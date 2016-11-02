@@ -3,7 +3,7 @@
     package="com.bluefire.apidemo"
     android:versionCode="20"
     android:versionName="20.0" >
-<!--  Note - versionCode must match Adapter.Version and README.md -->
+<!--  Note - versionName must match BlueFire.Version and README.md -->
 
     <uses-sdk
         android:minSdkVersion="15"
