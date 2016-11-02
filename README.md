@@ -131,6 +131,11 @@ Version 20.0:<ul>
 	<li>Added an Adapter BT2.1 and a BLE checkbox that will select the appropriate Adapter type. Leaving both unchecked will cause the API to auto select the Adapter type.
 	<li>Added GetTransmissionGears method that will retrieve the current and selected gears from the transmission ECM if the data is available.
 </ul>
+
+Version 20.1:<ul>
+	<li>Removed IsUsingBT21 and IsUsingBLE properties in lieu of using properties UseBT21 and UseBLE which if not set will be set automatically by the API.
+	<li>The Demo App Disconnect button will be shown immediately after connecting to allow for disconnecting while the API is attempting to discover an Adapter.
+</ul>
 	
 Limitations:<ul>
 	<li>VIN and Component Id will be retrieved only from the Engine ECU.

@@ -75,5 +75,6 @@ gen/
 
 /APIDemo/build/generated/
 /APIDemo/build/intermediates/
+/APIDemo/build/tmp
 /APIDemo/build/outputs/logs/
 /build/

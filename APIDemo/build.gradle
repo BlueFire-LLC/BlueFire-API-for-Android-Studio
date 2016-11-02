@@ -22,5 +22,5 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.1'
     compile files('libs/commons-codec-1.10.jar')
     compile files('libs/commons-lang3-3.3.2.jar')
-    compile project(':bluefire-api-v20.0')
+    compile project(':bluefire-api-v20.1')
 }

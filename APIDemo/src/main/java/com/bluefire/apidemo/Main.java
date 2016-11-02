@@ -1,3 +1,4 @@
+//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.annotation.SuppressLint;
@@ -67,6 +68,7 @@ public class Main extends Activity
     
     private boolean isConnecting;
     private boolean isConnected;
+	private boolean IsConnectButton;
  	
     private int pgn;
     private boolean isSendingPGN;
@@ -227,8 +229,9 @@ public class Main extends Activity
         textHeartbeat = (TextView) findViewById(R.id.textHeartbeat);
         
         clearForm();
-       
-        buttonConnect.setEnabled(true);
+
+		ShowConnectButton();
+
         buttonReset.setEnabled(false);
         buttonSendMonitor.setEnabled(false);
         textStatus.setText("Not Connected");
@@ -266,7 +269,7 @@ public class Main extends Activity
 	// Connect button
 	public void onConnectClick(View view) 
 	{
-        if (!isConnected)
+        if (IsConnectButton)
         {
         	clearForm();
     		
@@ -282,7 +285,8 @@ public class Main extends Activity
 			checkJ1939.setEnabled(false);
 			checkJ1708.setEnabled(false);
 
-            buttonConnect.setEnabled(false);
+			ShowDisconnectButton();
+
             buttonReset.setEnabled(false);
             buttonUpdate.setEnabled(false);
             buttonSendMonitor.setEnabled(false);
@@ -293,7 +297,20 @@ public class Main extends Activity
         else
         	DisconnectAdapter();
 	}
-	
+
+	private void ShowConnectButton()
+	{
+		IsConnectButton = true;
+		buttonConnect.setText("Connect");
+		buttonConnect.setEnabled(true);
+	}
+
+	private void ShowDisconnectButton()
+	{
+		IsConnectButton = false;
+		buttonConnect.setText("Disconnect");
+		buttonConnect.setEnabled(true);
+	}
 	private class ConnectAdapter extends TimerTask
 	{
         @Override
@@ -320,17 +337,14 @@ public class Main extends Activity
 		}
 		catch(Exception e) {}
 	}
-	
+
 	private void AdapterConnected()
 	{
-		LogNotifications("BlueFire connected.");
+		LogNotifications("Adapter connected.");
 		
 	   	isConnected = true;
 	   	isConnecting = false;
 
-	   	buttonConnect.setText("Disconnect");
-        
-        buttonConnect.setEnabled(true);
         buttonUpdate.setEnabled(true);
         buttonSendMonitor.setEnabled(true);
     	
@@ -341,15 +355,22 @@ public class Main extends Activity
         
 		getData();
 	}
-	
+
+	private void AdapterDisconnected()
+	{
+		LogNotifications("Adapter disconnected.");
+
+		AdapterNotConnected();
+	}
+
 	private void AdapterNotConnected()
 	{
-		LogNotifications("BlueFire not connected.");
+		LogNotifications("Adapter not connected.");
 		
 	   	isConnected = false;
 	   	isConnecting = false;
 
-        buttonConnect.setText("Connect");
+		ShowConnectButton();
 
 		checkBT21.setEnabled(true);
 		checkBLE.setEnabled(true);
@@ -357,7 +378,6 @@ public class Main extends Activity
 		checkJ1939.setEnabled(true);
         checkJ1708.setEnabled(true);
         
-        buttonConnect.setEnabled(true);
         buttonUpdate.setEnabled(true);
         buttonSendMonitor.setEnabled(false);
     	
@@ -368,7 +388,7 @@ public class Main extends Activity
 
     private void AdapterReconnecting()
     {
-		LogNotifications("BlueFire re-connecting.");
+		LogNotifications("Adapter re-connecting.");
 		
     	isConnected = false;
 		isConnecting = true;
@@ -377,29 +397,29 @@ public class Main extends Activity
         buttonUpdate.setEnabled(false);
         buttonSendMonitor.setEnabled(false);
 
-        LogNotifications("App reconnecting to the BlueFire. Reason is " + blueFire.ReconnectReason + ".");
+        LogNotifications("App reconnecting to the Adapter. Reason is " + blueFire.ReconnectReason + ".");
         
-		Toast.makeText(this, "Lost connection to the BlueFire.", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Lost connection to the Adapter.", Toast.LENGTH_LONG).show();
          
     	Toast.makeText(this, "Attempting to reconnect.", Toast.LENGTH_LONG).show();
     }
  
     private void AdapterReconnected()
     {
-		LogNotifications("BlueFire re-connected.");
+		LogNotifications("Adapter re-connected.");
 		
         // Note, AdapterConnected will be called when State changes to Connected.
  
-        Toast.makeText(this, "BlueFire reconnected.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Adapter reconnected.", Toast.LENGTH_LONG).show();
     }
 
     private void AdapterNotReconnected()
     {
-		LogNotifications("BlueFire not re-connected.");
+		LogNotifications("Adapter not re-connected.");
 		
         AdapterNotConnected();
         
-        Toast.makeText(this, "BlueFire did not reconnect.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "The Adapter did not reconnect.", Toast.LENGTH_LONG).show();
     }
 
 	// Next Group click
@@ -621,8 +641,8 @@ public class Main extends Activity
 						break;
 					
 					case Disconnected:
-						if (isConnected)
-							AdapterNotConnected();
+						if (isConnecting || isConnected)
+							AdapterDisconnected();
 						break;
 						
 					case Reconnecting:
@@ -651,7 +671,7 @@ public class Main extends Activity
 						{
 							blueFire.Disconnect();
 							AdapterNotConnected();
-							ShowMessage("BlueFire Connection", "BlueFire Timed Out.");
+							ShowMessage("Adapter Connection", "The Adapter Timed Out.");
 						}
 						break;
 						
@@ -679,12 +699,18 @@ public class Main extends Activity
 	
     // Start retrieving data after connecting to the adapter
     private void getData()
-    {        
+    {
+		// Check for API setting the adapter type
+		appUseBT21 = blueFire.UseBT21;
+		appUseBLE = blueFire.UseBLE;
+		checkBT21.setChecked(appUseBT21);
+		checkBLE.setChecked(appUseBLE);
+
 		// Note, version has already been retrieved.
 		// Check for an incompatible version.
     	if (blueFire.IsVersionIncompatible)
     	{
-            Toast.makeText(this, "The BlueFire BlueFire is not compatible with this API.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "The Adapter is not compatible with this API.", Toast.LENGTH_LONG).show();
             DisconnectAdapter();
             return;
     	}
@@ -692,7 +718,7 @@ public class Main extends Activity
     	// Check authentication
         if (!blueFire.IsAuthenticated)
         {
-            Toast.makeText(this, "Your User Name and Password do not match the BlueFire's User Name and Password.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Your User Name and Password do not match the Adapter's User Name and Password.", Toast.LENGTH_LONG).show();
             DisconnectAdapter();
             return;
         }
@@ -760,12 +786,6 @@ public class Main extends Activity
 	{ 
 		// Check the key state
 		CheckKeyState();
-
-		// Check for API setting the adapter type
-		appUseBT21 = blueFire.IsUsingBT21;
-		appUseBLE = blueFire.IsUsingBLE;
-		checkBT21.setChecked(appUseBT21);
-		checkBLE.setChecked(appUseBLE);
 
         // Show truck data
         if (blueFire.IsTruckDataChanged)

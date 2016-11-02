@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/APIDemo" />
-            <option value="$PROJECT_DIR$/bluefire-api-v20.0" />
+            <option value="$PROJECT_DIR$/bluefire-api-v20.1" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
