@@ -1,0 +1,483 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+	<RelativeLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+	    
+	    	<!--  RPM    -->
+	    <TextView
+	        android:id="@+id/textView1"
+	       android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginTop="10dp"
+	        android:text=""
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/dataView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	       	android:layout_alignBaseline="@+id/textView1"
+	        android:layout_alignBottom="@+id/textView1"
+	        android:layout_marginLeft="130dp" 
+	        android:text="0"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+		<!--  Next Group Button    -->
+	    <Button
+	        android:id="@+id/buttonNextGroup"
+	        style="@style/AppBaseTheme"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView1"
+	        android:layout_alignBottom="@+id/textView2"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="10dp"
+	        android:onClick="onNextGroupClick"
+	        android:text="Next Group"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+		<!--  Speed    -->
+	    <TextView
+	        android:id="@+id/textView2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView1"
+	        android:layout_marginTop="3dp"
+	        android:text=""
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/dataView2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	       	android:layout_alignBaseline="@+id/textView2"
+	        android:layout_alignBottom="@+id/textView2"
+	        android:layout_alignLeft="@+id/dataView1"
+	        android:text="0"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+		<!--  Hours    -->
+	    <TextView
+	        android:id="@+id/textView3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView2"
+	        android:layout_marginTop="3dp"
+	        android:text=""
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/dataView3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	       	android:layout_alignBaseline="@+id/textView3"
+	        android:layout_alignBottom="@+id/textView3"
+	        android:layout_alignLeft="@+id/dataView1"
+	        android:text="0"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	     
+		<!--  Odometer    -->
+	   	<TextView
+	        android:id="@+id/textView4"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView3"
+	        android:layout_marginTop="3dp"
+	        android:text=""
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/dataView4"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	       	android:layout_alignBaseline="@+id/textView4"
+	        android:layout_alignBottom="@+id/textView4"
+	        android:layout_alignLeft="@+id/dataView1"
+	        android:text="0"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	     
+		<!--  Accelerator Pedal Position    -->
+	   	<TextView
+	        android:id="@+id/textView5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView4"
+	        android:layout_marginTop="3dp"
+	        android:text=""
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/dataView5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	       	android:layout_alignBaseline="@+id/textView5"
+	        android:layout_alignBottom="@+id/textView5"
+	        android:layout_alignLeft="@+id/dataView1"
+	        android:text="0"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	      
+		<!--  Brake Switch    -->
+	   	<TextView
+	        android:id="@+id/textView6"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView5"
+	        android:layout_marginTop="3dp"
+	        android:text=""
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/dataView6"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	       	android:layout_alignBaseline="@+id/textView6"
+	        android:layout_alignBottom="@+id/textView6"
+	        android:layout_alignLeft="@+id/dataView1"
+	        android:text="0"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+		<!--  Vehicle Data    -->
+	    <TextView
+	        android:id="@+id/textView7"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView6"
+	        android:layout_marginTop="3dp"
+	        android:text="VIN:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/dataView7"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView7"
+	        android:layout_alignBottom="@+id/textView7"
+	        android:layout_alignLeft="@+id/dataView1"
+	        android:text="NA"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+		<!--  Status    -->
+	    <TextView
+	        android:id="@+id/textView9"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView7"
+	        android:layout_marginTop="3dp"
+	        android:text="Status:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/textStatus"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView9"
+	        android:layout_alignBottom="@+id/textView9"
+	        android:layout_alignLeft="@+id/dataView1"
+	        android:text="Not Connected"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+		<!--  Fault    -->
+	    <TextView
+	        android:id="@+id/textView10"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView9"
+	       	android:layout_marginTop="3dp"
+	        android:text="Fault:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/textFaultCode"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView10"
+	        android:layout_alignBottom="@+id/textView10"
+	        android:layout_alignLeft="@+id/dataView1"
+	        android:onClick="onFaultClick"
+	        android:text="NA"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+		<!--  Reset Button    -->
+	    <Button
+	        android:id="@+id/buttonReset"
+	        style="@style/AppBaseTheme"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView10"
+	        android:layout_alignBottom="@+id/textView10"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="10dp"
+	        android:onClick="onResetClick"
+	        android:text="Reset"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+		<!--  BlueFire Title    -->
+	    <TextView
+	        android:id="@+id/textView11"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView10"
+	        android:layout_marginTop="10dp"
+	        android:text="Adapter"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<CheckBox
+			android:id="@+id/checkBT21"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBaseline="@+id/textView11"
+			android:layout_alignBottom="@+id/textView12"
+			android:layout_alignLeft="@+id/dataView1"
+			android:onClick="onBT21Click"
+			android:text="BT 2.1"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<CheckBox
+			android:id="@+id/checkBLE"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBaseline="@+id/textView11"
+			android:layout_alignBottom="@+id/textView12"
+			android:layout_alignLeft="@+id/checkBT21"
+			android:layout_marginLeft="90dp"
+			android:onClick="onBLEClick"
+			android:text="BLE"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<!--  Led Brightness    -->
+	    <TextView
+	        android:id="@+id/textView12"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView11"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="3dp"
+	        android:text="Led Brightness:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <EditText
+	        android:id="@+id/textLedBrightness"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView12"
+	        android:layout_alignBottom="@+id/textView12"
+	        android:layout_marginLeft="155dp"
+	        android:inputType="number"
+	        android:maxLength="3"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+		<!--  User Name    -->
+	    <TextView
+	        android:id="@+id/textView12a"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView12"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="3dp"
+	        android:text="User Name:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <EditText
+	        android:id="@+id/textUserName"
+	        android:layout_width="150dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView12a"
+	        android:layout_alignBottom="@+id/textView12a"
+	        android:layout_marginLeft="120dp"
+	        android:inputType="textNoSuggestions"
+	        android:maxLength="20"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+		<!--  Password    -->
+	    <TextView
+	        android:id="@+id/textView12a1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView12a"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="3dp"
+	        android:text="Password:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <EditText
+	        android:id="@+id/textPassword"
+	        android:layout_width="150dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView12a1"
+	        android:layout_alignBottom="@+id/textView12a1"
+	        android:layout_marginLeft="120dp"
+	        android:inputType="textNoSuggestions"
+	        android:maxLength="12"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    	    	
+		<!--  Update Button    -->
+	    <Button
+	        android:id="@+id/buttonUpdate"
+	        style="@style/AppBaseTheme"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignTop="@+id/textUserName"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="10dp"
+	        android:onClick="onUpdateClick"
+	        android:text="Update"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+		<!--  Send PGN    -->
+	    <TextView
+	        android:id="@+id/textView12b"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textPassword"
+	       	android:layout_marginTop="0dp"
+	        android:text="Send PGN:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <EditText
+	        android:id="@+id/textPGN"
+	        android:layout_width="80dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView12b"
+	        android:layout_alignBottom="@+id/textView12b"
+	        android:layout_marginLeft="90dp"
+	        android:inputType="textNoSuggestions"
+	        android:maxLength="6"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/textView12c"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView12b"
+	        android:layout_marginLeft="40dp"
+	        android:layout_marginTop="5dp"
+	        android:text="Data:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    	    	
+	    <EditText
+	        android:id="@+id/textPGNData"
+	        android:layout_width="190dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView12c"
+	        android:layout_below="@+id/textPGN"
+	        android:layout_alignBottom="@+id/textView12c"
+	        android:layout_marginLeft="90dp"
+	        android:inputType="textNoSuggestions"
+	        android:maxLength="16"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    	
+		<!--  Send/Monitor Button    -->
+	    <Button
+	        android:id="@+id/buttonSendMonitor"
+	        style="@style/AppBaseTheme"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/textPGNData"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="10dp"
+	        android:onClick="onSendMonitorClick"
+	        android:text="Send"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<!--  Data Bus    -->
+	    <TextView
+	        android:id="@+id/textView8"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_below="@+id/textView12c"
+	        android:layout_marginTop="20dp"
+	        android:text="Data Bus"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	    <CheckBox
+	        android:id="@+id/checkJ1939"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView8"
+	        android:layout_alignBottom="@+id/textView8"
+	        android:layout_alignLeft="@+id/dataView1"
+	        android:onClick="onJ1939Click"
+	        android:text="J1939"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	 
+	    <CheckBox
+	        android:id="@+id/checkJ1708"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/textView8"
+	        android:layout_alignBottom="@+id/textView8"
+	        android:layout_alignLeft="@+id/checkJ1939"
+	        android:layout_marginLeft="90dp"
+	        android:onClick="onJ1708Click"
+	        android:text="J1708"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<!--  Connect Button    -->
+	    <Button
+	        android:id="@+id/buttonConnect"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/textView8"
+	        android:layout_marginTop="5dp"
+	        android:layout_alignParentLeft="true"
+	        android:onClick="onConnectClick"
+	        android:text="Connect"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+		<!--  Key State    -->
+	    <TextView
+	        android:id="@+id/textKeyState"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/buttonConnect"
+	        android:layout_alignBottom="@+id/buttonConnect"
+	        android:layout_alignParentLeft="true"
+	        android:layout_marginLeft="140dp"
+	        android:text="Key Off"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    	
+		<!--  Heartbeat    -->
+	    <TextView
+	        android:id="@+id/textView13"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/buttonConnect"
+	        android:layout_alignBottom="@+id/buttonConnect"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="60dp"
+	        android:text="Heartbeat:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    <TextView
+	        android:id="@+id/textHeartbeat"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/buttonConnect"
+	        android:layout_alignBottom="@+id/buttonConnect"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="25dp"
+	        android:text="0"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	        
+	</RelativeLayout>
+</ScrollView>
