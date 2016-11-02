@@ -1,5 +1,4 @@
 .gradle
-build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -70,3 +69,11 @@ $RECYCLE.BIN/
 # Development
 Build Instructions
 
+APIDemo/gen/
+APIDemo/src/main/resources/
+gen/
+
+/APIDemo/build/generated/
+/APIDemo/build/intermediates/
+/APIDemo/build/outputs/logs/
+/build/
