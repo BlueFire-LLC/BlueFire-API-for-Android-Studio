@@ -1,21 +1,7 @@
 # BlueFire-API-for-Android
 Android API for direct connection to the BlueFire J1939/J1708 Bluetooth Data Adapters. Documentation is available upon request from [BlueFire Support](mailto:support@bluefire-llc.com).
 
-There are two branches for Eclipse and Android Studio development. Select the appropriate branch for your IDE and download the code.
-<ul>
-    <li>Eclipse - https://github.com/BlueFire-LLC/BlueFire-API-for-Android/tree/Eclipse
-    </li>
-    <li>Android Studio - https://github.com/BlueFire-LLC/BlueFire-API-for-Android/tree/Android-Studio
-    </li>
-</ul>
-
-If you just want to download the .apk file for checking out the Demo app, you can find the .apk file at these locations:
-<ul>
-    <li>Eclipse - https://github.com/BlueFire-LLC/BlueFire-API-for-Android/tree/Eclipse/bin
-    </li>
-    <li>Android Studio - https://github.com/BlueFire-LLC/BlueFire-API-for-Android/tree/Android-Studio/APIDemo/build/outputs/apk/
-    </li>
-</ul>
+If you just want to download the .apk file for checking out the Demo app, you can find the .apk file at [this link.](https://github.com/BlueFire-LLC/BlueFire-API-for-Android-Studio/tree/Android-Studio/APIDemo/build/outputs/apk/)
 
 Version 1:<ul>
 	<li>Initial version.
@@ -139,15 +125,12 @@ Version 19:<ul>
 Version 19.1:<ul>
 	<li>Patch for discovering an adapter using Bluetooth Classic and Android 6.0+.
 </ul>
-<<<<<<< HEAD
 
 Version 20.0:<ul>
 	<li>Renamed the Adapter class to the BlueFire class to avoid confusion with the Android Adapter widget.
 	<li>Added an Adapter BT2.1 and a BLE checkbox that will select the appropriate Adapter type. Leaving both unchecked will cause the API to auto select the Adapter type.
 	<li>Added GetTransmissionGears method that will retrieve the current and selected gears from the transmission ECM if the data is available.
 </ul>
-=======
->>>>>>> origin/Android-Studio
 	
 Limitations:<ul>
 	<li>VIN and Component Id will be retrieved only from the Engine ECU.
