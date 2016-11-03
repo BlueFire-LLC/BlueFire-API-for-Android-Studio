@@ -134,7 +134,7 @@ Version 20.0:<ul>
 
 Version 20.1:<ul>
 	<li>Removed IsUsingBT21 and IsUsingBLE properties in lieu of using properties UseBT21 and UseBLE which if not set will be set automatically by the API.
-	<li>The Demo App Disconnect button will be shown immediately after connecting to allow for disconnecting while the API is attempting to discover an Adapter.
+	<li>The Demo App's Disconnect button will be shown immediately after connecting to allow for disconnecting while the API is attempting to discover an Adapter.
 </ul>
 	
 Limitations:<ul>
