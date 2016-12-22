@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bluefire.apidemo"
     android:versionCode="20"
-    android:versionName="20.1" >
+    android:versionName="20.2" >
 <!--  Note - versionName must match BlueFire.Version and README.md -->
 
     <uses-sdk

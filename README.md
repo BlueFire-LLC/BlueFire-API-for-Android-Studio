@@ -136,6 +136,11 @@ Version 20.1:<ul>
 	<li>Removed IsUsingBT21 and IsUsingBLE properties in lieu of using properties UseBT21 and UseBLE which if not set will be set automatically by the API.
 	<li>The Demo App's Disconnect button will be shown immediately after connecting to allow for disconnecting while the API is attempting to discover an Adapter.
 </ul>
+
+Version 20.2:<ul>
+	<li>Fixed crash in SendPGN.
+	<li>The Demo App's will edit for invalid hex characters in Send PGN Data.
+</ul>
 	
 Limitations:<ul>
 	<li>VIN and Component Id will be retrieved only from the Engine ECU.

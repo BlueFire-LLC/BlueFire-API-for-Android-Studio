@@ -573,7 +573,11 @@ public class Main extends Activity
 		    try 
 		    {
 				pgnBytes = Hex.decodeHex(pgnData.toCharArray());
-			} catch (Exception e) {}
+			} catch (Exception e)
+			{
+				Toast.makeText(this, "PGN Data must be 16 hex characters (8 bytes).", Toast.LENGTH_LONG).show();
+				return;
+			}
 		    
 			// Send the PGN
 			isSendingPGN = true;
