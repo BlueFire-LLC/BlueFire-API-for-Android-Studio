@@ -138,6 +138,7 @@ Version 20.1:<ul>
 </ul>
 
 Version 20.2:<ul>
+	<li>Added method ResetAdapter which will reset the Adapter to factory settings.
 	<li>Fixed crash in SendPGN.
 	<li>The Demo App will edit for invalid hex characters in Send PGN Data.
 </ul>
