@@ -139,7 +139,7 @@ Version 20.1:<ul>
 
 Version 20.2:<ul>
 	<li>Fixed crash in SendPGN.
-	<li>The Demo App's will edit for invalid hex characters in Send PGN Data.
+	<li>The Demo App will edit for invalid hex characters in Send PGN Data.
 </ul>
 	
 Limitations:<ul>
