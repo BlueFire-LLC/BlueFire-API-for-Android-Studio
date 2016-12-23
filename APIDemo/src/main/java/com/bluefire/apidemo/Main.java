@@ -345,10 +345,13 @@ public class Main extends Activity
 	   	isConnected = true;
 	   	isConnecting = false;
 
+		buttonConnect.setEnabled(true);
         buttonUpdate.setEnabled(true);
         buttonSendMonitor.setEnabled(true);
-    	
-    	buttonConnect.requestFocus();
+		if (faultIndex >= 0)
+			buttonReset.setEnabled(true);
+
+		buttonConnect.requestFocus();
     	
 		// Get the Bluetooth connected id
 		appLastConnectedId = blueFire.GetLastConnectedId();
@@ -407,8 +410,8 @@ public class Main extends Activity
     private void AdapterReconnected()
     {
 		LogNotifications("Adapter re-connected.");
-		
-        // Note, AdapterConnected will be called when State changes to Connected.
+
+		AdapterConnected();
  
         Toast.makeText(this, "Adapter reconnected.", Toast.LENGTH_LONG).show();
     }
@@ -621,7 +624,6 @@ public class Main extends Activity
 						break;
 						
 					case Connecting:
-						// Status only
 						if (blueFire.IsReconnecting)
 							if (!isConnecting)
 								AdapterReconnecting();
@@ -801,6 +803,7 @@ public class Main extends Activity
         {
 	        if (Truck.GetFaultCount() == 0)
 	        {
+				faultIndex = -1; // reset to show fault
 	        	textFaultCode.setText("");
 	          	buttonReset.setEnabled(false);
 	        }

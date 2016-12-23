@@ -138,9 +138,11 @@ Version 20.1:<ul>
 </ul>
 
 Version 20.2:<ul>
-	<li>Added method ResetAdapter which will reset the Adapter to factory settings.
-	<li>Fixed crash in SendPGN.
+	<li>The API will only raise Connection State 'Reconnected' when the Adapter is reconnected. Connection State 'AdapterConnected' will only be raised upon initial connection.
+	<li>The Demo App has been modified to reflect the above 'Reconnected' Connection State.
+	<li>Added API method ResetAdapter which will reset the Adapter to factory settings.
 	<li>The Demo App will edit for invalid hex characters in Send PGN Data.
+	<li>Fixed API fatal exception in SendPGN when sending data.
 </ul>
 	
 Limitations:<ul>
