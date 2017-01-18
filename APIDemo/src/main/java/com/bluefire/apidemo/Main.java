@@ -74,8 +74,9 @@ public class Main extends Activity
     private boolean isSendingPGN;
     private boolean isMonitoringPGN;
 
+	private int faultCount;
 	private int faultIndex;
-	
+
 	private int groupNo;
 	private static final int maxGroupNo = 6;
     
@@ -749,9 +750,11 @@ public class Main extends Activity
       	blueFire.GetBatteryVoltage(); // Battery Voltage
 
 		blueFire.GetTransmissionGears(); // Selected and Current Gears
-      	
-      	blueFire.GetFaults(); // Any Engine Faults
-    }
+
+		blueFire.GetFaults(); // Engine Faults
+		blueFire.GetFaults(11, 128); // Brakes Faults
+		//blueFire.GetFaults(90, 0); // Proprietary faults
+	}
 
 	private void ShowStatus()
 	{
@@ -799,25 +802,28 @@ public class Main extends Activity
         	ShowTruckData();
         }
        
-        if (blueFire.IsFaultDataChanged)
-        {
-	        if (Truck.GetFaultCount() == 0)
-	        {
+		if (Truck.GetFaultCount() == 0)
+		{
+			faultCount = 0;
+			faultIndex = -1; // reset to show fault
+			textFaultCode.setText("");
+			buttonReset.setEnabled(false);
+		}
+		else
+		{
+			if (Truck.GetFaultCount() != faultCount) // additional faults
+			{
+				faultCount = Truck.GetFaultCount();
 				faultIndex = -1; // reset to show fault
-	        	textFaultCode.setText("");
-	          	buttonReset.setEnabled(false);
-	        }
-	        else
-	        {
-	        	if (faultIndex < 0) // show first fault only once.
-	        	{
-	        		faultIndex = 0;
-		        	ShowFault();
-		          	buttonReset.setEnabled(true);
-	        	}
-	        }
-        }
-		
+			}
+			if (faultIndex < 0) // show first fault only once.
+			{
+				faultIndex = 0;
+				ShowFault();
+				buttonReset.setEnabled(true);
+			}
+		}
+
 		// Check for user changed adapter data while offline
 		if (appLedBrightness != blueFire.LedBrightness)
 			blueFire.SetLedBrightness(appLedBrightness);
@@ -1005,12 +1011,14 @@ public class Main extends Activity
 	private void ShowFault()
 	{
 		// Show the fault at the specified index. Note, faultIndex is relative to 0.
+		int FaultSource = Truck.GetFaultSource(faultIndex);
+
     	String FaultCode = String.valueOf(Truck.GetFaultSPN(faultIndex)) + " - " + String.valueOf(Truck.GetFaultFMI(faultIndex));
-    	textFaultCode.setText(FaultCode);
+    	textFaultCode.setText("(" + FaultSource + ") " + FaultCode);
     	
     	// Set to show next fault
     	faultIndex += 1;
-    	if (faultIndex == Truck.GetFaultCount()) // wrap to the beginning
+    	if (faultIndex == faultCount) // wrap to the beginning
     		faultIndex = 0;
 	}
 

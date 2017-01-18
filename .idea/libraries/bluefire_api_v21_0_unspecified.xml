@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="bluefire-api-v21.0-unspecified">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/APIDemo/build/intermediates/exploded-aar/BlueFire-API-for-Android-Studio/bluefire-api-v21.0/unspecified/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/APIDemo/build/intermediates/exploded-aar/BlueFire-API-for-Android-Studio/bluefire-api-v21.0/unspecified/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

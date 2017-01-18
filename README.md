@@ -144,11 +144,17 @@ Version 20.2:<ul>
 	<li>The Demo App will edit for invalid hex characters in Send PGN Data.
 	<li>Fixed API fatal exception in SendPGN when sending data.
 </ul>
+
+Version 21.0:<ul>
+	<li>Added optional Source and MID parameters to the GetVehicleInfo method.
+    <li>Added optional Source and MID parameters to the GetFaults method.
+    <li>Removed property IsFaultDataChanged.
+    <li>Added Truck property IsJ1587Fault.
+    <li>All methods take Source, PGN, and MID as integers.
+    <li>Demo app shows Fault source.
+</ul>
 	
 Limitations:<ul>
-	<li>VIN and Component Id will be retrieved only from the Engine ECU.
-	<li>Only Engine Active faults are retrieved.
-	<li>Only J1939 or J1708 faults can be retrieved (not J1939 and J1708 faults).
 	<li>BLE adapters cannot reliable retrieve data faster than 500 ms (eg. 10, 50, 100 ms).
 	<li>The API may become unstable after long periods of BLE adapter connection.
 	<li>The API may lock up if the BLE adapter is power cycled too quickly (such as a power blip).
