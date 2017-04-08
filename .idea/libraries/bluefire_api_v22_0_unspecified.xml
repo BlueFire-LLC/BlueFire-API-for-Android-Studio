@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="bluefire-api-v22.0-unspecified">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/8b062d4982b8ee0f1d02891dba069151f31a950d/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/8b062d4982b8ee0f1d02891dba069151f31a950d/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

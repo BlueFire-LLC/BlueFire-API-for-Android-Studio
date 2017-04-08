@@ -153,6 +153,15 @@ Version 21.0:<ul>
     <li>All methods take Source, PGN, and MID as integers.
     <li>Demo app shows Fault source.
 </ul>
+
+Version 22.0:<ul>
+	<li>Added support for Adapter Firmware 3.10 and ELD Recording (see API 22.0 documentation).
+    <li>Changed all properties and methods.
+    <li>Backward compatible with Adapter Firmware 3.7 to 3.9 (no ELD Recording).
+    <li>No additional functionality except for features in Firmware 3.10 and ELD Recording.
+    <li>Adapter Id security.
+    <li>New Demo App that supports ELD Recording.
+</ul>
 	
 Limitations:<ul>
 	<li>BLE adapters cannot reliable retrieve data faster than 500 ms (eg. 10, 50, 100 ms).
