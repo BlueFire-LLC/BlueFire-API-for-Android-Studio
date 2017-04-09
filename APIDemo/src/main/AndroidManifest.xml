@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bluefire.apidemo"
-    android:versionCode="22"
-    android:versionName="22.0" >
-<!--  Note - versionName must match BlueFire.Version and README.md -->
+      package="com.bluefire.apidemo"
+      android:versionCode="1"
+      android:versionName="22.0" >
+    <!--  Note - versionName must match BlueFire.Version, the README.md and the build.gradle script -->
 
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="23" />
-           
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/bluefire"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:label="API Demo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.bluefire.apidemo.Main"
-            android:label="@string/app_name" >
+            android:label="API Demo" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>

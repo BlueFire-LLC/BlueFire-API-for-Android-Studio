@@ -156,18 +156,15 @@ Version 21.0:<ul>
 
 Version 22.0:<ul>
 	<li>Added support for Adapter Firmware 3.10 and ELD Recording (see API 22.0 documentation).
-    <li>Changed all properties and methods.
+    <li>Changed and renamed many properties and methods. Refer to the API documentation for all the changes.
     <li>Backward compatible with Adapter Firmware 3.7 to 3.9 (no ELD Recording).
     <li>No additional functionality except for features in Firmware 3.10 and ELD Recording.
-    <li>Adapter Id security.
+    <li>Added Adapter Id security.
+    <li>Fixed BLE issues however using the BLE Adapter requires Android 6+.
     <li>New Demo App that supports ELD Recording.
-</ul>
-	
-Limitations:<ul>
-	<li>BLE adapters cannot reliable retrieve data faster than 500 ms (eg. 10, 50, 100 ms).
-	<li>The API may become unstable after long periods of BLE adapter connection.
-	<li>The API may lock up if the BLE adapter is power cycled too quickly (such as a power blip).
-	<li>Note, these BLE limitations may be fixed by Google in later versions of Android.
+    <li>Demo App request location permissions if connecting to a BLE adapter.
+    <li>API and Demo App are compiled with minimum Android version of 23.
+    <li>Demo App no longer references commons-codec-1.10.
 </ul>
 	
 	

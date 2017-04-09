@@ -1,1223 +1,1216 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    
-	<RelativeLayout
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content" >
-
-		<RelativeLayout
-			android:id="@+id/layoutAdapter"
-			android:orientation="vertical"
-			android:visibility="visible"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" >
-
-			<!--  Alignment    -->
-			<TextView
-				android:id="@+id/labelMargin"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignParentLeft="true"
-				android:layout_alignParentTop="true"
-				android:layout_marginLeft="5dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Status    -->
-			<TextView
-				android:id="@+id/labelStatus"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_marginTop="10dp"
-				android:text="Status:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/textStatus"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelStatus"
-				android:layout_alignBottom="@+id/labelStatus"
-				android:layout_marginLeft="80dp"
-				android:text="Not Connected"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Adapter Checkboxes -->
-			<TextView
-				android:id="@+id/labelAdapter"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_below="@+id/textStatus"
-				android:layout_marginTop="10dp"
-				android:text="Adapter:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkUseBT21"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelAdapter"
-				android:layout_alignBottom="@+id/labelLedBrightness"
-				android:layout_marginLeft="80dp"
-				android:onClick="onUseBT21Check"
-				android:text="BT 2.1"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkUseBLE"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelAdapter"
-				android:layout_alignBottom="@+id/labelLedBrightness"
-				android:layout_alignLeft="@+id/checkUseBT21"
-				android:layout_marginLeft="90dp"
-				android:onClick="onUseBLECheck"
-				android:text="BLE"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Data Bus Checkboxez   -->
-			<TextView
-				android:id="@+id/labelDataBus"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_below="@+id/labelAdapter"
-				android:layout_marginTop="20dp"
-				android:text="Data Bus:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkUseJ1939"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelDataBus"
-				android:layout_alignBottom="@+id/labelDataBus"
-				android:layout_alignLeft="@+id/checkUseBT21"
-				android:onClick="onUseJ1939Check"
-				android:text="J1939"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkUseJ1708"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelDataBus"
-				android:layout_alignBottom="@+id/labelDataBus"
-				android:layout_alignLeft="@+id/checkUseJ1939"
-				android:layout_marginLeft="90dp"
-				android:onClick="onUseJ1708Check"
-				android:text="J1708"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Connect Button    -->
-			<Button
-				android:id="@+id/buttonConnect"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@+id/labelDataBus"
-				android:layout_marginTop="5dp"
-				android:layout_alignParentLeft="true"
-				android:onClick="onConnectClick"
-				android:text="Connect"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Key State    -->
-			<TextView
-				android:id="@+id/textKeyState"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/buttonConnect"
-				android:layout_alignBottom="@+id/buttonConnect"
-				android:layout_alignParentLeft="true"
-				android:layout_marginLeft="140dp"
-				android:text="Key Off"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Heartbeat    -->
-			<TextView
-				android:id="@+id/labelHeartbeat"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/buttonConnect"
-				android:layout_alignBottom="@+id/buttonConnect"
-				android:layout_alignParentRight="true"
-				android:layout_marginRight="60dp"
-				android:text="Heartbeat:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-			<TextView
-				android:id="@+id/textHeartbeat"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/buttonConnect"
-				android:layout_alignBottom="@+id/buttonConnect"
-				android:layout_alignParentRight="true"
-				android:layout_marginRight="25dp"
-				android:text="0"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Separator    -->
-			<View
-				android:id="@+id/lineSeparator1"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_below="@+id/buttonConnect"
-				android:background="@android:color/darker_gray"/>
-
-			<!--  Led Brightness    -->
-			<TextView
-				android:id="@+id/labelLedBrightness"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_below="@+id/lineSeparator1"
-				android:text="Led Brightness:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<EditText
-				android:id="@+id/textLedBrightness"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelLedBrightness"
-				android:layout_alignBottom="@+id/labelLedBrightness"
-				android:layout_marginLeft="140dp"
-				android:inputType="number"
-				android:maxLength="3"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Connect to Last Adapter Checkbox   -->
-			<TextView
-				android:id="@+id/labelConnectLastAdapter"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_below="@+id/textLedBrightness"
-				android:text="Connect to Last Adapter:"
-				android:layout_marginTop="5dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkConnectLastAdapter"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelConnectLastAdapter"
-				android:layout_alignBottom="@+id/labelConnectLastAdapter"
-				android:layout_marginLeft="210dp"
-				android:onClick="onConnectLastAdapterCheck"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Secure Adapter Checkbox  -->
-			<TextView
-				android:id="@+id/labelSecureAdapter"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_below="@+id/labelConnectLastAdapter"
-				android:text="Secure Adapter:"
-				android:layout_marginTop="10dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkSecureAdapter"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelSecureAdapter"
-				android:layout_alignBottom="@+id/labelSecureAdapter"
-				android:layout_marginLeft="140dp"
-				android:onClick="onSecureAdapterCheck"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  User Name    -->
-			<TextView
-				android:id="@+id/labelUserName"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_below="@+id/checkSecureAdapter"
-				android:layout_marginTop="3dp"
-				android:text="User Name:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<EditText
-				android:id="@+id/textUserName"
-				android:layout_width="150dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelUserName"
-				android:layout_alignBottom="@+id/labelUserName"
-				android:layout_marginLeft="100dp"
-				android:inputType="textNoSuggestions"
-				android:maxLength="20"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Password    -->
-			<TextView
-				android:id="@+id/labelPassword"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_below="@+id/labelUserName"
-				android:layout_marginTop="10dp"
-				android:text="Password:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<EditText
-				android:id="@+id/textPassword"
-				android:layout_width="150dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelPassword"
-				android:layout_alignBottom="@+id/labelPassword"
-				android:layout_marginLeft="100dp"
-				android:inputType="textNoSuggestions"
-				android:maxLength="12"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Update Button    -->
-			<Button
-				android:id="@+id/buttonUpdate"
-				style="@style/AppBaseTheme"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBottom="@+id/textPassword"
-				android:layout_alignParentRight="true"
-				android:layout_marginRight="10dp"
-				android:onClick="onUpdateClick"
-				android:text="Update"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Separator    -->
-			<View
-				android:id="@+id/lineSeparator2"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_below="@+id/textPassword"
-				android:background="@android:color/darker_gray"/>
-
-			<!--  Send PGN    -->
-			<TextView
-				android:id="@+id/labelPGN"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_below="@+id/lineSeparator2"
-				android:layout_marginTop="0dp"
-				android:text="Send PGN:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<EditText
-				android:id="@+id/textPGN"
-				android:layout_width="80dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelPGN"
-				android:layout_alignBottom="@+id/labelPGN"
-				android:layout_marginLeft="90dp"
-				android:inputType="textNoSuggestions"
-				android:maxLength="6"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/labelPGNData"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin"
-				android:layout_below="@+id/labelPGN"
-				android:layout_marginLeft="40dp"
-				android:layout_marginTop="5dp"
-				android:text="Data:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<EditText
-				android:id="@+id/textPGNData"
-				android:layout_width="190dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelPGNData"
-				android:layout_below="@+id/textPGN"
-				android:layout_alignBottom="@+id/labelPGNData"
-				android:layout_marginLeft="90dp"
-				android:inputType="textNoSuggestions"
-				android:maxLength="16"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Send/Monitor Button    -->
-			<Button
-				android:id="@+id/buttonSendMonitor"
-				style="@style/AppBaseTheme"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBottom="@+id/textPGNData"
-				android:layout_alignParentRight="true"
-				android:layout_marginRight="10dp"
-				android:onClick="onSendMonitorClick"
-				android:text="Send"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Separator    -->
-			<View
-				android:id="@+id/lineSeparator3"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_below="@+id/buttonSendMonitor"
-				android:background="@android:color/darker_gray"/>
-
-			<!--  Truck Button    -->
-			<Button
-				android:id="@+id/buttonTruckData"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@+id/lineSeparator3"
-				android:layout_marginTop="5dp"
-				android:layout_alignParentLeft="true"
-				android:onClick="onTruckDataClick"
-				android:text="Truck Data"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  ELD Button    -->
-			<Button
-				android:id="@+id/buttonELDData"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBottom="@+id/buttonTruckData"
-				android:layout_marginTop="5dp"
-				android:layout_alignLeft="@+id/buttonTruckData"
-				android:layout_marginLeft="120dp"
-				android:onClick="onELDDataClick"
-				android:text="ELD Data"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Separator    -->
-			<View
-				android:id="@+id/lineSeparator4"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_below="@+id/buttonELDData"
-				android:background="@android:color/darker_gray"/>
-
-		</RelativeLayout>
-
-		<RelativeLayout
-			android:id="@+id/layoutTruck"
-			android:orientation="vertical"
-			android:visibility="invisible"
-			android:layout_below="@+id/lineSeparator4"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" >
-
-			<!--  Header    -->
-			<TextView
-				android:id="@+id/labelMargin1"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignParentLeft="true"
-				android:layout_alignParentTop="true"
-				android:layout_marginLeft="5dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Data 1  -->
-			<TextView
-				android:id="@+id/textView1"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/labelMargin1"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/dataView1"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/textView1"
-				android:layout_alignBottom="@+id/textView1"
-				android:layout_marginLeft="130dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Data 2  -->
-			<TextView
-				android:id="@+id/textView2"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/textView1"
-				android:layout_marginTop="3dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/dataView2"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/textView2"
-				android:layout_alignBottom="@+id/textView2"
-				android:layout_alignLeft="@+id/dataView1"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Data 3  -->
-			<TextView
-				android:id="@+id/textView3"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/textView2"
-				android:layout_marginTop="3dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/dataView3"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/textView3"
-				android:layout_alignBottom="@+id/textView3"
-				android:layout_alignLeft="@+id/dataView1"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Data 4  -->
-			<TextView
-				android:id="@+id/textView4"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/textView3"
-				android:layout_marginTop="3dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/dataView4"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/textView4"
-				android:layout_alignBottom="@+id/textView4"
-				android:layout_alignLeft="@+id/dataView1"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Data 5  -->
-			<TextView
-				android:id="@+id/textView5"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/textView4"
-				android:layout_marginTop="3dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/dataView5"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/textView5"
-				android:layout_alignBottom="@+id/textView5"
-				android:layout_alignLeft="@+id/dataView1"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Data 6  -->
-			<TextView
-				android:id="@+id/textView6"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/textView5"
-				android:layout_marginTop="3dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/dataView6"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/textView6"
-				android:layout_alignBottom="@+id/textView6"
-				android:layout_alignLeft="@+id/dataView1"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Data 7  -->
-			<TextView
-				android:id="@+id/textView7"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/dataView6"
-				android:layout_marginTop="3dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/dataView7"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/textView7"
-				android:layout_alignBottom="@+id/textView7"
-				android:layout_alignLeft="@+id/dataView1"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Data 8 -->
-			<TextView
-				android:id="@+id/textView8"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/dataView7"
-				android:layout_marginTop="3dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/dataView8"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/textView8"
-				android:layout_alignBottom="@+id/textView8"
-				android:layout_alignLeft="@+id/dataView1"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Next Group Button    -->
-			<Button
-				android:id="@+id/buttonNextGroup"
-				style="@style/AppBaseTheme"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/textView8"
-				android:onClick="onNextGroupClick"
-				android:text="Next Group"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Separator    -->
-			<View
-				android:id="@+id/lineSeparator10"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_below="@+id/buttonNextGroup"
-				android:background="@android:color/darker_gray"/>
-
-			<!--  Fault    -->
-			<TextView
-				android:id="@+id/labelFault"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin1"
-				android:layout_below="@+id/lineSeparator10"
-				android:layout_marginTop="10dp"
-				android:text="Fault:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/textFaultCode"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelFault"
-				android:layout_alignBottom="@+id/labelFault"
-				android:layout_alignLeft="@+id/dataView1"
-				android:onClick="onFaultClick"
-				android:text="NA"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Reset Button    -->
-			<Button
-				android:id="@+id/buttonReset"
-				style="@style/AppBaseTheme"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelFault"
-				android:layout_alignBottom="@+id/labelFault"
-				android:layout_alignParentRight="true"
-				android:layout_marginRight="10dp"
-				android:onClick="onResetClick"
-				android:text="Reset"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Separator    -->
-			<View
-				android:id="@+id/lineSeparator11"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_below="@+id/buttonReset"
-				android:background="@android:color/darker_gray"/>
-
-		</RelativeLayout>
-
-		<RelativeLayout
-			android:id="@+id/layoutELD"
-			android:orientation="vertical"
-			android:visibility="invisible"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" >
-
-			<!--  Alignment    -->
-			<TextView
-				android:id="@+id/labelMargin11"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignParentLeft="true"
-				android:layout_alignParentTop="true"
-				android:layout_marginLeft="5dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Driver Id  -->
-			<TextView
-				android:id="@+id/labelDriverId"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelMargin11"
-				android:layout_marginTop="3dp"
-				android:text="Driver Id:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<EditText
-				android:id="@+id/textDriverId"
-				android:layout_width="200dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelDriverId"
-				android:layout_alignBottom="@+id/labelDriverId"
-				android:layout_marginLeft="80dp"
-				android:inputType="textNoSuggestions"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  ELD Interval  -->
-			<TextView
-				android:id="@+id/labelELD"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelDriverId"
-				android:layout_marginTop="10dp"
-				android:text="ELD:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkRecordELD"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelELD"
-				android:layout_alignBottom="@+id/labelELD"
-				android:layout_alignLeft="@+id/labelELD"
-				android:layout_marginLeft="45dp"
-				android:enabled="false"
-				android:checked="true"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/labelELDInterval"
-				android:layout_width="100dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelELD"
-				android:layout_alignBottom="@+id/labelELD"
-				android:layout_alignLeft="@+id/checkRecordELD"
-				android:layout_marginLeft="35dp"
-				android:text="Interval:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<EditText
-				android:id="@+id/textELDInterval"
-				android:layout_width="60dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelELD"
-				android:layout_alignBottom="@+id/labelELD"
-				android:layout_alignLeft="@+id/labelELDInterval"
-				android:layout_marginLeft="70dp"
-				android:inputType="numberDecimal"
-				android:maxLength="4"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkAlignELD"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelELD"
-				android:layout_alignBottom="@+id/labelELD"
-				android:layout_alignLeft="@+id/textELDInterval"
-				android:layout_marginLeft="60dp"
-				android:onClick="onAlignELDCheck"
-				android:text="Align"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  IFTA  -->
-			<TextView
-				android:id="@+id/labelIFTA"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelELD"
-				android:layout_below="@+id/labelELDInterval"
-				android:layout_marginTop="10dp"
-				android:text="IFTA:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkRecordIFTA"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelIFTA"
-				android:layout_alignBottom="@+id/labelIFTA"
-				android:layout_alignLeft="@+id/checkRecordELD"
-				android:onClick="onRecordIFTACheck"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/labelIFTAInterval"
-                android:layout_width="100dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelIFTA"
-				android:layout_alignBottom="@+id/labelIFTA"
-				android:layout_alignLeft="@+id/labelELDInterval"
-				android:text="Interval:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<EditText
-				android:id="@+id/textIFTAInterval"
-				android:layout_width="60dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelIFTA"
-				android:layout_alignBottom="@+id/labelIFTA"
-				android:layout_alignLeft="@+id/textELDInterval"
-				android:inputType="numberDecimal"
-				android:maxLength="4"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkAlignIFTA"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelIFTA"
-				android:layout_alignBottom="@+id/labelIFTA"
-				android:layout_alignLeft="@+id/checkAlignELD"
-				android:onClick="onAlignIFTACheck"
-				android:text="Align"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<!--  Stats  -->
-			<TextView
-				android:id="@+id/labelStats"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelELD"
-				android:layout_below="@+id/labelIFTA"
-				android:layout_marginTop="10dp"
-				android:text="Stats:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<CheckBox
-				android:id="@+id/checkRecordStats"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelStats"
-				android:layout_alignBottom="@+id/labelStats"
-				android:layout_alignLeft="@+id/checkRecordELD"
-				android:onClick="onRecordStatsCheck"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-
-			<TextView
-				android:id="@+id/labelStatsInterval"
+            android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/layoutAdapter"
+                android:orientation="vertical"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelStats"
-				android:layout_alignBottom="@+id/labelStats"
-				android:layout_alignLeft="@+id/labelELDInterval"
-				android:text="Interval:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:layout_height="wrap_content" >
 
-			<EditText
-				android:id="@+id/textStatsInterval"
-				android:layout_width="60dp"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelStats"
-				android:layout_alignBottom="@+id/labelStats"
-				android:layout_alignLeft="@+id/textELDInterval"
-				android:inputType="numberDecimal"
-				android:maxLength="4"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Alignment    -->
+                <TextView
+                    android:id="@+id/labelMargin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<CheckBox
-				android:id="@+id/checkAlignStats"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelStats"
-				android:layout_alignBottom="@+id/labelStats"
-				android:layout_alignLeft="@+id/checkAlignELD"
-				android:onClick="onAlignStatsCheck"
-				android:text="Align"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Status    -->
+                <TextView
+                    android:id="@+id/labelStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_marginTop="10dp"
+                    android:text="Status:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Secure ELD  -->
-			<TextView
-				android:id="@+id/labelSecureELD"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelStats"
-				android:layout_marginTop="10dp"
-				android:text="Secure ELD:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/textStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelStatus"
+                    android:layout_alignBottom="@+id/labelStatus"
+                    android:layout_marginLeft="80dp"
+                    android:text="Not Connected"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<CheckBox
-				android:id="@+id/checkSecureELD"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelSecureELD"
-				android:layout_alignBottom="@+id/labelSecureELD"
-				android:layout_alignLeft="@+id/labelSecureELD"
-				android:layout_marginLeft="95dp"
-				android:onClick="onSecureELDCheck"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Adapter Checkboxes -->
+                <TextView
+                    android:id="@+id/labelAdapter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/textStatus"
+                    android:layout_marginTop="10dp"
+                    android:text="Adapter:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Access Secured  -->
-			<TextView
-				android:id="@+id/labelAccessSecured"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelSecureELD"
-				android:layout_alignBottom="@+id/labelSecureELD"
-				android:layout_alignLeft="@+id/checkSecureELD"
-				android:layout_marginLeft="40dp"
-				android:text="Access Secured:"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkUseBT21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelAdapter"
+                    android:layout_alignBottom="@+id/labelLedBrightness"
+                    android:layout_marginLeft="80dp"
+                    android:onClick="onUseBT21Check"
+                    android:text="BT 2.1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<CheckBox
-				android:id="@+id/checkAccessSecured"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelAccessSecured"
-				android:layout_alignBottom="@+id/labelAccessSecured"
-				android:layout_alignLeft="@+id/labelAccessSecured"
-				android:layout_marginLeft="135dp"
-				android:enabled="false"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkUseBLE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelAdapter"
+                    android:layout_alignBottom="@+id/labelLedBrightness"
+                    android:layout_alignLeft="@+id/checkUseBT21"
+                    android:layout_marginLeft="90dp"
+                    android:onClick="onUseBLECheck"
+                    android:text="BLE"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Separator    -->
-			<View
-				android:id="@+id/lineSeparator5"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_below="@+id/checkAccessSecured"
-				android:background="@android:color/darker_gray"/>
+                <!--  Data Bus Checkboxez   -->
+                <TextView
+                    android:id="@+id/labelDataBus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelAdapter"
+                    android:layout_marginTop="20dp"
+                    android:text="Data Bus:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Start Button    -->
-			<Button
-				android:id="@+id/buttonStartELD"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@+id/lineSeparator5"
-				android:layout_alignParentLeft="true"
-				android:onClick="onStartELDClick"
-				android:text="Start ELD"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkUseJ1939"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelDataBus"
+                    android:layout_alignBottom="@+id/labelDataBus"
+                    android:layout_alignLeft="@+id/checkUseBT21"
+                    android:onClick="onUseJ1939Check"
+                    android:text="J1939"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Upload Button    -->
-			<Button
-				android:id="@+id/buttonUploadELD"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBottom="@+id/buttonStartELD"
-				android:layout_marginTop="5dp"
-				android:layout_alignLeft="@+id/buttonStartELD"
-				android:layout_marginLeft="100dp"
-				android:onClick="onUploadELDClick"
-				android:text="Upload Data"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkUseJ1708"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelDataBus"
+                    android:layout_alignBottom="@+id/labelDataBus"
+                    android:layout_alignLeft="@+id/checkUseJ1939"
+                    android:layout_marginLeft="90dp"
+                    android:onClick="onUseJ1708Check"
+                    android:text="J1708"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Delete Button    -->
-			<Button
-				android:id="@+id/buttonDeleteELD"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBottom="@+id/buttonStartELD"
-				android:layout_marginTop="5dp"
-				android:layout_alignLeft="@+id/buttonUploadELD"
-				android:layout_marginLeft="130dp"
-				android:onClick="onDeleteELDClick"
-				android:text="Delete Data"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Connect Button    -->
+                <Button
+                    android:id="@+id/buttonConnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/labelDataBus"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignParentLeft="true"
+                    android:onClick="onConnectClick"
+                    android:text="Connect"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <!--  Separator    -->
-            <View
-                android:id="@+id/lineSeparator6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/buttonDeleteELD"
-                android:background="@android:color/darker_gray"/>
+                <!--  Key State    -->
+                <TextView
+                    android:id="@+id/textKeyState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/buttonConnect"
+                    android:layout_alignBottom="@+id/buttonConnect"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="140dp"
+                    android:text="Key Off"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <!--  Remaining    -->
-            <TextView
-                android:id="@+id/labelRemaining"
+                <!--  Heartbeat    -->
+                <TextView
+                    android:id="@+id/labelHeartbeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/buttonConnect"
+                    android:layout_alignBottom="@+id/buttonConnect"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="60dp"
+                    android:text="Heartbeat:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/textHeartbeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/buttonConnect"
+                    android:layout_alignBottom="@+id/buttonConnect"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/buttonConnect"
+                    android:background="@android:color/darker_gray"/>
+
+                <!--  Led Brightness    -->
+                <TextView
+                    android:id="@+id/labelLedBrightness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/lineSeparator1"
+                    android:text="Led Brightness:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/textLedBrightness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelLedBrightness"
+                    android:layout_alignBottom="@+id/labelLedBrightness"
+                    android:layout_marginLeft="140dp"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Connect to Last Adapter Checkbox   -->
+                <TextView
+                    android:id="@+id/labelConnectLastAdapter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/textLedBrightness"
+                    android:text="Connect to Last Adapter:"
+                    android:layout_marginTop="5dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/checkConnectLastAdapter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelConnectLastAdapter"
+                    android:layout_alignBottom="@+id/labelConnectLastAdapter"
+                    android:layout_marginLeft="210dp"
+                    android:onClick="onConnectLastAdapterCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Secure Adapter Checkbox  -->
+                <TextView
+                    android:id="@+id/labelSecureAdapter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelConnectLastAdapter"
+                    android:text="Secure Adapter:"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/checkSecureAdapter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelSecureAdapter"
+                    android:layout_alignBottom="@+id/labelSecureAdapter"
+                    android:layout_marginLeft="140dp"
+                    android:onClick="onSecureAdapterCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  User Name    -->
+                <TextView
+                    android:id="@+id/labelUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/checkSecureAdapter"
+                    android:layout_marginTop="3dp"
+                    android:text="User Name:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/textUserName"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelUserName"
+                    android:layout_alignBottom="@+id/labelUserName"
+                    android:layout_marginLeft="100dp"
+                    android:inputType="textNoSuggestions"
+                    android:maxLength="20"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Password    -->
+                <TextView
+                    android:id="@+id/labelPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelUserName"
+                    android:layout_marginTop="10dp"
+                    android:text="Password:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/textPassword"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelPassword"
+                    android:layout_alignBottom="@+id/labelPassword"
+                    android:layout_marginLeft="100dp"
+                    android:inputType="textNoSuggestions"
+                    android:maxLength="12"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Update Button    -->
+                <Button
+                    android:id="@+id/buttonUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textPassword"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onUpdateClick"
+                    android:text="Update"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/textPassword"
+                    android:background="@android:color/darker_gray"/>
+
+                <!--  Send PGN    -->
+                <TextView
+                    android:id="@+id/labelPGN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/lineSeparator2"
+                    android:layout_marginTop="0dp"
+                    android:text="Send PGN:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/textPGN"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelPGN"
+                    android:layout_alignBottom="@+id/labelPGN"
+                    android:layout_marginLeft="90dp"
+                    android:inputType="textNoSuggestions"
+                    android:maxLength="6"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelPGNData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelPGN"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Data:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/textPGNData"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelPGNData"
+                    android:layout_below="@+id/textPGN"
+                    android:layout_alignBottom="@+id/labelPGNData"
+                    android:layout_marginLeft="90dp"
+                    android:inputType="textNoSuggestions"
+                    android:maxLength="16"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Send/Monitor Button    -->
+                <Button
+                    android:id="@+id/buttonSendMonitor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textPGNData"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onSendMonitorClick"
+                    android:text="Send"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/buttonSendMonitor"
+                    android:background="@android:color/darker_gray"/>
+
+                <!--  Truck Button    -->
+                <Button
+                    android:id="@+id/buttonTruckData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lineSeparator3"
+                    android:layout_alignParentLeft="true"
+                    android:onClick="onTruckDataClick"
+                    android:text="Truck Data"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  ELD Button    -->
+                <Button
+                    android:id="@+id/buttonELDData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/buttonTruckData"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignLeft="@+id/buttonTruckData"
+                    android:layout_marginLeft="120dp"
+                    android:onClick="onELDDataClick"
+                    android:text="ELD Data"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/buttonELDData"
+                    android:background="@android:color/darker_gray"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutTruck"
+                android:orientation="vertical"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/labelMargin11"
-                android:layout_below="@+id/lineSeparator6"
-                android:layout_marginTop="3dp"
-                android:text="Remaining:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/textRemaining"
+                <!--  Header    -->
+                <TextView
+                    android:id="@+id/labelMargin1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 1  -->
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/labelMargin1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/dataView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView1"
+                    android:layout_alignBottom="@+id/textView1"
+                    android:layout_marginLeft="130dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 2  -->
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/textView1"
+                    android:layout_marginTop="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/dataView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView2"
+                    android:layout_alignBottom="@+id/textView2"
+                    android:layout_alignLeft="@+id/dataView1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 3  -->
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/textView2"
+                    android:layout_marginTop="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/dataView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView3"
+                    android:layout_alignBottom="@+id/textView3"
+                    android:layout_alignLeft="@+id/dataView1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 4  -->
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/textView3"
+                    android:layout_marginTop="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/dataView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView4"
+                    android:layout_alignBottom="@+id/textView4"
+                    android:layout_alignLeft="@+id/dataView1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 5  -->
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/textView4"
+                    android:layout_marginTop="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/dataView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView5"
+                    android:layout_alignBottom="@+id/textView5"
+                    android:layout_alignLeft="@+id/dataView1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 6  -->
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/textView5"
+                    android:layout_marginTop="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/dataView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView6"
+                    android:layout_alignBottom="@+id/textView6"
+                    android:layout_alignLeft="@+id/dataView1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 7  -->
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/dataView6"
+                    android:layout_marginTop="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/dataView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView7"
+                    android:layout_alignBottom="@+id/textView7"
+                    android:layout_alignLeft="@+id/dataView1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 8 -->
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/dataView7"
+                    android:layout_marginTop="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/dataView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView8"
+                    android:layout_alignBottom="@+id/textView8"
+                    android:layout_alignLeft="@+id/dataView1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Next Group Button    -->
+                <Button
+                    android:id="@+id/buttonNextGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/textView8"
+                    android:onClick="onNextGroupClick"
+                    android:text="Next Group"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator10"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/buttonNextGroup"
+                    android:background="@android:color/darker_gray"/>
+
+                <!--  Fault    -->
+                <TextView
+                    android:id="@+id/labelFault"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin1"
+                    android:layout_below="@+id/lineSeparator10"
+                    android:layout_marginTop="10dp"
+                    android:text="Fault:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textFaultCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelFault"
+                    android:layout_alignBottom="@+id/labelFault"
+                    android:layout_alignLeft="@+id/dataView1"
+                    android:onClick="onFaultClick"
+                    android:text="NA"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Reset Button    -->
+                <Button
+                    android:id="@+id/buttonReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelFault"
+                    android:layout_alignBottom="@+id/labelFault"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onResetClick"
+                    android:text="Reset"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator11"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/buttonReset"
+                    android:background="@android:color/darker_gray"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutELD"
+                android:orientation="vertical"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/labelRemaining"
-                android:layout_alignBottom="@+id/labelRemaining"
-                android:layout_alignLeft="@+id/labelRemaining"
-                android:layout_marginLeft="95dp"
-                android:text="0.00% (0.00 hrs)"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:layout_height="wrap_content" >
 
-			<!--  Separator    -->
-			<View
-				android:id="@+id/lineSeparator7"
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="10dp"
-				android:layout_marginBottom="10dp"
-				android:layout_below="@+id/textRemaining"
-				android:background="@android:color/darker_gray"/>
+                <!--  Alignment    -->
+                <TextView
+                    android:id="@+id/labelMargin11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 1  -->
-			<TextView
-				android:id="@+id/labelRecordNo"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/lineSeparator7"
-                android:text="Record No"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Driver Id  -->
+                <TextView
+                    android:id="@+id/labelDriverId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelMargin11"
+                    android:layout_marginTop="3dp"
+                    android:text="Driver Id:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textRecordNo"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelRecordNo"
-				android:layout_alignBottom="@+id/labelRecordNo"
-				android:layout_marginLeft="130dp"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <EditText
+                    android:id="@+id/textDriverId"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelDriverId"
+                    android:layout_alignBottom="@+id/labelDriverId"
+                    android:layout_marginLeft="80dp"
+                    android:inputType="textNoSuggestions"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 2  -->
-			<TextView
-				android:id="@+id/labelRecordId"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelRecordNo"
-				android:layout_marginTop="3dp"
-                android:text="Record Id"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  ELD Interval  -->
+                <TextView
+                    android:id="@+id/labelELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelDriverId"
+                    android:layout_marginTop="10dp"
+                    android:text="ELD:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textRecordId"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelRecordId"
-				android:layout_alignBottom="@+id/labelRecordId"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkRecordELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelELD"
+                    android:layout_alignBottom="@+id/labelELD"
+                    android:layout_alignLeft="@+id/labelELD"
+                    android:layout_marginLeft="45dp"
+                    android:enabled="false"
+                    android:checked="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 3  -->
-			<TextView
-				android:id="@+id/labelTime"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelRecordId"
-				android:layout_marginTop="3dp"
-                android:text="Time"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/labelELDInterval"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelELD"
+                    android:layout_alignBottom="@+id/labelELD"
+                    android:layout_alignLeft="@+id/checkRecordELD"
+                    android:layout_marginLeft="35dp"
+                    android:text="Interval:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textTime"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelTime"
-				android:layout_alignBottom="@+id/labelTime"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <EditText
+                    android:id="@+id/textELDInterval"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelELD"
+                    android:layout_alignBottom="@+id/labelELD"
+                    android:layout_alignLeft="@+id/labelELDInterval"
+                    android:layout_marginLeft="70dp"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 4  -->
-			<TextView
-				android:id="@+id/labelVIN"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelTime"
-				android:layout_marginTop="3dp"
-                android:text="VIN"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkAlignELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelELD"
+                    android:layout_alignBottom="@+id/labelELD"
+                    android:layout_alignLeft="@+id/textELDInterval"
+                    android:layout_marginLeft="60dp"
+                    android:onClick="onAlignELDCheck"
+                    android:text="Align"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textVIN"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelVIN"
-				android:layout_alignBottom="@+id/labelVIN"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  IFTA  -->
+                <TextView
+                    android:id="@+id/labelIFTA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelELD"
+                    android:layout_below="@+id/labelELDInterval"
+                    android:layout_marginTop="10dp"
+                    android:text="IFTA:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 5  -->
-			<TextView
-				android:id="@+id/labelDistance"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelVIN"
-				android:layout_marginTop="3dp"
-                android:text="Distance"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkRecordIFTA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelIFTA"
+                    android:layout_alignBottom="@+id/labelIFTA"
+                    android:layout_alignLeft="@+id/checkRecordELD"
+                    android:onClick="onRecordIFTACheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textDistance"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelDistance"
-				android:layout_alignBottom="@+id/labelDistance"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/labelIFTAInterval"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelIFTA"
+                    android:layout_alignBottom="@+id/labelIFTA"
+                    android:layout_alignLeft="@+id/labelELDInterval"
+                    android:text="Interval:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 6  -->
-			<TextView
-				android:id="@+id/labelOdometer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelDistance"
-				android:layout_marginTop="3dp"
-                android:text="Odometer"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <EditText
+                    android:id="@+id/textIFTAInterval"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelIFTA"
+                    android:layout_alignBottom="@+id/labelIFTA"
+                    android:layout_alignLeft="@+id/textELDInterval"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textOdometer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelOdometer"
-				android:layout_alignBottom="@+id/labelOdometer"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkAlignIFTA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelIFTA"
+                    android:layout_alignBottom="@+id/labelIFTA"
+                    android:layout_alignLeft="@+id/checkAlignELD"
+                    android:onClick="onAlignIFTACheck"
+                    android:text="Align"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 7  -->
-			<TextView
-				android:id="@+id/labelTotalHours"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelOdometer"
-				android:layout_marginTop="3dp"
-                android:text="Total Hours"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Stats  -->
+                <TextView
+                    android:id="@+id/labelStats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelELD"
+                    android:layout_below="@+id/labelIFTA"
+                    android:layout_marginTop="10dp"
+                    android:text="Stats:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textTotalHours"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelTotalHours"
-				android:layout_alignBottom="@+id/labelTotalHours"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkRecordStats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelStats"
+                    android:layout_alignBottom="@+id/labelStats"
+                    android:layout_alignLeft="@+id/checkRecordELD"
+                    android:onClick="onRecordStatsCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 8 -->
-			<TextView
-				android:id="@+id/labelIdleHours"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelTotalHours"
-				android:layout_marginTop="3dp"
-                android:text="Idle Hours"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/labelStatsInterval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelStats"
+                    android:layout_alignBottom="@+id/labelStats"
+                    android:layout_alignLeft="@+id/labelELDInterval"
+                    android:text="Interval:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textIdleHours"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelIdleHours"
-				android:layout_alignBottom="@+id/labelIdleHours"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <EditText
+                    android:id="@+id/textStatsInterval"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelStats"
+                    android:layout_alignBottom="@+id/labelStats"
+                    android:layout_alignLeft="@+id/textELDInterval"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 9 -->
-			<TextView
-				android:id="@+id/labelTotalFuel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelIdleHours"
-				android:layout_marginTop="3dp"
-                android:text="Total Fuel"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkAlignStats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelStats"
+                    android:layout_alignBottom="@+id/labelStats"
+                    android:layout_alignLeft="@+id/checkAlignELD"
+                    android:onClick="onAlignStatsCheck"
+                    android:text="Align"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textTotalFuel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelTotalFuel"
-				android:layout_alignBottom="@+id/labelTotalFuel"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Secure ELD  -->
+                <TextView
+                    android:id="@+id/labelSecureELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelStats"
+                    android:layout_marginTop="10dp"
+                    android:text="Secure ELD:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 10 -->
-			<TextView
-				android:id="@+id/labelIdleFuel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelTotalFuel"
-				android:layout_marginTop="3dp"
-                android:text="Idle Fuel"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkSecureELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelSecureELD"
+                    android:layout_alignBottom="@+id/labelSecureELD"
+                    android:layout_alignLeft="@+id/labelSecureELD"
+                    android:layout_marginLeft="95dp"
+                    android:onClick="onSecureELDCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textIdleFuel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelIdleFuel"
-				android:layout_alignBottom="@+id/labelIdleFuel"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Access Secured  -->
+                <TextView
+                    android:id="@+id/labelAccessSecured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelSecureELD"
+                    android:layout_alignBottom="@+id/labelSecureELD"
+                    android:layout_alignLeft="@+id/checkSecureELD"
+                    android:layout_marginLeft="40dp"
+                    android:text="Access Secured:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<!--  Data 11 -->
-			<TextView
-				android:id="@+id/labelLatitude"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@+id/labelMargin11"
-				android:layout_below="@+id/labelIdleFuel"
-				android:layout_marginTop="3dp"
-                android:text="Latitude"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/checkAccessSecured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelAccessSecured"
+                    android:layout_alignBottom="@+id/labelAccessSecured"
+                    android:layout_alignLeft="@+id/labelAccessSecured"
+                    android:layout_marginLeft="135dp"
+                    android:enabled="false"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			<TextView
-				android:id="@+id/textLatitude"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBaseline="@+id/labelLatitude"
-				android:layout_alignBottom="@+id/labelLatitude"
-				android:layout_alignLeft="@+id/textRecordNo"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/checkAccessSecured"
+                    android:background="@android:color/darker_gray"/>
 
-            <!--  Data 12 -->
-            <TextView
-                android:id="@+id/labelLongitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/labelMargin11"
-                android:layout_below="@+id/labelLatitude"
-                android:layout_marginTop="3dp"
-                android:text="Longitude"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Start Button    -->
+                <Button
+                    android:id="@+id/buttonStartELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lineSeparator5"
+                    android:layout_alignParentLeft="true"
+                    android:onClick="onStartELDClick"
+                    android:text="Start ELD"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/textLongitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/labelLongitude"
-                android:layout_alignBottom="@+id/labelLongitude"
-                android:layout_alignLeft="@+id/textRecordNo"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <!--  Upload Button    -->
+                <Button
+                    android:id="@+id/buttonUploadELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/buttonStartELD"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignLeft="@+id/buttonStartELD"
+                    android:layout_marginLeft="100dp"
+                    android:onClick="onUploadELDClick"
+                    android:text="Upload Data"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-		</RelativeLayout>
+                <!--  Delete Button    -->
+                <Button
+                    android:id="@+id/buttonDeleteELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/buttonStartELD"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignLeft="@+id/buttonUploadELD"
+                    android:layout_marginLeft="130dp"
+                    android:onClick="onDeleteELDClick"
+                    android:text="Delete Data"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-	</RelativeLayout>
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/buttonDeleteELD"
+                    android:background="@android:color/darker_gray"/>
 
-</ScrollView>
+                <!--  Remaining    -->
+                <TextView
+                    android:id="@+id/labelRemaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/lineSeparator6"
+                    android:layout_marginTop="3dp"
+                    android:text="Remaining:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textRemaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelRemaining"
+                    android:layout_alignBottom="@+id/labelRemaining"
+                    android:layout_alignLeft="@+id/labelRemaining"
+                    android:layout_marginLeft="95dp"
+                    android:text="0.00% (0.00 hrs)"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/textRemaining"
+                    android:background="@android:color/darker_gray"/>
+
+                <!--  Data 1  -->
+                <TextView
+                    android:id="@+id/labelRecordNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/lineSeparator7"
+                    android:text="Record No"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textRecordNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelRecordNo"
+                    android:layout_alignBottom="@+id/labelRecordNo"
+                    android:layout_marginLeft="130dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 2  -->
+                <TextView
+                    android:id="@+id/labelRecordId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelRecordNo"
+                    android:layout_marginTop="3dp"
+                    android:text="Record Id"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textRecordId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelRecordId"
+                    android:layout_alignBottom="@+id/labelRecordId"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 3  -->
+                <TextView
+                    android:id="@+id/labelTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelRecordId"
+                    android:layout_marginTop="3dp"
+                    android:text="Time"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelTime"
+                    android:layout_alignBottom="@+id/labelTime"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 4  -->
+                <TextView
+                    android:id="@+id/labelVIN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelTime"
+                    android:layout_marginTop="3dp"
+                    android:text="VIN"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textVIN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelVIN"
+                    android:layout_alignBottom="@+id/labelVIN"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 5  -->
+                <TextView
+                    android:id="@+id/labelDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelVIN"
+                    android:layout_marginTop="3dp"
+                    android:text="Distance"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelDistance"
+                    android:layout_alignBottom="@+id/labelDistance"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 6  -->
+                <TextView
+                    android:id="@+id/labelOdometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelDistance"
+                    android:layout_marginTop="3dp"
+                    android:text="Odometer"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textOdometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelOdometer"
+                    android:layout_alignBottom="@+id/labelOdometer"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 7  -->
+                <TextView
+                    android:id="@+id/labelTotalHours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelOdometer"
+                    android:layout_marginTop="3dp"
+                    android:text="Total Hours"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textTotalHours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelTotalHours"
+                    android:layout_alignBottom="@+id/labelTotalHours"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 8 -->
+                <TextView
+                    android:id="@+id/labelIdleHours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelTotalHours"
+                    android:layout_marginTop="3dp"
+                    android:text="Idle Hours"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textIdleHours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelIdleHours"
+                    android:layout_alignBottom="@+id/labelIdleHours"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 9 -->
+                <TextView
+                    android:id="@+id/labelTotalFuel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelIdleHours"
+                    android:layout_marginTop="3dp"
+                    android:text="Total Fuel"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textTotalFuel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelTotalFuel"
+                    android:layout_alignBottom="@+id/labelTotalFuel"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 10 -->
+                <TextView
+                    android:id="@+id/labelIdleFuel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelTotalFuel"
+                    android:layout_marginTop="3dp"
+                    android:text="Idle Fuel"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textIdleFuel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelIdleFuel"
+                    android:layout_alignBottom="@+id/labelIdleFuel"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 11 -->
+                <TextView
+                    android:id="@+id/labelLatitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelIdleFuel"
+                    android:layout_marginTop="3dp"
+                    android:text="Latitude"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textLatitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelLatitude"
+                    android:layout_alignBottom="@+id/labelLatitude"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Data 12 -->
+                <TextView
+                    android:id="@+id/labelLongitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelLatitude"
+                    android:layout_marginTop="3dp"
+                    android:text="Longitude"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textLongitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelLongitude"
+                    android:layout_alignBottom="@+id/labelLongitude"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
