@@ -7,42 +7,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab225881-d1f1-4fab-9884-60ce23a3ad49" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_22.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.aar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/build.gradle" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/bluefire_api_v22_0_unspecified.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/attrs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_22.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.aar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw600dp/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/lint.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw600dp/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" />
     </list>
     <ignored path="BlueFire-API-for-Android-Studio.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,16 +74,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Build Instructions" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Build Instructions">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -107,7 +97,7 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="202">
+              <first_editor relative-caret-position="2346">
                 <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
                 <folding />
               </first_editor>
@@ -121,8 +111,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+            <state relative-caret-position="374">
+              <caret line="74" column="9" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -2226,12 +2216,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/Build Instructions" />
         <option value="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/APIDemo/build.gradle" />
         <option value="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
+        <option value="$PROJECT_DIR$/Build Instructions" />
         <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
@@ -2267,12 +2257,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="AndroidView">
-        <subPane />
-      </pane>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2447,6 +2431,12 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="AndroidView">
+        <subPane />
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2902,7 +2892,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Build Instructions">
+    <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
@@ -2940,7 +2930,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Build Instructions">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Build_Instructions">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="2346">
+            <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor>
+            <js_state />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
@@ -2978,7 +3014,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Build Instructions">
+    <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -3016,7 +3052,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Build Instructions">
+    <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="884">
           <caret line="52" column="2" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="2" />
@@ -3062,7 +3098,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Build Instructions">
+    <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -3109,14 +3145,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
@@ -3143,25 +3179,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bluefire-api-v22.0/build.gradle">
@@ -3203,14 +3239,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Build Instructions">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -3223,7 +3251,7 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="202">
+          <first_editor relative-caret-position="2346">
             <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
             <folding />
           </first_editor>
@@ -3233,10 +3261,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Build_Instructions">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+        <state relative-caret-position="374">
+          <caret line="74" column="9" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
           <folding />
         </state>
       </provider>

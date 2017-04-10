@@ -75,7 +75,7 @@ $RECYCLE.BIN/
 vssver2.*
 
 # Development
-Build Instructions
+Build_Instructions
 
 APIDemo/gen/
 APIDemo/src/main/resources/
