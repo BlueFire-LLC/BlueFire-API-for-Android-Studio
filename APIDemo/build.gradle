@@ -27,5 +27,5 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:support-v4:26.0.0-alpha1'
-    compile project(':bluefire-api-v22.0')
+    releaseCompile project(':bluefire-api-v22.0')
 }
