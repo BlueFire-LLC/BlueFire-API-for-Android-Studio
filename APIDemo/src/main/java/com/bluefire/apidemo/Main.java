@@ -37,6 +37,8 @@ public class Main extends Activity
     private RelativeLayout layoutAdapter;
 
     private TextView textStatus;
+    private TextView textHardware;
+    private TextView textFirmware;
     private TextView textKeyState;
     private TextView textFaultCode;
     private TextView textHeartbeat;
@@ -334,6 +336,8 @@ public class Main extends Activity
         layoutAdapter = (RelativeLayout)findViewById(R.id.layoutAdapter);
 
         textStatus = (TextView) findViewById(R.id.textStatus);
+        textHardware = (TextView) findViewById(R.id.textHardware);
+        textFirmware = (TextView) findViewById(R.id.textFirmware);
         textKeyState = (TextView) findViewById(R.id.textKeyState);
         textFaultCode = (TextView) findViewById(R.id.textFaultCode);
         textHeartbeat = (TextView) findViewById(R.id.textHeartbeat);
@@ -538,6 +542,24 @@ public class Main extends Activity
             startConnection();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        // Check for user granting permission.
+        // Note, iff request is cancelled, the result arrays are empty.
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            startConnection();
+
+            // User refused the permission request, do not allow connection.
+        else
+        {
+            adapterDisconnected();
+
+            Toast.makeText(this, "You need to allow Location Access to use the BLE Adapter.", Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void startConnection()
     {
         // Connect to the adapter via a thread so that the blocking
@@ -558,24 +580,6 @@ public class Main extends Activity
             // Connect to the adapter.
             // Note, this is a blocking call and must run in it's own thread.
             blueFire.Connect();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
-    {
-        // Check for user granting permission.
-        // Note, iff request is cancelled, the result arrays are empty.
-
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            startConnection();
-
-        // User refused the permission request, do not allow connection.
-        else
-        {
-            adapterDisconnected();
-
-            Toast.makeText(this, "You need to allow Location Access to use the BLE Adapter.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -1006,13 +1010,7 @@ public class Main extends Activity
     public void onAlignELDCheck(View view)
     {
         // Edit for valid hour alignment
-        appELDInterval = getInterval(textELDInterval.getText().toString());
-
-        if (checkAlignELD.isChecked())
-            if (!editAlignment(appELDInterval))
-                return;
-
-        appAlignELD = checkAlignELD.isChecked();
+        editELDInterval();
     }
 
     // Record IFTA Checkbox
@@ -1025,13 +1023,7 @@ public class Main extends Activity
     public void onAlignIFTACheck(View view)
     {
         // Edit for valid hour alignment
-        appIFTAInterval = getInterval(textStatsInterval.getText().toString());
-
-        if (checkAlignIFTA.isChecked())
-            if (!editAlignment(appIFTAInterval))
-                return;
-
-        appAlignIFTA = checkAlignIFTA.isChecked();
+        editIFTAInterval();
     }
 
     // Record Stats Checkbox
@@ -1044,13 +1036,7 @@ public class Main extends Activity
     public void onAlignStatsCheck(View view)
     {
         // Edit for valid hour alignment
-        appStatsInterval = getInterval(textStatsInterval.getText().toString());
-
-        if (checkAlignStats.isChecked())
-            if (!editAlignment(appStatsInterval))
-                return;
-
-        appAlignStats = checkAlignStats.isChecked();
+        editStatsInterval();
     }
 
     // Secure ELD Checkbox
@@ -1365,36 +1351,15 @@ public class Main extends Activity
         }
         appDriverId = driverId;
 
-        // Edit intervals and hour alignment
-        appELDInterval = getInterval(textELDInterval.getText().toString());
-        if (appELDInterval <= 0)
+        // Edit intervals and alignments
+        if (!editELDInterval())
             return false;
 
-        if (appAlignELD)
-            if (!editAlignment(appELDInterval))
-                return false;
+        if (!editIFTAInterval())
+            return false;
 
-        if (appRecordIFTA)
-        {
-            appIFTAInterval = getInterval(textIFTAInterval.getText().toString());
-            if (appIFTAInterval <= 0)
-                return false;
-
-            if (appAlignIFTA)
-                if (!editAlignment(appIFTAInterval))
-                    return false;
-        }
-
-        if (appRecordStats)
-        {
-            appStatsInterval = getInterval(textStatsInterval.getText().toString());
-            if (appStatsInterval <= 0)
-                return false;
-
-            if (appAlignStats)
-                if (!editAlignment(appStatsInterval))
-                    return false;
-        }
+        if (!editStatsInterval())
+            return false;
 
         // Set ELD parameters
         blueFire.ELD.DriverId = appDriverId; // not persistent by adapter
@@ -1446,28 +1411,75 @@ public class Main extends Activity
         blueFire.ELD.WriteRecord(customId, customData);
     }
 
-    private float getInterval(String IntervalText)
+    private boolean editInterval(String intervalText, boolean align)
     {
-        float Interval = -1;
+        float interval = -1;
         try
         {
-            Interval = Float.parseFloat(IntervalText.trim());
+            interval = Float.parseFloat(intervalText.trim());
         }
+
         catch(Exception e){}
 
-        if (Interval < 0)
-            Toast.makeText(this, "Interval is not valid.", Toast.LENGTH_LONG).show();
-
-        return Interval;
-    }
-
-    private boolean editAlignment(float Interval)
-    {
-        if (!blueFire.ELD.IsHourAligned(Interval))
+        if (interval <= 0)
         {
-            Toast.makeText(this, "Interval cannot be aligned.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Interval must be greater than 0.", Toast.LENGTH_LONG).show();
             return false;
         }
+
+        if (align)
+        {
+            if (!blueFire.ELD.IsHourAligned(interval))
+            {
+                Toast.makeText(this, "Interval cannot be aligned.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean editELDInterval()
+    {
+        // Edit ELD interval and alignment
+        String  intervalText = textELDInterval.getText().toString().trim();
+        boolean align = checkAlignELD.isChecked();
+
+        if (!editInterval(intervalText, align))
+            return false;
+
+        appELDInterval = Float.parseFloat(intervalText);
+        appAlignELD = align;
+
+        return true;
+    }
+
+    private boolean editIFTAInterval()
+    {
+        // Edit IFTA interval and alignment
+        String intervalText = textIFTAInterval.getText().toString().trim();
+        boolean align = checkAlignIFTA.isChecked();
+
+        if (!editInterval(intervalText, align))
+            return false;
+
+        appIFTAInterval = Float.parseFloat(intervalText);
+        appAlignIFTA = align;
+
+        return true;
+    }
+
+    private boolean editStatsInterval()
+    {
+        // Edit Stats interval and alignment
+        String intervalText = textStatsInterval.getText().toString().trim();
+        boolean align = checkAlignStats.isChecked();
+
+        if (!editInterval(intervalText, align))
+            return false;
+
+        appStatsInterval = Float.parseFloat(intervalText);
+        appAlignStats = align;
 
         return true;
     }
@@ -1539,6 +1551,10 @@ public class Main extends Activity
 
     private void showData()
     {
+        // Show hardware and firmware versions
+        textHardware.setText(blueFire.HardwareVersion());
+        textFirmware.setText(blueFire.FirmwareVersion());
+
         // Check the key state
         checkKeyState();
 

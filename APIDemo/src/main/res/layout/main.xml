@@ -111,16 +111,68 @@
                     android:text="J1708"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_below="@+id/checkUseJ1708"
+                    android:background="@android:color/darker_gray"/>
+
                 <!--  Connect Button    -->
                 <Button
                     android:id="@+id/buttonConnect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/labelDataBus"
-                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/lineSeparator0"
                     android:layout_alignParentLeft="true"
                     android:onClick="onConnectClick"
-                    android:text="Connect"
+                    android:text="Disconnect"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Firmware    -->
+                <TextView
+                    android:id="@+id/labelFirmware"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/buttonConnect"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginTop="0dp"
+                    android:text="FW:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textFirmware"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelFirmware"
+                    android:layout_alignBottom="@+id/labelFirmware"
+                    android:layout_marginLeft="160dp"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Hardware    -->
+                <TextView
+                    android:id="@+id/labelHardware"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/buttonConnect"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="120dp"
+                    android:text="HW:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textHardware"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelHardware"
+                    android:layout_alignBottom="@+id/labelHardware"
+                    android:layout_marginLeft="160dp"
+                    android:text=""
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <!--  Key State    -->
@@ -128,10 +180,10 @@
                     android:id="@+id/textKeyState"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/buttonConnect"
-                    android:layout_alignBottom="@+id/buttonConnect"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="140dp"
+                    android:layout_alignTop="@+id/buttonConnect"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="0dp"
                     android:text="Key Off"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -140,7 +192,6 @@
                     android:id="@+id/labelHeartbeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/buttonConnect"
                     android:layout_alignBottom="@+id/buttonConnect"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="60dp"
@@ -150,7 +201,6 @@
                     android:id="@+id/textHeartbeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/buttonConnect"
                     android:layout_alignBottom="@+id/buttonConnect"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="25dp"
@@ -162,7 +212,7 @@
                     android:id="@+id/lineSeparator1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
                     android:layout_below="@+id/buttonConnect"
                     android:background="@android:color/darker_gray"/>
