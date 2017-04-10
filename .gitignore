@@ -72,6 +72,7 @@ $RECYCLE.BIN/
 
 # Visual Studio
 *.scc
+vssver2.*
 
 # Development
 Build Instructions
