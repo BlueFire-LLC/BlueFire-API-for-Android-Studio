@@ -169,6 +169,7 @@ Version 22.0:<ul>
 	
 Version 22.1:<ul>
 	<li>Changed ConnectionStates, SleepModes, and ELD.RecordIds to be exposed outside of the BlueFire class.
+	<li>Internal changes.
 </ul>
 
 	
