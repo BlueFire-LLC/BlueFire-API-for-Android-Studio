@@ -21,9 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bluefire.api.BlueFire;
+import com.bluefire.api.ConnectionStates;
 import com.bluefire.api.Const;
-import com.bluefire.api.ELD;
-import com.bluefire.api.Helper;
+import com.bluefire.api.RecordIds;
+import com.bluefire.api.SleepModes;
 import com.bluefire.api.Truck;
 
 import java.math.BigDecimal;
@@ -143,7 +144,7 @@ public class Main extends Activity
 
     private boolean secureAdapter = false;
 
-    private BlueFire.ConnectionStates connectionState = BlueFire.ConnectionStates.NotConnected;
+    private ConnectionStates connectionState = ConnectionStates.NotConnected;
 
     // BlueFire adapter
     private BlueFire blueFire;
@@ -157,7 +158,7 @@ public class Main extends Activity
     private boolean appUseBT21 = false;
 
     private int appLedBrightness = 100;
-    private BlueFire.SleepModes appSleepMode = BlueFire.SleepModes.NoSleep;
+    private SleepModes appSleepMode = SleepModes.NoSleep;
     private boolean appPerformanceMode = false;
     public int appMinInterval;
 
@@ -492,7 +493,7 @@ public class Main extends Activity
                 isConnecting = true;
                 isConnected = false;
 
-                connectionState = BlueFire.ConnectionStates.NA;
+                connectionState = ConnectionStates.NA;
                 textStatus.setText("Connecting...");
 
                 checkUseBT21.setEnabled(false);
@@ -1220,19 +1221,19 @@ public class Main extends Activity
         // Show ELD Records
 
         clearELDData();
-
-        ELD.RecordIds RecordId = ELD.RecordIds.forValue(blueFire.ELD.RecordId());
+        
+        RecordIds RecordId = RecordIds.forValue(blueFire.ELD.RecordId());
 
         textRecordNo.setText(String.valueOf(RecordNo));
         textRecordId.setText(RecordId.toString());
         textTime.setText(DateFormat.getDateTimeInstance().format(blueFire.ELD.Time()));
 
-        if (RecordId == ELD.RecordIds.VIN)
+        if (RecordId == RecordIds.VIN)
         {
             labelVIN.setText("VIN");
             textVIN.setText(blueFire.ELD.VIN());
         }
-        else if(RecordId == ELD.RecordIds.DriverId)
+        else if(RecordId == RecordIds.DriverId)
         {
             labelVIN.setText("Driver");
             textVIN.setText(blueFire.ELD.DriverId);
@@ -1400,7 +1401,7 @@ public class Main extends Activity
     private void sendCustomELDRecord(int myCustomRecordId)
     {
         // Set the custom record id
-        int customId = ELD.RecordIds.Custom.getValue() + myCustomRecordId;
+        int customId = RecordIds.Custom.getValue() + myCustomRecordId;
 
         // Set the data to whatever you want
         byte[] customData = new byte[blueFire.ELD.CustomDataLength];
@@ -1727,11 +1728,11 @@ public class Main extends Activity
                 textView7.setText("Coolant Level");
                 textView8.setText("Battery Volts");
 
-                dataView1.setText(formatFloat(Helper.CelciusToFarenheit(Truck.OilTemp),2));
+                dataView1.setText(formatFloat(celciusToFarenheit(Truck.OilTemp),2));
                 dataView2.setText(formatFloat(Truck.OilPressure * Const.kPaToPSI,2));
-                dataView3.setText(formatFloat(Helper.CelciusToFarenheit(Truck.IntakeTemp),2));
+                dataView3.setText(formatFloat(celciusToFarenheit(Truck.IntakeTemp),2));
                 dataView4.setText(formatFloat(Truck.IntakePressure * Const.kPaToPSI,2));
-                dataView5.setText(formatFloat(Helper.CelciusToFarenheit(Truck.CoolantTemp),2));
+                dataView5.setText(formatFloat(celciusToFarenheit(Truck.CoolantTemp),2));
                 dataView6.setText(formatFloat(Truck.CoolantPressure * Const.kPaToPSI,2));
                 dataView7.setText(formatFloat(Truck.CoolantLevel,2));
                 dataView8.setText(formatFloat(Truck.BatteryPotential,2));
@@ -1960,6 +1961,22 @@ public class Main extends Activity
         String hexString = ("0000000000000000" + new BigInteger(1, hexBytes).toString(16));
 
         return hexString.substring(hexString.length()-16);
+    }
+
+    private float celciusToFarenheit(float temp)
+    {
+        if (temp < 0)
+            return -1;
+        else
+            return (temp * 1.8F + 32F);
+    }
+
+    private float farenheitToCelcius(float temp)
+    {
+        if (temp < 0)
+            return -1;
+        else
+            return ((temp -32) / 1.8F);
     }
 
     @Override
