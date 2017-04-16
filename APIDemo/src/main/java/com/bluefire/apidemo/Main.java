@@ -1137,6 +1137,11 @@ public class Main extends Activity
         // Start recording
         if (!blueFire.ELD.IsStarted())
         {
+            // Set the time in the adapter.
+            // Note, must do this here so the custom record will have the correct date.
+            // If no custom record is to be sent, StartRecording will also set the time.
+            blueFire.SetTime();
+
             // Send a custom record(like app started recording)
             sendCustomELDRecord(myCustomRecordId1);
 

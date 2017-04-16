@@ -171,5 +171,11 @@ Version 22.1:<ul>
 	<li>Changed ConnectionStates, SleepModes, and ELD.RecordIds to be exposed outside of the BlueFire class.
 	<li>Internal changes.
 </ul>
+	
+Version 22.2:<ul>
+	<li>Compatible with Adapter Firmware Beta 3.10.3 (required).
+	<li>Removed duplicate ELD records.
+	<li>Better re-connection while ELD recording.
+</ul>
 
 	
