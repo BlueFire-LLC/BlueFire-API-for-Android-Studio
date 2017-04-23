@@ -177,5 +177,10 @@ Version 22.2:<ul>
 	<li>Removed duplicate ELD records.
 	<li>Better re-connection while ELD recording.
 </ul>
+	
+Version 22.3:<ul>
+	<li>Compatible with Adapter Firmware Beta 3.10.5 (required).
+	<li>Better time sync with the Adapter.
+</ul>
 
 	
