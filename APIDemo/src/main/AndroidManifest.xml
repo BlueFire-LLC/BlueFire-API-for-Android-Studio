@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.bluefire.apidemo"
       android:versionCode="1"
-      android:versionName="22.3" >
+      android:versionName="22.4" >
     <!--  Note - versionName must match BlueFire.Version, the README.md and the build.gradle script -->
 
     <uses-sdk android:minSdkVersion="16"></uses-sdk>

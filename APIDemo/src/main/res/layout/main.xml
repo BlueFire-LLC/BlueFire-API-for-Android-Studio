@@ -597,32 +597,13 @@
                     android:layout_alignLeft="@+id/dataView1"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 8 -->
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/labelMargin1"
-                    android:layout_below="@+id/dataView7"
-                    android:layout_marginTop="3dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/dataView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView8"
-                    android:layout_alignBottom="@+id/textView8"
-                    android:layout_alignLeft="@+id/dataView1"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
                 <!--  Next Group Button    -->
                 <Button
                     android:id="@+id/buttonNextGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin1"
-                    android:layout_below="@+id/textView8"
+                    android:layout_below="@+id/textView7"
                     android:onClick="onNextGroupClick"
                     android:text="Next Group"
                     android:textAppearance="?android:attr/textAppearanceMedium" />

@@ -182,5 +182,14 @@ Version 22.3:<ul>
 	<li>Compatible with Adapter Firmware Beta 3.10.5 (required).
 	<li>Better time sync with the Adapter.
 </ul>
+	
+Version 22.4:<ul>
+	<li>Requires Adapter Firmware Beta 3.10.5.
+	<li>Added getEngineVIN method.
+	<li>Added synchronization to Truck Data methods.
+	<li>Added retrievalMethod parameter to Truck Data methods.
+	<li>Demo app only retrieves truck data when navigating to the specific data page.
+	<li>API documentation has been updated to reflect the above changes.
+</ul>
 
 	

@@ -74,7 +74,6 @@ public class Main extends Activity
     private TextView textView5;
     private TextView textView6;
     private TextView textView7;
-    private TextView textView8;
 
     private TextView dataView1;
     private TextView dataView2;
@@ -83,7 +82,6 @@ public class Main extends Activity
     private TextView dataView5;
     private TextView dataView6;
     private TextView dataView7;
-    private TextView dataView8;
 
     // ELD Layout
     private RelativeLayout layoutELD;
@@ -133,7 +131,12 @@ public class Main extends Activity
     private int faultIndex;
 
     private int groupNo;
-    private static final int maxGroupNo = 5;
+    private static final int maxGroupNo = 6;
+
+    private static final boolean Synchronized = true;
+    private static final boolean OnChange = false;
+    private boolean retrievalMethod;
+    private int retrievalInterval;
 
     private static final int myCustomRecordId1 = 1;
     private static final int myCustomRecordId2 = 2;
@@ -373,7 +376,6 @@ public class Main extends Activity
         textView5 = (TextView) findViewById(R.id.textView5);
         textView6 = (TextView) findViewById(R.id.textView6);
         textView7 = (TextView) findViewById(R.id.textView7);
-        textView8 = (TextView) findViewById(R.id.textView8);
 
         dataView1 = (TextView) findViewById(R.id.dataView1);
         dataView2 = (TextView) findViewById(R.id.dataView2);
@@ -382,7 +384,6 @@ public class Main extends Activity
         dataView5 = (TextView) findViewById(R.id.dataView5);
         dataView6 = (TextView) findViewById(R.id.dataView6);
         dataView7 = (TextView) findViewById(R.id.dataView7);
-        dataView8 = (TextView) findViewById(R.id.dataView8);
 
         // ELD layout
         layoutELD = (RelativeLayout)findViewById(R.id.layoutELD);
@@ -444,7 +445,8 @@ public class Main extends Activity
         enableAdapterParms(false);
 
         // Clear form
-        showTruckData();
+        groupNo = 0;
+        showTruckText();
 
         textFaultCode.setText("NA");
         textHeartbeat.setText("0");
@@ -756,16 +758,6 @@ public class Main extends Activity
         Toast.makeText(this, "The Adapter did not reconnect.", Toast.LENGTH_LONG).show();
     }
 
-    // Next Group Button
-    public void onNextGroupClick(View view)
-    {
-        groupNo++;
-        if (groupNo > maxGroupNo)
-            groupNo = 0;
-
-        showTruckData();
-    }
-
     // BT21 Checkbox
     public void onUseBT21Check(View view)
     {
@@ -975,6 +967,16 @@ public class Main extends Activity
 
             stopTruckData();
         }
+    }
+
+    // Next Group Button
+    public void onNextGroupClick(View view)
+    {
+        groupNo++;
+        if (groupNo > maxGroupNo)
+            groupNo = 0;
+
+        showTruckText();
     }
 
     // ELD Button
@@ -1629,26 +1631,16 @@ public class Main extends Activity
         if (!blueFire.IsConnected())
             return;
 
-        blueFire.GetVehicleData(); // VIN, Make, Model, Serial no
+        // Set data retrieval method for testing.
+        // Note, this can be Synchronized or OnChange.
+        //retrievalMethod = OnChange;
+        //retrievalMethod = Synchronized;
 
-        blueFire.GetEngineData1(); // RPM, Percent Torque, Driver Torque, Torque Mode
-        blueFire.GetEngineData2(); // Percent Load, Accelerator Pedal Position
-        blueFire.GetEngineData3(); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+        // Or set the retrieval interval if not using the RetrievalMethod.
+        retrievalInterval = blueFire.MinInterval(); // or any interval you need
 
-        blueFire.GetTemps(); // Oil Temp, Coolant Temp, Intake Manifold Temperature
-        blueFire.GetOdometer(); // Odometer (Engine Distance)
-        blueFire.GetFuelData(); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
-        blueFire.GetBrakeData(); // Application Pressure, Primary Pressure, Secondary Pressure
-        blueFire.GetPressures(); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
-        blueFire.GetEngineHours(); // Total Engine Hours, Total Idle Hours
-        blueFire.GetCoolantLevel(); // Coolant Level
-        blueFire.GetBatteryVoltage(); // Battery Voltage
-
-        blueFire.GetTransmissionGears(); // Selected and Current Gears
-
-        blueFire.GetFaults(); // Engine Faults
-        blueFire.GetFaults(11, 128); // Brakes Faults
-        blueFire.GetFaults(90, 0); // Proprietary faults
+        groupNo = 0;
+        showTruckText();
     }
 
     private void stopTruckData()
@@ -1659,48 +1651,73 @@ public class Main extends Activity
         blueFire.StopDataRetrieval();
     }
 
-    private void showTruckData()
+    private void clearAdapterData()
     {
+        blueFire.StopDataRetrieval();
+
+        blueFire.GetFaults(); // Engine Faults
+        //blueFire.GetFaults(11, 128); // Brakes Faults
+        //blueFire.GetFaults(90, 0); // Proprietary faults
+    }
+
+    private void showTruckText()
+    {
+        clearAdapterData();
+
+        dataView1.setText("");
+        dataView2.setText("");
+        dataView3.setText("");
+        dataView4.setText("");
+        dataView5.setText("");
+        dataView6.setText("");
+        dataView7.setText("");
+
         switch (groupNo)
         {
             case 0:
                 textView1.setText("RPM");
                 textView2.setText("Speed");
-                textView3.setText("Distance");
-                textView4.setText("Odometer");
-                textView5.setText("Accel Pedal");
-                textView6.setText("Throttle Pos");
-                textView7.setText("Current Gear");
-                textView8.setText("Selected Gear");
+                textView3.setText("Accel Pedal");
+                textView4.setText("Pct Load");
+                textView5.setText("Pct Torque");
+                textView6.setText("Driver Torque");
+                textView7.setText("Torque Mode");
 
-                dataView1.setText(formatInt(Truck.RPM));
-                dataView2.setText(formatFloat(Truck.Speed * Const.KphToMph,0));
-                dataView3.setText(formatFloat(Truck.Distance * Const.KmToMiles,0));
-                dataView4.setText(formatFloat(Truck.Odometer * Const.MetersToMiles,0)); // HiRes Distance
-                dataView5.setText(formatFloat(Truck.AccelPedal,2));
-                dataView6.setText(formatFloat(Truck.ThrottlePos,2));
-                dataView7.setText(formatInt(Truck.CurrentGear));
-                dataView8.setText(formatInt(Truck.SelectedGear));
+                if (retrievalInterval > 0)
+                {
+                    blueFire.GetEngineData1(retrievalInterval); // RPM, Percent Torque, Driver Torque, Torque Mode
+                    blueFire.GetEngineData2(retrievalInterval); // Percent Load, Accelerator Pedal Position
+                    blueFire.GetEngineData3(retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+                }
+                else
+                {
+                    blueFire.GetEngineData1(retrievalMethod); // RPM, Percent Torque, Driver Torque, Torque Mode
+                    blueFire.GetEngineData2(retrievalMethod); // Percent Load, Accelerator Pedal Position
+                    blueFire.GetEngineData3(retrievalMethod); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+                }
                 break;
 
             case 1:
-                textView1.setText("Pct Load");
-                textView2.setText("Pct Torque");
-                textView3.setText("Driver Torque");
-                textView4.setText("Torque Mode");
-                textView5.setText("Total Hours");
-                textView6.setText("Idle Hours");
-                textView7.setText("Max Speed");
-                textView8.setText("HiRes Max");
+                textView1.setText("Distance");
+                textView2.setText("Odometer");
+                textView3.setText("Total Hours");
+                textView4.setText("Idle Hours");
+                textView5.setText("Brake Pres");
+                textView6.setText("Brake Air");
+                textView7.setText("");
 
-                dataView1.setText(formatInt(Truck.PctLoad));
-                dataView2.setText(formatInt(Truck.PctTorque));
-                dataView3.setText(formatInt(Truck.DrvPctTorque));
-                dataView4.setText(String.valueOf(Truck.TorqueMode));
-                dataView5.setText(formatFloat(Truck.TotalHours,2));
-                dataView6.setText(formatFloat(Truck.IdleHours,2));
-                dataView7.setText(formatFloat(Truck.MaxSpeed * Const.KphToMph,0));
-                dataView8.setText(formatFloat(Truck.HiResMaxSpeed * Const.KphToMph,0));
+                if (retrievalInterval > 0)
+                {
+                    blueFire.GetOdometer(retrievalInterval); // Odometer (Engine Distance)
+                    blueFire.GetBrakeData(retrievalInterval); // Application Pressure, Primary Pressure, Secondary Pressure
+                    blueFire.GetEngineHours(retrievalInterval); // Total Engine Hours, Total Idle Hours
+                }
+                else
+                {
+                    blueFire.GetOdometer(retrievalMethod); // Odometer (Engine Distance)
+                    blueFire.GetBrakeData(retrievalMethod); // Application Pressure, Primary Pressure, Secondary Pressure
+                    blueFire.GetEngineHours(retrievalMethod); // Total Engine Hours, Total Idle Hours
+                }
                 break;
 
             case 2:
@@ -1710,17 +1727,13 @@ public class Main extends Activity
                 textView4.setText("Idle Fuel Used");
                 textView5.setText("Avg Fuel Econ");
                 textView6.setText("Inst Fuel Econ");
-                textView7.setText("");
-                textView8.setText("");
+                textView7.setText("Throttle Pos");
 
-                dataView1.setText(formatFloat(Truck.FuelRate * Const.LphToGalPHr,2));
-                dataView2.setText(formatFloat(Truck.FuelUsed * Const.LitersToGal,2));
-                dataView3.setText(formatFloat(Truck.HiResFuelUsed * Const.LitersToGal,2));
-                dataView4.setText(formatFloat(Truck.IdleFuelUsed * Const.LitersToGal,2));
-                dataView5.setText(formatFloat(Truck.AvgFuelEcon * Const.KplToMpg,2));
-                dataView6.setText(formatFloat(Truck.InstFuelEcon * Const.KplToMpg,2));
-                dataView7.setText("");
-                dataView8.setText("");
+                if (retrievalInterval > 0)
+                    blueFire.GetFuelData(retrievalInterval); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
+                else
+                    blueFire.GetFuelData(retrievalMethod); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
+
                 break;
 
             case 3:
@@ -1731,39 +1744,63 @@ public class Main extends Activity
                 textView5.setText("Coolant Temp");
                 textView6.setText("Coolant Pres");
                 textView7.setText("Coolant Level");
-                textView8.setText("Battery Volts");
 
-                dataView1.setText(formatFloat(celciusToFarenheit(Truck.OilTemp),2));
-                dataView2.setText(formatFloat(Truck.OilPressure * Const.kPaToPSI,2));
-                dataView3.setText(formatFloat(celciusToFarenheit(Truck.IntakeTemp),2));
-                dataView4.setText(formatFloat(Truck.IntakePressure * Const.kPaToPSI,2));
-                dataView5.setText(formatFloat(celciusToFarenheit(Truck.CoolantTemp),2));
-                dataView6.setText(formatFloat(Truck.CoolantPressure * Const.kPaToPSI,2));
-                dataView7.setText(formatFloat(Truck.CoolantLevel,2));
-                dataView8.setText(formatFloat(Truck.BatteryPotential,2));
+                if (retrievalInterval > 0)
+                {
+                    blueFire.GetTemps(retrievalInterval); // Oil Temp, Coolant Temp, Intake Manifold Temperature
+                    blueFire.GetPressures(retrievalInterval); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
+                    blueFire.GetCoolantLevel(retrievalInterval); // Coolant Level
+
+                    blueFire.GetTransmissionGears(retrievalInterval); // Selected and Current Gears
+                }
+                else
+                {
+                    blueFire.GetTemps(retrievalMethod); // Oil Temp, Coolant Temp, Intake Manifold Temperature
+                    blueFire.GetPressures(retrievalMethod); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
+                    blueFire.GetCoolantLevel(retrievalMethod); // Coolant Level
+                }
                 break;
 
             case 4:
-                textView1.setText("Cruise Switch");
-                textView2.setText("Cruise Speed");
-                textView3.setText("Cruise State");
-                textView4.setText("Park Switch");
-                textView5.setText("Clutch Switch");
-                textView6.setText("Brake Switch");
-                textView7.setText("Brake Air");
-                textView8.setText("Brake Pres");
+                textView1.setText("Brake Switch");
+                textView2.setText("Clutch Switch");
+                textView3.setText("Park Switch");
+                textView4.setText("Cruise Switch");
+                textView5.setText("Cruise State");
+                textView6.setText("Cruise Speed");
+                textView7.setText("");
 
-                dataView1.setText(String.valueOf(Truck.CruiseOnOff));
-                dataView2.setText(formatFloat(Truck.CruiseSetSpeed * Const.KphToMph,0));
-                dataView3.setText(String.valueOf(Truck.CruiseState));
-                dataView4.setText(String.valueOf(Truck.ParkBrakeSwitch));
-                dataView5.setText(String.valueOf(Truck.ClutchSwitch));
-                dataView6.setText(String.valueOf(Truck.BrakeSwitch));
-                dataView7.setText(formatFloat(Truck.BrakeAppPressure * Const.kPaToPSI,2));
-                dataView8.setText(formatFloat(Truck.Brake1AirPressure * Const.kPaToPSI,2));
+                if (retrievalInterval > 0)
+                    blueFire.GetEngineData3(retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+                else
+                    blueFire.GetEngineData3(retrievalMethod); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+
                 break;
 
             case 5:
+                textView1.setText("Max Speed");
+                textView2.setText("HiRes Max");
+                textView3.setText("Current Gear");
+                textView4.setText("Selected Gear");
+                textView5.setText("Battery Volts");
+                textView6.setText("");
+                textView7.setText("");
+
+                if (retrievalInterval > 0)
+                {
+                    blueFire.GetEngineData3(retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+                    blueFire.GetBatteryVoltage(retrievalInterval); // Battery Voltage
+                    blueFire.GetTransmissionGears(retrievalInterval); // Selected and Current Gears
+                }
+                else
+                {
+                    blueFire.GetEngineData3(retrievalMethod); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+                    blueFire.GetBatteryVoltage(retrievalMethod); // Battery Voltage
+                    blueFire.GetTransmissionGears(retrievalMethod); // Selected and Current Gears
+                }
+                break;
+
+            case 6:
                 textView1.setText("VIN");
                 textView2.setText("Make");
                 textView3.setText("Model");
@@ -1771,8 +1808,83 @@ public class Main extends Activity
                 textView5.setText("Unit No");
                 textView6.setText("");
                 textView7.setText("");
-                textView8.setText("");
 
+                if (retrievalInterval > 0)
+                    blueFire.GetEngineVIN(retrievalInterval);
+                else
+                    blueFire.GetEngineVIN(retrievalMethod);
+
+                blueFire.GetVehicleData(); // VIN, Make, Model, Serial No asynchronously
+
+                break;
+        }
+    }
+
+    private void showTruckData()
+    {
+        switch (groupNo)
+        {
+            case 0:
+                dataView1.setText(formatInt(Truck.RPM));
+                dataView2.setText(formatFloat(Truck.Speed * Const.KphToMph,0));
+                dataView3.setText(formatFloat(Truck.AccelPedal,2));
+                dataView4.setText(formatInt(Truck.PctLoad));
+                dataView5.setText(formatInt(Truck.PctTorque));
+                dataView6.setText(formatInt(Truck.DrvPctTorque));
+                dataView7.setText(String.valueOf(Truck.TorqueMode));
+                break;
+
+            case 1:
+                dataView1.setText(formatFloat(Truck.Distance * Const.KmToMiles,0));
+                dataView2.setText(formatFloat(Truck.Odometer * Const.MetersToMiles,0)); // HiRes Distance
+                dataView3.setText(formatFloat(Truck.TotalHours,2));
+                dataView4.setText(formatFloat(Truck.IdleHours,2));
+                dataView5.setText(formatFloat(Truck.BrakeAppPressure * Const.kPaToPSI,2));
+                dataView6.setText(formatFloat(Truck.Brake1AirPressure * Const.kPaToPSI,2));
+                dataView7.setText("");
+                break;
+
+            case 2:
+                dataView1.setText(formatFloat(Truck.FuelRate * Const.LphToGalPHr,2));
+                dataView2.setText(formatFloat(Truck.FuelUsed * Const.LitersToGal,2));
+                dataView3.setText(formatFloat(Truck.HiResFuelUsed * Const.LitersToGal,2));
+                dataView4.setText(formatFloat(Truck.IdleFuelUsed * Const.LitersToGal,2));
+                dataView5.setText(formatFloat(Truck.AvgFuelEcon * Const.KplToMpg,2));
+                dataView6.setText(formatFloat(Truck.InstFuelEcon * Const.KplToMpg,2));
+                dataView7.setText(formatFloat(Truck.ThrottlePos,2));
+                break;
+
+            case 3:
+                dataView1.setText(formatFloat(celciusToFarenheit(Truck.OilTemp),2));
+                dataView2.setText(formatFloat(Truck.OilPressure * Const.kPaToPSI,2));
+                dataView3.setText(formatFloat(celciusToFarenheit(Truck.IntakeTemp),2));
+                dataView4.setText(formatFloat(Truck.IntakePressure * Const.kPaToPSI,2));
+                dataView5.setText(formatFloat(celciusToFarenheit(Truck.CoolantTemp),2));
+                dataView6.setText(formatFloat(Truck.CoolantPressure * Const.kPaToPSI,2));
+                dataView7.setText(formatFloat(Truck.CoolantLevel,2));
+                break;
+
+            case 4:
+                dataView1.setText(String.valueOf(Truck.BrakeSwitch));
+                dataView2.setText(String.valueOf(Truck.ClutchSwitch));
+                dataView3.setText(String.valueOf(Truck.ParkBrakeSwitch));
+                dataView4.setText(String.valueOf(Truck.CruiseOnOff));
+                dataView5.setText(String.valueOf(Truck.CruiseState));
+                dataView6.setText(formatFloat(Truck.CruiseSetSpeed * Const.KphToMph,0));
+                dataView7.setText("");
+                break;
+
+            case 5:
+                dataView1.setText(formatFloat(Truck.MaxSpeed * Const.KphToMph,0));
+                dataView2.setText(formatFloat(Truck.HiResMaxSpeed * Const.KphToMph,0));
+                dataView3.setText(formatInt(Truck.CurrentGear));
+                dataView4.setText(formatInt(Truck.SelectedGear));
+                dataView5.setText(formatFloat(Truck.BatteryPotential,2));
+                dataView6.setText("");
+                dataView7.setText("");
+                break;
+
+            case 6:
                 dataView1.setText(Truck.VIN);
                 dataView2.setText(Truck.Make);
                 dataView3.setText(Truck.Model);
@@ -1780,7 +1892,6 @@ public class Main extends Activity
                 dataView5.setText(Truck.UnitNo);
                 dataView6.setText("");
                 dataView7.setText("");
-                dataView8.setText("");
                 break;
         }
     }
