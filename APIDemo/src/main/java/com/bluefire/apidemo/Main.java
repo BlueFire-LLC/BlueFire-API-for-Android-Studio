@@ -444,10 +444,6 @@ public class Main extends Activity
         // Disable adapter parameters
         enableAdapterParms(false);
 
-        // Clear form
-        groupNo = 0;
-        showTruckText();
-
         textFaultCode.setText("NA");
         textHeartbeat.setText("0");
 
@@ -958,7 +954,7 @@ public class Main extends Activity
             layoutELD.setVisibility(View.INVISIBLE);
             layoutTruck.setVisibility(View.VISIBLE);
 
-            getTruckData();
+            startTruckData();
         }
         else
         {
@@ -976,7 +972,7 @@ public class Main extends Activity
         if (groupNo > maxGroupNo)
             groupNo = 0;
 
-        showTruckText();
+        getTruckData();
     }
 
     // ELD Button
@@ -1626,7 +1622,7 @@ public class Main extends Activity
         textHeartbeat.setText(String.valueOf(blueFire.HeartbeatCount()));
     }
 
-    private void getTruckData()
+    private void startTruckData()
     {
         if (!blueFire.IsConnected())
             return;
@@ -1640,7 +1636,7 @@ public class Main extends Activity
         retrievalInterval = blueFire.MinInterval(); // or any interval you need
 
         groupNo = 0;
-        showTruckText();
+        getTruckData();
     }
 
     private void stopTruckData()
@@ -1660,7 +1656,7 @@ public class Main extends Activity
         //blueFire.GetFaults(90, 0); // Proprietary faults
     }
 
-    private void showTruckText()
+    private void getTruckData()
     {
         clearAdapterData();
 
