@@ -1,5 +1,5 @@
 # BlueFire-API-for-Android
-Android API for direct connection to the BlueFire J1939/J1708 Bluetooth Data Adapters. Documentation is available upon request from [BlueFire Support](mailto:support@bluefire-llc.com).
+Android API for direct connection to the BlueFire J1939/J1708 Bluetooth Data Adapters.
 
 If you just want to download the .apk file for checking out the Demo app, you can find the .apk file at [this link.](https://github.com/BlueFire-LLC/BlueFire-API-for-Android-Eclipse/tree/master/bin)
 
