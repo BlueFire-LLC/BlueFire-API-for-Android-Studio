@@ -20,17 +20,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bluefire.api.BlueFire;
-import com.bluefire.api.ConnectionStates;
-import com.bluefire.api.Const;
-import com.bluefire.api.RecordIds;
-import com.bluefire.api.SleepModes;
-import com.bluefire.api.Truck;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.DateFormat;
+
+// BlueFire
+import com.bluefire.api.BlueFire;
+import com.bluefire.api.Const;
+import com.bluefire.api.Truck;
+// BlueFire Enums
+import com.bluefire.api.RecordIds;
+import com.bluefire.api.SleepModes;
+import com.bluefire.api.RecordingModes;
+import com.bluefire.api.ConnectionStates;
+import com.bluefire.api.RetrievalMethods;
 
 public class Main extends Activity
 {
@@ -98,6 +102,11 @@ public class Main extends Activity
     private CheckBox checkRecordStats;
     private CheckBox checkSecureELD;
     private CheckBox checkAccessSecured;
+    private CheckBox checkStreamingELD;
+    private CheckBox checkRecordingConnected;
+    private CheckBox checkRecordingDisconnected;
+
+    private TextView textStreamingELD;
 
     private Button buttonStartELD;
     private Button buttonUploadELD;
@@ -133,9 +142,7 @@ public class Main extends Activity
     private int groupNo;
     private static final int maxGroupNo = 6;
 
-    private static final boolean Synchronized = true;
-    private static final boolean OnChange = false;
-    private boolean retrievalMethod;
+    private RetrievalMethods retrievalMethod;
     private int retrievalInterval;
 
     private static final int myCustomRecordId1 = 1;
@@ -187,11 +194,14 @@ public class Main extends Activity
     public boolean appAlignELD = false;
     public boolean appAlignIFTA = false;
     public boolean appAlignStats = false;
+    public boolean appStreamingELD = false;
+    public int appRecordingMode = RecordingModes.RecordNever.getValue();
     public String appDriverId = "";
     public String appELDAdapterId = "";
     public float appELDInterval = 60; // minutes;
     public float appIFTAInterval = 1; // minutes;
     public float appStatsInterval = 60; // minutes;
+    public RecordingModes RecordingMode;
 
     private boolean isUploading;
     private int currentRecordNo = -1;
@@ -245,8 +255,8 @@ public class Main extends Activity
         appPassword = settings.getString("Password", "");
         appLedBrightness = settings.getInt("LedBrightness", 100);
         appMinInterval = settings.getInt("MinInterval", 0);
-        appDiscoveryTimeOut = settings.getInt("DiscoveryTimeOut", 10 * Const.OneSecond);
-        appMaxConnectRetrys = settings.getInt("MaxConnectRetrys", 10);
+        appDiscoveryTimeOut = settings.getInt("DiscoveryTimeout", 10 * Const.OneSecond);
+        appMaxConnectRetrys = settings.getInt("MaxConnectAttempts", 10);
         appMaxReconnectAttempts = settings.getInt("MaxReconnectAttempts", 5);
 
         // Get ELD settings
@@ -257,6 +267,8 @@ public class Main extends Activity
         appAlignELD = settings.getBoolean("AlignELD", false);
         appAlignIFTA = settings.getBoolean("AlignIFTA", false);
         appAlignStats = settings.getBoolean("AlignStats", false);
+        appStreamingELD = settings.getBoolean("StreamingELD", false);
+        appRecordingMode = settings.getInt("RecordingMode", RecordingModes.RecordNever.getValue());
         appDriverId = settings.getString("DriverId", "");
         appELDAdapterId = settings.getString("ELDAdapterId", "");
         appELDInterval = settings.getFloat("ELDInterval", 60); // minutes;
@@ -279,8 +291,8 @@ public class Main extends Activity
         settingsSave.putString("Password", appPassword);
         settingsSave.putInt("LedBrightness", appLedBrightness);
         settingsSave.putInt("MinInterval", appMinInterval);
-        settingsSave.putInt("DiscoveryTimeOut", appDiscoveryTimeOut);
-        settingsSave.putInt("MaxConnectRetrys", appMaxConnectRetrys);
+        settingsSave.putInt("DiscoveryTimeout", appDiscoveryTimeOut);
+        settingsSave.putInt("MaxConnectAttempts", appMaxConnectRetrys);
         settingsSave.putInt("MaxReconnectAttempts", appMaxReconnectAttempts);
 
         settingsSave.putBoolean("ELDStarted", appELDStarted);
@@ -290,6 +302,8 @@ public class Main extends Activity
         settingsSave.putBoolean("AlignELD", appAlignELD);
         settingsSave.putBoolean("AlignIFTA", appAlignIFTA);
         settingsSave.putBoolean("AlignStats", appAlignStats);
+        settingsSave.putBoolean("StreamingELD", appStreamingELD);
+        settingsSave.putInt("RecordingMode", appRecordingMode);
         settingsSave.putString("DriverId", appDriverId);
         settingsSave.putString("ELDAdapterId", appELDAdapterId);
         settingsSave.putFloat("ELDInterval", appELDInterval); // minutes;
@@ -323,7 +337,7 @@ public class Main extends Activity
         // Note, if the mobile device does not connect, try setting this to a value that
         // allows for a consistent connection. If you're using multiple adapters and have
         // connection problems, un-pair all devices before connecting.
-        blueFire.SetMaxConnectRetrys(appMaxConnectRetrys);
+        blueFire.SetMaxConnectAttempts(appMaxConnectRetrys);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
 
         // Set the Bluetooth adapter id and the 'connect to last adapter' setting
@@ -332,6 +346,10 @@ public class Main extends Activity
 
         // Set the adapter security parameters
         blueFire.SetSecurity(appSecureAdapter, appUserName, appPassword);
+
+        // Set streaming and recording mode
+        blueFire.ELD.SetStreaming(appStreamingELD);
+        blueFire.ELD.SetRecordingMode(RecordingModes.forValue(appRecordingMode));
     }
 
     private void initializeForm()
@@ -400,6 +418,11 @@ public class Main extends Activity
         checkRecordStats = (CheckBox) findViewById(R.id.checkRecordStats);
         checkSecureELD = (CheckBox) findViewById(R.id.checkSecureELD);
         checkAccessSecured = (CheckBox) findViewById(R.id.checkAccessSecured);
+        checkStreamingELD = (CheckBox) findViewById(R.id.checkStreamingELD);
+        checkRecordingConnected = (CheckBox) findViewById(R.id.checkRecordingConnected);
+        checkRecordingDisconnected = (CheckBox) findViewById(R.id.checkRecordingDisconnected);
+
+        textStreamingELD = (TextView) findViewById(R.id.textStreamingELD);
 
         buttonStartELD = (Button) findViewById(R.id.buttonStartELD);
         buttonUploadELD = (Button) findViewById(R.id.buttonUploadELD);
@@ -524,7 +547,7 @@ public class Main extends Activity
         if (appUseBLE)
         {
             // Check for Android 6 or higher
-            if (BlueFire.AndroidVersion[0] < 6)
+            if (blueFire.AndroidVersion()[0] < 6)
             {
                 adapterDisconnected();
 
@@ -1049,6 +1072,41 @@ public class Main extends Activity
         blueFire.ELD.SetSecured(appSecureELD);
     }
 
+    // Streaning ELD Checkbox
+    public void onStreamingELDCheck(View view)
+    {
+        if (!blueFire.IsConnected())
+            return;
+
+        appStreamingELD = checkStreamingELD.isChecked();
+
+        blueFire.ELD.SetStreaming(appStreamingELD);
+
+        SetStreamingText();
+    }
+
+    // Record Connected Checkbox
+    public void onRecordingConnectedCheck(View view)
+    {
+        if (!blueFire.IsConnected())
+            return;
+
+        blueFire.ELD.SetRecordingMode(checkRecordingConnected.isChecked(), checkRecordingDisconnected.isChecked());
+
+        SetStreamingText();
+    }
+
+    // Record Connected Checkbox
+    public void onRecordingDisconnectedCheck(View view)
+    {
+        if (!blueFire.IsConnected())
+            return;
+
+        blueFire.ELD.SetRecordingMode(checkRecordingConnected.isChecked(), checkRecordingDisconnected.isChecked());
+
+        SetStreamingText();
+    }
+
     // ELD Start Button
     public void onStartELDClick(View view)
     {
@@ -1080,22 +1138,68 @@ public class Main extends Activity
         buttonUploadELD.setEnabled(false);
         buttonDeleteELD.setEnabled(false);
 
-        // Delete all records
+        // Delete all adapter recorded records
         blueFire.ELD.DeleteRecords(blueFire.ELD.CurrentRecordNo());
 
         // Clear the ELD data from the page
         clearELDData();
 
-        // Enable buttons
+        // Enable start button
         buttonStartELD.setEnabled(true);
-        buttonUploadELD.setEnabled(true);
-        buttonDeleteELD.setEnabled(true);
+
+        Toast.makeText(this, "The ELD data was deleted.", Toast.LENGTH_LONG).show();
     }
 
-    private void startELD()
+    private void showELDPage()
     {
-        if (!blueFire.IsConnected())
-            return;
+        // Refresh adapter ELD parameters
+        getELDParms();
+
+        // Clear and initialize ELD parameters
+        setELDParms();
+
+        // Enable ELD parameters
+        enableELDParms(true);
+
+        // Set start button
+        buttonStartELD.setEnabled(true);
+        buttonStartELD.setText("Start ELD");
+
+        // Disable upload and delete buttons
+        buttonUploadELD.setEnabled(false);
+        buttonDeleteELD.setEnabled(false);
+
+        // Show ELD memory
+        showELDRemaining();
+
+        // Get current record
+        blueFire.ELD.GetRecord(blueFire.ELD.CurrentRecordNo());
+
+        // Check for recording on the adapter while connect to the app
+        if (blueFire.ELD.IsRecordingConnected())
+        {
+            // Set start button text
+            if (blueFire.ELD.IsStarted())
+                buttonStartELD.setText("Stop ELD");
+        }
+        else // recording locally or adapter disconnected
+        {
+            // Stop any streaming
+            if (blueFire.ELD.IsStreaming())
+                blueFire.ELD.StopStreaming();
+
+            // Stop any recording
+            if (blueFire.ELD.IsStarted())
+                blueFire.ELD.StopRecording();
+
+            // Check for records from when the adapter was disconnected
+            if (blueFire.ELD.CurrentRecordNo() > 0)
+            {
+                buttonStartELD.setEnabled(false);
+                buttonUploadELD.setEnabled(true);
+                buttonDeleteELD.setEnabled(true);
+            }
+        }
 
         // Check for third party securing access
         if (blueFire.ELD.IsAccessSecured())
@@ -1110,13 +1214,22 @@ public class Main extends Activity
             buttonStartELD.setEnabled(false);
             buttonUploadELD.setEnabled(false);
             buttonDeleteELD.setEnabled(false);
+        }
+    }
 
-            // Start streaming
-            blueFire.ELD.StartStreaming();
-
+    private void startELD()
+    {
+        if (!blueFire.IsConnected())
+        {
+            Toast.makeText(this, "The adapter is not connected.", Toast.LENGTH_LONG).show();
             return;
         }
 
+        if (!blueFire.ELD.IsStreaming() && blueFire.ELD.RecordingMode() == RecordingModes.RecordNever)
+        {
+            Toast.makeText(this, "Please select either streaming or recording data.", Toast.LENGTH_LONG).show();
+            return;
+        }
         // if not started, edit ELD parameters
         if (!blueFire.ELD.IsStarted())
             if (!editELDParms())
@@ -1141,7 +1254,8 @@ public class Main extends Activity
             blueFire.SetTime();
 
             // Send a custom record(like app started recording)
-            sendCustomELDRecord(myCustomRecordId1);
+            if (!blueFire.ELD.IsRecordingDisconnected())
+                sendCustomELDRecord(myCustomRecordId1);
 
             blueFire.ELD.StartRecording();
         }
@@ -1164,6 +1278,11 @@ public class Main extends Activity
         // Enable upload and delete buttons
         if (blueFire.ELD.RecordNo() > 0)
         {
+            if (blueFire.ELD.IsRecordingLocally())
+                buttonUploadELD.setText("Save Records");
+            else
+                buttonUploadELD.setText("Upload Data");
+
             buttonUploadELD.setEnabled(true);
             buttonDeleteELD.setEnabled(true);
         }
@@ -1178,29 +1297,9 @@ public class Main extends Activity
         blueFire.ELD.StopRecording();
     }
 
-    private void showELDPage()
-    {
-        // Refresh adapter ELD parameters
-        getELDParms();
-
-        // Clear and initialize ELD parameters
-        setELDParms();
-
-        // Show ELD memory
-        showELDRemaining();
-
-        // Get current record
-        blueFire.ELD.GetRecord(blueFire.ELD.CurrentRecordNo());
-
-        // Start ELD if previously started
-        if (blueFire.ELD.IsStarted())
-            startELD();
-    }
-
     private void showELDData()
     {
-        // Check for any ELD records
-        if (blueFire.ELD.CurrentRecordNo() > 0)
+        if (blueFire.ELD.CurrentRecordNo() > 0 || blueFire.ELD.IsRecordingLocally())
             if (blueFire.ELD.RecordNo() > 0 && blueFire.ELD.RecordNo() != currentRecordNo)
             {
                 // Only show the record once
@@ -1209,9 +1308,23 @@ public class Main extends Activity
                 // Show the ELD record
                 showELDRecord(currentRecordNo);
 
-                // Check for uploading records
-                if (isUploading)
-                    uploadELD();
+                // Check for recording locally
+                if (blueFire.ELD.IsRecordingLocally() && !isUploading)
+                {
+                    if (blueFire.ELD.IsStarted() || blueFire.ELD.LocalRecordNo() > 0)
+                    {
+                        blueFire.ELD.SetLocalRecordNo(blueFire.ELD.RecordNo());
+
+                        // Write local ELD record
+                        writeELDRecord();
+                    }
+                }
+                else // recording or uploading from the adapter
+                {
+                    // Check for uploading records
+                    if (isUploading)
+                        uploadELD();
+                }
             }
 
     }
@@ -1323,6 +1436,9 @@ public class Main extends Activity
         appAlignStats = blueFire.ELD.AlignStats;
 
         appSecureELD = blueFire.ELD.IsSecured();
+
+        appStreamingELD = blueFire.ELD.IsStreaming();
+        appRecordingMode = blueFire.ELD.RecordingMode().getValue();
     }
 
     private void setELDParms()
@@ -1342,6 +1458,24 @@ public class Main extends Activity
         checkAlignStats.setChecked(appAlignStats);
 
         checkSecureELD.setChecked(appSecureELD);
+
+        checkStreamingELD.setChecked(appStreamingELD);
+        checkRecordingConnected.setChecked(blueFire.ELD.IsRecordingConnected()); // comes from appRecordingMode
+        checkRecordingDisconnected.setChecked(blueFire.ELD.IsRecordingDisconnected()); // comes from appRecordingMode
+
+        SetStreamingText();
+    }
+
+    private void SetStreamingText()
+    {
+        // Streaming text
+        if (blueFire.ELD.IsStreaming())
+        {
+            if (blueFire.ELD.IsRecordingConnected())
+                textStreamingELD.setText("Stream locally");
+            else
+                textStreamingELD.setText("Stream and record locally");
+        }
     }
 
     private boolean editELDParms()
@@ -1399,6 +1533,10 @@ public class Main extends Activity
         checkAlignStats.setEnabled(isEnable);
 
         checkSecureELD.setEnabled(isEnable);
+
+        checkStreamingELD.setEnabled(isEnable);
+        checkRecordingConnected.setEnabled(isEnable);
+        checkRecordingDisconnected.setEnabled(isEnable);
     }
 
     private void sendCustomELDRecord(int myCustomRecordId)
@@ -1490,8 +1628,8 @@ public class Main extends Activity
 
     private void uploadELD()
     {
-        // Upload the ELD record someplace
-        uploadELDRecord();
+        // Record the ELD record someplace
+        writeELDRecord();
 
         // Check for more records
         if (currentRecordNo < blueFire.ELD.CurrentRecordNo())
@@ -1507,11 +1645,14 @@ public class Main extends Activity
             buttonUploadELD.setEnabled(true);
             buttonDeleteELD.setEnabled(true);
 
-            Toast.makeText(this, "The Upload is completed.", Toast.LENGTH_LONG).show();
+            if (blueFire.ELD.IsRecordingLocally())
+                Toast.makeText(this, "The ELD records were saved.", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(this, "The ELD Upload is completed.", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void uploadELDRecord()
+    private void writeELDRecord()
     {
         // Do something with the record data
         Log.d("Upload", String.valueOf(blueFire.ELD.RecordNo()));
@@ -1668,6 +1809,13 @@ public class Main extends Activity
         dataView6.setText("");
         dataView7.setText("");
 
+        // Set the retrieval method and interval.
+        // Note, this is here for demo-ing the different methods.
+        //retrievalMethod = RetrievalMethods.OnChange; // default
+        //retrievalMethod = RetrievalMethods.Synchronized;
+        retrievalMethod = RetrievalMethods.OnInterval;
+        //retrievalInterval = 1000; // only required if RetrievalMethod is OnInterval, default is MinInterval
+
         switch (groupNo)
         {
             case 0:
@@ -1679,18 +1827,14 @@ public class Main extends Activity
                 textView6.setText("Driver Torque");
                 textView7.setText("Torque Mode");
 
-                if (retrievalInterval > 0)
-                {
-                    blueFire.GetEngineData1(retrievalInterval); // RPM, Percent Torque, Driver Torque, Torque Mode
-                    blueFire.GetEngineData2(retrievalInterval); // Percent Load, Accelerator Pedal Position
-                    blueFire.GetEngineData3(retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
-                }
-                else
-                {
-                    blueFire.GetEngineData1(retrievalMethod); // RPM, Percent Torque, Driver Torque, Torque Mode
-                    blueFire.GetEngineData2(retrievalMethod); // Percent Load, Accelerator Pedal Position
-                    blueFire.GetEngineData3(retrievalMethod); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
-                }
+                //blueFire.GetEngineData1(); // default OnChange
+                //blueFire.GetEngineData1(retrievalMethod.OnInterval); // default MinInterval
+                //blueFire.GetEngineData1(retrievalMethod.Synchronized); // blocks until data is retrieved
+
+                blueFire.GetEngineData1(retrievalMethod, retrievalInterval); // RPM, Percent Torque, Driver Torque, Torque Mode
+                blueFire.GetEngineData2(retrievalMethod, retrievalInterval); // Percent Load, Accelerator Pedal Position
+                blueFire.GetEngineData3(retrievalMethod, retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+
                 break;
 
             case 1:
@@ -1702,18 +1846,10 @@ public class Main extends Activity
                 textView6.setText("Brake Air");
                 textView7.setText("");
 
-                if (retrievalInterval > 0)
-                {
-                    blueFire.GetOdometer(retrievalInterval); // Odometer (Engine Distance)
-                    blueFire.GetBrakeData(retrievalInterval); // Application Pressure, Primary Pressure, Secondary Pressure
-                    blueFire.GetEngineHours(retrievalInterval); // Total Engine Hours, Total Idle Hours
-                }
-                else
-                {
-                    blueFire.GetOdometer(retrievalMethod); // Odometer (Engine Distance)
-                    blueFire.GetBrakeData(retrievalMethod); // Application Pressure, Primary Pressure, Secondary Pressure
-                    blueFire.GetEngineHours(retrievalMethod); // Total Engine Hours, Total Idle Hours
-                }
+                blueFire.GetOdometer(retrievalMethod, retrievalInterval); // Odometer (Engine Distance)
+                blueFire.GetBrakeData(retrievalMethod, retrievalInterval); // Application Pressure, Primary Pressure, Secondary Pressure
+                blueFire.GetEngineHours(retrievalMethod, retrievalInterval); // Total Engine Hours, Total Idle Hours
+
                 break;
 
             case 2:
@@ -1725,10 +1861,7 @@ public class Main extends Activity
                 textView6.setText("Inst Fuel Econ");
                 textView7.setText("Throttle Pos");
 
-                if (retrievalInterval > 0)
-                    blueFire.GetFuelData(retrievalInterval); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
-                else
-                    blueFire.GetFuelData(retrievalMethod); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
+                blueFire.GetFuelData(retrievalMethod, retrievalInterval); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
 
                 break;
 
@@ -1741,20 +1874,10 @@ public class Main extends Activity
                 textView6.setText("Coolant Pres");
                 textView7.setText("Coolant Level");
 
-                if (retrievalInterval > 0)
-                {
-                    blueFire.GetTemps(retrievalInterval); // Oil Temp, Coolant Temp, Intake Manifold Temperature
-                    blueFire.GetPressures(retrievalInterval); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
-                    blueFire.GetCoolantLevel(retrievalInterval); // Coolant Level
+                blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Intake Manifold Temperature
+                blueFire.GetPressures(retrievalMethod, retrievalInterval); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
+                blueFire.GetCoolantLevel(retrievalMethod, retrievalInterval); // Coolant Level
 
-                    blueFire.GetTransmissionGears(retrievalInterval); // Selected and Current Gears
-                }
-                else
-                {
-                    blueFire.GetTemps(retrievalMethod); // Oil Temp, Coolant Temp, Intake Manifold Temperature
-                    blueFire.GetPressures(retrievalMethod); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
-                    blueFire.GetCoolantLevel(retrievalMethod); // Coolant Level
-                }
                 break;
 
             case 4:
@@ -1766,10 +1889,7 @@ public class Main extends Activity
                 textView6.setText("Cruise Speed");
                 textView7.setText("");
 
-                if (retrievalInterval > 0)
-                    blueFire.GetEngineData3(retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
-                else
-                    blueFire.GetEngineData3(retrievalMethod); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+                blueFire.GetEngineData3(retrievalMethod, retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
 
                 break;
 
@@ -1782,18 +1902,10 @@ public class Main extends Activity
                 textView6.setText("");
                 textView7.setText("");
 
-                if (retrievalInterval > 0)
-                {
-                    blueFire.GetEngineData3(retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
-                    blueFire.GetBatteryVoltage(retrievalInterval); // Battery Voltage
-                    blueFire.GetTransmissionGears(retrievalInterval); // Selected and Current Gears
-                }
-                else
-                {
-                    blueFire.GetEngineData3(retrievalMethod); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
-                    blueFire.GetBatteryVoltage(retrievalMethod); // Battery Voltage
-                    blueFire.GetTransmissionGears(retrievalMethod); // Selected and Current Gears
-                }
+                blueFire.GetEngineData3(retrievalMethod, retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+                blueFire.GetBatteryVoltage(retrievalMethod, retrievalInterval); // Battery Voltage
+                blueFire.GetTransmissionGears(retrievalMethod, retrievalInterval); // Selected and Current Gears
+
                 break;
 
             case 6:
@@ -1805,10 +1917,7 @@ public class Main extends Activity
                 textView6.setText("");
                 textView7.setText("");
 
-                if (retrievalInterval > 0)
-                    blueFire.GetEngineVIN(retrievalInterval);
-                else
-                    blueFire.GetEngineVIN(retrievalMethod);
+                blueFire.GetEngineVIN(retrievalMethod, retrievalInterval);
 
                 blueFire.GetVehicleData(); // VIN, Make, Model, Serial No asynchronously
 
@@ -2013,6 +2122,10 @@ public class Main extends Activity
                             adapterNotReconnected();
                         break;
 
+                    case CANFilterFull:
+                        showMessage("Adapter Data Retrieval", "The CAN Filter is Full. Some data will not be retrieved.");
+                        break;
+
                     case DataError:
                         // Ignore, handled by Reconnecting
                         break;
@@ -2098,17 +2211,23 @@ public class Main extends Activity
         {
             if (layoutTruck.getVisibility() == View.VISIBLE)
             {
+                saveSettings();
+
                 layoutTruck.setVisibility(View.INVISIBLE);
                 layoutAdapter.setVisibility(View.VISIBLE);
+
                 return;
             }
             if (layoutELD.getVisibility() == View.VISIBLE)
             {
                 if (!editELDParms())
                     return;
+                getELDParms();
+                saveSettings();
 
                 layoutELD.setVisibility(View.INVISIBLE);
                 layoutAdapter.setVisibility(View.VISIBLE);
+
                 return;
             }
 

@@ -867,59 +867,137 @@
                     android:text="Align"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Secure ELD  -->
-                <TextView
-                    android:id="@+id/labelSecureELD"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/labelMargin11"
-                    android:layout_below="@+id/labelStats"
-                    android:layout_marginTop="10dp"
-                    android:text="Secure ELD:"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <CheckBox
-                    android:id="@+id/checkSecureELD"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/labelSecureELD"
-                    android:layout_alignBottom="@+id/labelSecureELD"
-                    android:layout_alignLeft="@+id/labelSecureELD"
-                    android:layout_marginLeft="95dp"
-                    android:onClick="onSecureELDCheck"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <!--  Access Secured  -->
-                <TextView
-                    android:id="@+id/labelAccessSecured"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/labelSecureELD"
-                    android:layout_alignBottom="@+id/labelSecureELD"
-                    android:layout_alignLeft="@+id/checkSecureELD"
-                    android:layout_marginLeft="40dp"
-                    android:text="Access Secured:"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <CheckBox
-                    android:id="@+id/checkAccessSecured"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/labelAccessSecured"
-                    android:layout_alignBottom="@+id/labelAccessSecured"
-                    android:layout_alignLeft="@+id/labelAccessSecured"
-                    android:layout_marginLeft="135dp"
-                    android:enabled="false"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
                 <!--  Separator    -->
                 <View
                     android:id="@+id/lineSeparator5"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
+                    android:layout_below="@+id/labelStats"
+                    android:background="@android:color/darker_gray"/>
+
+                <!--  Secure ELD  -->
+                <CheckBox
+                    android:id="@+id/checkSecureELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/lineSeparator5"
+                    android:onClick="onSecureELDCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelSecureELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/checkSecureELD"
+                    android:layout_alignBottom="@+id/checkSecureELD"
+                    android:layout_alignLeft="@+id/checkSecureELD"
+                    android:layout_marginLeft="30dp"
+                    android:text="Secure ELD"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Access Secured  -->
+                <CheckBox
+                    android:id="@+id/checkAccessSecured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelSecureELD"
+                    android:layout_alignBottom="@+id/labelSecureELD"
+                    android:layout_alignLeft="@+id/labelSecureELD"
+                    android:layout_marginLeft="120dp"
+                    android:enabled="false"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelAccessSecured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/checkAccessSecured"
+                    android:layout_alignBottom="@+id/checkAccessSecured"
+                    android:layout_alignLeft="@+id/checkAccessSecured"
+                    android:layout_marginLeft="30dp"
+                    android:text="Access Secured"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/checkSecureELD"
+                    android:background="@android:color/darker_gray"/>
+
+                <!--  Streaming  -->
+                <CheckBox
+                    android:id="@+id/checkStreamingELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/lineSeparator6"
+                    android:onClick="onStreamingELDCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textStreamingELD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/checkStreamingELD"
+                    android:layout_alignBottom="@+id/checkStreamingELD"
+                    android:layout_alignLeft="@+id/checkStreamingELD"
+                    android:layout_marginLeft="30dp"
+                    android:text="Stream and record locally"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Record Connected  -->
+                <CheckBox
+                    android:id="@+id/checkRecordingConnected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/checkStreamingELD"
+                    android:onClick="onRecordingConnectedCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelRecordingConnected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/checkRecordingConnected"
+                    android:layout_alignBottom="@+id/checkRecordingConnected"
+                    android:layout_alignLeft="@+id/checkRecordingConnected"
+                    android:layout_marginLeft="30dp"
+                    android:text="Adapter recording while connected"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Record Disconnected  -->
+                <CheckBox
+                    android:id="@+id/checkRecordingDisconnected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/checkRecordingConnected"
+                    android:onClick="onRecordingDisconnectedCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelRecordingDisconnected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/checkRecordingDisconnected"
+                    android:layout_alignBottom="@+id/checkRecordingDisconnected"
+                    android:layout_alignLeft="@+id/checkRecordingDisconnected"
+                    android:layout_marginLeft="30dp"
+                    android:text="Adapter recording while disconnected"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_below="@+id/checkAccessSecured"
+                    android:layout_below="@+id/checkRecordingDisconnected"
                     android:background="@android:color/darker_gray"/>
 
                 <!--  Start Button    -->
@@ -927,7 +1005,7 @@
                     android:id="@+id/buttonStartELD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/lineSeparator5"
+                    android:layout_below="@+id/lineSeparator7"
                     android:layout_alignParentLeft="true"
                     android:onClick="onStartELDClick"
                     android:text="Start ELD"
@@ -961,7 +1039,7 @@
 
                 <!--  Separator    -->
                 <View
-                    android:id="@+id/lineSeparator6"
+                    android:id="@+id/lineSeparator8"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
@@ -975,7 +1053,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin11"
-                    android:layout_below="@+id/lineSeparator6"
+                    android:layout_below="@+id/lineSeparator8"
                     android:layout_marginTop="3dp"
                     android:text="Remaining:"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -993,7 +1071,7 @@
 
                 <!--  Separator    -->
                 <View
-                    android:id="@+id/lineSeparator7"
+                    android:id="@+id/lineSeparator9"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
@@ -1007,7 +1085,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin11"
-                    android:layout_below="@+id/lineSeparator7"
+                    android:layout_below="@+id/lineSeparator9"
                     android:text="Record No"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 

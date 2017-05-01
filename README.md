@@ -191,5 +191,24 @@ Version 22.4:<ul>
 	<li>Demo app only retrieves truck data when navigating to the specific data page.
 	<li>API documentation has been updated to reflect the above changes.
 </ul>
+	
+Version 22.5:<ul>
+	<li>Requires Adapter Firmware Beta 3.10.6.
+	<li>Fixed J1708 data retrieval.
+	<li>Added property AndroidVersion.
+    <li>Added property SyncTimeout.
+    <li>Added ConnectionState CANFilterFull.
+    <li>Renamed property DiscoveryTimeOut to DiscoveryTimeout.
+    <li>Renamed property MaxConnectRetrys to MaxConnectAttempts.
+    <li>Added method ELD.SetStreaming.
+    <li>Added property ELD.LocalRecordNo.
+    <li>Added ELD Enum RecordingModes.
+    <li>Added property ELD.RecordingMode and method SetRecordingMode.
+    <li>Added property ELD.IsRecordingLocally.
+    <li>Added property ELD.IsRecordingConnected.
+    <li>Added property ELD.IsRecordingDisconnected.
+    <li>Included the API documentation in the GitHub repository.
+    <li>Added to the API documentation Appendix instructions for manually resetting the Adapter.
+</ul>
 
 	
