@@ -219,4 +219,9 @@ Version 22.6:<ul>
 	<li>ELD rules are sent to the Adapter from the API.
 	<li>The Adapter will reboot after ELD StopEngine if the API is not connected.
 </ul>
+	
+Version 22.7:<ul>
+	<li>Requires Adapter Firmware Beta 3.10.9.
+	<li>Fixed issue with retrieving VIN and Vehicle Data in the Demo app.
+</ul>
 

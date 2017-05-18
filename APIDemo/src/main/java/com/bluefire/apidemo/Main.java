@@ -1925,16 +1925,13 @@ public class Main extends Activity
 
                 while (!retrievedVIN && retryCount > 0)
                 {
+                    blueFire.StopDataRetrieval(); // this might help
                     retrievedVIN = blueFire.GetEngineVIN(RetrievalMethods.Synchronized); // this will block
-
-                    if (!retrievedVIN)
-                    {
-                        blueFire.StopDataRetrieval(); // this might help
-                        retryCount--;
-                    }
+                    retryCount--;
                 }
 
-                blueFire.GetVehicleData(); // Make, Model, Serial No asynchronously
+                // Get Make, Model, Serial No asynchronously
+                blueFire.GetVehicleData();
 
                 break;
         }
