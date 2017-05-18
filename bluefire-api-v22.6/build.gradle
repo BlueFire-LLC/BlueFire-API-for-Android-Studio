@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('bluefire-api-v22.6.aar'))

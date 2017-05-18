@@ -210,5 +210,13 @@ Version 22.5:<ul>
     <li>Included the API documentation in the GitHub repository.
     <li>Added to the API documentation Appendix instructions for manually resetting the Adapter.
 </ul>
-
 	
+Version 22.6:<ul>
+	<li>Requires Adapter Firmware Beta 3.10.8.
+	<li>Removed VIN from GetVehicleData method.
+	<li>Added Boolean return value to Truck Data methods for synchronized calls.
+	<li>Added synchronized VIN retrieval to Demo app.
+	<li>ELD rules are sent to the Adapter from the API.
+	<li>The Adapter will reboot after ELD StopEngine if the API is not connected.
+</ul>
+

@@ -20,21 +20,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bluefire.api.BlueFire;
+import com.bluefire.api.ConnectionStates;
+import com.bluefire.api.Const;
+import com.bluefire.api.RecordIds;
+import com.bluefire.api.RecordingModes;
+import com.bluefire.api.RetrievalMethods;
+import com.bluefire.api.SleepModes;
+import com.bluefire.api.Truck;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.DateFormat;
 
 // BlueFire
-import com.bluefire.api.BlueFire;
-import com.bluefire.api.Const;
-import com.bluefire.api.Truck;
 // BlueFire Enums
-import com.bluefire.api.RecordIds;
-import com.bluefire.api.SleepModes;
-import com.bluefire.api.RecordingModes;
-import com.bluefire.api.ConnectionStates;
-import com.bluefire.api.RetrievalMethods;
 
 public class Main extends Activity
 {
@@ -1917,9 +1918,23 @@ public class Main extends Activity
                 textView6.setText("");
                 textView7.setText("");
 
-                blueFire.GetEngineVIN(retrievalMethod, retrievalInterval);
+                // Get the VIN synchronized
+                boolean retrievedVIN = false;
+                blueFire.SetSyncTimeout(2000); // override default of one second
+                int retryCount = 5;
 
-                blueFire.GetVehicleData(); // VIN, Make, Model, Serial No asynchronously
+                while (!retrievedVIN && retryCount > 0)
+                {
+                    retrievedVIN = blueFire.GetEngineVIN(RetrievalMethods.Synchronized); // this will block
+
+                    if (!retrievedVIN)
+                    {
+                        blueFire.StopDataRetrieval(); // this might help
+                        retryCount--;
+                    }
+                }
+
+                blueFire.GetVehicleData(); // Make, Model, Serial No asynchronously
 
                 break;
         }
