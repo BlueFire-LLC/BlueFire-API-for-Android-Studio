@@ -173,18 +173,18 @@ Version 22.1:<ul>
 </ul>
 	
 Version 22.2:<ul>
-	<li>Compatible with Adapter Firmware Beta 3.10.3 (required).
+	<li>Requires Adapter Firmware Beta 3.10.3 for ELD functionality.
 	<li>Removed duplicate ELD records.
 	<li>Better re-connection while ELD recording.
 </ul>
 	
 Version 22.3:<ul>
-	<li>Compatible with Adapter Firmware Beta 3.10.5 (required).
+	<li>Compatible with Adapter Firmware Beta 3.10.5 for ELD functionality.
 	<li>Better time sync with the Adapter.
 </ul>
 	
 Version 22.4:<ul>
-	<li>Requires Adapter Firmware Beta 3.10.5.
+	<li>Requires Adapter Firmware Beta 3.10.5 for ELD functionality.
 	<li>Added getEngineVIN method.
 	<li>Added synchronization to Truck Data methods.
 	<li>Added retrievalMethod parameter to Truck Data methods.
@@ -193,7 +193,7 @@ Version 22.4:<ul>
 </ul>
 	
 Version 22.5:<ul>
-	<li>Requires Adapter Firmware Beta 3.10.6.
+	<li>Requires Adapter Firmware Beta 3.10.6 for ELD functionality.
 	<li>Fixed J1708 data retrieval.
 	<li>Added property AndroidVersion.
     <li>Added property SyncTimeout.
@@ -212,7 +212,7 @@ Version 22.5:<ul>
 </ul>
 	
 Version 22.6:<ul>
-	<li>Requires Adapter Firmware Beta 3.10.8.
+	<li>Requires Adapter Firmware Beta 3.10.8 for ELD functionality.
 	<li>Removed VIN from GetVehicleData method.
 	<li>Added Boolean return value to Truck Data methods for synchronized calls.
 	<li>Added synchronized VIN retrieval to Demo app.
@@ -221,7 +221,7 @@ Version 22.6:<ul>
 </ul>
 	
 Version 22.7:<ul>
-	<li>Requires Adapter Firmware Beta 3.10.9.
+	<li>Requires Adapter Firmware 3.10 for ELD functionality.
 	<li>Fixed issue with retrieving VIN and Vehicle Data in the Demo app.
 </ul>
 
