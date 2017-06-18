@@ -226,6 +226,7 @@ Version 22.7:<ul>
 </ul>	
 
 Version 22.8:<ul>
+	<li>Fixed compatability with Firmware 3.9 and below.
 	<li>API will generate and update the Adapter Serial Number if it is missing. This can occur if the adapter firmware is flashed over the top of an older incompatible firmware.
 </ul>
 
