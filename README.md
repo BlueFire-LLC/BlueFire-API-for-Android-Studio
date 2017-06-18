@@ -223,5 +223,9 @@ Version 22.6:<ul>
 Version 22.7:<ul>
 	<li>Requires Adapter Firmware 3.10 for ELD functionality.
 	<li>Fixed issue with retrieving VIN and Vehicle Data in the Demo app.
+</ul>	
+
+Version 22.8:<ul>
+	<li>API will generate and update the Adapter Serial Number if it is missing. This can occur if the adapter firmware is flashed over the top of an older incompatible firmware.
 </ul>
 
