@@ -34,9 +34,6 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.DateFormat;
 
-// BlueFire
-// BlueFire Enums
-
 public class Main extends Activity
 {
     // Adapter Layout
@@ -46,7 +43,6 @@ public class Main extends Activity
     private TextView textHardware;
     private TextView textFirmware;
     private TextView textKeyState;
-    private TextView textFaultCode;
     private TextView textHeartbeat;
 
     private EditText textLedBrightness;
@@ -63,7 +59,8 @@ public class Main extends Activity
     private CheckBox checkConnectLastAdapter;
 
     private Button buttonConnect;
-    private Button buttonReset;
+    private Button buttonNextFault;
+    private Button buttonResetFault;
     private Button buttonUpdate;
     private Button buttonSendMonitor;
     private Button buttonTruckData;
@@ -137,11 +134,20 @@ public class Main extends Activity
     private boolean isSendingPGN;
     private boolean isMonitoringPGN;
 
+    private boolean isRetrievingVIN;
+
     private int faultCount;
     private int faultIndex;
+    private boolean isRetrievingFaults;
+
+    private String faultSource = "";
+    private String faultSPN = "";
+    private String faultFMI = "";
+    private String faultOccurrence = "";
+    private String faultConversion = "";
 
     private int groupNo;
-    private static final int maxGroupNo = 6;
+    private static final int maxGroupNo = 7;
 
     private RetrievalMethods retrievalMethod;
     private int retrievalInterval;
@@ -362,7 +368,6 @@ public class Main extends Activity
         textHardware = (TextView) findViewById(R.id.textHardware);
         textFirmware = (TextView) findViewById(R.id.textFirmware);
         textKeyState = (TextView) findViewById(R.id.textKeyState);
-        textFaultCode = (TextView) findViewById(R.id.textFaultCode);
         textHeartbeat = (TextView) findViewById(R.id.textHeartbeat);
 
         textLedBrightness = (EditText) findViewById(R.id.textLedBrightness);
@@ -379,7 +384,8 @@ public class Main extends Activity
         checkConnectLastAdapter = (CheckBox) findViewById(R.id.checkConnectLastAdapter);
 
         buttonConnect = (Button) findViewById(R.id.buttonConnect);
-        buttonReset = (Button) findViewById(R.id.buttonReset);
+        buttonNextFault = (Button) findViewById(R.id.buttonNextFault);
+        buttonResetFault = (Button) findViewById(R.id.buttonResetFault);
         buttonUpdate = (Button) findViewById(R.id.buttonUpdate);
         buttonSendMonitor = (Button) findViewById(R.id.buttonSendMonitor);
         buttonTruckData = (Button) findViewById(R.id.buttonTruckData);
@@ -449,9 +455,11 @@ public class Main extends Activity
 
         showConnectButton();
 
-        buttonReset.setEnabled(false);
         buttonUpdate.setEnabled(false);
         buttonSendMonitor.setEnabled(false);
+
+        buttonNextFault.setVisibility(View.INVISIBLE);
+        buttonResetFault.setVisibility(View.INVISIBLE);
 
         buttonTruckData.setEnabled(false);
         buttonELDData.setEnabled(false);
@@ -468,10 +476,12 @@ public class Main extends Activity
         // Disable adapter parameters
         enableAdapterParms(false);
 
-        textFaultCode.setText("NA");
         textHeartbeat.setText("0");
 
         faultIndex = -1;
+
+        isRetrievingVIN = false;
+        isRetrievingFaults = false;
 
         // Show user settings
         checkUseBT21.setChecked(appUseBT21);
@@ -526,9 +536,11 @@ public class Main extends Activity
 
                 showDisconnectButton();
 
-                buttonReset.setEnabled(false);
                 buttonUpdate.setEnabled(false);
                 buttonSendMonitor.setEnabled(false);
+
+                buttonNextFault.setVisibility(View.INVISIBLE);
+                buttonResetFault.setVisibility(View.INVISIBLE);
 
                 checkBluetoothPermissions();
             }
@@ -625,9 +637,11 @@ public class Main extends Activity
         try
         {
             buttonConnect.setEnabled(false);
-            buttonReset.setEnabled(false);
             buttonUpdate.setEnabled(false);
             buttonSendMonitor.setEnabled(false);
+
+            buttonNextFault.setVisibility(View.INVISIBLE);
+            buttonResetFault.setVisibility(View.INVISIBLE);
 
             buttonTruckData.setEnabled(false);
             buttonELDData.setEnabled(false);
@@ -652,8 +666,8 @@ public class Main extends Activity
         buttonUpdate.setEnabled(true);
         buttonSendMonitor.setEnabled(true);
 
-        if (faultIndex >= 0)
-            buttonReset.setEnabled(true);
+        buttonNextFault.setVisibility(View.INVISIBLE);
+        buttonResetFault.setVisibility(View.INVISIBLE);
 
         buttonTruckData.setEnabled(true);
         buttonELDData.setEnabled(true);
@@ -838,14 +852,14 @@ public class Main extends Activity
         blueFire.SetIgnoreJ1708(appIgnoreJ1708);
     }
 
-    // Fault Text Button
-    public void onFaultClick(View view)
+    // Fault Button
+    public void onNextFaultClick(View view)
     {
-        showFault();
+        showNextFault();
     }
 
     // Reset Button
-    public void onResetClick(View view)
+    public void onResetFaultClick(View view)
     {
         blueFire.ResetFaults();
     }
@@ -1712,28 +1726,6 @@ public class Main extends Activity
         if ( blueFire.ELD.IsDataRetrieved())
             showELDData();
 
-        if (Truck.GetFaultCount() == 0)
-        {
-            faultCount = 0;
-            faultIndex = -1; // reset to show fault
-            textFaultCode.setText("");
-            buttonReset.setEnabled(false);
-        }
-        else
-        {
-            if (Truck.GetFaultCount() != faultCount) // additional faults
-            {
-                faultCount = Truck.GetFaultCount();
-                faultIndex = -1; // reset to show fault
-            }
-            if (faultIndex < 0) // show first fault only once.
-            {
-                faultIndex = 0;
-                showFault();
-                buttonReset.setEnabled(true);
-            }
-        }
-
         // Check for user changed adapter data while offline
         if (appLedBrightness != blueFire.LedBrightness())
             blueFire.SetLedBrightness(appLedBrightness);
@@ -1791,11 +1783,10 @@ public class Main extends Activity
 
     private void clearAdapterData()
     {
-        blueFire.StopDataRetrieval();
+        isRetrievingVIN = false;
+        isRetrievingFaults = false;
 
-        blueFire.GetFaults(); // Engine Faults
-        //blueFire.GetFaults(11, 128); // Brakes Faults
-        //blueFire.GetFaults(90, 0); // Proprietary faults
+        blueFire.StopDataRetrieval();
     }
 
     private void getTruckData()
@@ -1809,6 +1800,9 @@ public class Main extends Activity
         dataView5.setText("");
         dataView6.setText("");
         dataView7.setText("");
+
+        buttonNextFault.setVisibility(View.INVISIBLE);
+        buttonResetFault.setVisibility(View.INVISIBLE);
 
         // Set the retrieval method and interval.
         // Note, this is here for demo-ing the different methods.
@@ -1916,22 +1910,51 @@ public class Main extends Activity
                 textView4.setText("Serial No");
                 textView5.setText("Unit No");
                 textView6.setText("");
-                textView7.setText("");
+                textView7.setText("Retrieving VIN ...");
 
-                // Get the VIN synchronized
-                boolean retrievedVIN = false;
-                blueFire.SetSyncTimeout(2000); // override default of one second
-                int retryCount = 5;
-
-                while (!retrievedVIN && retryCount > 0)
+                if (!isRetrievingVIN)
                 {
-                    blueFire.StopDataRetrieval(); // this might help
-                    retrievedVIN = blueFire.GetEngineVIN(RetrievalMethods.Synchronized); // this will block
-                    retryCount--;
+                    isRetrievingVIN = true;
+
+                    // Get the VIN synchronized
+                    boolean retrievedVIN = false;
+                    //blueFire.SetSyncTimeout(5000); // override default of 2 seconds, not recommended but may help
+                    int retryCount = 5; // set this to however long you want to wait
+
+                    while (!retrievedVIN && retryCount > 0)
+                    {
+                        blueFire.StopDataRetrieval(); // this might help
+                        retrievedVIN = blueFire.GetEngineVIN(RetrievalMethods.Synchronized); // this will block
+                        retryCount--;
+                    }
+
+                    // Get Make, Model, Serial No asynchronously
+                    blueFire.GetVehicleData();
                 }
 
-                // Get Make, Model, Serial No asynchronously
-                blueFire.GetVehicleData();
+                break;
+
+            case 7:
+                textView1.setText("Source");
+                textView2.setText("SPN");
+                textView3.setText("FMI");
+                textView4.setText("Occurrences");
+                textView5.setText("Conversion");
+                textView6.setText("");
+                textView7.setText("");
+
+                if (!isRetrievingFaults)
+                {
+                    isRetrievingFaults = true;
+
+                    buttonNextFault.setVisibility(View.VISIBLE);
+                    buttonResetFault.setVisibility(View.VISIBLE);
+
+                    blueFire.GetFaults(); // Engine Faults
+                    //blueFire.GetFaults(11, 128); // Brakes Faults
+                    //blueFire.GetFaults(90, 0); // Proprietary faults
+
+                }
 
                 break;
         }
@@ -2009,18 +2032,65 @@ public class Main extends Activity
                 dataView5.setText(Truck.UnitNo);
                 dataView6.setText("");
                 dataView7.setText("");
+
+                if (Truck.VIN != "")
+                    textView7.setText("Retrieving Truck Info ...");
+
+                if (Truck.Make != "")
+                    textView7.setText("");
+
+                break;
+
+            case 7:
+                if (Truck.GetFaultCount() == 0)
+                {
+                    faultCount = 0;
+                    faultIndex = -1; // reset to show fault
+                    buttonNextFault.setEnabled(false);
+                    buttonResetFault.setEnabled(false);
+                }
+                else // faults found
+                {
+                    if (Truck.GetFaultCount() != faultCount) // additional faults
+                    {
+                        faultCount = Truck.GetFaultCount();
+                        faultIndex = 0; // show first fault
+                        if (faultCount > 1)
+                            buttonNextFault.setEnabled(true);
+                        buttonResetFault.setEnabled(true);
+                    }
+                }
+                if (faultIndex < 0)
+                {
+                    faultSource = "";
+                    faultSPN = "";
+                    faultFMI = "";
+                    faultOccurrence = "";
+                    faultConversion = "";
+                }
+                else
+                {
+                    faultSource = String.valueOf(Truck.GetFaultSource(faultIndex));
+                    faultSPN = String.valueOf(Truck.GetFaultSPN(faultIndex));
+                    faultFMI = String.valueOf(Truck.GetFaultFMI(faultIndex));
+                    faultOccurrence = String.valueOf(Truck.GetFaultOccurrence(faultIndex));
+                    faultConversion = String.valueOf(Truck.GetFaultConversion(faultIndex));
+                }
+
+                dataView1.setText(faultSource);
+                dataView2.setText(faultSPN);
+                dataView3.setText(faultFMI);
+                dataView4.setText(faultOccurrence);
+                dataView5.setText(faultConversion);
+                dataView6.setText("");
+                dataView7.setText("");
+
                 break;
         }
     }
 
-    private void showFault()
+    private void showNextFault()
     {
-        // Show the fault at the specified index. Note, faultIndex is relative to 0.
-        int FaultSource = Truck.GetFaultSource(faultIndex);
-
-        String FaultCode = String.valueOf(Truck.GetFaultSPN(faultIndex)) + " - " + String.valueOf(Truck.GetFaultFMI(faultIndex));
-        textFaultCode.setText("(" + FaultSource + ") " + FaultCode);
-
         // Set to show next fault
         faultIndex += 1;
         if (faultIndex == faultCount) // wrap to the beginning
@@ -2167,9 +2237,6 @@ public class Main extends Activity
                             showData();
                 }
 
-                // Check reset button enable
-                if (!isConnected)
-                    buttonReset.setEnabled(false); // because it's enabled in showData
             }
             catch (Exception e) {}
         }

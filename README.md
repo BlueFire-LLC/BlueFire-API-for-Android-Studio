@@ -230,3 +230,12 @@ Version 22.8:<ul>
 	<li>API will generate and update the Adapter Serial Number if it is missing. This can occur if the adapter firmware is flashed over the top of an older incompatible firmware.
 </ul>
 
+Version 22.9:<ul>
+	<li>Requires Adapter Firmware 3.11. Note, Firmware 3.10 is broken and should be updated to 3.11.
+    <li>Compatable with Firmware 3.9 and below.
+	<li>API method GetEngineVIN automatically sets the sync timeout if RetrievalMethod Synchronized is specified. The default sync timeout is 2 seconds.
+	<li>The call to VIN retrieval SetSyncTimeout in the Demo app has been commented out to allow the API method to set the default.
+	<li>Faults have been moved to their own page in the Demo app in order to allow faults to be retrieved by themselves (recommended).
+	<li>VIN and Truck data (Component Id) retrieval have been improved. It is recommended to retrieve VIN and Truck data before retrieving any other data.
+</ul>
+

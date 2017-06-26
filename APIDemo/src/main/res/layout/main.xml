@@ -618,50 +618,29 @@
                     android:layout_below="@+id/buttonNextGroup"
                     android:background="@android:color/darker_gray"/>
 
-                <!--  Fault    -->
-                <TextView
-                    android:id="@+id/labelFault"
+                <!--  Next Fault Button    -->
+                <Button
+                    android:id="@+id/buttonNextFault"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/labelMargin1"
                     android:layout_below="@+id/lineSeparator10"
                     android:layout_marginTop="10dp"
-                    android:text="Fault:"
+                    android:onClick="onNextFaultClick"
+                    android:text="Next Fault"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:id="@+id/textFaultCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/labelFault"
-                    android:layout_alignBottom="@+id/labelFault"
-                    android:layout_alignLeft="@+id/dataView1"
-                    android:onClick="onFaultClick"
-                    android:text="NA"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <!--  Reset Button    -->
+                <!--  Reset Fault Button    -->
                 <Button
-                    android:id="@+id/buttonReset"
+                    android:id="@+id/buttonResetFault"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/labelFault"
-                    android:layout_alignBottom="@+id/labelFault"
+                    android:layout_alignBaseline="@+id/buttonNextFault"
+                    android:layout_alignBottom="@+id/buttonNextFault"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:onClick="onResetClick"
-                    android:text="Reset"
+                    android:onClick="onResetFaultClick"
+                    android:text="Reset Fault"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <!--  Separator    -->
-                <View
-                    android:id="@+id/lineSeparator11"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_below="@+id/buttonReset"
-                    android:background="@android:color/darker_gray"/>
 
             </RelativeLayout>
 
