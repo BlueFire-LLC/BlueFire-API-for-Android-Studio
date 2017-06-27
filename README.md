@@ -241,4 +241,5 @@ Version 22.9:<ul>
 
 Version 22.10:<ul>
 	<li>The API now disconnects properly from the Adapter while ELD is recording.
+    <li>The Demo app disconnectAdapter method WaitForDisconnect parameter is set to false for Adapter Firmware 3.11.
 </ul>

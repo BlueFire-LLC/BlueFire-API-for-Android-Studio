@@ -646,7 +646,10 @@ public class Main extends Activity
             buttonTruckData.setEnabled(false);
             buttonELDData.setEnabled(false);
 
-            blueFire.Disconnect(true);
+            // Note, with Firmware 3.11 there is no need to wait for the adapter
+            // to disconnect.
+            boolean WaitForDisconnect = false;
+            blueFire.Disconnect(WaitForDisconnect);
         }
         catch(Exception e) {}
     }
