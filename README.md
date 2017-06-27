@@ -239,3 +239,6 @@ Version 22.9:<ul>
 	<li>VIN and Truck data (Component Id) retrieval have been improved. It is recommended to retrieve VIN and Truck data before retrieving any other data.
 </ul>
 
+Version 22.10:<ul>
+	<li>The API now disconnects properly from the Adapter while ELD is recording.
+</ul>
