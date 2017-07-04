@@ -262,7 +262,7 @@ public class Main extends Activity
         appPassword = settings.getString("Password", "");
         appLedBrightness = settings.getInt("LedBrightness", 100);
         appMinInterval = settings.getInt("MinInterval", 0);
-        appDiscoveryTimeOut = settings.getInt("DiscoveryTimeout", 10 * Const.OneSecond);
+        appDiscoveryTimeOut = settings.getInt("_DiscoveryTimeout", 10 * Const.OneSecond);
         appMaxConnectRetrys = settings.getInt("MaxConnectAttempts", 10);
         appMaxReconnectAttempts = settings.getInt("MaxReconnectAttempts", 5);
 
@@ -298,7 +298,7 @@ public class Main extends Activity
         settingsSave.putString("Password", appPassword);
         settingsSave.putInt("LedBrightness", appLedBrightness);
         settingsSave.putInt("MinInterval", appMinInterval);
-        settingsSave.putInt("DiscoveryTimeout", appDiscoveryTimeOut);
+        settingsSave.putInt("_DiscoveryTimeout", appDiscoveryTimeOut);
         settingsSave.putInt("MaxConnectAttempts", appMaxConnectRetrys);
         settingsSave.putInt("MaxReconnectAttempts", appMaxReconnectAttempts);
 
@@ -338,7 +338,7 @@ public class Main extends Activity
         // discovery could take a long time.
         // Note, if this is set to a high value, the app needs to provide the user with the
         // capability of canceling the discovery.
-        blueFire.SetDiscoveryTimeOut(appDiscoveryTimeOut);
+        blueFire.SetDiscoveryTimeout(appDiscoveryTimeOut);
 
         // Set number of Bluetooth connection attempts.
         // Note, if the mobile device does not connect, try setting this to a value that
@@ -827,6 +827,11 @@ public class Main extends Activity
     public void onConnectLastAdapterCheck(View view)
     {
         appConnectToLastAdapter = checkConnectLastAdapter.isChecked();
+
+        if (appConnectToLastAdapter)
+            blueFire.SetAdapterId(appAdapterId);
+        else
+            blueFire.SetAdapterId("");
     }
 
     // Secure Adapter Checkbox
