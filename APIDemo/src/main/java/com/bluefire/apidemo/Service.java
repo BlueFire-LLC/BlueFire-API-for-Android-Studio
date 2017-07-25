@@ -125,7 +125,7 @@ public class Service
         blueFire.SetMaxConnectAttempts(appMaxConnectAttempts);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
 
-        // Set the Bluetooth adapter id and the 'connect to last adapter' setting
+        // Set the Bluetooth adapter id and the ConnectToLastAdapter setting
         blueFire.SetAdapterId(appAdapterId);
         blueFire.SetConnectToLastAdapter(appConnectToLastAdapter);
     }

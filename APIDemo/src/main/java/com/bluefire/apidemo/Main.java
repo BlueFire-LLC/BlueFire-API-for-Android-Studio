@@ -171,7 +171,7 @@ public class Main extends Activity
 
     private boolean isStartingService;
 
-    // BlueFire App settings\
+    // BlueFire App settings
 
     private SharedPreferences settings;
     private SharedPreferences.Editor settingsSave;
