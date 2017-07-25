@@ -259,3 +259,8 @@ Version 22.12:<ul>
     <li>Note that hi-resolution distance is at a 1 second ECM refresh rate while lo-resolution is at a 100 ms ECM refresh rate.
     <li>Modified the Demo app to reflect the above changes.
 </ul>
+
+Version 22.13:<ul>
+	<li>Added a Service class that emulates using the API with an Android service.
+	<li>Added a Start and Stop Service buttons to the Demo app.
+</ul>

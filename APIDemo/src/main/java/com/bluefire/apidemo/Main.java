@@ -21,13 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bluefire.api.BlueFire;
-import com.bluefire.api.ConnectionStates;
-import com.bluefire.api.Const;
-import com.bluefire.api.RecordIds;
-import com.bluefire.api.RecordingModes;
-import com.bluefire.api.RetrievalMethods;
-import com.bluefire.api.SleepModes;
 import com.bluefire.api.Truck;
+import com.bluefire.api.Const;
+import com.bluefire.api.SleepModes;
+import com.bluefire.api.ConnectionStates;
+import com.bluefire.api.RetrievalMethods;
+import com.bluefire.api.RecordIds; // for ELD
+import com.bluefire.api.RecordingModes; // for ELD
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -65,6 +65,8 @@ public class Main extends Activity
     private Button buttonSendMonitor;
     private Button buttonTruckData;
     private Button buttonELDData;
+    private Button buttonStartService;
+    private Button buttonStopService;
 
     // Truck Layout
     private RelativeLayout layoutTruck;
@@ -163,8 +165,11 @@ public class Main extends Activity
 
     private ConnectionStates connectionState = ConnectionStates.NotConnected;
 
-    // BlueFire adapter
+    // BlueFire adapter and service
     private BlueFire blueFire;
+    private Service demoService;
+
+    private boolean isStartingService;
 
     // BlueFire App settings\
 
@@ -190,7 +195,7 @@ public class Main extends Activity
     private String appPassword = "";
 
     public int appDiscoveryTimeOut = 10 * Const.OneSecond;
-    public int appMaxConnectRetrys = 10;
+    public int appMaxConnectAttempts = 10;
     public int appMaxReconnectAttempts = 5;
 
     // ELD settings
@@ -263,7 +268,7 @@ public class Main extends Activity
         appLedBrightness = settings.getInt("LedBrightness", 100);
         appMinInterval = settings.getInt("MinInterval", 0);
         appDiscoveryTimeOut = settings.getInt("_DiscoveryTimeout", 10 * Const.OneSecond);
-        appMaxConnectRetrys = settings.getInt("MaxConnectAttempts", 10);
+        appMaxConnectAttempts = settings.getInt("MaxConnectAttempts", 10);
         appMaxReconnectAttempts = settings.getInt("MaxReconnectAttempts", 5);
 
         // Get ELD settings
@@ -299,7 +304,7 @@ public class Main extends Activity
         settingsSave.putInt("LedBrightness", appLedBrightness);
         settingsSave.putInt("MinInterval", appMinInterval);
         settingsSave.putInt("_DiscoveryTimeout", appDiscoveryTimeOut);
-        settingsSave.putInt("MaxConnectAttempts", appMaxConnectRetrys);
+        settingsSave.putInt("MaxConnectAttempts", appMaxConnectAttempts);
         settingsSave.putInt("MaxReconnectAttempts", appMaxReconnectAttempts);
 
         settingsSave.putBoolean("ELDStarted", appELDStarted);
@@ -344,7 +349,7 @@ public class Main extends Activity
         // Note, if the mobile device does not connect, try setting this to a value that
         // allows for a consistent connection. If you're using multiple adapters and have
         // connection problems, un-pair all devices before connecting.
-        blueFire.SetMaxConnectAttempts(appMaxConnectRetrys);
+        blueFire.SetMaxConnectAttempts(appMaxConnectAttempts);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
 
         // Set the Bluetooth adapter id and the 'connect to last adapter' setting
@@ -362,7 +367,7 @@ public class Main extends Activity
     private void initializeForm()
     {
         // Adapter layout
-        layoutAdapter = (RelativeLayout)findViewById(R.id.layoutAdapter);
+        layoutAdapter = (RelativeLayout) findViewById(R.id.layoutAdapter);
 
         textStatus = (TextView) findViewById(R.id.textStatus);
         textHardware = (TextView) findViewById(R.id.textHardware);
@@ -390,9 +395,11 @@ public class Main extends Activity
         buttonSendMonitor = (Button) findViewById(R.id.buttonSendMonitor);
         buttonTruckData = (Button) findViewById(R.id.buttonTruckData);
         buttonELDData = (Button) findViewById(R.id.buttonELDData);
+        buttonStartService = (Button) findViewById(R.id.buttonStartService);
+        buttonStopService = (Button) findViewById(R.id.buttonStopService);
 
         // Truck layout
-        layoutTruck = (RelativeLayout)findViewById(R.id.layoutTruck);
+        layoutTruck = (RelativeLayout) findViewById(R.id.layoutTruck);
 
         textView1 = (TextView) findViewById(R.id.textView1);
         textView2 = (TextView) findViewById(R.id.textView2);
@@ -411,7 +418,7 @@ public class Main extends Activity
         dataView7 = (TextView) findViewById(R.id.dataView7);
 
         // ELD layout
-        layoutELD = (RelativeLayout)findViewById(R.id.layoutELD);
+        layoutELD = (RelativeLayout) findViewById(R.id.layoutELD);
 
         textDriverId = (EditText) findViewById(R.id.textDriverId);
         textELDInterval = (EditText) findViewById(R.id.textELDInterval);
@@ -543,15 +550,15 @@ public class Main extends Activity
                 buttonResetFault.setVisibility(View.INVISIBLE);
 
                 checkBluetoothPermissions();
-            }
-            else
+            } else
             {
                 Thread.sleep(500); // allow eld to stop before disconnecting
 
                 disconnectAdapter();
             }
+        } catch (Exception ex)
+        {
         }
-        catch (Exception ex) {}
     }
 
     private void checkBluetoothPermissions()
@@ -597,12 +604,19 @@ public class Main extends Activity
 
     private void startConnection()
     {
-        // Connect to the adapter via a thread so that the blocking
-        // connection will run in it's own thread and allow the app
-        // to show status.
-
-        connectThread = new ConnectAdapterThread();
-        connectThread.start();
+        if (isStartingService)
+        {
+            isStartingService = false;
+            StartService();
+        }
+        else
+        {
+            // Connect to the adapter via a thread so that the blocking
+            // connection will run in it's own thread and allow the app
+            // to show status.
+            connectThread = new ConnectAdapterThread();
+            connectThread.start();
+        }
     }
 
     private class ConnectAdapterThread extends Thread
@@ -623,6 +637,9 @@ public class Main extends Activity
         isConnectButton = true;
         buttonConnect.setText("Connect");
         buttonConnect.setEnabled(true);
+
+        buttonStartService.setEnabled(true);
+        buttonStopService.setEnabled(false);
     }
 
     private void showDisconnectButton()
@@ -646,12 +663,16 @@ public class Main extends Activity
             buttonTruckData.setEnabled(false);
             buttonELDData.setEnabled(false);
 
+            buttonStartService.setEnabled(false);
+            buttonStopService.setEnabled(false);
+
             // Note, with Firmware 3.11 there is no need to wait for the adapter
             // to disconnect.
             boolean WaitForDisconnect = false;
             blueFire.Disconnect(WaitForDisconnect);
+        } catch (Exception e)
+        {
         }
-        catch(Exception e) {}
     }
 
     private void adapterConnected()
@@ -818,7 +839,7 @@ public class Main extends Activity
             if (appUseBLE)
 
 
-            appUseBT21 = false;
+                appUseBT21 = false;
             checkUseBT21.setChecked(false);
         }
     }
@@ -858,6 +879,52 @@ public class Main extends Activity
 
         // Update BlueFire
         blueFire.SetIgnoreJ1708(appIgnoreJ1708);
+    }
+
+    // Start Service Button
+    public void onStartServiceClick(View view)
+    {
+        isStartingService = true;
+
+        buttonStartService.setEnabled(false);
+        buttonStopService.setEnabled(true);
+
+        buttonConnect.setEnabled(false);
+        buttonUpdate.setEnabled(false);
+        buttonSendMonitor.setEnabled(false);
+
+        buttonTruckData.setEnabled(false);
+        buttonELDData.setEnabled(false);
+
+        checkBluetoothPermissions();
+    }
+
+    // Start Service
+    public void StartService()
+    {
+        if (demoService == null)
+            demoService = new Service(this);
+
+        demoService.startService();
+    }
+
+    // Stop Service Button
+    public void onStopServiceClick(View view)
+    {
+        if (demoService == null)
+            return;
+
+        demoService.stopService();
+
+        buttonStartService.setEnabled(true);
+        buttonStopService.setEnabled(false);
+
+        buttonConnect.setEnabled(true);
+        buttonUpdate.setEnabled(true);
+        buttonSendMonitor.setEnabled(true);
+
+        buttonTruckData.setEnabled(true);
+        buttonELDData.setEnabled(true);
     }
 
     // Fault Button
@@ -991,26 +1058,6 @@ public class Main extends Activity
         }
     }
 
-    // Truck Button
-    public void onTruckDataClick(View view)
-    {
-        if (layoutTruck.getVisibility() == View.INVISIBLE)
-        {
-            layoutAdapter.setVisibility(View.INVISIBLE);
-            layoutELD.setVisibility(View.INVISIBLE);
-            layoutTruck.setVisibility(View.VISIBLE);
-
-            startTruckData();
-        }
-        else
-        {
-            layoutTruck.setVisibility(View.INVISIBLE);
-            layoutAdapter.setVisibility(View.VISIBLE);
-
-            stopTruckData();
-        }
-    }
-
     // Next Group Button
     public void onNextGroupClick(View view)
     {
@@ -1048,6 +1095,26 @@ public class Main extends Activity
         {
             layoutELD.setVisibility(View.INVISIBLE);
             layoutAdapter.setVisibility(View.VISIBLE);
+        }
+    }
+
+    // Truck Button
+    public void onTruckDataClick(View view)
+    {
+        if (layoutTruck.getVisibility() == View.INVISIBLE)
+        {
+            layoutAdapter.setVisibility(View.INVISIBLE);
+            layoutELD.setVisibility(View.INVISIBLE);
+            layoutTruck.setVisibility(View.VISIBLE);
+
+            startTruckData();
+        }
+        else
+        {
+            layoutTruck.setVisibility(View.INVISIBLE);
+            layoutAdapter.setVisibility(View.VISIBLE);
+
+            stopTruckData();
         }
     }
 

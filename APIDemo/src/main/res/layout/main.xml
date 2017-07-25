@@ -446,6 +446,39 @@
                     android:layout_below="@+id/buttonELDData"
                     android:background="@android:color/darker_gray"/>
 
+                <!--  Start Service Button    -->
+                <Button
+                    android:id="@+id/buttonStartService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lineSeparator4"
+                    android:layout_alignParentLeft="true"
+                    android:onClick="onStartServiceClick"
+                    android:text="Start Service"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Stop Service Button    -->
+                <Button
+                    android:id="@+id/buttonStopService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/buttonStartService"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignLeft="@+id/buttonStartService"
+                    android:layout_marginLeft="135dp"
+                    android:onClick="onStopServiceClick"
+                    android:text="Stop Service"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator4a"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/buttonStopService"
+                    android:background="@android:color/darker_gray"/>
+
             </RelativeLayout>
 
             <RelativeLayout
