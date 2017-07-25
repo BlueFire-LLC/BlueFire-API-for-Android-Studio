@@ -21,13 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bluefire.api.BlueFire;
-import com.bluefire.api.Truck;
-import com.bluefire.api.Const;
-import com.bluefire.api.SleepModes;
 import com.bluefire.api.ConnectionStates;
+import com.bluefire.api.Const;
+import com.bluefire.api.RecordIds;
+import com.bluefire.api.RecordingModes;
 import com.bluefire.api.RetrievalMethods;
-import com.bluefire.api.RecordIds; // for ELD
-import com.bluefire.api.RecordingModes; // for ELD
+import com.bluefire.api.SleepModes;
+import com.bluefire.api.Truck;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -561,6 +561,43 @@ public class Main extends Activity
         }
     }
 
+    // Start Service Button
+    public void onStartServiceClick(View view)
+    {
+        isStartingService = true;
+
+        buttonStartService.setEnabled(false);
+        buttonStopService.setEnabled(true);
+
+        buttonConnect.setEnabled(false);
+        buttonUpdate.setEnabled(false);
+        buttonSendMonitor.setEnabled(false);
+
+        buttonTruckData.setEnabled(false);
+        buttonELDData.setEnabled(false);
+
+        checkBluetoothPermissions();
+    }
+
+    // Stop Service Button
+    public void onStopServiceClick(View view)
+    {
+        if (demoService == null)
+            return;
+
+        demoService.stopService();
+
+        buttonStartService.setEnabled(true);
+        buttonStopService.setEnabled(false);
+
+        buttonConnect.setEnabled(true);
+        buttonUpdate.setEnabled(true);
+        buttonSendMonitor.setEnabled(true);
+
+        buttonTruckData.setEnabled(true);
+        buttonELDData.setEnabled(true);
+    }
+
     private void checkBluetoothPermissions()
     {
         // BLE adapters require Android 6.0 and the user must accept location access permission
@@ -617,6 +654,15 @@ public class Main extends Activity
             connectThread = new ConnectAdapterThread();
             connectThread.start();
         }
+    }
+
+    // Start Service
+    public void StartService()
+    {
+        if (demoService == null)
+            demoService = new Service(this);
+
+        demoService.startService();
     }
 
     private class ConnectAdapterThread extends Thread
@@ -879,52 +925,6 @@ public class Main extends Activity
 
         // Update BlueFire
         blueFire.SetIgnoreJ1708(appIgnoreJ1708);
-    }
-
-    // Start Service Button
-    public void onStartServiceClick(View view)
-    {
-        isStartingService = true;
-
-        buttonStartService.setEnabled(false);
-        buttonStopService.setEnabled(true);
-
-        buttonConnect.setEnabled(false);
-        buttonUpdate.setEnabled(false);
-        buttonSendMonitor.setEnabled(false);
-
-        buttonTruckData.setEnabled(false);
-        buttonELDData.setEnabled(false);
-
-        checkBluetoothPermissions();
-    }
-
-    // Start Service
-    public void StartService()
-    {
-        if (demoService == null)
-            demoService = new Service(this);
-
-        demoService.startService();
-    }
-
-    // Stop Service Button
-    public void onStopServiceClick(View view)
-    {
-        if (demoService == null)
-            return;
-
-        demoService.stopService();
-
-        buttonStartService.setEnabled(true);
-        buttonStopService.setEnabled(false);
-
-        buttonConnect.setEnabled(true);
-        buttonUpdate.setEnabled(true);
-        buttonSendMonitor.setEnabled(true);
-
-        buttonTruckData.setEnabled(true);
-        buttonELDData.setEnabled(true);
     }
 
     // Fault Button
