@@ -7,10 +7,13 @@ import android.os.Message;
 import android.util.Log;
 
 import com.bluefire.api.BlueFire;
-import com.bluefire.api.ConnectionStates;
-import com.bluefire.api.Const;
-import com.bluefire.api.RetrievalMethods;
 import com.bluefire.api.Truck;
+import com.bluefire.api.Const;
+import com.bluefire.api.SleepModes;
+import com.bluefire.api.ConnectionStates;
+import com.bluefire.api.RetrievalMethods;
+import com.bluefire.api.RecordIds; // for ELD
+import com.bluefire.api.RecordingModes; // for ELD
 
 public class Service
 {
@@ -47,11 +50,9 @@ public class Service
     private String appAdapterId = "";
     private boolean appConnectToLastAdapter;
 
-    private Context serviceContext;
-
-    public Service(Context context)
+    public Service(Context serviceContext)
     {
-        serviceContext = context; // the API requires a context
+        blueFire = new BlueFire(serviceContext, eventHandler);
 
         // Set app variables
         appUseBLE = true;
@@ -72,9 +73,6 @@ public class Service
 
     public void startService()
     {
-        // Initiate the API
-        blueFire = new BlueFire(serviceContext, eventHandler);
-
         // Simulate a service
         serviceIsRunning = true;
 
@@ -101,27 +99,6 @@ public class Service
             // Connect to the adapter
             connectAdapter();
         }
-    }
-
-    // Connect
-    public void connectAdapter()
-    {
-        try
-        {
-            isConnecting = true;
-            isConnected = false;
-
-            connectionState = ConnectionStates.NA;
-
-            logNotifications("Connecting...");
-
-            // Initialize adapter properties (in case they were changed)
-            initializeAdapter();
-
-            // Note, this is a blocking call and must run in it's own thread.
-            blueFire.Connect();
-        }
-        catch (Exception ex) {}
     }
 
     private void initializeAdapter()
@@ -151,6 +128,25 @@ public class Service
         // Set the Bluetooth adapter id and the 'connect to last adapter' setting
         blueFire.SetAdapterId(appAdapterId);
         blueFire.SetConnectToLastAdapter(appConnectToLastAdapter);
+    }
+
+    // Connect
+    public void connectAdapter()
+    {
+        try
+        {
+            logNotifications("Connecting...");
+
+            // Initialize adapter properties (in case they were changed)
+            initializeAdapter();
+
+            isConnecting = true;
+            isConnected = false;
+
+            // Note, this is a blocking call and must run in it's own thread.
+            blueFire.Connect();
+        }
+        catch (Exception ex) {}
     }
 
     private void disconnectAdapter()
