@@ -7,13 +7,10 @@ import android.os.Message;
 import android.util.Log;
 
 import com.bluefire.api.BlueFire;
-import com.bluefire.api.Truck;
-import com.bluefire.api.Const;
-import com.bluefire.api.SleepModes;
 import com.bluefire.api.ConnectionStates;
+import com.bluefire.api.Const;
 import com.bluefire.api.RetrievalMethods;
-import com.bluefire.api.RecordIds; // for ELD
-import com.bluefire.api.RecordingModes; // for ELD
+import com.bluefire.api.Truck;
 
 public class Service
 {
@@ -50,9 +47,11 @@ public class Service
     private String appAdapterId = "";
     private boolean appConnectToLastAdapter;
 
-    public Service(Context serviceContext)
+    private Context serviceContext;
+
+    public Service(Context context)
     {
-        blueFire = new BlueFire(serviceContext, eventHandler);
+        serviceContext = context; // the API requires a context
 
         // Set app variables
         appUseBLE = true;
@@ -73,6 +72,9 @@ public class Service
 
     public void startService()
     {
+        // Initiate the API
+        blueFire = new BlueFire(serviceContext, eventHandler);
+
         // Simulate a service
         serviceIsRunning = true;
 
@@ -101,6 +103,27 @@ public class Service
         }
     }
 
+    // Connect
+    public void connectAdapter()
+    {
+        try
+        {
+            isConnecting = true;
+            isConnected = false;
+
+            connectionState = ConnectionStates.NA;
+
+            logNotifications("Connecting...");
+
+            // Initialize adapter properties (in case they were changed)
+            initializeAdapter();
+
+            // Note, this is a blocking call and must run in it's own thread.
+            blueFire.Connect();
+        }
+        catch (Exception ex) {}
+    }
+
     private void initializeAdapter()
     {
         // Set Bluetooth adapter type
@@ -125,28 +148,9 @@ public class Service
         blueFire.SetMaxConnectAttempts(appMaxConnectAttempts);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
 
-        // Set the Bluetooth adapter id and the ConnectToLastAdapter setting
+        // Set the Bluetooth adapter id and the 'connect to last adapter' setting
         blueFire.SetAdapterId(appAdapterId);
         blueFire.SetConnectToLastAdapter(appConnectToLastAdapter);
-    }
-
-    // Connect
-    public void connectAdapter()
-    {
-        try
-        {
-            logNotifications("Connecting...");
-
-            // Initialize adapter properties (in case they were changed)
-            initializeAdapter();
-
-            isConnecting = true;
-            isConnected = false;
-
-            // Note, this is a blocking call and must run in it's own thread.
-            blueFire.Connect();
-        }
-        catch (Exception ex) {}
     }
 
     private void disconnectAdapter()
@@ -184,6 +188,10 @@ public class Service
             return;
         }
 
+        // Set to receive notifications from the adapter.
+        // Note, this should only be used during testing.
+        blueFire.SetNotificationsOn(true);
+
         // Set the adapter led brightness
         blueFire.SetLedBrightness(appLedBrightness);
 
@@ -210,7 +218,7 @@ public class Service
 
         // Set the retrieval interval if not using the RetrievalMethod.
         // Note, only required if RetrievalMethod is OnInterval, default is MinInterval
-        retrievalInterval = blueFire.MinInterval(); // or any interval you need
+        //retrievalInterval = blueFire.MinInterval(); // or any interval you need
 
         // Request data from the adapter
         // Note, be careful not to request too much data at one time otherwise you
@@ -220,17 +228,36 @@ public class Service
         blueFire.GetEngineData1(retrievalMethod, retrievalInterval); // RPM, Percent Torque, Driver Torque, Torque Mode
         blueFire.GetEngineData2(retrievalMethod, retrievalInterval); // Percent Load, Accelerator Pedal Position
         blueFire.GetEngineData3(retrievalMethod, retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
+        blueFire.GetOdometer(retrievalMethod, retrievalInterval); // Distance and Odometer
+        blueFire.GetEngineHours(retrievalMethod, retrievalInterval); // Total Engine Hours, Total Idle Hours
+        blueFire.GetBrakeData(retrievalMethod, retrievalInterval); // Application Pressure, Primary Pressure, Secondary Pressure
+        //blueFire.GetTransmissionGears(retrievalMethod, retrievalInterval); // Selected and Current Gears
+        blueFire.GetBatteryVoltage(retrievalMethod, retrievalInterval); // Battery Voltage
+        blueFire.GetFuelData(retrievalMethod, retrievalInterval); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
+        blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Intake Manifold Temperature
+        blueFire.GetPressures(retrievalMethod, retrievalInterval); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
+        blueFire.GetCoolantLevel(retrievalMethod, retrievalInterval); // Coolant Level
     }
 
+    private int TimeToWrite = 9999;
     private void checkTruckData()
     {
         // Check the data you requested to see which one changed that triggered the DataAvailable
         // event. If you're not concerned with data throughput for processing the data, you can just
         // process all the data whether it changed or not.
 
-        logNotifications("RPM=" + Truck.RPM);
-        logNotifications("PctLoad=" + Truck.PctLoad);
-        logNotifications("Speed=" + Truck.Speed);
+        if (TimeToWrite > 50)
+        {
+            TimeToWrite = 0;
+            logNotifications("RPM=" + Truck.RPM);
+        }
+        else
+            TimeToWrite ++;
+
+//        if (Truck.RPM > 0)
+//            logNotifications("RPM=" + Truck.RPM);
+//        logNotifications("PctLoad=" + Truck.PctLoad);
+//        logNotifications("Speed=" + Truck.Speed);
     }
 
     private void checkKeyState()
@@ -360,6 +387,11 @@ public class Service
                     case NotReconnected:
                         if (isConnecting)
                             adapterNotReconnected();
+                        break;
+
+                    case Notification:
+                        logNotifications(blueFire.NotificationLocation() + " - " + blueFire.NotificationMessage());
+                        blueFire.ClearMessages();
                         break;
 
                     case CANFilterFull:

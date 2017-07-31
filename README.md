@@ -264,3 +264,18 @@ Version 22.13:<ul>
 	<li>Added a Service class that emulates using the API with an Android service.
 	<li>Added a Start and Stop Service buttons to the Demo app.
 </ul>
+
+Version 23.0:<ul>
+	<li>GetVehicleData is renamed to GetEngineId.
+	<li>Added methods GetVIN and GetComponentId for retrieving non-engine ECM data.
+	<li>Added synchronized calling to GetEngineVIN, GetVIN, GetEngineId, and GetComponentId.
+	<li>The SetSyncTimeout method is replaced with the SyncTimeout passed as the Interval parameter along with the Synchronized Retrieval Method parameter.
+	<li>Fixed the OnChange Retrieval Method that caused issues with the Adapter.
+	<li>Added a Notification Connection State that will return any API notifications.
+	<li>Added SetHeartbeatOn method that will turn the Adapter heartbeat on/off. Use with caution.
+	<li>Added SetNotificationsOn method that will turn Adapter notifications on/off.
+	<li>Improved connection reliability with Firmware 3.12.
+	<li>Change the Engine VIN/Id page in the Demo app to show using synchronous retrieval.
+	<li>Added a VIN/ComponentId page to the Demo app that shows using asynchronous retrieval.
+	<li>Added a Test All button to the Demo app that retrieves all the data at once to test loading the connection.
+</ul>

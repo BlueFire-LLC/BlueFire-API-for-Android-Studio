@@ -6,6 +6,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
+            <!--  Adapter Layout    -->
             <RelativeLayout
                 android:id="@+id/layoutAdapter"
                 android:orientation="vertical"
@@ -437,13 +438,35 @@
                     android:text="ELD Data"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
+                <!--  Test Button    -->
+                <Button
+                    android:id="@+id/buttonTest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/buttonTruckData"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignLeft="@+id/buttonELDData"
+                    android:layout_marginLeft="105dp"
+                    android:onClick="onTestClick"
+                    android:text="Start Testing"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textNotifications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_below="@+id/buttonTruckData"
+                    android:text="Notifications"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
                 <!--  Separator    -->
                 <View
                     android:id="@+id/lineSeparator4"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@+id/buttonELDData"
+                    android:layout_below="@+id/textNotifications"
                     android:background="@android:color/darker_gray"/>
 
                 <!--  Start Service Button    -->
@@ -481,6 +504,7 @@
 
             </RelativeLayout>
 
+            <!--  Truck Layout    -->
             <RelativeLayout
                 android:id="@+id/layoutTruck"
                 android:orientation="vertical"
@@ -677,6 +701,7 @@
 
             </RelativeLayout>
 
+            <!--  ELD Layout    -->
             <RelativeLayout
                 android:id="@+id/layoutELD"
                 android:orientation="vertical"
