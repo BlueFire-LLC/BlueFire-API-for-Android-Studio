@@ -47,6 +47,8 @@ public class Service
     private String appAdapterId = "";
     private boolean appConnectToLastAdapter;
 
+    private boolean appOptimizeDataRetrieval = false;
+
     private Context serviceContext;
 
     public Service(Context context)
@@ -68,6 +70,8 @@ public class Service
         appLedBrightness = 100;
 
         appConnectToLastAdapter = false;
+
+        appOptimizeDataRetrieval = true;
     }
 
     public void startService()
@@ -320,6 +324,12 @@ public class Service
         adapterNotConnected();
     }
 
+    private void j1708Restarting()
+    {
+        // Start re-retrieving truck data
+        getTruckData();
+    }
+
     // BlueFire Event Handler
     private final Handler eventHandler = new Handler()
     {
@@ -387,6 +397,10 @@ public class Service
                     case NotReconnected:
                         if (isConnecting)
                             adapterNotReconnected();
+                        break;
+
+                    case J1708Restarting:
+                        j1708Restarting();
                         break;
 
                     case Notification:

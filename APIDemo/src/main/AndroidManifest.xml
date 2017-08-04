@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.bluefire.apidemo"
-      android:versionCode="1"
-      android:versionName="23.0" >
-    <!--  Note - versionName must match BlueFire.Version, the README.md and the build.gradle script -->
 
-    <uses-sdk android:minSdkVersion="16"></uses-sdk>
+      android:versionCode="1"
+      android:versionName="23.1" >
+    <!--  Note - versionName must match BlueFire.Version and the README.md -->
+
+    <uses-sdk android:minSdkVersion="23"></uses-sdk>
 
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>

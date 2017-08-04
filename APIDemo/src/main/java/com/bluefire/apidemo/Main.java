@@ -1,4 +1,3 @@
-//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.Manifest;
@@ -166,7 +165,9 @@ public class Main extends Activity
 
     private ConnectAdapterThread connectThread;
 
+    private boolean isKeyOn;
     private boolean isCANAvailable;
+    private boolean isJ1708Available;
 
     private boolean secureAdapter = false;
 
@@ -204,6 +205,8 @@ public class Main extends Activity
     public int appDiscoveryTimeOut = 10 * Const.OneSecond;
     public int appMaxConnectAttempts = 10;
     public int appMaxReconnectAttempts = 5;
+
+    private boolean appOptimizeDataRetrieval = false;
 
     // ELD settings
     public boolean appELDStarted = false;
@@ -277,6 +280,7 @@ public class Main extends Activity
         appDiscoveryTimeOut = settings.getInt("_DiscoveryTimeout", 10 * Const.OneSecond);
         appMaxConnectAttempts = settings.getInt("MaxConnectAttempts", 10);
         appMaxReconnectAttempts = settings.getInt("MaxReconnectAttempts", 5);
+        appOptimizeDataRetrieval = settings.getBoolean("appOptimizeDataRetrieval", true);
 
         // Get ELD settings
         appELDStarted = settings.getBoolean("ELDStarted", false);
@@ -313,6 +317,7 @@ public class Main extends Activity
         settingsSave.putInt("_DiscoveryTimeout", appDiscoveryTimeOut);
         settingsSave.putInt("MaxConnectAttempts", appMaxConnectAttempts);
         settingsSave.putInt("MaxReconnectAttempts", appMaxReconnectAttempts);
+        settingsSave.putBoolean("appOptimizeDataRetrieval", appOptimizeDataRetrieval);
 
         settingsSave.putBoolean("ELDStarted", appELDStarted);
         settingsSave.putBoolean("SecureELD", appSecureELD);
@@ -365,6 +370,9 @@ public class Main extends Activity
 
         // Set the adapter security parameters
         blueFire.SetSecurity(appSecureAdapter, appUserName, appPassword);
+
+        // Set to optimize data retrieval
+        blueFire.OptimizeDataRetrieval = appOptimizeDataRetrieval;
 
         // Set streaming and recording mode
         blueFire.ELD.SetStreaming(appStreamingELD);
@@ -765,6 +773,15 @@ public class Main extends Activity
 
         // Get adapter data
         getAdapterData();
+
+        if (isTesting)
+            StartTest();
+    }
+
+    private void j1708Restarting()
+    {
+        if (isTesting)
+            StartTest();
     }
 
     // Start retrieving data after connecting to the adapter
@@ -1109,36 +1126,6 @@ public class Main extends Activity
         }
     }
 
-    // ELD Button
-    public void onELDDataClick(View view)
-    {
-        if (!blueFire.ELD.IsCompatible())
-        {
-            Toast.makeText(this, "The Adapter is not compatible with ELD Recording.", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (!blueFire.IsConnected())
-        {
-            Toast.makeText(this, "The Adapter must be connected for ELD Recording.", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (layoutELD.getVisibility() == View.INVISIBLE)
-        {
-            layoutAdapter.setVisibility(View.INVISIBLE);
-            layoutTruck.setVisibility(View.INVISIBLE);
-            layoutELD.setVisibility(View.VISIBLE);
-
-            showELDPage();
-        }
-        else
-        {
-            layoutELD.setVisibility(View.INVISIBLE);
-            layoutAdapter.setVisibility(View.VISIBLE);
-        }
-    }
-
     private boolean isTesting;
 
     // Test Button
@@ -1191,6 +1178,39 @@ public class Main extends Activity
         blueFire.GetCoolantLevel(retrievalMethod, retrievalInterval); // Coolant Level
         blueFire.GetTransmissionGears(retrievalMethod, retrievalInterval); // Selected and Current Gears
     }
+
+    // *********************************** ELD *******************************************
+
+    // ELD Button
+    public void onELDDataClick(View view)
+    {
+        if (!blueFire.ELD.IsCompatible())
+        {
+            Toast.makeText(this, "The Adapter is not compatible with ELD Recording.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (!blueFire.IsConnected())
+        {
+            Toast.makeText(this, "The Adapter must be connected for ELD Recording.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (layoutELD.getVisibility() == View.INVISIBLE)
+        {
+            layoutAdapter.setVisibility(View.INVISIBLE);
+            layoutTruck.setVisibility(View.INVISIBLE);
+            layoutELD.setVisibility(View.VISIBLE);
+
+            showELDPage();
+        }
+        else
+        {
+            layoutELD.setVisibility(View.INVISIBLE);
+            layoutAdapter.setVisibility(View.VISIBLE);
+        }
+    }
+
     // Align ELD Checkbox
     public void onAlignELDCheck(View view)
     {
@@ -1822,17 +1842,21 @@ public class Main extends Activity
         Log.d("Upload", String.valueOf(blueFire.ELD.RecordId()));
     }
 
+    // *********************************** End ELD *******************************************
+
     private void checkKeyState()
     {
-        if (isCANAvailable != blueFire.IsCANAvailable())
+        boolean keyIsOn = (blueFire.IsCANAvailable() || blueFire.IsJ1708Available());
+
+        if (isKeyOn != keyIsOn)
         {
-            isCANAvailable = blueFire.IsCANAvailable();
-            if (isCANAvailable)
+            if (keyIsOn)
                 textKeyState.setText("Key On");
             else
                 textKeyState.setText("Key Off");
-        }
 
+            isKeyOn = keyIsOn;
+        }
     }
 
     private void showData()
@@ -1940,8 +1964,8 @@ public class Main extends Activity
         // Note, this is here for demo-ing the different methods.
         //retrievalMethod = RetrievalMethods.OnChange; // default
         //retrievalMethod = RetrievalMethods.Synchronized;
-        retrievalMethod = RetrievalMethods.OnInterval;
-        retrievalInterval = 1000; // only required if RetrievalMethod is OnInterval, default is MinInterval
+        retrievalMethod = RetrievalMethods.OnChange;
+        retrievalInterval = 1000; // only required if RetrievalMethod is OnInterval, default is MinInterval (500 ms)
 
         switch (groupNo)
         {
@@ -2186,19 +2210,19 @@ public class Main extends Activity
                 break;
 
             case 1:
-                dataView1.setText(formatFloat(Truck.Distance * Const.MetersToMiles,0)); // hi-res or converted lo-res
-                dataView2.setText(formatFloat(Truck.HiResDistance * Const.MetersToMiles,0));
-                dataView3.setText(formatFloat(Truck.LoResDistance * Const.KmToMiles,0));
+                dataView1.setText(formatFloat(Truck.Distance * Const.MetersToMiles,2)); // hi-res or converted lo-res
+                dataView2.setText(formatFloat(Truck.HiResDistance * Const.MetersToMiles,2));
+                dataView3.setText(formatFloat(Truck.LoResDistance * Const.KmToMiles,2));
                 dataView4.setText("");
-                dataView5.setText(formatFloat(Truck.Odometer * Const.MetersToMiles,0)); // hi-res or converted lo-res
-                dataView6.setText(formatFloat(Truck.HiResOdometer * Const.MetersToMiles,0));
-                dataView7.setText(formatFloat(Truck.LoResOdometer * Const.KmToMiles,0));
+                dataView5.setText(formatFloat(Truck.Odometer * Const.MetersToMiles,2)); // hi-res or converted lo-res
+                dataView6.setText(formatFloat(Truck.HiResOdometer * Const.MetersToMiles,2));
+                dataView7.setText(formatFloat(Truck.LoResOdometer * Const.KmToMiles,2));
 
                 break;
 
             case 2:
-                dataView1.setText(formatFloat(Truck.TotalHours,2));
-                dataView2.setText(formatFloat(Truck.IdleHours,2));
+                dataView1.setText(formatFloat(Truck.TotalHours,3));
+                dataView2.setText(formatFloat(Truck.IdleHours,3));
                 dataView3.setText(formatFloat(Truck.BrakeAppPressure * Const.kPaToPSI,2));
                 dataView4.setText(formatFloat(Truck.Brake1AirPressure * Const.kPaToPSI,2));
                 dataView5.setText(formatInt(Truck.CurrentGear));
@@ -2209,9 +2233,9 @@ public class Main extends Activity
 
             case 3:
                 dataView1.setText(formatFloat(Truck.FuelRate * Const.LphToGalPHr,2));
-                dataView2.setText(formatFloat(Truck.FuelUsed * Const.LitersToGal,2));
-                dataView3.setText(formatFloat(Truck.HiResFuelUsed * Const.LitersToGal,2));
-                dataView4.setText(formatFloat(Truck.IdleFuelUsed * Const.LitersToGal,2));
+                dataView2.setText(formatFloat(Truck.FuelUsed * Const.LitersToGal,3));
+                dataView3.setText(formatFloat(Truck.HiResFuelUsed * Const.LitersToGal,3));
+                dataView4.setText(formatFloat(Truck.IdleFuelUsed * Const.LitersToGal,3));
                 dataView5.setText(formatFloat(Truck.AvgFuelEcon * Const.KplToMpg,2));
                 dataView6.setText(formatFloat(Truck.InstFuelEcon * Const.KplToMpg,2));
                 dataView7.setText(formatFloat(Truck.ThrottlePos,2));
@@ -2457,6 +2481,10 @@ public class Main extends Activity
                     case NotReconnected:
                         if (isConnecting)
                             adapterNotReconnected();
+                        break;
+
+                    case J1708Restarting:
+                        j1708Restarting();
                         break;
 
                     case Notification:

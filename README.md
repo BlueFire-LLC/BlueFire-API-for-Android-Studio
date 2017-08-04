@@ -274,8 +274,20 @@ Version 23.0:<ul>
 	<li>Added a Notification Connection State that will return any API notifications.
 	<li>Added SetHeartbeatOn method that will turn the Adapter heartbeat on/off. Use with caution.
 	<li>Added SetNotificationsOn method that will turn Adapter notifications on/off.
-	<li>Improved connection reliability with Firmware 3.12.
 	<li>Change the Engine VIN/Id page in the Demo app to show using synchronous retrieval.
 	<li>Added a VIN/ComponentId page to the Demo app that shows using asynchronous retrieval.
 	<li>Added a Test All button to the Demo app that retrieves all the data at once to test loading the connection.
+	<li>Improved connection reliability with beta Firmware 3.12.x.
+</ul>
+
+Version 23.1:<ul>
+	<li>Added property OptimizeDataRetrieval that optimizes retrieval of data when the same data is available from both J1939 and J1708 ECMs. Recommended.
+	<li>Better J1708 data retrieval with Firmware 3.12.
+	<li>Not selecting a connection type (BLE or BT21) will auto connect properly.
+	<li>Works on Android 7.1 devices that use Android 6 BLE firmware.
+	<li>No longer supports Android 4+ and Android 5+.
+	<li>
+	<li>
+	<li>
+	<li>Improved connection and data reliability with Firmware 3.12.
 </ul>
