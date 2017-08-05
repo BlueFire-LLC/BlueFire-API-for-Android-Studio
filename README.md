@@ -286,8 +286,4 @@ Version 23.1:<ul>
 	<li>Not selecting a connection type (BLE or BT21) will auto connect properly.
 	<li>Works on Android 7.1 devices that use Android 6 BLE firmware.
 	<li>No longer supports Android 4+ and Android 5+.
-	<li>
-	<li>
-	<li>
-	<li>Improved connection and data reliability with Firmware 3.12.
 </ul>
