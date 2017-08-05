@@ -271,7 +271,7 @@ Version 23.0:<ul>
 	<li>Added synchronized calling to GetEngineVIN, GetVIN, GetEngineId, and GetComponentId.
 	<li>The SetSyncTimeout method is replaced with the SyncTimeout passed as the Interval parameter along with the Synchronized Retrieval Method parameter.
 	<li>Fixed the OnChange Retrieval Method that caused issues with the Adapter.
-	<li>Added a Notification Connection State that will return any API notifications.
+	<li>Added a Notification ConnectionState that will return any API notifications.
 	<li>Added SetHeartbeatOn method that will turn the Adapter heartbeat on/off. Use with caution.
 	<li>Added SetNotificationsOn method that will turn Adapter notifications on/off.
 	<li>Change the Engine VIN/Id page in the Demo app to show using synchronous retrieval.
@@ -282,8 +282,11 @@ Version 23.0:<ul>
 
 Version 23.1:<ul>
 	<li>Added property OptimizeDataRetrieval that optimizes retrieval of data when the same data is available from both J1939 and J1708 ECMs. Recommended.
-	<li>Better J1708 data retrieval with Firmware 3.12.
+	<li>Added a J1708Restarting ConnectionState that will be raised if J1708 data retrieval is restarting (see Demo app). 
 	<li>Not selecting a connection type (BLE or BT21) will auto connect properly.
-	<li>Works on Android 7.1 devices that use Android 6 BLE firmware.
+	<li>The Demo app re-retrieves data when the ConnectionState J1708Restarting is raised.
+	<li>The Demo app shows Key On/Off properly for J1708 vehicles.
+	<li>Better J1708 data retrieval with Firmware 3.12.
 	<li>No longer supports Android 4+ and Android 5+.
+	<li>Compatible with Android 7.1 devices that use Android 6 BLE firmware.
 </ul>
