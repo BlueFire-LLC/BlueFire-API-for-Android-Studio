@@ -780,8 +780,11 @@ public class Main extends Activity
 
     private void j1708Restarting()
     {
+        // Re-retrieve truck data
         if (isTesting)
             StartTest();
+        else
+            getTruckData();
     }
 
     // Start retrieving data after connecting to the adapter
