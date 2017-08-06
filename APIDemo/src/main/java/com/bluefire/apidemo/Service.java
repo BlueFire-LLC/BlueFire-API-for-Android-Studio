@@ -1,3 +1,4 @@
+//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.annotation.SuppressLint;
@@ -23,7 +24,7 @@ public class Service
 
     private ConnectionStates connectionState = ConnectionStates.NotConnected;
 
-    private boolean isCANAvailable;
+    private boolean isKeyOn;
 
     private boolean isConnecting;
     private boolean isConnected;
@@ -242,12 +243,13 @@ public class Service
         //blueFire.GetTransmissionGears(retrievalMethod, retrievalInterval); // Selected and Current Gears
         blueFire.GetBatteryVoltage(retrievalMethod, retrievalInterval); // Battery Voltage
         blueFire.GetFuelData(retrievalMethod, retrievalInterval); // Fuel Levels, Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
-        blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Transmission Temp, Intake Manifold Temperature
+        blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Intake Manifold Temperature
         blueFire.GetPressures(retrievalMethod, retrievalInterval); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
         blueFire.GetCoolantLevel(retrievalMethod, retrievalInterval); // Coolant Level
     }
 
     private int TimeToWrite = 9999;
+
     private void checkTruckData()
     {
         // Check the data you requested to see which one changed that triggered the DataAvailable
@@ -270,13 +272,16 @@ public class Service
 
     private void checkKeyState()
     {
-        if (isCANAvailable != blueFire.IsCANAvailable())
+        boolean keyIsOn = (isConnected && (blueFire.IsCANAvailable() || blueFire.IsJ1708Available()));
+
+        if (isKeyOn != keyIsOn)
         {
-            isCANAvailable = blueFire.IsCANAvailable();
-            if (isCANAvailable)
+            if (keyIsOn)
                 logNotifications("Key is On");
             else
                 logNotifications("Key is Off");
+
+            isKeyOn = keyIsOn;
         }
     }
 

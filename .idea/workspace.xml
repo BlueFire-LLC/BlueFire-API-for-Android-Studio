@@ -10,42 +10,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab225881-d1f1-4fab-9884-60ce23a3ad49" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/lint.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.aar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/bluefire_api_v22_0_unspecified.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_22.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_22.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/lint.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/bluefire_api_v22_0_unspecified.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw600dp/dimens.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
     </list>
     <ignored path="BlueFire-API-for-Android-Studio.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,7 +80,7 @@
       <file leaf-file-name="Build_Instructions" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Build_Instructions">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="680">
               <caret line="40" column="102" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
               <folding />
             </state>
@@ -89,28 +89,19 @@
       </file>
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
               <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-manifest">
-            <state />
-          </provider>
         </entry>
       </file>
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
-          <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
               <first_editor relative-caret-position="236">
@@ -122,165 +113,13 @@
               </second_editor>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5356">
-              <caret line="1946" column="4" selection-start-line="1946" selection-start-column="4" selection-end-line="1946" selection-end-column="4" />
-              <folding>
-                <element signature="method#onCreate#0;class#Main#0" expanded="false" />
-                <element signature="e#7205#7242#0" expanded="false" />
-                <element signature="method#getSettings#0;class#Main#0" expanded="false" />
-                <element signature="e#7929#7960#0" expanded="false" />
-                <element signature="method#saveSettings#0;class#Main#0" expanded="false" />
-                <element signature="method#initializeAdapter#0;class#Main#0" expanded="false" />
-                <element signature="e#12657#12696#0" expanded="false" />
-                <element signature="e#13044#13091#0" expanded="false" />
-                <element signature="method#initializeForm#0;class#Main#0" expanded="false" />
-                <element signature="method#clearForm#0;class#Main#0" expanded="false" />
-                <element signature="method#enableAdapterParms#0;class#Main#0" expanded="false" />
-                <element signature="method#onConnectClick#0;class#Main#0" expanded="false" />
-                <element signature="method#onStartServiceClick#0;class#Main#0" expanded="false" />
-                <element signature="method#onStopServiceClick#0;class#Main#0" expanded="false" />
-                <element signature="method#checkBluetoothPermissions#0;class#Main#0" expanded="false" />
-                <element signature="e#23966#24012#0" expanded="false" />
-                <element signature="method#onRequestPermissionsResult#0;class#Main#0" expanded="false" />
-                <element signature="e#24485#24523#0" expanded="false" />
-                <element signature="method#startConnection#0;class#Main#0" expanded="false" />
-                <element signature="e#25190#25249#0" expanded="false" />
-                <element signature="method#StartService#0;class#Main#0" expanded="false" />
-                <element signature="class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
-                <element signature="method#run#0;class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
-                <element signature="e#25856#25882#0" expanded="false" />
-                <element signature="method#showConnectButton#0;class#Main#0" expanded="false" />
-                <element signature="method#showDisconnectButton#0;class#Main#0" expanded="false" />
-                <element signature="method#disconnectAdapter#0;class#Main#0" expanded="false" />
-                <element signature="e#27007#27075#0" expanded="false" />
-                <element signature="method#adapterConnected#0;class#Main#0" expanded="false" />
-                <element signature="method#j1708Restarting#0;class#Main#0" expanded="false" />
-                <element signature="method#getAdapterData#0;class#Main#0" expanded="false" />
-                <element signature="e#28676#28725#0" expanded="false" />
-                <element signature="method#adapterNotAuthenticated#0;class#Main#0" expanded="false" />
-                <element signature="method#adapterDisconnected#0;class#Main#0" expanded="false" />
-                <element signature="method#adapterNotConnected#0;class#Main#0" expanded="false" />
-                <element signature="method#adapterReconnecting#0;class#Main#0" expanded="false" />
-                <element signature="method#adapterReconnected#0;class#Main#0" expanded="false" />
-                <element signature="method#adapterNotReconnected#0;class#Main#0" expanded="false" />
-                <element signature="method#onUseBT21Check#0;class#Main#0" expanded="false" />
-                <element signature="method#onUseBLECheck#0;class#Main#0" expanded="false" />
-                <element signature="method#onConnectLastAdapterCheck#0;class#Main#0" expanded="false" />
-                <element signature="method#onUseJ1939Check#0;class#Main#0" expanded="false" />
-                <element signature="method#onUseJ1708Check#0;class#Main#0" expanded="false" />
-                <element signature="method#onUpdateClick#0;class#Main#0" expanded="false" />
-                <element signature="method#onSendMonitorClick#0;class#Main#0" expanded="false" />
-                <element signature="method#onNextGroupClick#0;class#Main#0" expanded="false" />
-                <element signature="method#onTruckDataClick#0;class#Main#0" expanded="false" />
-                <element signature="method#onTestClick#0;class#Main#0" expanded="false" />
-                <element signature="method#StartTest#0;class#Main#0" expanded="false" />
-                <element signature="e#38218#38259#0" expanded="false" />
-                <element signature="e#38398#38448#0" expanded="false" />
-                <element signature="e#38756#38788#0" expanded="false" />
-                <element signature="method#onELDDataClick#0;class#Main#0" expanded="false" />
-                <element signature="method#onAlignELDCheck#0;class#Main#0" expanded="false" />
-                <element signature="method#onAlignIFTACheck#0;class#Main#0" expanded="false" />
-                <element signature="method#onAlignStatsCheck#0;class#Main#0" expanded="false" />
-                <element signature="method#onSecureELDCheck#0;class#Main#0" expanded="false" />
-                <element signature="method#onStreamingELDCheck#0;class#Main#0" expanded="false" />
-                <element signature="method#onRecordingConnectedCheck#0;class#Main#0" expanded="false" />
-                <element signature="method#onRecordingDisconnectedCheck#0;class#Main#0" expanded="false" />
-                <element signature="method#onStartELDClick#0;class#Main#0" expanded="false" />
-                <element signature="method#onUploadELDClick#0;class#Main#0" expanded="false" />
-                <element signature="method#onDeleteELDClick#0;class#Main#0" expanded="false" />
-                <element signature="method#showELDPage#0;class#Main#0" expanded="false" />
-                <element signature="method#startELD#0;class#Main#0" expanded="false" />
-                <element signature="e#47462#47493#0" expanded="false" />
-                <element signature="method#stopELD#0;class#Main#0" expanded="false" />
-                <element signature="method#showELDData#0;class#Main#0" expanded="false" />
-                <element signature="method#showELDRecord#0;class#Main#0" expanded="false" />
-                <element signature="method#showELDRemaining#0;class#Main#0" expanded="false" />
-                <element signature="method#clearELDData#0;class#Main#0" expanded="false" />
-                <element signature="method#getELDParms#0;class#Main#0" expanded="false" />
-                <element signature="e#53232#53280#0" expanded="false" />
-                <element signature="method#setELDParms#0;class#Main#0" expanded="false" />
-                <element signature="method#SetStreamingText#0;class#Main#0" expanded="false" />
-                <element signature="method#editELDParms#0;class#Main#0" expanded="false" />
-                <element signature="method#enableELDParms#0;class#Main#0" expanded="false" />
-                <element signature="method#sendCustomELDRecord#0;class#Main#0" expanded="false" />
-                <element signature="method#editInterval#0;class#Main#0" expanded="false" />
-                <element signature="method#editELDInterval#0;class#Main#0" expanded="false" />
-                <element signature="method#editIFTAInterval#0;class#Main#0" expanded="false" />
-                <element signature="method#editStatsInterval#0;class#Main#0" expanded="false" />
-                <element signature="method#uploadELD#0;class#Main#0" expanded="false" />
-                <element signature="method#writeELDRecord#0;class#Main#0" expanded="false" />
-                <element signature="method#checkKeyState#0;class#Main#0" expanded="false" />
-                <element signature="method#showData#0;class#Main#0" expanded="false" />
-                <element signature="method#startTruckData#0;class#Main#0" expanded="false" />
-                <element signature="e#62732#62773#0" expanded="false" />
-                <element signature="method#stopTruckData#0;class#Main#0" expanded="false" />
-                <element signature="method#clearAdapterData#0;class#Main#0" expanded="false" />
-                <element signature="method#getTruckData#0;class#Main#0" expanded="false" />
-                <element signature="e#63988#64029#0" expanded="false" />
-                <element signature="e#64798#64846#0" expanded="false" />
-                <element signature="e#72499#72529#0" expanded="false" />
-                <element signature="e#74381#74428#0" expanded="false" />
-                <element signature="method#showTruckData#0;class#Main#0" expanded="false" />
-                <element signature="method#showNextFault#0;class#Main#0" expanded="false" />
-                <element signature="method#formatInt#0;class#Main#0" expanded="false" />
-                <element signature="method#formatFloat#0;class#Main#0" expanded="false" />
-                <element signature="method#formatDecimal#0;class#Main#0" expanded="false" />
-                <element signature="method#showStatus#0;class#Main#0" expanded="false" />
-                <element signature="method#showAPINotifications#0;class#Main#0" expanded="false" />
-                <element signature="method#showMessage#0;class#Main#0" expanded="false" />
-                <element signature="method#logNotifications#0;class#Main#0" expanded="false" />
-                <element signature="method#hexStringToBytes#0;class#Main#0" expanded="false" />
-                <element signature="method#bytesToHexString#0;class#Main#0" expanded="false" />
-                <element signature="method#celciusToFarenheit#0;class#Main#0" expanded="false" />
-                <element signature="method#farenheitToCelcius#0;class#Main#0" expanded="false" />
-                <element signature="method#onBackPressed#0;class#Main#0" expanded="false" />
-                <element signature="method#onDestroy#0;class#Main#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Service.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Service.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="216" column="4" selection-start-line="216" selection-start-column="4" selection-end-line="216" selection-end-column="4" />
-              <folding>
-                <element signature="method#Service#0;class#Service#0" expanded="false" />
-                <element signature="method#startService#0;class#Service#0" expanded="false" />
-                <element signature="method#stopService#0;class#Service#0" expanded="false" />
-                <element signature="class#ServiceThread#0;class#Service#0" expanded="false" />
-                <element signature="method#run#0;class#ServiceThread#0;class#Service#0" expanded="false" />
-                <element signature="method#connectAdapter#0;class#Service#0" expanded="false" />
-                <element signature="method#initializeAdapter#0;class#Service#0" expanded="false" />
-                <element signature="e#3260#3299#0" expanded="false" />
-                <element signature="e#3647#3694#0" expanded="false" />
-                <element signature="method#disconnectAdapter#0;class#Service#0" expanded="false" />
-                <element signature="e#4466#4534#0" expanded="false" />
-                <element signature="method#adapterConnected#0;class#Service#0" expanded="false" />
-                <element signature="method#getAdapterData#0;class#Service#0" expanded="false" />
-                <element signature="e#5270#5319#0" expanded="false" />
-                <element signature="method#getTruckData#0;class#Service#0" expanded="false" />
-                <element signature="e#5869#5910#0" expanded="false" />
-                <element signature="e#6166#6229#0" expanded="false" />
-                <element signature="method#checkTruckData#0;class#Service#0" expanded="false" />
-                <element signature="e#8338#8427#0" expanded="false" />
-                <element signature="e#8760#8788#0" expanded="false" />
-                <element signature="method#checkKeyState#0;class#Service#0" expanded="false" />
-                <element signature="method#adapterNotAuthenticated#0;class#Service#0" expanded="false" />
-                <element signature="method#adapterDisconnected#0;class#Service#0" expanded="false" />
-                <element signature="method#adapterNotConnected#0;class#Service#0" expanded="false" />
-                <element signature="method#adapterReconnecting#0;class#Service#0" expanded="false" />
-                <element signature="method#adapterReconnected#0;class#Service#0" expanded="false" />
-                <element signature="method#adapterNotReconnected#0;class#Service#0" expanded="false" />
-                <element signature="method#j1708Restarting#0;class#Service#0" expanded="false" />
-                <element signature="method#logStatus#0;class#Service#0" expanded="false" />
-              </folding>
+          <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="0">
+                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -1737,62 +1576,6 @@
                 <option name="description" value="Displays the properties of project ':APIDemo'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/APIDemo" />
                 <option name="name" value="properties" />
-              </ExternalTaskPojo>
-            </list>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/bluefire-api-v23.1">
-          <value>
-            <list>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by project ':bluefire-api-v23.1'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="components" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of project ':bluefire-api-v23.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="projects" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in project ':bluefire-api-v23.1'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="dependentComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in project ':bluefire-api-v23.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="buildEnvironment" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in project ':bluefire-api-v23.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="dependencyInsight" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in project ':bluefire-api-v23.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="dependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays a help message." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="help" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of project ':bluefire-api-v23.1'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="model" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of project ':bluefire-api-v23.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="properties" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from project ':bluefire-api-v23.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v23.1" />
-                <option name="name" value="tasks" />
               </ExternalTaskPojo>
             </list>
           </value>
@@ -3885,11 +3668,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane />
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -4046,6 +3828,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -4060,18 +3843,18 @@
     <property name="last_opened_file_path" value="$USER_HOME$/.android/build-cache/94971725865a97575869aaa3ea062c798d896e6f/output/jars/classes.jar!/com/bluefire/api" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.bluefire.apidemo" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\java\com\bluefire\apidemo" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\res\layout" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\libs" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bluefire.apidemo" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.APIDemo">
@@ -4401,7 +4184,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24675325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -4416,8 +4199,7 @@
       <window_info id="Captures" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24539231" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24539231" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -4431,6 +4213,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -4761,190 +4544,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Service.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
+        <state relative-caret-position="1258">
           <caret line="216" column="4" selection-start-line="216" selection-start-column="4" selection-end-line="216" selection-end-column="4" />
-          <folding>
-            <element signature="method#Service#0;class#Service#0" expanded="false" />
-            <element signature="method#startService#0;class#Service#0" expanded="false" />
-            <element signature="method#stopService#0;class#Service#0" expanded="false" />
-            <element signature="class#ServiceThread#0;class#Service#0" expanded="false" />
-            <element signature="method#run#0;class#ServiceThread#0;class#Service#0" expanded="false" />
-            <element signature="method#connectAdapter#0;class#Service#0" expanded="false" />
-            <element signature="method#initializeAdapter#0;class#Service#0" expanded="false" />
-            <element signature="e#3260#3299#0" expanded="false" />
-            <element signature="e#3647#3694#0" expanded="false" />
-            <element signature="method#disconnectAdapter#0;class#Service#0" expanded="false" />
-            <element signature="e#4466#4534#0" expanded="false" />
-            <element signature="method#adapterConnected#0;class#Service#0" expanded="false" />
-            <element signature="method#getAdapterData#0;class#Service#0" expanded="false" />
-            <element signature="e#5270#5319#0" expanded="false" />
-            <element signature="method#getTruckData#0;class#Service#0" expanded="false" />
-            <element signature="e#5869#5910#0" expanded="false" />
-            <element signature="e#6166#6229#0" expanded="false" />
-            <element signature="method#checkTruckData#0;class#Service#0" expanded="false" />
-            <element signature="e#8338#8427#0" expanded="false" />
-            <element signature="e#8760#8788#0" expanded="false" />
-            <element signature="method#checkKeyState#0;class#Service#0" expanded="false" />
-            <element signature="method#adapterNotAuthenticated#0;class#Service#0" expanded="false" />
-            <element signature="method#adapterDisconnected#0;class#Service#0" expanded="false" />
-            <element signature="method#adapterNotConnected#0;class#Service#0" expanded="false" />
-            <element signature="method#adapterReconnecting#0;class#Service#0" expanded="false" />
-            <element signature="method#adapterReconnected#0;class#Service#0" expanded="false" />
-            <element signature="method#adapterNotReconnected#0;class#Service#0" expanded="false" />
-            <element signature="method#j1708Restarting#0;class#Service#0" expanded="false" />
-            <element signature="method#logStatus#0;class#Service#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5356">
+        <state relative-caret-position="7905">
           <caret line="1946" column="4" selection-start-line="1946" selection-start-column="4" selection-end-line="1946" selection-end-column="4" />
-          <folding>
-            <element signature="method#onCreate#0;class#Main#0" expanded="false" />
-            <element signature="e#7205#7242#0" expanded="false" />
-            <element signature="method#getSettings#0;class#Main#0" expanded="false" />
-            <element signature="e#7929#7960#0" expanded="false" />
-            <element signature="method#saveSettings#0;class#Main#0" expanded="false" />
-            <element signature="method#initializeAdapter#0;class#Main#0" expanded="false" />
-            <element signature="e#12657#12696#0" expanded="false" />
-            <element signature="e#13044#13091#0" expanded="false" />
-            <element signature="method#initializeForm#0;class#Main#0" expanded="false" />
-            <element signature="method#clearForm#0;class#Main#0" expanded="false" />
-            <element signature="method#enableAdapterParms#0;class#Main#0" expanded="false" />
-            <element signature="method#onConnectClick#0;class#Main#0" expanded="false" />
-            <element signature="method#onStartServiceClick#0;class#Main#0" expanded="false" />
-            <element signature="method#onStopServiceClick#0;class#Main#0" expanded="false" />
-            <element signature="method#checkBluetoothPermissions#0;class#Main#0" expanded="false" />
-            <element signature="e#23966#24012#0" expanded="false" />
-            <element signature="method#onRequestPermissionsResult#0;class#Main#0" expanded="false" />
-            <element signature="e#24485#24523#0" expanded="false" />
-            <element signature="method#startConnection#0;class#Main#0" expanded="false" />
-            <element signature="e#25190#25249#0" expanded="false" />
-            <element signature="method#StartService#0;class#Main#0" expanded="false" />
-            <element signature="class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
-            <element signature="method#run#0;class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
-            <element signature="e#25856#25882#0" expanded="false" />
-            <element signature="method#showConnectButton#0;class#Main#0" expanded="false" />
-            <element signature="method#showDisconnectButton#0;class#Main#0" expanded="false" />
-            <element signature="method#disconnectAdapter#0;class#Main#0" expanded="false" />
-            <element signature="e#27007#27075#0" expanded="false" />
-            <element signature="method#adapterConnected#0;class#Main#0" expanded="false" />
-            <element signature="method#j1708Restarting#0;class#Main#0" expanded="false" />
-            <element signature="method#getAdapterData#0;class#Main#0" expanded="false" />
-            <element signature="e#28676#28725#0" expanded="false" />
-            <element signature="method#adapterNotAuthenticated#0;class#Main#0" expanded="false" />
-            <element signature="method#adapterDisconnected#0;class#Main#0" expanded="false" />
-            <element signature="method#adapterNotConnected#0;class#Main#0" expanded="false" />
-            <element signature="method#adapterReconnecting#0;class#Main#0" expanded="false" />
-            <element signature="method#adapterReconnected#0;class#Main#0" expanded="false" />
-            <element signature="method#adapterNotReconnected#0;class#Main#0" expanded="false" />
-            <element signature="method#onUseBT21Check#0;class#Main#0" expanded="false" />
-            <element signature="method#onUseBLECheck#0;class#Main#0" expanded="false" />
-            <element signature="method#onConnectLastAdapterCheck#0;class#Main#0" expanded="false" />
-            <element signature="method#onUseJ1939Check#0;class#Main#0" expanded="false" />
-            <element signature="method#onUseJ1708Check#0;class#Main#0" expanded="false" />
-            <element signature="method#onUpdateClick#0;class#Main#0" expanded="false" />
-            <element signature="method#onSendMonitorClick#0;class#Main#0" expanded="false" />
-            <element signature="method#onNextGroupClick#0;class#Main#0" expanded="false" />
-            <element signature="method#onTruckDataClick#0;class#Main#0" expanded="false" />
-            <element signature="method#onTestClick#0;class#Main#0" expanded="false" />
-            <element signature="method#StartTest#0;class#Main#0" expanded="false" />
-            <element signature="e#38218#38259#0" expanded="false" />
-            <element signature="e#38398#38448#0" expanded="false" />
-            <element signature="e#38756#38788#0" expanded="false" />
-            <element signature="method#onELDDataClick#0;class#Main#0" expanded="false" />
-            <element signature="method#onAlignELDCheck#0;class#Main#0" expanded="false" />
-            <element signature="method#onAlignIFTACheck#0;class#Main#0" expanded="false" />
-            <element signature="method#onAlignStatsCheck#0;class#Main#0" expanded="false" />
-            <element signature="method#onSecureELDCheck#0;class#Main#0" expanded="false" />
-            <element signature="method#onStreamingELDCheck#0;class#Main#0" expanded="false" />
-            <element signature="method#onRecordingConnectedCheck#0;class#Main#0" expanded="false" />
-            <element signature="method#onRecordingDisconnectedCheck#0;class#Main#0" expanded="false" />
-            <element signature="method#onStartELDClick#0;class#Main#0" expanded="false" />
-            <element signature="method#onUploadELDClick#0;class#Main#0" expanded="false" />
-            <element signature="method#onDeleteELDClick#0;class#Main#0" expanded="false" />
-            <element signature="method#showELDPage#0;class#Main#0" expanded="false" />
-            <element signature="method#startELD#0;class#Main#0" expanded="false" />
-            <element signature="e#47462#47493#0" expanded="false" />
-            <element signature="method#stopELD#0;class#Main#0" expanded="false" />
-            <element signature="method#showELDData#0;class#Main#0" expanded="false" />
-            <element signature="method#showELDRecord#0;class#Main#0" expanded="false" />
-            <element signature="method#showELDRemaining#0;class#Main#0" expanded="false" />
-            <element signature="method#clearELDData#0;class#Main#0" expanded="false" />
-            <element signature="method#getELDParms#0;class#Main#0" expanded="false" />
-            <element signature="e#53232#53280#0" expanded="false" />
-            <element signature="method#setELDParms#0;class#Main#0" expanded="false" />
-            <element signature="method#SetStreamingText#0;class#Main#0" expanded="false" />
-            <element signature="method#editELDParms#0;class#Main#0" expanded="false" />
-            <element signature="method#enableELDParms#0;class#Main#0" expanded="false" />
-            <element signature="method#sendCustomELDRecord#0;class#Main#0" expanded="false" />
-            <element signature="method#editInterval#0;class#Main#0" expanded="false" />
-            <element signature="method#editELDInterval#0;class#Main#0" expanded="false" />
-            <element signature="method#editIFTAInterval#0;class#Main#0" expanded="false" />
-            <element signature="method#editStatsInterval#0;class#Main#0" expanded="false" />
-            <element signature="method#uploadELD#0;class#Main#0" expanded="false" />
-            <element signature="method#writeELDRecord#0;class#Main#0" expanded="false" />
-            <element signature="method#checkKeyState#0;class#Main#0" expanded="false" />
-            <element signature="method#showData#0;class#Main#0" expanded="false" />
-            <element signature="method#startTruckData#0;class#Main#0" expanded="false" />
-            <element signature="e#62732#62773#0" expanded="false" />
-            <element signature="method#stopTruckData#0;class#Main#0" expanded="false" />
-            <element signature="method#clearAdapterData#0;class#Main#0" expanded="false" />
-            <element signature="method#getTruckData#0;class#Main#0" expanded="false" />
-            <element signature="e#63988#64029#0" expanded="false" />
-            <element signature="e#64798#64846#0" expanded="false" />
-            <element signature="e#72499#72529#0" expanded="false" />
-            <element signature="e#74381#74428#0" expanded="false" />
-            <element signature="method#showTruckData#0;class#Main#0" expanded="false" />
-            <element signature="method#showNextFault#0;class#Main#0" expanded="false" />
-            <element signature="method#formatInt#0;class#Main#0" expanded="false" />
-            <element signature="method#formatFloat#0;class#Main#0" expanded="false" />
-            <element signature="method#formatDecimal#0;class#Main#0" expanded="false" />
-            <element signature="method#showStatus#0;class#Main#0" expanded="false" />
-            <element signature="method#showAPINotifications#0;class#Main#0" expanded="false" />
-            <element signature="method#showMessage#0;class#Main#0" expanded="false" />
-            <element signature="method#logNotifications#0;class#Main#0" expanded="false" />
-            <element signature="method#hexStringToBytes#0;class#Main#0" expanded="false" />
-            <element signature="method#bytesToHexString#0;class#Main#0" expanded="false" />
-            <element signature="method#celciusToFarenheit#0;class#Main#0" expanded="false" />
-            <element signature="method#farenheitToCelcius#0;class#Main#0" expanded="false" />
-            <element signature="method#onBackPressed#0;class#Main#0" expanded="false" />
-            <element signature="method#onDestroy#0;class#Main#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
+        <state relative-caret-position="680">
           <caret line="40" column="102" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
           <first_editor relative-caret-position="236">
@@ -4954,6 +4587,15 @@
           <second_editor>
             <js_state />
           </second_editor>
+        </state>
+      </provider>
+      <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

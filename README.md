@@ -296,5 +296,6 @@ Version 23.2:<ul>
 	<li>Added retrieval of primary and secondary fuel gauge levels (Truck.PrimaryFuelLevel and SecondaryFuelLevel to GetFuelData.
 	<li>Changed property OptimizeDataRetrieval to OptimizeDataRetrieval() and SetOptimizeDataRetrieval(boolean value).
 	<li>Improved OptimizeDataRetrieval. Note, this update is required if using OptimizeDataRetrieval.
+	<li>The Demo app shows Key Off when disconnected (see checkKeyState and showConnectButton).
 	<li>Critical patch for retrieving Adapter settings (sleep mode, led brightness, ignore databuses, j1708 availability).
 </ul>
