@@ -372,7 +372,7 @@ public class Main extends Activity
         blueFire.SetSecurity(appSecureAdapter, appUserName, appPassword);
 
         // Set to optimize data retrieval
-        blueFire.OptimizeDataRetrieval = appOptimizeDataRetrieval;
+        blueFire.SetOptimizeDataRetrieval(appOptimizeDataRetrieval);
 
         // Set streaming and recording mode
         blueFire.ELD.SetStreaming(appStreamingELD);
@@ -2040,7 +2040,7 @@ public class Main extends Activity
                 if (!isTesting)
                 {
                     clearAdapterData();
-                    blueFire.GetFuelData(retrievalMethod, retrievalInterval); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
+                    blueFire.GetFuelData(retrievalMethod, retrievalInterval); // Fuel Levels, Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
                 }
                 break;
 
@@ -2056,7 +2056,7 @@ public class Main extends Activity
                 if (!isTesting)
                 {
                     clearAdapterData();
-                    blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Intake Manifold Temperature
+                    blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Transmission Temp, Intake Manifold Temperature
                     blueFire.GetPressures(retrievalMethod, retrievalInterval); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
                     blueFire.GetCoolantLevel(retrievalMethod, retrievalInterval); // Coolant Level
                 }

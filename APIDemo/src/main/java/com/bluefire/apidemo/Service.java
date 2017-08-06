@@ -12,6 +12,7 @@ import com.bluefire.api.Const;
 import com.bluefire.api.RetrievalMethods;
 import com.bluefire.api.Truck;
 
+
 public class Service
 {
     private BlueFire blueFire;
@@ -155,6 +156,9 @@ public class Service
         // Set the Bluetooth adapter id and the 'connect to last adapter' setting
         blueFire.SetAdapterId(appAdapterId);
         blueFire.SetConnectToLastAdapter(appConnectToLastAdapter);
+
+        // Set to optimize data retrieval
+        blueFire.SetOptimizeDataRetrieval(appOptimizeDataRetrieval);
     }
 
     private void disconnectAdapter()
@@ -237,8 +241,8 @@ public class Service
         blueFire.GetBrakeData(retrievalMethod, retrievalInterval); // Application Pressure, Primary Pressure, Secondary Pressure
         //blueFire.GetTransmissionGears(retrievalMethod, retrievalInterval); // Selected and Current Gears
         blueFire.GetBatteryVoltage(retrievalMethod, retrievalInterval); // Battery Voltage
-        blueFire.GetFuelData(retrievalMethod, retrievalInterval); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
-        blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Intake Manifold Temperature
+        blueFire.GetFuelData(retrievalMethod, retrievalInterval); // Fuel Levels, Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
+        blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Transmission Temp, Intake Manifold Temperature
         blueFire.GetPressures(retrievalMethod, retrievalInterval); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
         blueFire.GetCoolantLevel(retrievalMethod, retrievalInterval); // Coolant Level
     }
@@ -326,7 +330,7 @@ public class Service
 
     private void j1708Restarting()
     {
-        // Start re-retrieving truck data
+        // Re-retrieve truck data
         getTruckData();
     }
 

@@ -290,3 +290,11 @@ Version 23.1:<ul>
 	<li>No longer supports Android 4+ and Android 5+.
 	<li>Compatible with Android 7.1 devices that use Android 6 BLE firmware.
 </ul>
+
+Version 23.2:<ul>
+	<li>Added retrieval of transmission temperature (Truck.TransTemp) to method GetTemps.
+	<li>Added retrieval of primary and secondary fuel gauge levels (Truck.PrimaryFuelLevel and SecondaryFuelLevel to GetFuelData.
+	<li>Changed property OptimizeDataRetrieval to OptimizeDataRetrieval() and SetOptimizeDataRetrieval(boolean value).
+	<li>Improved OptimizeDataRetrieval. Note, this update is required if using OptimizeDataRetrieval.
+	<li>Critical patch for retrieving Adapter settings (sleep mode, led brightness, ignore databuses, j1708 availability).
+</ul>
