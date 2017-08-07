@@ -299,3 +299,16 @@ Version 23.2:<ul>
 	<li>The Demo app shows Key Off when disconnected (see checkKeyState and showConnectButton).
 	<li>Critical patch for retrieving Adapter settings (sleep mode, led brightness, ignore databuses, j1708 availability).
 </ul>
+
+Version 23.3:<ul>
+	<li>Fixed bug in 23.2 that caused GetEngineVIN and GetEngineId to error.
+	<li>Added methods GetTruckVIN and GetTruckId for retrieving the OEM VIN and Component Id (Make/Model/SerialNo).
+	<li>Added methods StopRetrievingEngineVIN and StopRetrievingEngineId. Call these after Truck.EngineVIN and/or Truck.EngineMake have been retrieved.
+	<li>Added methods StopRetrievingTruckId and StopRetrievingTruckId. Call these after Truck.VIN and/or Truck.Make have been retrieved.
+	<li>Removed methods GetVIN and GetComponentId.
+	<li>Specifying OnChange Retrieval Method now works. The previous release changed it internally to OnInterval.
+	<li>Added AdapterMessage ConnectionState that will be raised when there is a message from the Adapter.
+	<li>Further improvements to J1708 data retrieval and connection stability.
+	<li>Improved API and Adapter error reporting.
+	<li>Updated the Demo app and Service to demonstrate the above changes.
+</ul>

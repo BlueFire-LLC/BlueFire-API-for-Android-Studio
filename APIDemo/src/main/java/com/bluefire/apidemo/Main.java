@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,8 +25,6 @@ import android.widget.Toast;
 import com.bluefire.api.BlueFire;
 import com.bluefire.api.ConnectionStates;
 import com.bluefire.api.Const;
-import com.bluefire.api.J1587;
-import com.bluefire.api.J1939;
 import com.bluefire.api.RecordIds;
 import com.bluefire.api.RecordingModes;
 import com.bluefire.api.RetrievalMethods;
@@ -142,9 +141,6 @@ public class Main extends Activity
     private boolean isSendingPGN;
     private boolean isMonitoringPGN;
 
-    private boolean isRetrievingTruckInfo;
-    private boolean isRetrievingEngineInfo;
-
     private int faultCount;
     private int faultIndex;
     private boolean isRetrievingFaults;
@@ -157,6 +153,8 @@ public class Main extends Activity
 
     private int groupNo;
     private static final int maxGroupNo = 8;
+
+    private boolean IsRetrievingVINID;
 
     private RetrievalMethods retrievalMethod;
     private int retrievalInterval;
@@ -505,8 +503,6 @@ public class Main extends Activity
 
         faultIndex = -1;
 
-        isRetrievingTruckInfo = false;
-        isRetrievingEngineInfo = false;
         isRetrievingFaults = false;
 
         // Show user settings
@@ -520,6 +516,8 @@ public class Main extends Activity
         textUserName.setText(appUserName);
         textPassword.setText(appPassword);
         textLedBrightness.setText(String.valueOf(appLedBrightness));
+
+        textNotifications.setText("");
 
         // ELD
         setELDParms();
@@ -649,15 +647,31 @@ public class Main extends Activity
         // Note, iff request is cancelled, the result arrays are empty.
 
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            startConnection();
+        {
+            // Ensure location services is turned on
+            if (isLocationEnabled())
+                startConnection();
+            else
+            {
+                adapterDisconnected();
 
-            // User refused the permission request, do not allow connection.
+                Toast.makeText(this, "You need to turn on Location to use the BLE Adapter.", Toast.LENGTH_LONG).show();
+            }
+        }
+        // User refused the permission request, do not allow connection.
         else
         {
             adapterDisconnected();
 
             Toast.makeText(this, "You need to allow Location Access to use the BLE Adapter.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private boolean isLocationEnabled()
+    {
+        LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     private void startConnection()
@@ -716,6 +730,8 @@ public class Main extends Activity
         isConnectButton = false;
         buttonConnect.setText("Disconnect");
         buttonConnect.setEnabled(true);
+
+        buttonStartService.setEnabled(false);
     }
 
     private void disconnectAdapter()
@@ -756,7 +772,7 @@ public class Main extends Activity
         enableAdapterParms(true);
 
         // Enable buttons
-        buttonConnect.setEnabled(true);
+        showDisconnectButton();
         buttonUpdate.setEnabled(true);
         buttonSendMonitor.setEnabled(true);
 
@@ -869,7 +885,8 @@ public class Main extends Activity
 
     private void adapterReconnecting()
     {
-        logNotifications("Adapter re-connecting.");
+        if (!isConnecting)
+            Toast.makeText(this, "Lost connection to the Adapter.", Toast.LENGTH_LONG).show();
 
         isConnected = false;
         isConnecting = true;
@@ -878,9 +895,9 @@ public class Main extends Activity
         buttonUpdate.setEnabled(false);
         buttonSendMonitor.setEnabled(false);
 
-        logNotifications("App reconnecting to the Adapter. Reason is " + blueFire.ReconnectReason() + ".");
+        logAPINotifications();
 
-        Toast.makeText(this, "Lost connection to the Adapter.", Toast.LENGTH_LONG).show();
+        logNotifications("Adapter re-connecting.");
 
         Toast.makeText(this, "Attempting to reconnect.", Toast.LENGTH_LONG).show();
     }
@@ -1110,6 +1127,16 @@ public class Main extends Activity
         getTruckData();
     }
 
+    // Previous Group Button
+    public void onPreviousGroupClick(View view)
+    {
+        groupNo--;
+        if (groupNo < 0)
+            groupNo = maxGroupNo;
+
+        getTruckData();
+    }
+
     // Truck Button
     public void onTruckDataClick(View view)
     {
@@ -1131,6 +1158,7 @@ public class Main extends Activity
     }
 
     private boolean isTesting;
+    private boolean testStarted;
 
     // Test Button
     public void onTestClick(View view)
@@ -1154,33 +1182,31 @@ public class Main extends Activity
 
     private void StartTest()
     {
-        // Set the retrieval method and interval.
-        // Note, this is here for demo-ing the different methods.
-        retrievalMethod = RetrievalMethods.OnChange; // default
-        //retrievalMethod = RetrievalMethods.Synchronized;
-        //retrievalMethod = RetrievalMethods.OnInterval;
+        clearAdapterData();
 
-        // Set the retrieval interval if not using the RetrievalMethod.
-        // Note, only required if RetrievalMethod is OnInterval, default is MinInterval
-        retrievalInterval = blueFire.MinInterval(); // or any interval you need
+        retrievalMethod = RetrievalMethods.OnChange; // do not use OnInterval with this many data requests
+        retrievalInterval = blueFire.MinInterval(); // should be MinInterval or greater with this many requests
+        int hoursInterval = 30 * Const.OneSecond; // hours only change every 3 minutes
 
-        // Request data from the adapter
-        // Note, be careful not to request too much data at one time otherwise you
-        // run the risk of filling up the CAN Filter buffer. You can experiement with
-        // combining data retrievals to determine how much you can request before filling
-        // the CAN Filter buffer (you get an error if you do).
+        // Request data from the adapter.
+        // Note, be careful not to request too much data at one time otherwise you run the risk of filling up
+        // the CAN Filter buffer. You can experiment with combining data retrievals to determine how much you can
+        // request before filling the CAN Filter buffer (you get an error if you do).
+
         blueFire.GetEngineData1(retrievalMethod, retrievalInterval); // RPM, Percent Torque, Driver Torque, Torque Mode
         blueFire.GetEngineData2(retrievalMethod, retrievalInterval); // Percent Load, Accelerator Pedal Position
         blueFire.GetEngineData3(retrievalMethod, retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
         blueFire.GetOdometer(retrievalMethod, retrievalInterval); // Distance and Odometer
-        blueFire.GetEngineHours(retrievalMethod, retrievalInterval); // Total Engine Hours, Total Idle Hours
+        blueFire.GetEngineHours(retrievalMethod, hoursInterval); // Total Engine Hours, Total Idle Hours
         blueFire.GetBrakeData(retrievalMethod, retrievalInterval); // Application Pressure, Primary Pressure, Secondary Pressure
         blueFire.GetBatteryVoltage(retrievalMethod, retrievalInterval); // Battery Voltage
         blueFire.GetFuelData(retrievalMethod, retrievalInterval); // Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
         blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Intake Manifold Temperature
         blueFire.GetPressures(retrievalMethod, retrievalInterval); // Oil Pressure, Coolant Pressure, Intake Manifold(Boost) Pressure
         blueFire.GetCoolantLevel(retrievalMethod, retrievalInterval); // Coolant Level
-        blueFire.GetTransmissionGears(retrievalMethod, retrievalInterval); // Selected and Current Gears
+        blueFire.GetTransmissionGears(retrievalMethod, retrievalInterval); // Selected and Current Gears (not available in J1708)
+
+        testStarted = true;
     }
 
     private void checkKeyState()
@@ -1272,8 +1298,9 @@ public class Main extends Activity
 
     private void clearAdapterData()
     {
-        isRetrievingTruckInfo = false;
-        isRetrievingEngineInfo = false;
+        testStarted = false;
+
+        IsRetrievingVINID = false;
         isRetrievingFaults = false;
 
         blueFire.StopDataRetrieval();
@@ -1292,19 +1319,10 @@ public class Main extends Activity
         buttonNextFault.setVisibility(View.INVISIBLE);
         buttonResetFault.setVisibility(View.INVISIBLE);
 
-        int nofRetrys;
-        int retryCount;
-        String retryCountText = "";
-
-        int syncTimeout;
-        boolean retrievedVINTruckInfo;
-
         // Set the retrieval method and interval.
         // Note, this is here for demo-ing the different methods.
-        //retrievalMethod = RetrievalMethods.OnChange; // default
-        //retrievalMethod = RetrievalMethods.Synchronized;
-        retrievalMethod = RetrievalMethods.OnChange;
-        retrievalInterval = 1000; // only required if RetrievalMethod is OnInterval, default is MinInterval (500 ms)
+        retrievalMethod = RetrievalMethods.OnChange; // default
+        retrievalInterval = blueFire.MinInterval(); // default, only required if RetrievalMethod is OnInterval
 
         switch (groupNo)
         {
@@ -1407,6 +1425,9 @@ public class Main extends Activity
                 textView6.setText("Cruise Speed");
                 textView7.setText("Max Speed");
 
+                if (isTesting && !testStarted)
+                    StartTest(); // restart testing
+
                 if (!isTesting)
                 {
                     clearAdapterData();
@@ -1420,55 +1441,25 @@ public class Main extends Activity
                 textView3.setText("Model");
                 textView4.setText("Serial No");
                 textView5.setText("Unit No");
-                textView6.setText("Retries");
-                textView7.setText("Retrieving VIN ...");
+                textView6.setText("");
+                textView7.setText("");
 
-                if (!isRetrievingEngineInfo)
+                if (!IsRetrievingVINID)
                 {
                     clearAdapterData();
 
-                    isRetrievingEngineInfo = true;
+                    IsRetrievingVINID = true;
 
-                    // Get the VIN synchronously
-                    retrievedVINTruckInfo = false;
-                    syncTimeout = 2 * Const.OneSecond; // override default of 1 second
-                    nofRetrys = 5; // set this to however long you want to wait
-                    retryCount = 0;
+                    retrievalInterval = 5 * Const.OneSecond;
 
-                    while (!retrievedVINTruckInfo && retryCount < nofRetrys)
-                    {
-                        retrievedVINTruckInfo = blueFire.GetEngineVIN(RetrievalMethods.Synchronized, syncTimeout); // this will block
-                        retryCount++;
-                    }
-                    retryCountText = "VIN=" + retryCount;
+                    // Get the Engine VIN and Component Id asynchronously
+                    blueFire.GetEngineVIN(RetrievalMethods.OnInterval, retrievalInterval);
+                    blueFire.GetEngineId(RetrievalMethods.OnInterval, retrievalInterval);
 
-                    // Get Make, Model, Serial No synchronously
-                    textView7.setText("Retrieving Engine Info ...");
-
-                    retrievedVINTruckInfo = false;
-                    syncTimeout = 3 * Const.OneSecond; // override default of 1 second
-                    nofRetrys = 3; // set this to however long you want to wait
-                    retryCount = 0;
-
-                    while (!retrievedVINTruckInfo && retryCount < nofRetrys)
-                    {
-                        retrievedVINTruckInfo = blueFire.GetEngineId(RetrievalMethods.Synchronized, syncTimeout); // this will block
-                        retryCount++;
-                    }
-                    retryCountText += ", Info=" + retryCount;
-
-                    if (isTesting)
-                        StartTest();
+                    // Get the Truck VIN and Component Id asynchronously
+                    blueFire.GetTruckVIN(RetrievalMethods.OnInterval, retrievalInterval);
+                    blueFire.GetTruckId(RetrievalMethods.OnInterval, retrievalInterval);
                 }
-                textView7.setText("");
-
-                dataView1.setText(Truck.EngineVIN);
-                dataView2.setText(Truck.Make);
-                dataView3.setText(Truck.Model);
-                dataView4.setText(Truck.SerialNo);
-                dataView5.setText(Truck.UnitNo);
-                dataView6.setText(retryCountText);
-                dataView7.setText("");
 
                 break;
 
@@ -1479,28 +1470,7 @@ public class Main extends Activity
                 textView4.setText("Serial No");
                 textView5.setText("Unit No");
                 textView6.setText("");
-                textView7.setText("Retrieving Data ...");
-
-                if (!isRetrievingTruckInfo)
-                {
-                    clearAdapterData();
-
-                    isRetrievingTruckInfo = true;
-
-                    retrievalInterval = 3 * Const.OneSecond;
-
-                    // Get the VIN asynchronously.
-                    // Note, the truck component id can come from various sources according to which one the OEM chose.
-                    // For example, Kenworth and Peterbilt use the Cab source while Freightliner use the Instruments source.
-                    blueFire.GetVIN(J1939.Sources.Cab, J1587.MIDs.Body, RetrievalMethods.OnInterval, retrievalInterval);
-                    blueFire.GetVIN(J1939.Sources.Body, J1587.MIDs.Body, RetrievalMethods.OnInterval, retrievalInterval);
-                    blueFire.GetVIN(J1939.Sources.Instruments, J1587.MIDs.Body, RetrievalMethods.OnInterval, retrievalInterval);
-
-                    // Get the Truck Component Id asynchronously
-                    blueFire.GetComponentId(J1939.Sources.Cab, J1587.MIDs.Body, RetrievalMethods.OnInterval, retrievalInterval);
-                    blueFire.GetComponentId(J1939.Sources.Body, J1587.MIDs.Body, RetrievalMethods.OnInterval, retrievalInterval);
-                    blueFire.GetComponentId(J1939.Sources.Instruments, J1587.MIDs.Body, RetrievalMethods.OnInterval, retrievalInterval);
-                }
+                textView7.setText("");
 
                 break;
 
@@ -1513,10 +1483,10 @@ public class Main extends Activity
                 textView6.setText("");
                 textView7.setText("");
 
-                if (isTesting)
+                if (isTesting && !testStarted)
                     StartTest(); // restart testing
 
-                if (!isRetrievingFaults)
+                if (!isTesting && !isRetrievingFaults)
                 {
                     isRetrievingFaults = true;
 
@@ -1526,7 +1496,6 @@ public class Main extends Activity
                     blueFire.GetFaults(); // Engine Faults
                     //blueFire.GetFaults(11, 128); // Brakes Faults
                     //blueFire.GetFaults(90, 0); // Proprietary faults
-
                 }
 
                 break;
@@ -1539,7 +1508,7 @@ public class Main extends Activity
         {
             case 0:
                 dataView1.setText(formatInt(Truck.RPM));
-                dataView2.setText(formatFloat(Truck.Speed * Const.KphToMph,0));
+                dataView2.setText(formatFloat(Truck.Speed * Const.KphToMph,2));
                 dataView3.setText(formatFloat(Truck.AccelPedal,2));
                 dataView4.setText(formatInt(Truck.PctLoad));
                 dataView5.setText(formatInt(Truck.PctTorque));
@@ -1606,26 +1575,67 @@ public class Main extends Activity
 
                 break;
 
-            case 6: // data shown in getTruckData
+            case 6:
+                dataView1.setText(Truck.EngineVIN);
+                dataView2.setText(Truck.EngineMake);
+                dataView3.setText(Truck.EngineModel);
+                dataView4.setText(Truck.EngineSerialNo);
+                dataView5.setText(Truck.EngineUnitNo);
+                dataView6.setText("");
+
+                // Waiting on either VIN or ID
+                if (Truck.EngineVIN == Const.NA && Truck.EngineMake == Const.NA)
+                    textView7.setText("Retrieving Engine VIN ...");
+
+                // Waiting just for VIN
+                else if (Truck.EngineVIN == Const.NA)
+                    textView7.setText("Retrieving Engine VIN ...");
+
+                // Waiting just for ID
+                else if (Truck.EngineMake == Const.NA)
+                    textView7.setText("Retrieving Engine Id ...");
+
+                // Retrieved VIN and ID
+                else
+                    textView7.setText("");
+
+                // Stop retrieving the data when all have been retrieved.
+                // Note, because the VIN and ID are requested on interval, they should be stopped
+                // when all have been retrieved.
+                if (Truck.EngineVIN != Const.NA && Truck.EngineMake != Const.NA && Truck.VIN != Const.NA && Truck.Make != Const.NA)
+                    blueFire.StopDataRetrieval();
+
                 break;
 
             case 7:
-                // Wait for data to be retrieved
-                if (Truck.VIN != Const.NA && Truck.Make != Const.NA)
-                {
-                    textView7.setText("");
-                    blueFire.StopDataRetrieval(); // stop asynchronous retrieval
-                    if (isTesting)
-                        StartTest(); // restart testing
-                }
-
                 dataView1.setText(Truck.VIN);
                 dataView2.setText(Truck.Make);
                 dataView3.setText(Truck.Model);
                 dataView4.setText(Truck.SerialNo);
                 dataView5.setText(Truck.UnitNo);
                 dataView6.setText("");
-                dataView7.setText("");
+
+                // Waiting on either VIN or ID
+                if (Truck.VIN == Const.NA && Truck.Make == Const.NA)
+                    textView7.setText("Retrieving Truck VIN ...");
+
+                    // Waiting just for VIN
+                else if (Truck.VIN == Const.NA)
+                    textView7.setText("Retrieving Truck VIN ...");
+
+                    // Waiting just for ID
+                else if (Truck.Make == Const.NA)
+                    textView7.setText("Retrieving Truck Id ...");
+
+                    // Retrieved VIN and ID
+                else
+                    textView7.setText("");
+
+                // Stop retrieving the data when all have been retrieved.
+                // Note, because the VIN and ID are requested on interval, they should be stopped
+                // when all have been retrieved.
+                if (Truck.EngineVIN != Const.NA && Truck.EngineMake != Const.NA && Truck.VIN != Const.NA && Truck.Make != Const.NA)
+                    blueFire.StopDataRetrieval();
 
                 break;
 
@@ -1694,12 +1704,8 @@ public class Main extends Activity
             textStatus.setText(connectionState.toString());
         }
 
-        // Show any error message from the adapter
-        if (!blueFire.NotificationMessage().equals(""))
-        {
-            logNotifications(blueFire.NotificationMessage());
-            blueFire.ClearNotificationMessage();
-        }
+        // Show any error messages from the adapter
+        logAPINotifications();
     }
 
     // *********************************** ELD *******************************************
@@ -2390,16 +2396,9 @@ public class Main extends Activity
         return String.valueOf(bd.floatValue());
     }
 
-    private void showAPINotifications(String NotificationLocation, String NotificationMessage)
-    {
-        String Message = NotificationLocation + " - " + NotificationMessage;
-
-        logNotifications(Message);
-    }
-
     private void showSystemError()
     {
-        showMessage("System Error", "See System Log");
+        showMessage("System Error", logAPINotifications());
     }
 
     private void showMessage(String title, String message)
@@ -2410,12 +2409,62 @@ public class Main extends Activity
         alert.show();
     }
 
-    private void logNotifications(String Notification)
+    private String logAPINotifications()
     {
-        Log.d("BlueFire", Notification);
+        String Message = blueFire.NotificationMessage();
 
-        if (textNotifications != null)
-            textNotifications.setText(Notification);
+        if (!Message.equals(""))
+        {
+            if (!blueFire.NotificationLocation().equals(""))
+                Message = blueFire.NotificationLocation() + " - " + Message;
+
+            blueFire.ClearNotificationMessage();
+
+            logNotifications(Message, true);
+        }
+
+        String AdapterMessage = logAdapterMessages();
+        if (!AdapterMessage.equals(""))
+            Message += Const.CrLf + AdapterMessage;
+
+        return Message;
+    }
+
+    private String logAdapterMessages()
+    {
+        String Message = blueFire.Message();
+
+        if (!Message.equals(""))
+        {
+            blueFire.ClearMessages();
+
+            logNotifications(Message, true);
+        }
+        return Message;
+    }
+    private void logNotifications(String notification)
+    {
+        logNotifications(notification, false);
+    }
+
+    private void logNotifications(String notification, boolean showMessage)
+    {
+        Log.d("BlueFire", notification);
+
+        if (textNotifications == null)
+            return;
+
+        String Message;
+        if (showMessage)
+        {
+            Message = textNotifications.getText().toString().trim();
+            if (!Message.equals(""))
+                Message += Const.CrLf;
+
+            Message += notification;
+
+            textNotifications.setText(Message);
+        }
     }
 
     // BlueFire Event Handler
@@ -2432,13 +2481,13 @@ public class Main extends Activity
                 switch (blueFire.ConnectionState)
                 {
                     case NotConnected:
-                        if (isConnecting || isConnected)
+                        if (isConnecting || isConnected) // only show once
                             adapterNotConnected();
                         break;
 
                     case Connecting:
                         if (blueFire.IsReconnecting())
-                            if (!isConnecting)
+                            if (!isConnecting) // only show once
                                 adapterReconnecting();
                         break;
 
@@ -2455,7 +2504,7 @@ public class Main extends Activity
                         break;
 
                     case Authenticated:
-                        if (!isConnected)
+                        if (!isConnected) // only show once
                             adapterConnected();
                         break;
 
@@ -2468,22 +2517,21 @@ public class Main extends Activity
                         break;
 
                     case Disconnected:
-                        if (isConnecting || isConnected)
+                        if (isConnecting || isConnected) // only show once
                             adapterDisconnected();
                         break;
 
                     case Reconnecting:
-                        if (!isConnecting)
-                            adapterReconnecting();
+                        adapterReconnecting();
                         break;
 
                     case Reconnected:
-                        if (isConnecting)
+                        if (isConnecting) // only show once
                             adapterReconnected();
                         break;
 
                     case NotReconnected:
-                        if (isConnecting)
+                        if (isConnecting) // only show once
                             adapterNotReconnected();
                         break;
 
@@ -2492,8 +2540,11 @@ public class Main extends Activity
                         break;
 
                     case Notification:
-                        showAPINotifications(blueFire.NotificationLocation(), blueFire.NotificationMessage());
-                        blueFire.ClearMessages();
+                        logAPINotifications();
+                        break;
+
+                    case AdapterMessage:
+                        logAdapterMessages();
                         break;
 
                     case CANFilterFull:
@@ -2507,7 +2558,7 @@ public class Main extends Activity
                     case CommTimeout:
                     case ConnectTimeout:
                     case AdapterTimeout:
-                        if (isConnecting || isConnected)
+                        if (isConnecting || isConnected) // only show once
                         {
                             blueFire.Disconnect();
                             adapterNotConnected();
@@ -2516,12 +2567,12 @@ public class Main extends Activity
                         break;
 
                     case SystemError:
-                        if (isConnecting || isConnected)
+                        if (isConnecting || isConnected) // only show once
                         {
                             blueFire.Disconnect();
                             adapterNotConnected();
-                            showSystemError();
                         }
+                        showSystemError();
                         break;
 
                     case DataChanged:

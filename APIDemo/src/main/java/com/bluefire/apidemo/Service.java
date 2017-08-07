@@ -13,7 +13,6 @@ import com.bluefire.api.Const;
 import com.bluefire.api.RetrievalMethods;
 import com.bluefire.api.Truck;
 
-
 public class Service
 {
     private BlueFire blueFire;
@@ -28,6 +27,8 @@ public class Service
 
     private boolean isConnecting;
     private boolean isConnected;
+
+    private boolean IsRetrievingEngineVIN;
 
     private RetrievalMethods retrievalMethod;
     private int retrievalInterval;
@@ -219,28 +220,27 @@ public class Service
         // Clear previous data from the CAN Filter
         blueFire.StopDataRetrieval();
 
-        // Set the retrieval method and interval.
-        // Note, this is here for demo-ing the different methods.
-        //retrievalMethod = RetrievalMethods.OnChange; // default
-        //retrievalMethod = RetrievalMethods.Synchronized;
-        retrievalMethod = RetrievalMethods.OnInterval;
+        if (Truck.EngineVIN == Const.NA)
+        {
+            IsRetrievingEngineVIN = true;
+            blueFire.GetEngineVIN();
+        }
 
-        // Set the retrieval interval if not using the RetrievalMethod.
-        // Note, only required if RetrievalMethod is OnInterval, default is MinInterval
-        //retrievalInterval = blueFire.MinInterval(); // or any interval you need
+        retrievalMethod = RetrievalMethods.OnChange; // do not use OnInterval with this many data requests
+        retrievalInterval = blueFire.MinInterval(); // should be MinInterval or greater with this many requests
+        int hoursInterval = 30 * Const.OneSecond; // hours only change every 3 minutes
 
-        // Request data from the adapter
-        // Note, be careful not to request too much data at one time otherwise you
-        // run the risk of filling up the CAN Filter buffer. You can experiement with
-        // combining data retrievals to determine how much you can request before filling
-        // the CAN Filter buffer (you get an error if you do).
+        // Request data from the adapter.
+        // Note, be careful not to request too much data at one time otherwise you run the risk of filling up
+        // the CAN Filter buffer. You can experiment with combining data retrievals to determine how much you can
+        // request before filling the CAN Filter buffer (you get an error if you do).
+
         blueFire.GetEngineData1(retrievalMethod, retrievalInterval); // RPM, Percent Torque, Driver Torque, Torque Mode
         blueFire.GetEngineData2(retrievalMethod, retrievalInterval); // Percent Load, Accelerator Pedal Position
         blueFire.GetEngineData3(retrievalMethod, retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
         blueFire.GetOdometer(retrievalMethod, retrievalInterval); // Distance and Odometer
-        blueFire.GetEngineHours(retrievalMethod, retrievalInterval); // Total Engine Hours, Total Idle Hours
+        blueFire.GetEngineHours(retrievalMethod, hoursInterval); // Total Engine Hours, Total Idle Hours
         blueFire.GetBrakeData(retrievalMethod, retrievalInterval); // Application Pressure, Primary Pressure, Secondary Pressure
-        //blueFire.GetTransmissionGears(retrievalMethod, retrievalInterval); // Selected and Current Gears
         blueFire.GetBatteryVoltage(retrievalMethod, retrievalInterval); // Battery Voltage
         blueFire.GetFuelData(retrievalMethod, retrievalInterval); // Fuel Levels, Fuel Used, Idle Fuel Used, Fuel Rate, Instant Fuel Economy, Avg Fuel Economy, Throttle Position
         blueFire.GetTemps(retrievalMethod, retrievalInterval); // Oil Temp, Coolant Temp, Intake Manifold Temperature
@@ -255,6 +255,13 @@ public class Service
         // Check the data you requested to see which one changed that triggered the DataAvailable
         // event. If you're not concerned with data throughput for processing the data, you can just
         // process all the data whether it changed or not.
+
+        if (IsRetrievingEngineVIN && Truck.EngineVIN != Const.NA)
+        {
+            IsRetrievingEngineVIN = false;
+            blueFire.StopRetrievingEngineVIN();
+            logNotifications("Engine VIN=" + Truck.EngineVIN);
+        }
 
         if (TimeToWrite > 50)
         {
@@ -311,12 +318,13 @@ public class Service
 
     private void adapterReconnecting()
     {
+        if (!isConnecting)
+            logNotifications("App lost connection to the Adapter. Reason is " + blueFire.ReconnectReason() + ".");
+
         logNotifications("Adapter re-connecting.");
 
         isConnected = false;
         isConnecting = true;
-
-        logNotifications("App reconnecting to the Adapter. Reason is " + blueFire.ReconnectReason() + ".");
     }
 
     private void adapterReconnected()
@@ -353,13 +361,13 @@ public class Service
                 switch (blueFire.ConnectionState)
                 {
                     case NotConnected:
-                        if (isConnecting || isConnected)
+                        if (isConnecting || isConnected) // only show once
                             adapterNotConnected();
                         break;
 
                     case Connecting:
                         if (blueFire.IsReconnecting())
-                            if (!isConnecting)
+                            if (!isConnecting) // only show once
                                 adapterReconnecting();
                         break;
 
@@ -376,7 +384,7 @@ public class Service
                         break;
 
                     case Authenticated:
-                        if (!isConnected)
+                        if (!isConnected) // only show once
                             adapterConnected();
                         break;
 
@@ -389,22 +397,21 @@ public class Service
                         break;
 
                     case Disconnected:
-                        if (isConnecting || isConnected)
+                        if (isConnecting || isConnected) // only show once
                             adapterDisconnected();
                         break;
 
                     case Reconnecting:
-                        if (!isConnecting)
-                            adapterReconnecting();
+                        adapterReconnecting();
                         break;
 
                     case Reconnected:
-                        if (isConnecting)
+                        if (isConnecting)// only show once
                             adapterReconnected();
                         break;
 
                     case NotReconnected:
-                        if (isConnecting)
+                        if (isConnecting)// only show once
                             adapterNotReconnected();
                         break;
 
@@ -413,8 +420,11 @@ public class Service
                         break;
 
                     case Notification:
-                        logNotifications(blueFire.NotificationLocation() + " - " + blueFire.NotificationMessage());
-                        blueFire.ClearMessages();
+                        logAPINotifications();
+                        break;
+
+                    case AdapterMessage:
+                        logAdapterMessages();
                         break;
 
                     case CANFilterFull:
@@ -428,7 +438,7 @@ public class Service
                     case CommTimeout:
                     case ConnectTimeout:
                     case AdapterTimeout:
-                        if (isConnecting || isConnected)
+                        if (isConnecting || isConnected) // only show once
                         {
                             blueFire.Disconnect();
                             adapterNotConnected();
@@ -437,7 +447,7 @@ public class Service
                         break;
 
                     case SystemError:
-                        if (isConnecting || isConnected)
+                        if (isConnecting || isConnected) // only show once
                         {
                             blueFire.Disconnect();
                             adapterNotConnected();
@@ -474,12 +484,48 @@ public class Service
 
     private void logSystemError()
     {
-        logNotifications("System Error.");
+        logNotifications("System Error");
+
+        logAPINotifications();
     }
 
-    private void logNotifications(String Notification)
+    private String logAPINotifications()
     {
-        Log.d("BlueFire", Notification);
+        String Message = blueFire.NotificationMessage();
+
+        if (!Message.equals(""))
+        {
+            if (!blueFire.NotificationLocation().equals(""))
+                Message = blueFire.NotificationLocation() + " - " + Message;
+
+            blueFire.ClearNotificationMessage();
+
+            logNotifications(Message);
+        }
+
+        String AdapterMessage = logAdapterMessages();
+        if (!AdapterMessage.equals(""))
+            Message += Const.CrLf + AdapterMessage;
+
+        return Message;
+    }
+
+    private String logAdapterMessages()
+    {
+        String Message = blueFire.Message();
+
+        if (!Message.equals(""))
+        {
+            blueFire.ClearMessages();
+
+            logNotifications(Message);
+        }
+        return Message;
+    }
+
+    private void logNotifications(String notification)
+    {
+        Log.d("BlueFire", notification);
     }
 
 }
