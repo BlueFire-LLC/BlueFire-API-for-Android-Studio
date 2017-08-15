@@ -317,6 +317,7 @@ Version 23.4:<ul>
 	<li>Critical patch to fix BLE connection issues.
 	<li>Fixed J1939 ELD VIN characters being truncated from a 17 character VIN.
 	<li>Better re-connection when the adapter reboots.
+	<li>Added property HardwareType with values HardwareTypes.HW_1_1 (old adapter), HW_6_Pin, and HW_9_Pin.
 	<li>Renamed PerformanceMode to IsPerformanceModeOn.
 	<li>Renamed SetPerformanceMode to SetPerformanceModeOn.
 	<li>Added PerformanceInterval and SetPerformanceInterval.
