@@ -1,4 +1,3 @@
-//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.Manifest;
@@ -164,6 +163,8 @@ public class Main extends Activity
 
     private ConnectAdapterThread connectThread;
 
+    private GetTruckInfoThread getTruckInfoThread;
+
     private boolean isKeyOn;
 
     private boolean secureAdapter = false;
@@ -266,7 +267,7 @@ public class Main extends Activity
         appUseBT21 = settings.getBoolean("UseBT21", false);
         appIgnoreJ1939 = settings.getBoolean("IgnoreJ1939", false);
         appIgnoreJ1708 = settings.getBoolean("IgnoreJ1708", true);
-        appPerformanceMode = settings.getBoolean("PerformanceMode", false);
+        appPerformanceMode = settings.getBoolean("IsPerformanceModeOn", false);
         appSecureAdapter = settings.getBoolean("SecureAdapter", false);
         appConnectToLastAdapter = settings.getBoolean("ConnectToLastAdapter", false);
         appAdapterId = settings.getString("_AdapterId", "");
@@ -303,7 +304,7 @@ public class Main extends Activity
         settingsSave.putBoolean("UseBT21", appUseBT21);
         settingsSave.putBoolean("IgnoreJ1939", appIgnoreJ1939);
         settingsSave.putBoolean("IgnoreJ1708", appIgnoreJ1708);
-        settingsSave.putBoolean("PerformanceMode", appPerformanceMode);
+        settingsSave.putBoolean("IsPerformanceModeOn", appPerformanceMode);
         settingsSave.putBoolean("SecureAdapter", appSecureAdapter);
         settingsSave.putBoolean("ConnectToLastAdapter", appConnectToLastAdapter);
         settingsSave.putString("_AdapterId", appAdapterId);
@@ -756,6 +757,7 @@ public class Main extends Activity
             // to disconnect.
             boolean WaitForDisconnect = false;
             blueFire.Disconnect(WaitForDisconnect);
+
         } catch (Exception e)
         {
         }
@@ -838,7 +840,7 @@ public class Main extends Activity
         blueFire.SetLedBrightness(appLedBrightness);
 
         // Set the performance mode
-        blueFire.SetPerformanceMode(appPerformanceMode);
+        blueFire.SetPerformanceModeOn(appPerformanceMode);
 
         // Get adapter data
         blueFire.GetMessages();
@@ -1245,8 +1247,8 @@ public class Main extends Activity
         if (appLedBrightness != blueFire.LedBrightness())
             blueFire.SetLedBrightness(appLedBrightness);
 
-        if (appPerformanceMode != blueFire.PerformanceMode())
-            blueFire.SetPerformanceMode(appPerformanceMode);
+        if (appPerformanceMode != blueFire.IsPerformanceModeOn())
+            blueFire.SetPerformanceModeOn(appPerformanceMode);
 
         // Check if adapter overrode user input
         if (!appIgnoreJ1939 != blueFire.IgnoreJ1939())
@@ -1304,6 +1306,51 @@ public class Main extends Activity
         isRetrievingFaults = false;
 
         blueFire.StopDataRetrieval();
+    }
+
+    private class GetTruckInfoThread extends Thread
+    {
+        public void run()
+        {
+            // Get the Engine VIN and Component Id
+            final int nofRetries = 3;
+
+            int retries = nofRetries;
+            while (retries > 0)
+            {
+                blueFire.GetEngineVIN(RetrievalMethods.Synchronized);
+                if (Truck.EngineVIN != Const.NA)
+                    break;
+                retries--;
+            }
+
+            retries = nofRetries;
+            while (retries > 0)
+            {
+                blueFire.GetEngineId(RetrievalMethods.Synchronized);
+                if (Truck.EngineMake != Const.NA)
+                    break;
+                retries--;
+            }
+
+            retries = nofRetries;
+            while (retries > 0)
+            {
+                blueFire.GetTruckVIN(RetrievalMethods.Synchronized);
+                if (Truck.VIN != Const.NA)
+                    break;
+                retries--;
+            }
+
+            retries = nofRetries;
+            while (retries > 0)
+            {
+                blueFire.GetTruckId(RetrievalMethods.Synchronized);
+                if (Truck.Make != Const.NA)
+                    break;
+                retries--;
+            }
+        }
     }
 
     private void getTruckData()
@@ -1450,15 +1497,8 @@ public class Main extends Activity
 
                     IsRetrievingVINID = true;
 
-                    retrievalInterval = 5 * Const.OneSecond;
-
-                    // Get the Engine VIN and Component Id asynchronously
-                    blueFire.GetEngineVIN(RetrievalMethods.OnInterval, retrievalInterval);
-                    blueFire.GetEngineId(RetrievalMethods.OnInterval, retrievalInterval);
-
-                    // Get the Truck VIN and Component Id asynchronously
-                    blueFire.GetTruckVIN(RetrievalMethods.OnInterval, retrievalInterval);
-                    blueFire.GetTruckId(RetrievalMethods.OnInterval, retrievalInterval);
+                    getTruckInfoThread = new GetTruckInfoThread();
+                    getTruckInfoThread.start();
                 }
 
                 break;
@@ -1602,6 +1642,11 @@ public class Main extends Activity
                 // Stop retrieving the data when all have been retrieved.
                 // Note, because the VIN and ID are requested on interval, they should be stopped
                 // when all have been retrieved.
+                if (Truck.EngineVIN != Const.NA)
+                    blueFire.StopRetrievingEngineVIN();
+                if (Truck.EngineMake != Const.NA )
+                    blueFire.StopRetrievingEngineId();
+
                 if (Truck.EngineVIN != Const.NA && Truck.EngineMake != Const.NA && Truck.VIN != Const.NA && Truck.Make != Const.NA)
                     blueFire.StopDataRetrieval();
 
@@ -1634,8 +1679,10 @@ public class Main extends Activity
                 // Stop retrieving the data when all have been retrieved.
                 // Note, because the VIN and ID are requested on interval, they should be stopped
                 // when all have been retrieved.
-                if (Truck.EngineVIN != Const.NA && Truck.EngineMake != Const.NA && Truck.VIN != Const.NA && Truck.Make != Const.NA)
-                    blueFire.StopDataRetrieval();
+                if (Truck.VIN != Const.NA)
+                    blueFire.StopRetrievingTruckVIN();
+                if (Truck.Make != Const.NA )
+                    blueFire.StopRetrievingTruckId();
 
                 break;
 
@@ -1864,6 +1911,9 @@ public class Main extends Activity
 
     private void showELDPage()
     {
+        if (blueFire.ELD.IsStarted())
+            return;
+
         // Refresh adapter ELD parameters
         getELDParms();
 

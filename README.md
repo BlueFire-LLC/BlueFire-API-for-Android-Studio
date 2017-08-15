@@ -312,3 +312,14 @@ Version 23.3:<ul>
 	<li>Improved API and Adapter error reporting.
 	<li>Updated the Demo app and Service to demonstrate the above changes.
 </ul>
+
+Version 23.4:<ul>
+	<li>Critical patch to fix BLE connection issues.
+	<li>Fixed J1939 ELD VIN characters being truncated from a 17 character VIN.
+	<li>Renamed PerformanceMode to IsPerformanceModeOn.
+	<li>Renamed SetPerformanceMode to SetPerformanceModeOn.
+	<li>Added PerformanceInterval and SetPerformanceInterval.
+	<li>Removed the ELD Waiting RecordId as it is no longer sent by the adapter.
+	<li>Added getTruckInfoThread to Demo app.
+	<li>Disconnecting the adapter no longer stops ELD recording.
+</ul>

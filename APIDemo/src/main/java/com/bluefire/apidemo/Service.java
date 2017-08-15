@@ -1,4 +1,3 @@
-//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.annotation.SuppressLint;
@@ -214,7 +213,6 @@ public class Service
         // Start retrieving truck data
         getTruckData();
     }
-
     private void getTruckData()
     {
         // Clear previous data from the CAN Filter
