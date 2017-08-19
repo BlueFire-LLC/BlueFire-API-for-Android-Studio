@@ -1128,7 +1128,7 @@
                     android:layout_below="@+id/textRemaining"
                     android:background="@android:color/darker_gray"/>
 
-                <!--  Data 1  -->
+                <!--  Record No  -->
                 <TextView
                     android:id="@+id/labelRecordNo"
                     android:layout_width="wrap_content"
@@ -1147,7 +1147,7 @@
                     android:layout_marginLeft="130dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 2  -->
+                <!--  Record Id  -->
                 <TextView
                     android:id="@+id/labelRecordId"
                     android:layout_width="wrap_content"
@@ -1167,33 +1167,53 @@
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 3  -->
+                <!--  UTC Time  -->
                 <TextView
-                    android:id="@+id/labelTime"
+                    android:id="@+id/labelTimeUTC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin11"
                     android:layout_below="@+id/labelRecordId"
                     android:layout_marginTop="3dp"
-                    android:text="Time"
+                    android:text="UTC Time"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/textTime"
+                    android:id="@+id/textTimeUTC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/labelTime"
-                    android:layout_alignBottom="@+id/labelTime"
+                    android:layout_alignBaseline="@+id/labelTimeUTC"
+                    android:layout_alignBottom="@+id/labelTimeUTC"
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 4  -->
+                <!--  Local Time -->
+                <TextView
+                    android:id="@+id/labelTimeLocal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin11"
+                    android:layout_below="@+id/labelTimeUTC"
+                    android:layout_marginTop="3dp"
+                    android:text="Local Time"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textTimeLocal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelTimeLocal"
+                    android:layout_alignBottom="@+id/labelTimeLocal"
+                    android:layout_alignLeft="@+id/textRecordNo"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  VIN  -->
                 <TextView
                     android:id="@+id/labelVIN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin11"
-                    android:layout_below="@+id/labelTime"
+                    android:layout_below="@+id/labelTimeLocal"
                     android:layout_marginTop="3dp"
                     android:text="VIN"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -1207,7 +1227,7 @@
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 5  -->
+                <!--  Distance  -->
                 <TextView
                     android:id="@+id/labelDistance"
                     android:layout_width="wrap_content"
@@ -1227,7 +1247,7 @@
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 6  -->
+                <!--  Odometer  -->
                 <TextView
                     android:id="@+id/labelOdometer"
                     android:layout_width="wrap_content"
@@ -1247,7 +1267,7 @@
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 7  -->
+                <!--  Total Hours  -->
                 <TextView
                     android:id="@+id/labelTotalHours"
                     android:layout_width="wrap_content"
@@ -1267,7 +1287,7 @@
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 8 -->
+                <!--  Idle Hours -->
                 <TextView
                     android:id="@+id/labelIdleHours"
                     android:layout_width="wrap_content"
@@ -1287,7 +1307,7 @@
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 9 -->
+                <!--  Total Fuel -->
                 <TextView
                     android:id="@+id/labelTotalFuel"
                     android:layout_width="wrap_content"
@@ -1307,7 +1327,7 @@
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 10 -->
+                <!--  Idle Fuel -->
                 <TextView
                     android:id="@+id/labelIdleFuel"
                     android:layout_width="wrap_content"
@@ -1327,7 +1347,7 @@
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 11 -->
+                <!--  Latitude -->
                 <TextView
                     android:id="@+id/labelLatitude"
                     android:layout_width="wrap_content"
@@ -1347,7 +1367,7 @@
                     android:layout_alignLeft="@+id/textRecordNo"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Data 12 -->
+                <!--  Longitude -->
                 <TextView
                     android:id="@+id/labelLongitude"
                     android:layout_width="wrap_content"

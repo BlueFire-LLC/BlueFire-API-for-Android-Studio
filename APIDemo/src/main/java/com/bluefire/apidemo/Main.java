@@ -1,3 +1,4 @@
+//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.Manifest;
@@ -33,7 +34,7 @@ import com.bluefire.api.Truck;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class Main extends Activity
 {
@@ -119,7 +120,8 @@ public class Main extends Activity
     private TextView textRemaining;
     private TextView textRecordNo;
     private TextView textRecordId;
-    private TextView textTime;
+    private TextView textTimeUTC;
+    private TextView textTimeLocal;
     private TextView labelVIN;
     private TextView textVIN;
     private TextView textDistance;
@@ -461,7 +463,8 @@ public class Main extends Activity
         textRemaining = (TextView) findViewById(R.id.textRemaining);
         textRecordNo = (TextView) findViewById(R.id.textRecordNo);
         textRecordId = (TextView) findViewById(R.id.textRecordId);
-        textTime = (TextView) findViewById(R.id.textTime);
+        textTimeUTC = (TextView) findViewById(R.id.textTimeUTC);
+        textTimeLocal = (TextView) findViewById(R.id.textTimeLocal);
         labelVIN = (TextView) findViewById(R.id.labelVIN);
         textVIN = (TextView) findViewById(R.id.textVIN);
         textDistance = (TextView) findViewById(R.id.textDistance);
@@ -2104,7 +2107,10 @@ public class Main extends Activity
 
         textRecordNo.setText(String.valueOf(RecordNo));
         textRecordId.setText(RecordId.toString());
-        textTime.setText(DateFormat.getDateTimeInstance().format(blueFire.ELD.Time()));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
+        textTimeUTC.setText(dateFormat.format(blueFire.ELD.Date()));
+        textTimeLocal.setText(dateFormat.format(blueFire.ELD.LocalDate()));
 
         if (RecordId == RecordIds.VIN)
         {
@@ -2167,7 +2173,8 @@ public class Main extends Activity
     {
         textRecordNo.setText("");
         textRecordId.setText("");
-        textTime.setText("");
+        textTimeUTC.setText("");
+        textTimeLocal.setText("");
         textVIN.setText("");
 
         textDistance.setText("");

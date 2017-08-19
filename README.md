@@ -325,3 +325,11 @@ Version 23.4:<ul>
 	<li>Added getTruckInfoThread to Demo app.
 	<li>Disconnecting the adapter in the Demo app no longer stops ELD recording.
 </ul>
+
+Version 23.5:<ul>
+	<li>The default interval for GetEngineVIN and GetTruckVIN is changed from 2 seconds to 3 seconds.
+	<li>The default interval for GetEngineId and GetTruckId is changed from 2 seconds to 5 seconds.
+	<li>ELD.Date returns the correct UTC date.
+	<li>Added ELD.LocalDate that returns the local date of the device the API is running on.
+	<li>Added ELD local date to the Demo app.
+</ul>
