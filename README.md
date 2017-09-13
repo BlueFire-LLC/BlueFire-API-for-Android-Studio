@@ -344,4 +344,6 @@ Version 23.6:<ul>
 	<li>The Demo App shows the heartbeat count when the ConnectionState 'Heartbeat' is raised.
 	<li>In the Demo App, showStatus{} is moved from the beginning to the end of the event handler.
 	<li>Added ConnectionState 'Heartbeat' to the Demo App's event handler.
+	<li>Enabled 'LED Brightness' and 'Connect to Last Adapter' in the Demo App so that it can be changed prior to connecting to the adapter.
+	<li>The ELD Upload and Delete buttons are enabled in the Demo App anytime there are ELD records no matter if ELD recording is occurring or not.
 </ul>
