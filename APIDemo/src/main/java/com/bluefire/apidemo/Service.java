@@ -12,6 +12,7 @@ import com.bluefire.api.Const;
 import com.bluefire.api.RetrievalMethods;
 import com.bluefire.api.Truck;
 
+
 public class Service
 {
     private BlueFire blueFire;
@@ -213,6 +214,7 @@ public class Service
         // Start retrieving truck data
         getTruckData();
     }
+
     private void getTruckData()
     {
         // Clear previous data from the CAN Filter
@@ -373,10 +375,6 @@ public class Service
                         // Status only
                         break;
 
-                    case Connected:
-                        // Status only
-                        break;
-
                     case AdapterConnected:
                         // Status only
                         break;
@@ -454,8 +452,7 @@ public class Service
                         break;
 
                     case DataChanged:
-                        if (isConnected)
-                            checkTruckData();
+                        checkTruckData();
                 }
 
             }

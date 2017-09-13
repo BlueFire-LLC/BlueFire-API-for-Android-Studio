@@ -1,4 +1,3 @@
-//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.Manifest;
@@ -756,9 +755,9 @@ public class Main extends Activity
             buttonStartService.setEnabled(false);
             buttonStopService.setEnabled(false);
 
-            // Note, with Firmware 3.11 there is no need to wait for the adapter
-            // to disconnect.
-            boolean WaitForDisconnect = false;
+            // Wait for the adapter to discnnect so that the Connect button
+            // is not displayed too prematurely.
+            boolean WaitForDisconnect = true;
             blueFire.Disconnect(WaitForDisconnect);
 
         } catch (Exception e)
@@ -1271,11 +1270,12 @@ public class Main extends Activity
             isSendingPGN = false; // only show sending data once
             textPGNData.setText(bytesToHexString(blueFire.PGNData.Data).toUpperCase()); //TODO Fix Hex
         }
-
-        // Show heartbeat
-        textHeartbeat.setText(String.valueOf(blueFire.HeartbeatCount()));
     }
 
+    private void showHeartbeat()
+    {
+        textHeartbeat.setText(String.valueOf(blueFire.HeartbeatCount()));
+    }
     private void startTruckData()
     {
         if (!blueFire.IsConnected())
@@ -1889,6 +1889,8 @@ public class Main extends Activity
         // Start the upload
         isUploading = true;
 
+        blueFire.ELD.StartUpload();
+
         blueFire.ELD.GetRecord(1);
     }
 
@@ -2407,7 +2409,10 @@ public class Main extends Activity
             // No more records, done uploading
         else
         {
+            // Stop the upload
             isUploading = false;
+
+            blueFire.ELD.StopUpload();
 
             // Enable buttons
             buttonStartELD.setEnabled(true);
@@ -2424,8 +2429,7 @@ public class Main extends Activity
     private void writeELDRecord()
     {
         // Do something with the record data
-        Log.d("Upload", String.valueOf(blueFire.ELD.RecordNo()));
-        Log.d("Upload", String.valueOf(blueFire.ELD.RecordId()));
+        Log.d("Upload", String.valueOf(blueFire.ELD.RecordNo()) + "," + String.valueOf(blueFire.ELD.RecordId()));
     }
 
     // *********************************** End ELD *******************************************
@@ -2533,8 +2537,6 @@ public class Main extends Activity
         {
             try
             {
-                showStatus();
-
                 switch (blueFire.ConnectionState)
                 {
                     case NotConnected:
@@ -2549,10 +2551,6 @@ public class Main extends Activity
                         break;
 
                     case Discovering:
-                        // Status only
-                        break;
-
-                    case Connected:
                         // Status only
                         break;
 
@@ -2633,9 +2631,15 @@ public class Main extends Activity
                         break;
 
                     case DataChanged:
-                        if (isConnected)
-                            showData();
+                        showData();
+                        break;
+
+                    case Heartbeat:
+                        showHeartbeat();
+                        return; // do not show heartbeat status
                 }
+
+                showStatus();
 
             }
             catch (Exception e) {}

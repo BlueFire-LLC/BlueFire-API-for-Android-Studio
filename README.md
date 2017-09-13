@@ -1,7 +1,7 @@
 # BlueFire-API-for-Android
 Android API for direct connection to the BlueFire J1939/J1708 Bluetooth Data Adapters.
 
-If you just want to download the .apk file for checking out the Demo app, you can find the .apk file at [this link.](https://github.com/BlueFire-LLC/BlueFire-API-for-Android-Eclipse/tree/master/bin)
+If you just want to download the .apk file for checking out the Demo App, you can find the .apk file at [this link.](https://github.com/BlueFire-LLC/BlueFire-API-for-Android-Eclipse/tree/master/bin)
 
 Version 1:<ul>
 	<li>Initial version.
@@ -41,7 +41,7 @@ Version 6:<ul>
 	<li>Added option to set the Interval on retrieving truck data (default is on change of data). This is useful when the data is coming in too fast (ie. RPM) and you want to slow it down.
 	<li>Added SendPGN method and PGNData property for sending non-API defined PGNs.
 	<li>Added sample code for SendPGN and MonitorPGN.
-	<li>Added commons-codec-1.10.jar to the project libs folder. This is only required for the API Demo app.
+	<li>Added commons-codec-1.10.jar to the project libs folder. This is only required for the API Demo App.
 	<li>Added a projects docs folder that contains the commons javadoc files. You must set the Javadoc Location project property to point to this folder.
 </ul>
 	
@@ -58,7 +58,7 @@ Version 8:<ul>
 	
 Version 9:<ul>
 	<li>Added additional exception handling.
-	<li>Added additional debug logging to the Demo app (Main).
+	<li>Added additional debug logging to the Demo App (Main).
 </ul>
 	
 Version 10:<ul>
@@ -76,7 +76,7 @@ Version 11:<ul>
 Version 12:<ul>
 	<li>Supports Adapter Firmwares 3.4+.
 	<li>Added User Name and Password authentication.
-	<li>Added updating adapter data (led brightness) while offline to the Demo app (Main).
+	<li>Added updating adapter data (led brightness) while offline to the Demo App (Main).
 </ul>
 	
 Version 13:<ul>
@@ -116,7 +116,7 @@ Version 19:<ul>
 	<li>Added properties IsUsingBLE, IsUsingBT21 that will be set according to the type of Bluetooth connected to. 
 	<li>Added property MinInterval that defaults to 500 ms for BLE adapters. 
 	<li>Supports the new 500K CAN adapter (green Deutsch connector). 
-	<li>Removed the Settings class from the Demo app.
+	<li>Removed the Settings class from the Demo App.
 	<li>No longer compatible with Adapter firmware 2.x.
 	<li>Requires Android 4+ for Bluetooth Classic adapter and 5+ for BLE adapter.
 	<li>Supports the Android Studio IDE.
@@ -151,7 +151,7 @@ Version 21.0:<ul>
     <li>Removed property IsFaultDataChanged.
     <li>Added Truck property IsJ1587Fault.
     <li>All methods take Source, PGN, and MID as integers.
-    <li>Demo app shows Fault source.
+    <li>Demo App shows Fault source.
 </ul>
 
 Version 22.0:<ul>
@@ -188,7 +188,7 @@ Version 22.4:<ul>
 	<li>Added getEngineVIN method.
 	<li>Added synchronization to Truck Data methods.
 	<li>Added retrievalMethod parameter to Truck Data methods.
-	<li>Demo app only retrieves truck data when navigating to the specific data page.
+	<li>Demo App only retrieves truck data when navigating to the specific data page.
 	<li>API documentation has been updated to reflect the above changes.
 </ul>
 	
@@ -215,14 +215,14 @@ Version 22.6:<ul>
 	<li>Requires Adapter Firmware Beta 3.10.8 for ELD functionality.
 	<li>Removed VIN from GetVehicleData method.
 	<li>Added Boolean return value to Truck Data methods for synchronized calls.
-	<li>Added synchronized VIN retrieval to Demo app.
+	<li>Added synchronized VIN retrieval to Demo App.
 	<li>ELD rules are sent to the Adapter from the API.
 	<li>The Adapter will reboot after ELD StopEngine if the API is not connected.
 </ul>
 	
 Version 22.7:<ul>
 	<li>Requires Adapter Firmware 3.10 for ELD functionality.
-	<li>Fixed issue with retrieving VIN and Vehicle Data in the Demo app.
+	<li>Fixed issue with retrieving VIN and Vehicle Data in the Demo App.
 </ul>	
 
 Version 22.8:<ul>
@@ -234,14 +234,14 @@ Version 22.9:<ul>
 	<li>Requires Adapter Firmware 3.11. Note, Firmware 3.10 is broken and should be updated to 3.11.
     <li>Compatable with Firmware 3.9 and below.
 	<li>API method GetEngineVIN automatically sets the sync timeout if RetrievalMethod Synchronized is specified. The default sync timeout is 2 seconds.
-	<li>The call to VIN retrieval SetSyncTimeout in the Demo app has been commented out to allow the API method to set the default.
-	<li>Faults have been moved to their own page in the Demo app in order to allow faults to be retrieved by themselves (recommended).
+	<li>The call to VIN retrieval SetSyncTimeout in the Demo App has been commented out to allow the API method to set the default.
+	<li>Faults have been moved to their own page in the Demo App in order to allow faults to be retrieved by themselves (recommended).
 	<li>VIN and Truck data (Component Id) retrieval have been improved. It is recommended to retrieve VIN and Truck data before retrieving any other data.
 </ul>
 
 Version 22.10:<ul>
 	<li>The API now disconnects properly from the Adapter while ELD is recording.
-    <li>The Demo app disconnectAdapter method WaitForDisconnect parameter is set to false for Adapter Firmware 3.11.
+    <li>The Demo App disconnectAdapter method WaitForDisconnect parameter is set to false for Adapter Firmware 3.11.
 </ul>
 
 Version 22.11:<ul>
@@ -257,12 +257,12 @@ Version 22.12:<ul>
     <li>Truck.Odometer will return -1 if the OEM distance is not available (e.g. Volvo trucks).
     <li>Truck.Distance and Truck.Odometer returns the hi-resolution value unless it is not available in which case it returns the lo-resolution value.
     <li>Note that hi-resolution distance is at a 1 second ECM refresh rate while lo-resolution is at a 100 ms ECM refresh rate.
-    <li>Modified the Demo app to reflect the above changes.
+    <li>Modified the Demo App to reflect the above changes.
 </ul>
 
 Version 22.13:<ul>
 	<li>Added a Service class that emulates using the API with an Android service.
-	<li>Added a Start and Stop Service buttons to the Demo app.
+	<li>Added a Start and Stop Service buttons to the Demo App.
 </ul>
 
 Version 23.0:<ul>
@@ -274,18 +274,18 @@ Version 23.0:<ul>
 	<li>Added a Notification ConnectionState that will return any API notifications.
 	<li>Added SetHeartbeatOn method that will turn the Adapter heartbeat on/off. Use with caution.
 	<li>Added SetNotificationsOn method that will turn Adapter notifications on/off.
-	<li>Change the Engine VIN/Id page in the Demo app to show using synchronous retrieval.
-	<li>Added a VIN/ComponentId page to the Demo app that shows using asynchronous retrieval.
-	<li>Added a Test All button to the Demo app that retrieves all the data at once to test loading the connection.
+	<li>Change the Engine VIN/Id page in the Demo App to show using synchronous retrieval.
+	<li>Added a VIN/ComponentId page to the Demo App that shows using asynchronous retrieval.
+	<li>Added a Test All button to the Demo App that retrieves all the data at once to test loading the connection.
 	<li>Improved connection reliability with beta Firmware 3.12.x.
 </ul>
 
 Version 23.1:<ul>
 	<li>Added property OptimizeDataRetrieval that optimizes retrieval of data when the same data is available from both J1939 and J1708 ECMs. Recommended.
-	<li>Added a J1708Restarting ConnectionState that will be raised if J1708 data retrieval is restarting (see Demo app). 
+	<li>Added a J1708Restarting ConnectionState that will be raised if J1708 data retrieval is restarting (see Demo App). 
 	<li>Not selecting a connection type (BLE or BT21) will auto connect properly.
-	<li>The Demo app re-retrieves data when the ConnectionState J1708Restarting is raised.
-	<li>The Demo app shows Key On/Off properly for J1708 vehicles.
+	<li>The Demo App re-retrieves data when the ConnectionState J1708Restarting is raised.
+	<li>The Demo App shows Key On/Off properly for J1708 vehicles.
 	<li>Better J1708 data retrieval with Firmware 3.12.
 	<li>No longer supports Android 4+ and Android 5+.
 	<li>Compatible with Android 7.1 devices that use Android 6 BLE firmware.
@@ -296,7 +296,7 @@ Version 23.2:<ul>
 	<li>Added retrieval of primary and secondary fuel gauge levels (Truck.PrimaryFuelLevel and SecondaryFuelLevel to GetFuelData.
 	<li>Changed property OptimizeDataRetrieval to OptimizeDataRetrieval() and SetOptimizeDataRetrieval(boolean value).
 	<li>Improved OptimizeDataRetrieval. Note, this update is required if using OptimizeDataRetrieval.
-	<li>The Demo app shows Key Off when disconnected (see checkKeyState and showConnectButton).
+	<li>The Demo App shows Key Off when disconnected (see checkKeyState and showConnectButton).
 	<li>Critical patch for retrieving Adapter settings (sleep mode, led brightness, ignore databuses, j1708 availability).
 </ul>
 
@@ -310,7 +310,7 @@ Version 23.3:<ul>
 	<li>Added AdapterMessage ConnectionState that will be raised when there is a message from the Adapter.
 	<li>Further improvements to J1708 data retrieval and connection stability.
 	<li>Improved API and Adapter error reporting.
-	<li>Updated the Demo app and Service to demonstrate the above changes.
+	<li>Updated the Demo App and Service to demonstrate the above changes.
 </ul>
 
 Version 23.4:<ul>
@@ -322,8 +322,8 @@ Version 23.4:<ul>
 	<li>Renamed SetPerformanceMode to SetPerformanceModeOn.
 	<li>Added PerformanceInterval and SetPerformanceInterval.
 	<li>Removed the ELD Waiting RecordId as it is no longer sent by the adapter.
-	<li>Added getTruckInfoThread to Demo app.
-	<li>Disconnecting the adapter in the Demo app no longer stops ELD recording.
+	<li>Added getTruckInfoThread to Demo App.
+	<li>Disconnecting the adapter in the Demo App no longer stops ELD recording.
 </ul>
 
 Version 23.5:<ul>
@@ -331,5 +331,17 @@ Version 23.5:<ul>
 	<li>The default interval for GetEngineId and GetTruckId is changed from 2 seconds to 5 seconds.
 	<li>ELD.Date returns the correct UTC date.
 	<li>Added ELD.LocalDate that returns the local date of the device the API is running on.
-	<li>Added ELD local date to the Demo app.
+	<li>Added ELD local date to the Demo App.
+</ul>
+
+Version 23.6:<ul>
+    <li>Added ELD.StartUpload and ELD.StopUpload methods that must be called prior to and after uploading ELD records. 
+	<li>Slightly faster connection if using SetConnectToLastAdapter especially in crowded Bluetooth areas.
+	<li>Added ConnectionState 'Heartbeat' that will be raised when a heartbeat is received from the adapter.
+	<li>ConnectionState 'DataChanged' is no longer raised when a heartbeat is received from the adapter. It is now only raised when actual data is received from the adapter.
+	<li>The Demo App sets WaitForDisconnect prior to disconnecting. This is highly recommended if re-connection is possible immediately after disconnecting.
+	<li>ConnectionState 'Connected' has been removed from the Demo App. This was confusing as it only appled to the Bluetooth connection and not the adapter connection.
+	<li>The Demo App shows the heartbeat count when the ConnectionState 'Heartbeat' is raised.
+	<li>In the Demo App, showStatus{} is moved from the beginning to the end of the event handler.
+	<li>Added ConnectionState 'Heartbeat' to the Demo App's event handler.
 </ul>
