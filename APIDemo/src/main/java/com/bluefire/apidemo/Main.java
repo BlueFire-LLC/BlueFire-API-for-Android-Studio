@@ -529,9 +529,7 @@ public class Main extends Activity
     private void enableAdapterParms(boolean isEnable)
     {
         // Enable/Disable Adapter page parameters
-        textLedBrightness.setEnabled(isEnable);
 
-        checkConnectLastAdapter.setEnabled(isEnable);
         checkSecureAdapter.setEnabled(isEnable);
         textUserName.setEnabled(isEnable);
         textPassword.setEnabled(isEnable);
@@ -547,6 +545,9 @@ public class Main extends Activity
         {
             if (isConnectButton)
             {
+                if (!EditLEDBrightness())
+                    return;
+
                 clearForm();
 
                 isConnecting = true;
@@ -828,6 +829,12 @@ public class Main extends Activity
         // Get the adapter id
         appAdapterId = blueFire.AdapterId();
 
+        // Set connect to last adapter
+        if (appConnectToLastAdapter)
+            blueFire.SetAdapterId(appAdapterId);
+        else
+            blueFire.SetAdapterId("");
+
         // Check for API setting the adapter data
         appUseBT21 = blueFire.UseBT21;
         appUseBLE = blueFire.UseBLE;
@@ -952,6 +959,26 @@ public class Main extends Activity
         }
     }
 
+    private boolean EditLEDBrightness()
+    {
+        // Edit LED Brightness
+        int ledBrightness = -1;
+        try
+        {
+            ledBrightness = Integer.parseInt(textLedBrightness.getText().toString().trim());
+        }
+        catch(Exception e){}
+
+        if (ledBrightness < 1 || ledBrightness > 100)
+        {
+            Toast.makeText(this, "Led Brightness must be between 1 and 100", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        appLedBrightness = ledBrightness;
+
+        return true;
+    }
     // Connect to Last Adapter Checkbox
     public void onConnectLastAdapterCheck(View view)
     {
@@ -1004,20 +1031,6 @@ public class Main extends Activity
     // Update Button
     public void onUpdateClick(View view)
     {
-        // Edit LED Brightness
-        int ledBrightness = -1;
-        try
-        {
-            ledBrightness = Integer.parseInt(textLedBrightness.getText().toString().trim());
-        }
-        catch(Exception e){}
-
-        if (ledBrightness < 1 || ledBrightness > 100)
-        {
-            Toast.makeText(this, "Led Brightness must be between 1 and 100", Toast.LENGTH_LONG).show();
-            return;
-        }
-
         // Edit User Name
         String userNameText = textUserName.getText().toString().trim();
         if (userNameText.length() > blueFire.MaxSecurityDataLength)
@@ -1032,16 +1045,6 @@ public class Main extends Activity
         {
             Toast.makeText(this, "Password cannot be greater than " + blueFire.MaxSecurityDataLength + " characters.", Toast.LENGTH_LONG).show();
             return;
-        }
-
-        // Check for a change of led brightness
-        if (ledBrightness != appLedBrightness)
-        {
-            appLedBrightness = ledBrightness;
-
-            blueFire.SetLedBrightness(appLedBrightness);
-
-            Toast.makeText(this, "LED brightness updated.", Toast.LENGTH_SHORT).show();
         }
 
         // Check for a change of security
@@ -1916,57 +1919,23 @@ public class Main extends Activity
 
     private void showELDPage()
     {
-        if (blueFire.ELD.IsStarted())
-            return;
-
-        // Refresh adapter ELD parameters
-        getELDParms();
-
-        // Clear and initialize ELD parameters
-        setELDParms();
-
-        // Enable ELD parameters
-        enableELDParms(true);
-
-        // Set start button
-        buttonStartELD.setEnabled(true);
-        buttonStartELD.setText("Start ELD");
-
-        // Disable upload and delete buttons
-        buttonUploadELD.setEnabled(false);
-        buttonDeleteELD.setEnabled(false);
+        // Initialize ELD parameters
+        if (!blueFire.ELD.IsStarted())
+        {
+            getELDParms();
+            setELDParms();
+        }
 
         // Show ELD memory
         showELDRemaining();
 
-        // Get current record
-        blueFire.ELD.GetRecord(blueFire.ELD.CurrentRecordNo());
+        // Set start button
+        buttonStartELD.setEnabled(true);
 
-        // Check for recording on the adapter while connect to the app
-        if (blueFire.ELD.IsRecordingConnected())
-        {
-            // Set start button text
-            if (blueFire.ELD.IsStarted())
-                buttonStartELD.setText("Stop ELD");
-        }
-        else // recording locally or adapter disconnected
-        {
-            // Stop any streaming
-            if (blueFire.ELD.IsStreaming())
-                blueFire.ELD.StopStreaming();
-
-            // Stop any recording
-            if (blueFire.ELD.IsStarted())
-                blueFire.ELD.StopRecording();
-
-            // Check for records from when the adapter was disconnected
-            if (blueFire.ELD.CurrentRecordNo() > 0)
-            {
-                buttonStartELD.setEnabled(false);
-                buttonUploadELD.setEnabled(true);
-                buttonDeleteELD.setEnabled(true);
-            }
-        }
+        if (blueFire.ELD.IsStarted())
+            buttonStartELD.setText("Stop ELD");
+        else
+            buttonStartELD.setText("Start ELD");
 
         // Check for third party securing access
         if (blueFire.ELD.IsAccessSecured())
@@ -1982,6 +1951,26 @@ public class Main extends Activity
             buttonUploadELD.setEnabled(false);
             buttonDeleteELD.setEnabled(false);
         }
+        else // open access
+        {
+            // Enable ELD parameters
+            enableELDParms(true);
+
+            // Check for any records to upload or delete
+            if (blueFire.ELD.CurrentRecordNo() > 0)
+            {
+                buttonUploadELD.setEnabled(true);
+                buttonDeleteELD.setEnabled(true);
+            }
+            else
+            {
+                buttonUploadELD.setEnabled(false);
+                buttonDeleteELD.setEnabled(false);
+            }
+        }
+
+        // Get current record
+        blueFire.ELD.GetRecord(blueFire.ELD.CurrentRecordNo());
     }
 
     private void startELD()
