@@ -260,13 +260,34 @@
                     android:onClick="onConnectLastAdapterCheck"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
+                <!--  Secure Device Checkbox  -->
+                <TextView
+                    android:id="@+id/labelSecureDevice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelConnectLastAdapter"
+                    android:text="Secure Device:"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/checkSecureDevice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelSecureDevice"
+                    android:layout_alignBottom="@+id/labelSecureDevice"
+                    android:layout_marginLeft="140dp"
+                    android:onClick="onSecureDeviceCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
                 <!--  Secure Adapter Checkbox  -->
                 <TextView
                     android:id="@+id/labelSecureAdapter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin"
-                    android:layout_below="@+id/labelConnectLastAdapter"
+                    android:layout_below="@+id/labelSecureDevice"
                     android:text="Secure Adapter:"
                     android:layout_marginTop="10dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />

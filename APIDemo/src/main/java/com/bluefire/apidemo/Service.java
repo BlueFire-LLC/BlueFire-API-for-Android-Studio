@@ -47,6 +47,7 @@ public class Service
     private int appMaxConnectAttempts;
     private int appMaxReconnectAttempts;
 
+    private String appDeviceId = "";
     private String appAdapterId = "";
     private boolean appConnectToLastAdapter;
 
@@ -155,8 +156,11 @@ public class Service
         blueFire.SetMaxConnectAttempts(appMaxConnectAttempts);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
 
-        // Set the Bluetooth adapter id and the 'connect to last adapter' setting
+        // Set the device and adapter ids
+        blueFire.SetDeviceId(appDeviceId);
         blueFire.SetAdapterId(appAdapterId);
+
+        // Set the connect to last adapter setting
         blueFire.SetConnectToLastAdapter(appConnectToLastAdapter);
 
         // Set to optimize data retrieval
@@ -206,6 +210,7 @@ public class Service
         blueFire.SetLedBrightness(appLedBrightness);
 
         // Get the adapter id
+        appDeviceId = blueFire.DeviceId();
         appAdapterId = blueFire.AdapterId();
 
         // Get any adapter messages

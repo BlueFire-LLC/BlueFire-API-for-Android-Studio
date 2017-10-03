@@ -58,6 +58,7 @@ public class Main extends Activity
     private CheckBox checkUseBLE;
     private CheckBox checkUseJ1939;
     private CheckBox checkUseJ1708;
+    private CheckBox checkSecureDevice;
     private CheckBox checkSecureAdapter;
     private CheckBox checkConnectLastAdapter;
 
@@ -168,6 +169,7 @@ public class Main extends Activity
 
     private boolean isKeyOn;
 
+    private boolean secureDevice = false;
     private boolean secureAdapter = false;
 
     private ConnectionStates connectionState = ConnectionStates.NotConnected;
@@ -194,12 +196,14 @@ public class Main extends Activity
     private boolean appIgnoreJ1939 = false;
     private boolean appIgnoreJ1708 = false;
 
+    private String appDeviceId = "";
     private String appAdapterId = "";
     private boolean appConnectToLastAdapter = false;
 
-    private boolean appSecureAdapter = false;
     private String appUserName = "";
     private String appPassword = "";
+    private boolean appSecureDevice = false;
+    private boolean appSecureAdapter = false;
 
     public int appDiscoveryTimeOut = 10 * Const.OneSecond;
     public int appMaxConnectAttempts = 10;
@@ -269,9 +273,11 @@ public class Main extends Activity
         appIgnoreJ1939 = settings.getBoolean("IgnoreJ1939", false);
         appIgnoreJ1708 = settings.getBoolean("IgnoreJ1708", true);
         appPerformanceMode = settings.getBoolean("IsPerformanceModeOn", false);
+        appSecureDevice = settings.getBoolean("SecureDevice", false);
         appSecureAdapter = settings.getBoolean("SecureAdapter", false);
         appConnectToLastAdapter = settings.getBoolean("ConnectToLastAdapter", false);
-        appAdapterId = settings.getString("_AdapterId", "");
+        appDeviceId = settings.getString("DeviceId", "");
+        appAdapterId = settings.getString("AdapterId", "");
         appUserName = settings.getString("UserName", "");
         appPassword = settings.getString("Password", "");
         appLedBrightness = settings.getInt("LedBrightness", 100);
@@ -306,9 +312,11 @@ public class Main extends Activity
         settingsSave.putBoolean("IgnoreJ1939", appIgnoreJ1939);
         settingsSave.putBoolean("IgnoreJ1708", appIgnoreJ1708);
         settingsSave.putBoolean("IsPerformanceModeOn", appPerformanceMode);
+        settingsSave.putBoolean("SecureDevice", appSecureDevice);
         settingsSave.putBoolean("SecureAdapter", appSecureAdapter);
         settingsSave.putBoolean("ConnectToLastAdapter", appConnectToLastAdapter);
-        settingsSave.putString("_AdapterId", appAdapterId);
+        settingsSave.putString("DeviceId", appDeviceId);
+        settingsSave.putString("AdapterId", appAdapterId);
         settingsSave.putString("UserName", appUserName);
         settingsSave.putString("Password", appPassword);
         settingsSave.putInt("LedBrightness", appLedBrightness);
@@ -363,12 +371,15 @@ public class Main extends Activity
         blueFire.SetMaxConnectAttempts(appMaxConnectAttempts);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
 
-        // Set the Bluetooth adapter id and the 'connect to last adapter' setting
+        // Set the device and adapter ids
+        blueFire.SetDeviceId(appDeviceId);
         blueFire.SetAdapterId(appAdapterId);
+
+        // Set the connect to last adapter setting
         blueFire.SetConnectToLastAdapter(appConnectToLastAdapter);
 
         // Set the adapter security parameters
-        blueFire.SetSecurity(appSecureAdapter, appUserName, appPassword);
+        blueFire.SetSecurity(appSecureDevice, appSecureAdapter, appUserName, appPassword);
 
         // Set to optimize data retrieval
         blueFire.SetOptimizeDataRetrieval(appOptimizeDataRetrieval);
@@ -401,6 +412,7 @@ public class Main extends Activity
         checkUseBLE = (CheckBox) findViewById(R.id.checkUseBLE);
         checkUseJ1939 = (CheckBox) findViewById(R.id.checkUseJ1939);
         checkUseJ1708 = (CheckBox) findViewById(R.id.checkUseJ1708);
+        checkSecureDevice = (CheckBox) findViewById(R.id.checkSecureDevice);
         checkSecureAdapter = (CheckBox) findViewById(R.id.checkSecureAdapter);
         checkConnectLastAdapter = (CheckBox) findViewById(R.id.checkConnectLastAdapter);
 
@@ -480,7 +492,6 @@ public class Main extends Activity
 
         showConnectButton();
 
-        buttonUpdate.setEnabled(false);
         buttonSendMonitor.setEnabled(false);
 
         buttonNextFault.setVisibility(View.INVISIBLE);
@@ -513,6 +524,7 @@ public class Main extends Activity
         checkUseBLE.setChecked(appUseBLE);
         checkUseJ1939.setChecked(!appIgnoreJ1939); // checkUseJ1939 is the opposite of ignoreJ1939
         checkUseJ1708.setChecked(!appIgnoreJ1708); // checkUseJ1708 is the opposite of ignoreJ1708
+        checkSecureDevice.setChecked(appSecureDevice);
         checkSecureAdapter.setChecked(appSecureAdapter);
         checkConnectLastAdapter.setChecked(appConnectToLastAdapter);
 
@@ -530,9 +542,8 @@ public class Main extends Activity
     {
         // Enable/Disable Adapter page parameters
 
+        checkSecureDevice.setEnabled(isEnable);
         checkSecureAdapter.setEnabled(isEnable);
-        textUserName.setEnabled(isEnable);
-        textPassword.setEnabled(isEnable);
 
         textPGN.setEnabled(isEnable);
         textPGNData.setEnabled(isEnable);
@@ -564,6 +575,8 @@ public class Main extends Activity
 
                 showDisconnectButton();
 
+                enableAdapterParms(false);
+
                 buttonUpdate.setEnabled(false);
                 buttonSendMonitor.setEnabled(false);
 
@@ -587,6 +600,8 @@ public class Main extends Activity
     {
         isStartingService = true;
 
+        enableAdapterParms(false);
+
         buttonStartService.setEnabled(false);
         buttonStopService.setEnabled(true);
 
@@ -608,6 +623,8 @@ public class Main extends Activity
             return;
 
         demoService.stopService();
+
+        enableAdapterParms(false);
 
         buttonStartService.setEnabled(true);
         buttonStopService.setEnabled(false);
@@ -742,6 +759,8 @@ public class Main extends Activity
     {
         try
         {
+            enableAdapterParms(false);
+
             buttonConnect.setEnabled(false);
             buttonUpdate.setEnabled(false);
             buttonSendMonitor.setEnabled(false);
@@ -756,7 +775,7 @@ public class Main extends Activity
             buttonStartService.setEnabled(false);
             buttonStopService.setEnabled(false);
 
-            // Wait for the adapter to discnnect so that the Connect button
+            // Wait for the adapter to disconnect so that the Connect button
             // is not displayed too prematurely.
             boolean WaitForDisconnect = true;
             blueFire.Disconnect(WaitForDisconnect);
@@ -826,14 +845,9 @@ public class Main extends Activity
         // Note, this should only be used during testing.
         blueFire.SetNotificationsOn(true);
 
-        // Get the adapter id
+        // Get the device and adapter ids
+        appDeviceId = blueFire.DeviceId();
         appAdapterId = blueFire.AdapterId();
-
-        // Set connect to last adapter
-        if (appConnectToLastAdapter)
-            blueFire.SetAdapterId(appAdapterId);
-        else
-            blueFire.SetAdapterId("");
 
         // Check for API setting the adapter data
         appUseBT21 = blueFire.UseBT21;
@@ -880,13 +894,15 @@ public class Main extends Activity
 
         showConnectButton();
 
+        enableAdapterParms(false);
+
         checkUseBT21.setEnabled(true);
         checkUseBLE.setEnabled(true);
 
         checkUseJ1939.setEnabled(true);
         checkUseJ1708.setEnabled(true);
 
-        buttonUpdate.setEnabled(false);
+        buttonUpdate.setEnabled(true);
         buttonSendMonitor.setEnabled(false);
 
         buttonConnect.requestFocus();
@@ -901,6 +917,8 @@ public class Main extends Activity
 
         isConnected = false;
         isConnecting = true;
+
+        enableAdapterParms(false);
 
         buttonConnect.setEnabled(false);
         buttonUpdate.setEnabled(false);
@@ -990,6 +1008,12 @@ public class Main extends Activity
             blueFire.SetAdapterId("");
     }
 
+    // Secure Device Checkbox
+    public void onSecureDeviceCheck(View view)
+    {
+        secureDevice = checkSecureDevice.isChecked();
+    }
+
     // Secure Adapter Checkbox
     public void onSecureAdapterCheck(View view)
     {
@@ -1031,30 +1055,19 @@ public class Main extends Activity
     // Update Button
     public void onUpdateClick(View view)
     {
-        // Edit User Name
+        // Get username and password
         String userNameText = textUserName.getText().toString().trim();
-        if (userNameText.length() > blueFire.MaxSecurityDataLength)
-        {
-            Toast.makeText(this, "User Name cannot be greater than " + blueFire.MaxSecurityDataLength + " characters.", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        // Edit Password
         String passwordText = textPassword.getText().toString().trim();
-        if (passwordText.length() > blueFire.MaxSecurityDataLength)
-        {
-            Toast.makeText(this, "Password cannot be greater than " + blueFire.MaxSecurityDataLength + " characters.", Toast.LENGTH_LONG).show();
-            return;
-        }
 
         // Check for a change of security
-        if (secureAdapter != appSecureAdapter || !appUserName.equals(userNameText) || !appPassword.equals(passwordText))
+        if (secureDevice != appSecureDevice || secureAdapter != appSecureAdapter || !appUserName.equals(userNameText) || !appPassword.equals(passwordText))
         {
+            appSecureDevice = secureDevice;
             appSecureAdapter = secureAdapter;
             appUserName = userNameText;
             appPassword = passwordText;
 
-            if (!blueFire.UpdateSecurity(appSecureAdapter, appUserName, appPassword))
+            if (!blueFire.UpdateSecurity(appSecureDevice, appSecureAdapter, appUserName, appPassword))
                 Toast.makeText(this, "Security parameters have not been updated.", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(this, "Security parameters have been updated.", Toast.LENGTH_SHORT).show();
@@ -1200,6 +1213,11 @@ public class Main extends Activity
         // the CAN Filter buffer. You can experiment with combining data retrievals to determine how much you can
         // request before filling the CAN Filter buffer (you get an error if you do).
 
+        // Start monitoring for faults.
+        // Note, this clears the CAN Filter so it must be before any other requests for data.
+        blueFire.GetFaults();
+
+        // Start monitoring all other truck data
         blueFire.GetEngineData1(retrievalMethod, retrievalInterval); // RPM, Percent Torque, Driver Torque, Torque Mode
         blueFire.GetEngineData2(retrievalMethod, retrievalInterval); // Percent Load, Accelerator Pedal Position
         blueFire.GetEngineData3(retrievalMethod, retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
@@ -2448,7 +2466,9 @@ public class Main extends Activity
 
     private void showSystemError()
     {
-        showMessage("System Error", logAPINotifications());
+        logAPINotifications();
+
+        showMessage("System Error", "See System Log for details.");
     }
 
     private void showMessage(String title, String message)

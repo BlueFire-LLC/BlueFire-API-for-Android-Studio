@@ -347,3 +347,17 @@ Version 23.6:<ul>
 	<li>Enabled 'LED Brightness' and 'Connect to Last Adapter' in the Demo App so that it can be changed prior to connecting to the adapter.
 	<li>The ELD Upload and Delete buttons are enabled in the Demo App anytime there are ELD records no matter if ELD recording is occurring or not.
 </ul>
+
+Version 23.7:<ul>
+    <li>Added Security setting Secure Device which secures the device (phone, tablet, etc) to an adapter. One device can be secured to many adapters (one to many relationship).
+    <li>Security setting Secure Adapter remains unchanged and secures the device to a single adapter and secures the adapter to the one device (one to one relationship).)
+    <li>Security setting UserName and Password secures the device to an adapter. A device can be secured to many adapters and many adapters can be secured to a device (many to many relationship).
+    <li>Security (UserName, Password, Adapter Id, Device Id) are all encrypted with AES encryption.
+    <li>Requires Adapter Firmware 3.14 for all security updates.
+    <li>Fixed Bluetooth Classic (BT21) reconnection issues.
+    <li>Fixed Bluetooth Classic 'Connect to Last Adapter' not working.
+    <li>The API will automatically reconnect when the IgnoreJ1939 or Ignore1708 are changed.
+    <li>With Firmware 3.14, ELD uploading with only 'Record while Disconnected' set will not perform any connected recording while uploading.
+    <li>Compatible with Adapter Firmware 3.13 and below. For Firmware 3.11 - 3.13 only Secure Adapter is available. For Firmware 3.9 and below, only UserName and Password security is available.
+    <li>Updated the Demo App to reflect the above changes.
+</ul>
