@@ -368,6 +368,10 @@ public class Main extends Activity
         // Note, if the mobile device does not connect, try setting this to a value that
         // allows for a consistent connection. If you're using multiple adapters and have
         // connection problems, un-pair all devices before connecting.
+        // Note: Bluetooth Classic (UseBT21) uses Com sockets and they can block for a
+        // considerably amount of time depending on the OEM device. It is therefore recommended
+        // that you adjust the MaxConnectAttempts, MaxReconnectAttempts, and the DiscoveryTimeout
+        // to compensate for this duration.
         blueFire.SetMaxConnectAttempts(appMaxConnectAttempts);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
 
@@ -920,7 +924,7 @@ public class Main extends Activity
 
         enableAdapterParms(false);
 
-        buttonConnect.setEnabled(false);
+        buttonConnect.setEnabled(true);
         buttonUpdate.setEnabled(false);
         buttonSendMonitor.setEnabled(false);
 

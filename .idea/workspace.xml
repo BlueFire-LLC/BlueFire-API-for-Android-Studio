@@ -10,42 +10,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab225881-d1f1-4fab-9884-60ce23a3ad49" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw600dp/dimens.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/bluefire_api_v22_0_unspecified.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.aar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/lint.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_22.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/lint.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/build.gradle" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/bluefire_api_v22_0_unspecified.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw600dp/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.aar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
     </list>
     <ignored path="BlueFire-API-for-Android-Studio.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,8 +80,8 @@
       <file leaf-file-name="Build_Instructions" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Build_Instructions">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="40" column="102" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
+            <state relative-caret-position="0">
+              <caret line="42" column="53" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -102,6 +102,17 @@
       </file>
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="505">
+                <caret line="347" column="41" selection-start-line="347" selection-start-column="41" selection-end-line="347" selection-end-column="41" />
+                <folding />
+              </first_editor>
+              <second_editor>
+                <js_state />
+              </second_editor>
+            </state>
+          </provider>
           <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="34">
@@ -109,17 +120,6 @@
                 <folding />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="607">
-                <caret line="353" column="194" selection-start-line="353" selection-start-column="81" selection-end-line="353" selection-end-column="194" />
-                <folding />
-              </first_editor>
-              <second_editor>
-                <js_state />
-              </second_editor>
             </state>
           </provider>
         </entry>
@@ -1640,7 +1640,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" value="6018190263291" />
+        <entry key="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" value="6018257350139" />
         <entry key="C:\Temp\BlueFire-API-for-Android-Studio" value="5966780210411" />
       </map>
     </option>
@@ -4091,9 +4091,9 @@
         <option value="$PROJECT_DIR$/Build_Instructions" />
         <option value="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
         <option value="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Service.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
       </list>
     </option>
   </component>
@@ -4128,6 +4128,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane />
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -4284,12 +4290,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView">
-        <subPane />
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -4303,18 +4303,18 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../API" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bluefire.apidemo" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\res\layout" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\java\com\bluefire\apidemo" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\libs" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.bluefire.apidemo" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.APIDemo">
@@ -5040,14 +5040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="277" column="0" selection-start-line="277" selection-start-column="0" selection-end-line="277" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml">
       <provider editor-type-id="android-manifest">
         <state />
@@ -5059,7 +5051,140 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="356" column="35" selection-start-line="356" selection-start-column="35" selection-end-line="356" selection-end-column="35" />
+          <folding>
+            <element signature="method#onCreate#0;class#Main#0" expanded="false" />
+            <element signature="e#7323#7360#0" expanded="false" />
+            <element signature="method#getSettings#0;class#Main#0" expanded="false" />
+            <element signature="e#8047#8078#0" expanded="false" />
+            <element signature="method#saveSettings#0;class#Main#0" expanded="false" />
+            <element signature="e#13032#13071#0" expanded="false" />
+            <element signature="method#initializeForm#0;class#Main#0" expanded="false" />
+            <element signature="method#clearForm#0;class#Main#0" expanded="false" />
+            <element signature="method#enableAdapterParms#0;class#Main#0" expanded="false" />
+            <element signature="method#onConnectClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onStartServiceClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onStopServiceClick#0;class#Main#0" expanded="false" />
+            <element signature="method#checkBluetoothPermissions#0;class#Main#0" expanded="false" />
+            <element signature="e#24913#24959#0" expanded="false" />
+            <element signature="method#onRequestPermissionsResult#0;class#Main#0" expanded="false" />
+            <element signature="e#25432#25470#0" expanded="false" />
+            <element signature="method#isLocationEnabled#0;class#Main#0" expanded="false" />
+            <element signature="method#startConnection#0;class#Main#0" expanded="false" />
+            <element signature="e#26668#26727#0" expanded="false" />
+            <element signature="method#StartService#0;class#Main#0" expanded="false" />
+            <element signature="class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
+            <element signature="method#run#0;class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
+            <element signature="e#27334#27360#0" expanded="false" />
+            <element signature="method#showConnectButton#0;class#Main#0" expanded="false" />
+            <element signature="method#showDisconnectButton#0;class#Main#0" expanded="false" />
+            <element signature="method#disconnectAdapter#0;class#Main#0" expanded="false" />
+            <element signature="e#28598#28662#0" expanded="false" />
+            <element signature="method#adapterConnected#0;class#Main#0" expanded="false" />
+            <element signature="method#j1708Restarting#0;class#Main#0" expanded="false" />
+            <element signature="e#30274#30323#0" expanded="false" />
+            <element signature="method#adapterNotAuthenticated#0;class#Main#0" expanded="false" />
+            <element signature="method#adapterDisconnected#0;class#Main#0" expanded="false" />
+            <element signature="method#adapterNotConnected#0;class#Main#0" expanded="false" />
+            <element signature="method#adapterReconnected#0;class#Main#0" expanded="false" />
+            <element signature="method#adapterNotReconnected#0;class#Main#0" expanded="false" />
+            <element signature="method#onUseBT21Check#0;class#Main#0" expanded="false" />
+            <element signature="method#onUseBLECheck#0;class#Main#0" expanded="false" />
+            <element signature="method#EditLEDBrightness#0;class#Main#0" expanded="false" />
+            <element signature="method#onConnectLastAdapterCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onUseJ1939Check#0;class#Main#0" expanded="false" />
+            <element signature="method#onUseJ1708Check#0;class#Main#0" expanded="false" />
+            <element signature="method#onUpdateClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onSendMonitorClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onNextGroupClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onPreviousGroupClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onTruckDataClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onTestClick#0;class#Main#0" expanded="false" />
+            <element signature="method#StartTest#0;class#Main#0" expanded="false" />
+            <element signature="e#39988#40021#0" expanded="false" />
+            <element signature="method#checkKeyState#0;class#Main#0" expanded="false" />
+            <element signature="method#showData#0;class#Main#0" expanded="false" />
+            <element signature="method#showHeartbeat#0;class#Main#0" expanded="false" />
+            <element signature="method#startTruckData#0;class#Main#0" expanded="false" />
+            <element signature="e#44233#44274#0" expanded="false" />
+            <element signature="method#stopTruckData#0;class#Main#0" expanded="false" />
+            <element signature="method#clearAdapterData#0;class#Main#0" expanded="false" />
+            <element signature="class#GetTruckInfoThread#0;class#Main#0" expanded="false" />
+            <element signature="method#run#0;class#GetTruckInfoThread#0;class#Main#0" expanded="false" />
+            <element signature="method#getTruckData#0;class#Main#0" expanded="false" />
+            <element signature="e#46588#46629#0" expanded="false" />
+            <element signature="e#47278#47326#0" expanded="false" />
+            <element signature="e#53838#53885#0" expanded="false" />
+            <element signature="method#showTruckData#0;class#Main#0" expanded="false" />
+            <element signature="e#58819#58876#0" expanded="false" />
+            <element signature="e#60372#60429#0" expanded="false" />
+            <element signature="method#showNextFault#0;class#Main#0" expanded="false" />
+            <element signature="method#showStatus#0;class#Main#0" expanded="false" />
+            <element signature="method#onELDDataClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onAlignELDCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onAlignIFTACheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onAlignStatsCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onSecureELDCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onStreamingELDCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onRecordingConnectedCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onRecordingDisconnectedCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onStartELDClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onUploadELDClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onDeleteELDClick#0;class#Main#0" expanded="false" />
+            <element signature="method#showELDPage#0;class#Main#0" expanded="false" />
+            <element signature="method#startELD#0;class#Main#0" expanded="false" />
+            <element signature="e#69729#69760#0" expanded="false" />
+            <element signature="method#stopELD#0;class#Main#0" expanded="false" />
+            <element signature="method#showELDData#0;class#Main#0" expanded="false" />
+            <element signature="method#showELDRecord#0;class#Main#0" expanded="false" />
+            <element signature="method#showELDRemaining#0;class#Main#0" expanded="false" />
+            <element signature="method#clearELDData#0;class#Main#0" expanded="false" />
+            <element signature="method#getELDParms#0;class#Main#0" expanded="false" />
+            <element signature="e#75671#75719#0" expanded="false" />
+            <element signature="method#setELDParms#0;class#Main#0" expanded="false" />
+            <element signature="method#SetStreamingText#0;class#Main#0" expanded="false" />
+            <element signature="method#editELDParms#0;class#Main#0" expanded="false" />
+            <element signature="method#enableELDParms#0;class#Main#0" expanded="false" />
+            <element signature="method#sendCustomELDRecord#0;class#Main#0" expanded="false" />
+            <element signature="method#editInterval#0;class#Main#0" expanded="false" />
+            <element signature="method#editELDInterval#0;class#Main#0" expanded="false" />
+            <element signature="method#editIFTAInterval#0;class#Main#0" expanded="false" />
+            <element signature="method#editStatsInterval#0;class#Main#0" expanded="false" />
+            <element signature="method#uploadELD#0;class#Main#0" expanded="false" />
+            <element signature="method#writeELDRecord#0;class#Main#0" expanded="false" />
+            <element signature="method#formatInt#0;class#Main#0" expanded="false" />
+            <element signature="method#formatFloat#0;class#Main#0" expanded="false" />
+            <element signature="method#formatDecimal#0;class#Main#0" expanded="false" />
+            <element signature="method#showSystemError#0;class#Main#0" expanded="false" />
+            <element signature="method#showMessage#0;class#Main#0" expanded="false" />
+            <element signature="method#logAPINotifications#0;class#Main#0" expanded="false" />
+            <element signature="method#logAdapterMessages#0;class#Main#0" expanded="false" />
+            <element signature="method#logNotifications#1;class#Main#0" expanded="false" />
+            <element signature="method#hexStringToBytes#0;class#Main#0" expanded="false" />
+            <element signature="method#bytesToHexString#0;class#Main#0" expanded="false" />
+            <element signature="method#celciusToFarenheit#0;class#Main#0" expanded="false" />
+            <element signature="method#farenheitToCelcius#0;class#Main#0" expanded="false" />
+            <element signature="method#onBackPressed#0;class#Main#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#Main#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="505">
+            <caret line="347" column="41" selection-start-line="347" selection-start-column="41" selection-end-line="347" selection-end-column="41" />
+            <folding />
+          </first_editor>
+          <second_editor>
+            <js_state />
+          </second_editor>
+        </state>
+      </provider>
       <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="34">
@@ -5069,22 +5194,11 @@
           <second_editor />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="607">
-            <caret line="353" column="194" selection-start-line="353" selection-start-column="81" selection-end-line="353" selection-end-column="194" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="40" column="102" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
+        <state relative-caret-position="0">
+          <caret line="42" column="53" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
           <folding />
         </state>
       </provider>

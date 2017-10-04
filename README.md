@@ -354,7 +354,7 @@ Version 23.7:<ul>
     <li>Security setting UserName and Password secures the device to an adapter. A device can be secured to many adapters and many adapters can be secured to a device (many to many relationship).
     <li>Security (UserName, Password, Adapter Id, Device Id) are all encrypted with AES encryption.
     <li>Requires Adapter Firmware 3.14 for all security updates.
-    <li>Fixed Bluetooth Classic (BT21) reconnection issues.
+    <li>Fixed Bluetooth Classic (BT21) reconnection issues. Please see the documentation for important information about Bluetooth Classic reconnection.
     <li>Fixed Bluetooth Classic 'Connect to Last Adapter' not working.
     <li>The API will automatically reconnect when the IgnoreJ1939 or Ignore1708 are changed.
     <li>With Firmware 3.14, ELD uploading with only 'Record while Disconnected' set will not perform any connected recording while uploading.
