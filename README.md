@@ -330,6 +330,7 @@ Version 23.5:<ul>
 	<li>The default interval for GetEngineVIN and GetTruckVIN is changed from 2 seconds to 3 seconds.
 	<li>The default interval for GetEngineId and GetTruckId is changed from 2 seconds to 5 seconds.
 	<li>ELD.Date returns the correct UTC date.
+	<li>Renamed method ELD.Time to ELD.Date.
 	<li>Added ELD.LocalDate that returns the local date of the device the API is running on.
 	<li>Added ELD local date to the Demo App.
 </ul>
