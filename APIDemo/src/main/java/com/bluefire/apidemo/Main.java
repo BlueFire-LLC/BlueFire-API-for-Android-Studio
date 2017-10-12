@@ -1,3 +1,4 @@
+//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.Manifest;
@@ -839,7 +840,7 @@ public class Main extends Activity
         // Set the performance mode
         blueFire.SetPerformanceModeOn(appPerformanceMode);
 
-        // Get adapter data
+        // Get any adapter messages
         blueFire.GetMessages();
     }
 
@@ -954,6 +955,10 @@ public class Main extends Activity
         logNotifications("Adapter reconnected.");
 
         adapterConnected();
+
+        // Reissue data request after reconnection
+        if (layoutTruck.getVisibility() == View.VISIBLE)
+            getTruckData();
     }
 
     private void adapterNotReconnected()
