@@ -367,7 +367,7 @@ Version 23.8:<ul>
     <li>Critical patch for retrieving data after a reconnection.
     <li>MaxConnectAttempts now works for BLE adapters.
     <li>The default MaxConnectAttempts is changed from 10 to 5;
-    <li>Added SetBluetoothRecycleAttempt method that will power cycle Bluetooth on the specified connection and reconnection attempt. The default is 2 (second attempt).
+    <li>Added SetBluetoothRecycleAttempt method that will recycle (turn off/on) Bluetooth at the specified connection and reconnection attempt. The default is 2 (second attempt).
     <li>Updated the Demo App to reflect the above changes.
     <li>Updated the documentation to reflect the above changes.
 </ul>
