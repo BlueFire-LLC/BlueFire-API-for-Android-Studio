@@ -173,7 +173,7 @@ public class Service
         {
             // Note, with Firmware 3.11 there is no need to wait for the adapter
             // to disconnect.
-            boolean WaitForDisconnect = false; // just for code clarity
+            boolean WaitForDisconnect = isConnected; // just for code clarity
             blueFire.Disconnect(WaitForDisconnect);
         }
         catch(Exception e) {}

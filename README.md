@@ -362,3 +362,12 @@ Version 23.7:<ul>
     <li>Compatible with Adapter Firmware 3.13 and below. For Firmware 3.11 - 3.13 only Secure Adapter is available. For Firmware 3.9 and below, only UserName and Password security is available.
     <li>Updated the Demo App to reflect the above changes.
 </ul>
+
+Version 23.8:<ul>
+    <li>Critical patch for retrieving data after a reconnection.
+    <li>MaxConnectAttempts now works for BLE adapters.
+    <li>The default MaxConnectAttempts is changed from 10 to 5;
+    <li>Added SetBluetoothRecycleAttempt method that will power cycle Bluetooth on the specified connection and reconnection attempt. The default is 2 (second attempt).
+    <li>Updated the Demo App to reflect the above changes.
+    <li>Updated the documentation to reflect the above changes.
+</ul>

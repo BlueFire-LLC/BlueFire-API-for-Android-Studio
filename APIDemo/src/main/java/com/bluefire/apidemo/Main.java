@@ -205,9 +205,10 @@ public class Main extends Activity
     private boolean appSecureDevice = false;
     private boolean appSecureAdapter = false;
 
-    public int appDiscoveryTimeOut = 10 * Const.OneSecond;
-    public int appMaxConnectAttempts = 10;
+    public int appDiscoveryTimeOut = 5 * Const.OneSecond;
+    public int appMaxConnectAttempts = 5;
     public int appMaxReconnectAttempts = 5;
+    public int appMaxBluetoothRecycleAttempt = 2;
 
     private boolean appOptimizeDataRetrieval = false;
 
@@ -282,9 +283,10 @@ public class Main extends Activity
         appPassword = settings.getString("Password", "");
         appLedBrightness = settings.getInt("LedBrightness", 100);
         appMinInterval = settings.getInt("MinInterval", 0);
-        appDiscoveryTimeOut = settings.getInt("_DiscoveryTimeout", 10 * Const.OneSecond);
-        appMaxConnectAttempts = settings.getInt("MaxConnectAttempts", 10);
+        appDiscoveryTimeOut = settings.getInt("_DiscoveryTimeout", 5 * Const.OneSecond);
+        appMaxConnectAttempts = settings.getInt("MaxConnectAttempts", 5);
         appMaxReconnectAttempts = settings.getInt("MaxReconnectAttempts", 5);
+        appMaxBluetoothRecycleAttempt = settings.getInt("MaxBluetoothRecycleAttempt",2);
         appOptimizeDataRetrieval = settings.getBoolean("appOptimizeDataRetrieval", true);
 
         // Get ELD settings
@@ -324,6 +326,7 @@ public class Main extends Activity
         settingsSave.putInt("_DiscoveryTimeout", appDiscoveryTimeOut);
         settingsSave.putInt("MaxConnectAttempts", appMaxConnectAttempts);
         settingsSave.putInt("MaxReconnectAttempts", appMaxReconnectAttempts);
+        settingsSave.putInt("MaxBluetoothRecycleAttempt", appMaxBluetoothRecycleAttempt);
         settingsSave.putBoolean("appOptimizeDataRetrieval", appOptimizeDataRetrieval);
 
         settingsSave.putBoolean("ELDStarted", appELDStarted);
@@ -374,6 +377,7 @@ public class Main extends Activity
         // to compensate for this duration.
         blueFire.SetMaxConnectAttempts(appMaxConnectAttempts);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
+        blueFire.SetBluetoothRecycleAttempt(appMaxBluetoothRecycleAttempt);
 
         // Set the device and adapter ids
         blueFire.SetDeviceId(appDeviceId);
@@ -781,46 +785,12 @@ public class Main extends Activity
 
             // Wait for the adapter to disconnect so that the Connect button
             // is not displayed too prematurely.
-            boolean WaitForDisconnect = true;
+            boolean WaitForDisconnect = isConnected; // just for code clarity
             blueFire.Disconnect(WaitForDisconnect);
 
         } catch (Exception e)
         {
         }
-    }
-
-    private void adapterConnected()
-    {
-        logNotifications("Adapter connected.");
-
-        isConnected = true;
-        isConnecting = false;
-
-        // Enable adapter parameters
-        enableAdapterParms(true);
-
-        // Enable buttons
-        showDisconnectButton();
-        buttonUpdate.setEnabled(true);
-        buttonSendMonitor.setEnabled(true);
-
-        buttonNextFault.setVisibility(View.INVISIBLE);
-        buttonResetFault.setVisibility(View.INVISIBLE);
-
-        buttonTruckData.setEnabled(true);
-        buttonELDData.setEnabled(true);
-        buttonTest.setEnabled(true);
-
-        buttonConnect.requestFocus();
-
-        // Connect to ELD
-        blueFire.ELD.Connect();
-
-        // Get adapter data
-        getAdapterData();
-
-        if (isTesting)
-            StartTest();
     }
 
     private void j1708Restarting()
@@ -877,22 +847,62 @@ public class Main extends Activity
     {
         logNotifications("Adapter not authenticated.");
 
-        Toast.makeText(this, "You are not authorized to access this adapter. Check for the correct adapter, the 'connect to last adapter' setting, or your user name and password.", Toast.LENGTH_LONG).show();
-
         adapterNotConnected();
+
+        Toast.makeText(this, "You are not authorized to access this adapter. Check for the correct adapter, the 'connect to last adapter' setting, or your user name and password.", Toast.LENGTH_LONG).show();
+    }
+
+    private void adapterConnected()
+    {
+        isConnected = true;
+        isConnecting = false;
+
+        // Enable adapter parameters
+        enableAdapterParms(true);
+
+        // Enable buttons
+        showDisconnectButton();
+        buttonUpdate.setEnabled(true);
+        buttonSendMonitor.setEnabled(true);
+
+        buttonNextFault.setVisibility(View.INVISIBLE);
+        buttonResetFault.setVisibility(View.INVISIBLE);
+
+        buttonTruckData.setEnabled(true);
+        buttonELDData.setEnabled(true);
+        buttonTest.setEnabled(true);
+
+        buttonConnect.requestFocus();
+
+        // Connect to ELD
+        blueFire.ELD.Connect();
+
+        // Get adapter data
+        getAdapterData();
+
+        if (isTesting)
+            StartTest();
+
+        String Message = "Adapter connected.";
+        logNotifications(Message);
+        Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
     }
 
     private void adapterDisconnected()
     {
-        logNotifications("Adapter disconnected.");
+        adapterNotConnected(false);
 
-        adapterNotConnected();
+        String Message = "Adapter disconnected.";
+        logNotifications(Message);
+        Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
     }
 
     private void adapterNotConnected()
     {
-        logNotifications("Adapter not connected.");
-
+        adapterNotConnected(true);
+    }
+    private void adapterNotConnected(boolean logMessage)
+    {
         isConnected = false;
         isConnecting = false;
 
@@ -912,13 +922,17 @@ public class Main extends Activity
         buttonConnect.requestFocus();
 
         showStatus();
+
+        if (logMessage)
+        {
+            String Message = "Adapter not connected.";
+            logNotifications(Message);
+            Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
+        }
     }
 
     private void adapterReconnecting()
     {
-        if (!isConnecting)
-            Toast.makeText(this, "Lost connection to the Adapter.", Toast.LENGTH_LONG).show();
-
         isConnected = false;
         isConnecting = true;
 
@@ -930,27 +944,25 @@ public class Main extends Activity
 
         logAPINotifications();
 
-        logNotifications("Adapter re-connecting.");
-
-        Toast.makeText(this, "Attempting to reconnect.", Toast.LENGTH_LONG).show();
+        String Message = "Connecting the Adapter.";
+        logNotifications(Message);
+        Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
     }
 
     private void adapterReconnected()
     {
-        logNotifications("Adapter re-connected.");
+        logNotifications("Adapter reconnected.");
 
         adapterConnected();
-
-        Toast.makeText(this, "Adapter reconnected.", Toast.LENGTH_LONG).show();
     }
 
     private void adapterNotReconnected()
     {
-        logNotifications("Adapter not re-connected.");
+        adapterNotConnected(false);
 
-        adapterNotConnected();
-
-        Toast.makeText(this, "The Adapter did not reconnect.", Toast.LENGTH_LONG).show();
+        String Message = "Adapter connection failed.";
+        logNotifications(Message);
+        Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
     }
 
     // BT21 Checkbox
@@ -1001,6 +1013,7 @@ public class Main extends Activity
 
         return true;
     }
+
     // Connect to Last Adapter Checkbox
     public void onConnectLastAdapterCheck(View view)
     {
