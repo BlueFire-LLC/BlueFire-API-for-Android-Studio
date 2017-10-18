@@ -1,4 +1,3 @@
-//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.annotation.SuppressLint;

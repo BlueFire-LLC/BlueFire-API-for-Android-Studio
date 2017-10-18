@@ -1,4 +1,3 @@
-//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.Manifest;
@@ -25,6 +24,7 @@ import android.widget.Toast;
 import com.bluefire.api.BlueFire;
 import com.bluefire.api.ConnectionStates;
 import com.bluefire.api.Const;
+import com.bluefire.api.HardwareTypes;
 import com.bluefire.api.RecordIds;
 import com.bluefire.api.RecordingModes;
 import com.bluefire.api.RetrievalMethods;
@@ -185,6 +185,8 @@ public class Main extends Activity
 
     private SharedPreferences settings;
     private SharedPreferences.Editor settingsSave;
+
+    private HardwareTypes appHardwareType = HardwareTypes.HW_Unknown;
 
     private boolean appUseBLE = false;
     private boolean appUseBT21 = false;
@@ -820,6 +822,15 @@ public class Main extends Activity
         // Note, this should only be used during testing.
         blueFire.SetNotificationsOn(true);
 
+        // Set the adapter led brightness
+        blueFire.SetLedBrightness(appLedBrightness);
+
+        // Set the performance mode
+        blueFire.SetPerformanceModeOn(appPerformanceMode);
+
+        // Get the adapter hardware type
+        appHardwareType = blueFire.HardwareType();
+
         // Get the device and adapter ids
         appDeviceId = blueFire.DeviceId();
         appAdapterId = blueFire.AdapterId();
@@ -828,25 +839,31 @@ public class Main extends Activity
         appUseBT21 = blueFire.UseBT21;
         appUseBLE = blueFire.UseBLE;
 
+        appIgnoreJ1939 = blueFire.IgnoreJ1939();
+        appIgnoreJ1708 = blueFire.IgnoreJ1708();
+
         // Save any changed data from the API
         saveSettings();
 
+        // Update UseBT21 and UseBLE checkboxes
         checkUseBT21.setChecked(appUseBT21);
         checkUseBLE.setChecked(appUseBLE);
 
-        // Set the adapter led brightness
-        blueFire.SetLedBrightness(appLedBrightness);
+        // Update J1939 and J1708 checkboxes
+        checkUseJ1939.setChecked(!appIgnoreJ1939);
+        checkUseJ1708.setChecked(!appIgnoreJ1708);
 
-        // Set the performance mode
-        blueFire.SetPerformanceModeOn(appPerformanceMode);
+        // Show hardware and firmware versions
+        textHardware.setText(blueFire.HardwareVersion());
+        textFirmware.setText(blueFire.FirmwareVersion());
 
-        // Get any adapter messages
-        blueFire.GetMessages();
+        // Check the key state (key on/off)
+        checkKeyState();
     }
 
     private void adapterNotAuthenticated()
     {
-        logNotifications("Adapter not authenticated.");
+        logNotifications("Adapter is not authenticated.");
 
         adapterNotConnected();
 
@@ -857,6 +874,10 @@ public class Main extends Activity
     {
         isConnected = true;
         isConnecting = false;
+
+        // Enable Use J1939/J1708
+        checkUseJ1939.setEnabled(true);
+        checkUseJ1708.setEnabled(true);
 
         // Enable adapter parameters
         enableAdapterParms(true);
@@ -884,7 +905,7 @@ public class Main extends Activity
         if (isTesting)
             StartTest();
 
-        String Message = "Adapter connected.";
+        String Message = "Adapter is connected.";
         logNotifications(Message);
         Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
     }
@@ -945,18 +966,18 @@ public class Main extends Activity
 
         logAPINotifications();
 
-        String Message = "Connecting the Adapter.";
+        String Message = "Connecting to the Adapter.";
         logNotifications(Message);
         Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
     }
 
     private void adapterReconnected()
     {
-        logNotifications("Adapter reconnected.");
+        logNotifications("Adapter is reconnected.");
 
         adapterConnected();
 
-        // Reissue data request after reconnection
+        // Start re-retrieving truck data after reconnection
         if (layoutTruck.getVisibility() == View.VISIBLE)
             getTruckData();
     }
@@ -1048,8 +1069,11 @@ public class Main extends Activity
         // Set to ignore J1939 (opposite of checkUseJ1939)
         appIgnoreJ1939 = !checkUseJ1939.isChecked();
 
-        // Update BlueFire
-        blueFire.SetIgnoreJ1939(appIgnoreJ1939);
+        // Update api or adapter
+        if (isConnected)
+            blueFire.SetIgnoreDatabuses(appIgnoreJ1939, appIgnoreJ1708);
+        else
+            blueFire.SetIgnoreJ1939(appIgnoreJ1939);
     }
 
     // J1708 Checkbox
@@ -1058,8 +1082,11 @@ public class Main extends Activity
         // Set to ignore J708 (opposite of checkUseJ1708)
         appIgnoreJ1708 = !checkUseJ1708.isChecked();
 
-        // Update BlueFire
-        blueFire.SetIgnoreJ1708(appIgnoreJ1708);
+        // Update api or adapter
+        if (isConnected)
+            blueFire.SetIgnoreDatabuses(appIgnoreJ1939, appIgnoreJ1708);
+        else
+            blueFire.SetIgnoreJ1708(appIgnoreJ1708);
     }
 
     // Fault Button
@@ -1273,11 +1300,7 @@ public class Main extends Activity
 
     private void showData()
     {
-        // Show hardware and firmware versions
-        textHardware.setText(blueFire.HardwareVersion());
-        textFirmware.setText(blueFire.FirmwareVersion());
-
-        // Check the key state
+        // Check the key state (key on/off)
         checkKeyState();
 
         // Show truck data
@@ -1287,25 +1310,6 @@ public class Main extends Activity
         // Show ELD data
         if ( blueFire.ELD.IsDataRetrieved())
             showELDData();
-
-        // Check for user changed adapter data while offline
-        if (appLedBrightness != blueFire.LedBrightness())
-            blueFire.SetLedBrightness(appLedBrightness);
-
-        if (appPerformanceMode != blueFire.IsPerformanceModeOn())
-            blueFire.SetPerformanceModeOn(appPerformanceMode);
-
-        // Check if adapter overrode user input
-        if (!appIgnoreJ1939 != blueFire.IgnoreJ1939())
-        {
-            appIgnoreJ1939 = blueFire.IgnoreJ1939();
-            checkUseJ1939.setChecked(!appIgnoreJ1939); // checkUseJ1939 is the opposite of ignoreJ1939
-        }
-        if (!appIgnoreJ1708 != blueFire.IgnoreJ1708())
-        {
-            appIgnoreJ1708 = blueFire.IgnoreJ1708();
-            checkUseJ1708.setChecked(!appIgnoreJ1708); // checkUseJ1708 is the opposite of ignoreJ1708
-        }
 
         // Check for SendPGN response
         if ((isSendingPGN || isMonitoringPGN) && blueFire.PGNData.PGN == pgn)
@@ -1317,6 +1321,9 @@ public class Main extends Activity
 
     private void showHeartbeat()
     {
+        // Check the key state (key on/off)
+        checkKeyState();
+
         textHeartbeat.setText(String.valueOf(blueFire.HeartbeatCount()));
     }
     private void startTruckData()
@@ -1803,6 +1810,18 @@ public class Main extends Activity
 
     // *********************************** ELD *******************************************
 
+    public void connectedELD()
+    {
+        // Check if ELD page is visible and refresh it
+        if (layoutELD.getVisibility() != View.INVISIBLE)
+        {
+            showELDPage();
+
+            if (blueFire.ELD.IsStarted())
+                blueFire.ELD.StartStreaming();
+        }
+    }
+
     // ELD Button
     public void onELDDataClick(View view)
     {
@@ -1954,7 +1973,7 @@ public class Main extends Activity
         // Enable start button
         buttonStartELD.setEnabled(true);
 
-        Toast.makeText(this, "The ELD data was deleted.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "ELD data has been deleted.", Toast.LENGTH_LONG).show();
     }
 
     private void showELDPage()
@@ -2623,6 +2642,10 @@ public class Main extends Activity
 
                     case J1708Restarting:
                         j1708Restarting();
+                        break;
+
+                    case ELDConnected:
+                        connectedELD();
                         break;
 
                     case Notification:

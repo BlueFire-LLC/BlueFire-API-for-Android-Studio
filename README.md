@@ -371,3 +371,13 @@ Version 23.8:<ul>
     <li>Updated the Demo App to reflect the above changes.
     <li>Updated the documentation to reflect the above changes.
 </ul>
+
+Version 23.9:<ul>
+    <li>Added method SetIgnoreDatabuses that will update the IgnoreJ1939 and IgnoreJ1708 settings and send them to the adapter. 
+    <li>Added ConnectionState ELDConnected that will be raised after the API receives ELD startup data from the adapter.
+    <li>The ConnectionState Authenticated will now be raised after the API receives startup data from the adapter. This data includes PerformanceMode, SleepMode, LEDBrightness, IgnoreJ1939, IgnoreJ1708, HardwareType and any messages.
+    <li>The UseBLE, UseBT21, IgnoreJ1939, and IgnoreJ1708 settings will be set appropriately if the HardwareType is HW_6_Pin.
+    <li>Added CheckKeyState to showHeartbeat in the Demo app to ensure that the key state is checked if the ECMs are powered down.
+    <li>Updated the Demo App to reflect the above changes.
+    <li>Updated the documentation to reflect the above changes.
+</ul>
