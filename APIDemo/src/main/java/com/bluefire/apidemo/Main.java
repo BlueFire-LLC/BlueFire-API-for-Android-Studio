@@ -285,11 +285,11 @@ public class Main extends Activity
         appUserName = settings.getString("UserName", "");
         appPassword = settings.getString("Password", "");
         appLedBrightness = settings.getInt("LedBrightness", 100);
-        appMinInterval = settings.getInt("MinInterval", 0);
-        appDiscoveryTimeOut = settings.getInt("_DiscoveryTimeout", 5 * Const.OneSecond);
-        appMaxConnectAttempts = settings.getInt("MaxConnectAttempts", 5);
-        appMaxReconnectAttempts = settings.getInt("MaxReconnectAttempts", 5);
-        appMaxBluetoothRecycleAttempt = settings.getInt("MaxBluetoothRecycleAttempt",2);
+        appMinInterval = settings.getInt("MinInterval", blueFire.MinIntervalDefault);
+        appDiscoveryTimeOut = settings.getInt("_DiscoveryTimeout", blueFire.DiscoveryTimeoutDefault);
+        appMaxConnectAttempts = settings.getInt("MaxConnectAttempts", blueFire.MaxConnectAttemptsDefault);
+        appMaxReconnectAttempts = settings.getInt("MaxReconnectAttempts", blueFire.MaxReconnectAttemptsDefault);
+        appMaxBluetoothRecycleAttempt = settings.getInt("MaxBluetoothRecycleAttempt", blueFire.BluetoothRecycleAttemptDefault);
         appOptimizeDataRetrieval = settings.getBoolean("appOptimizeDataRetrieval", true);
 
         // Get ELD settings
@@ -347,6 +347,12 @@ public class Main extends Activity
         settingsSave.putFloat("IFTAInterval", appIFTAInterval); // minutes;
         settingsSave.putFloat("StatsInterval", appStatsInterval); // minutes;
 
+        settingsSave.commit();
+    }
+
+    private void resetSettings()
+    {
+        settingsSave.clear();
         settingsSave.commit();
     }
 
@@ -966,7 +972,7 @@ public class Main extends Activity
 
         logAPINotifications();
 
-        String Message = "Connecting to the Adapter.";
+        String Message = "Reconnecting to the Adapter.";
         logNotifications(Message);
         Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
     }
@@ -986,7 +992,7 @@ public class Main extends Activity
     {
         adapterNotConnected(false);
 
-        String Message = "Adapter connection failed.";
+        String Message = "Adapter did not reconnect.";
         logNotifications(Message);
         Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
     }
@@ -1001,6 +1007,7 @@ public class Main extends Activity
             appUseBLE = false;
             checkUseBLE.setChecked(false);
         }
+        saveSettings();
     }
 
     // BLE Checkbox
@@ -1010,14 +1017,11 @@ public class Main extends Activity
 
         if (appUseBLE)
         {
-
-            if (appUseBLE)
-
-
-                appUseBT21 = false;
+            appUseBT21 = false;
             checkUseBT21.setChecked(false);
         }
-    }
+        saveSettings();
+   }
 
     private boolean EditLEDBrightness()
     {
@@ -1037,6 +1041,8 @@ public class Main extends Activity
 
         appLedBrightness = ledBrightness;
 
+        saveSettings();
+
         return true;
     }
 
@@ -1047,20 +1053,30 @@ public class Main extends Activity
 
         if (appConnectToLastAdapter)
             blueFire.SetAdapterId(appAdapterId);
-        else
-            blueFire.SetAdapterId("");
+
+        blueFire.SetConnectToLastAdapter(appConnectToLastAdapter);
+
+        saveSettings();
     }
 
     // Secure Device Checkbox
     public void onSecureDeviceCheck(View view)
     {
         secureDevice = checkSecureDevice.isChecked();
+
+        updateSecurity();
     }
 
     // Secure Adapter Checkbox
     public void onSecureAdapterCheck(View view)
     {
         secureAdapter = checkSecureAdapter.isChecked();
+
+        if (updateSecurity())
+        {
+            blueFire.SetAdapterId(appAdapterId);
+            saveSettings();
+        }
     }
 
     // J1939 Checkbox
@@ -1074,6 +1090,8 @@ public class Main extends Activity
             blueFire.SetIgnoreDatabuses(appIgnoreJ1939, appIgnoreJ1708);
         else
             blueFire.SetIgnoreJ1939(appIgnoreJ1939);
+
+        saveSettings();
     }
 
     // J1708 Checkbox
@@ -1087,6 +1105,8 @@ public class Main extends Activity
             blueFire.SetIgnoreDatabuses(appIgnoreJ1939, appIgnoreJ1708);
         else
             blueFire.SetIgnoreJ1708(appIgnoreJ1708);
+
+        saveSettings();
     }
 
     // Fault Button
@@ -1101,8 +1121,31 @@ public class Main extends Activity
         blueFire.ResetFaults();
     }
 
+    // Reset Settings Button
+    public void onResetSettingsClick(View view)
+    {
+        resetSettings();
+
+        getSettings();
+
+        initializeAdapter();
+
+        clearForm();
+
+        buttonConnect.requestFocus();
+
+        Toast.makeText(this, "App settings have been reset.", Toast.LENGTH_SHORT).show();
+    }
+
     // Update Button
     public void onUpdateClick(View view)
+    {
+        updateSecurity();
+
+        buttonConnect.requestFocus();
+    }
+
+    private boolean updateSecurity()
     {
         // Get username and password
         String userNameText = textUserName.getText().toString().trim();
@@ -1119,10 +1162,13 @@ public class Main extends Activity
             if (!blueFire.UpdateSecurity(appSecureDevice, appSecureAdapter, appUserName, appPassword))
                 Toast.makeText(this, "Security parameters have not been updated.", Toast.LENGTH_SHORT).show();
             else
+            {
                 Toast.makeText(this, "Security parameters have been updated.", Toast.LENGTH_SHORT).show();
+                saveSettings();
+                return true;
+            }
         }
-
-        buttonConnect.requestFocus();
+        return false;
     }
 
     // Send/Monitor Button

@@ -12,7 +12,6 @@ import com.bluefire.api.Const;
 import com.bluefire.api.RetrievalMethods;
 import com.bluefire.api.Truck;
 
-
 public class Service
 {
     private BlueFire blueFire;

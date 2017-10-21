@@ -122,6 +122,18 @@
                     android:layout_below="@+id/checkUseJ1708"
                     android:background="@android:color/darker_gray"/>
 
+                <!--  Reset Settings Button    -->
+                <Button
+                    android:id="@+id/buttonReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/checkUseJ1708"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onResetSettingsClick"
+                    android:text="Reset"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
                 <!--  Connect Button    -->
                 <Button
                     android:id="@+id/buttonConnect"

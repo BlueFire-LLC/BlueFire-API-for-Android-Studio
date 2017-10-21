@@ -381,3 +381,11 @@ Version 23.9:<ul>
     <li>Updated the Demo App to reflect the above changes.
     <li>Updated the documentation to reflect the above changes.
 </ul>
+
+Version 23.10:<ul>
+    <li>Improved adapter connection and reconnection. The last, secured, or previous adapter id will be used to attempt a direct connection to the adapter prior to scanning for an adapter.
+    <li>Added default values MinIntervalDefault, DiscoveryTimeoutDefault, MaxConnectAttemptsDefault, MaxReconnectAttemptsDefault, BluetoothRecycleAttemptDefault, and AdvertisementTimeoutDefault.
+    <li>Added API connection notifications.
+    <li>The SetNotificationsOn method will start/stop API notifications along with Adapter notifications.
+    <li>The Demo app saves settings when they are changed.
+</ul>
