@@ -389,3 +389,10 @@ Version 23.10:<ul>
     <li>The SetNotificationsOn method will start/stop API notifications along with Adapter notifications.
     <li>The Demo app saves settings when they are changed.
 </ul>
+
+Version 23.11:<ul>
+    <li>Added BleDisconnectWaitTime property and SetBleDisconnectWaitTime method that will wait for BLE to close the GATT connection. The default is 2000 (2 seconds).
+    <li>Bluetooth is no longer turned off when the the API disconnects from the adapter if Bluetooth was turned on to connect the first time.
+    <li>Added properties ConnectToLastAdapter, MaxConnectAttempts, MaxReconnectAttempts, BluetoothRecycleAttempt.
+    <li>Updated the Demo App to reflect the above changes.
+</ul>
