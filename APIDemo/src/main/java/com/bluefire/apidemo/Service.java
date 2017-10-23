@@ -12,6 +12,7 @@ import com.bluefire.api.Const;
 import com.bluefire.api.RetrievalMethods;
 import com.bluefire.api.Truck;
 
+
 public class Service
 {
     private BlueFire blueFire;
@@ -42,9 +43,10 @@ public class Service
     private int appLedBrightness;
 
     private int appDiscoveryTimeOut;
-
     private int appMaxConnectAttempts;
     private int appMaxReconnectAttempts;
+    private int appBluetoothRecycleAttempt;
+    private int appBleDisconnectWaitTime;
 
     private String appDeviceId = "";
     private String appAdapterId = "";
@@ -65,10 +67,11 @@ public class Service
         appIgnoreJ1939 = false;
         appIgnoreJ1708 = true;
 
-        appDiscoveryTimeOut = 10 * Const.OneSecond;
-
-        appMaxConnectAttempts = 10;
-        appMaxReconnectAttempts = 5;
+        appDiscoveryTimeOut = blueFire.DiscoveryTimeoutDefault;
+        appMaxConnectAttempts = blueFire.MaxConnectAttemptsDefault;
+        appMaxReconnectAttempts = blueFire.MaxReconnectAttemptsDefault;
+        appBluetoothRecycleAttempt = blueFire.BluetoothRecycleAttemptDefault;
+        appBleDisconnectWaitTime = blueFire.BleDisconnectWaitTimeDefault;
 
         appLedBrightness = 100;
 
@@ -141,6 +144,16 @@ public class Service
         blueFire.SetIgnoreJ1939(appIgnoreJ1939);
         blueFire.SetIgnoreJ1708(appIgnoreJ1708);
 
+        // Set the BLE Disconnect Wait Timeout.
+        // Note, in order for BLE to release the connection to the adapter and allow reconnects
+        // or subsequent connects, it must be completely closed. Unfortunately Android does not
+        // have a way to detect this other than waiting a set amount of time after disconnecting
+        // from the adapter. This wait time can vary with the Android version and the make and
+        // model of the mobile device. The default is 2 seconds. If your app experiences numerous
+        // unable to connect and BlueFire LE fails to show up under Bluetooth settings, try increasing
+        // this value.
+        blueFire.SetBleDisconnectWaitTime(appBleDisconnectWaitTime);
+
         // Set the Bluetooth discovery timeout.
         // Note, depending on the number of Bluetooth devices present on the mobile device,
         // discovery could take a long time.
@@ -154,6 +167,7 @@ public class Service
         // connection problems, un-pair all devices before connecting.
         blueFire.SetMaxConnectAttempts(appMaxConnectAttempts);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
+        blueFire.SetBluetoothRecycleAttempt(appBluetoothRecycleAttempt);
 
         // Set the device and adapter ids
         blueFire.SetDeviceId(appDeviceId);

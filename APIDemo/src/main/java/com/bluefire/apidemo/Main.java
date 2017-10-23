@@ -208,10 +208,11 @@ public class Main extends Activity
     private boolean appSecureDevice = false;
     private boolean appSecureAdapter = false;
 
-    public int appDiscoveryTimeOut = 5 * Const.OneSecond;
-    public int appMaxConnectAttempts = 5;
-    public int appMaxReconnectAttempts = 5;
-    public int appMaxBluetoothRecycleAttempt = 2;
+    private int appDiscoveryTimeout;
+    private int appMaxConnectAttempts;
+    private int appMaxReconnectAttempts;
+    private int appBluetoothRecycleAttempt;
+    private int appBleDisconnectWaitTime;
 
     private boolean appOptimizeDataRetrieval = false;
 
@@ -286,11 +287,12 @@ public class Main extends Activity
         appPassword = settings.getString("Password", "");
         appLedBrightness = settings.getInt("LedBrightness", 100);
         appMinInterval = settings.getInt("MinInterval", blueFire.MinIntervalDefault);
-        appDiscoveryTimeOut = settings.getInt("_DiscoveryTimeout", blueFire.DiscoveryTimeoutDefault);
+        appDiscoveryTimeout = settings.getInt("DiscoveryTimeout", blueFire.DiscoveryTimeoutDefault);
         appMaxConnectAttempts = settings.getInt("MaxConnectAttempts", blueFire.MaxConnectAttemptsDefault);
         appMaxReconnectAttempts = settings.getInt("MaxReconnectAttempts", blueFire.MaxReconnectAttemptsDefault);
-        appMaxBluetoothRecycleAttempt = settings.getInt("MaxBluetoothRecycleAttempt", blueFire.BluetoothRecycleAttemptDefault);
-        appOptimizeDataRetrieval = settings.getBoolean("appOptimizeDataRetrieval", true);
+        appBluetoothRecycleAttempt = settings.getInt("BluetoothRecycleAttempt", blueFire.BluetoothRecycleAttemptDefault);
+        appBleDisconnectWaitTime = settings.getInt("BleDisconnectWaitTime", blueFire.BleDisconnectWaitTimeDefault);
+        appOptimizeDataRetrieval = settings.getBoolean("OptimizeDataRetrieval", true);
 
         // Get ELD settings
         appELDStarted = settings.getBoolean("ELDStarted", false);
@@ -326,11 +328,12 @@ public class Main extends Activity
         settingsSave.putString("Password", appPassword);
         settingsSave.putInt("LedBrightness", appLedBrightness);
         settingsSave.putInt("MinInterval", appMinInterval);
-        settingsSave.putInt("_DiscoveryTimeout", appDiscoveryTimeOut);
+        settingsSave.putInt("DiscoveryTimeout", appDiscoveryTimeout);
         settingsSave.putInt("MaxConnectAttempts", appMaxConnectAttempts);
         settingsSave.putInt("MaxReconnectAttempts", appMaxReconnectAttempts);
-        settingsSave.putInt("MaxBluetoothRecycleAttempt", appMaxBluetoothRecycleAttempt);
-        settingsSave.putBoolean("appOptimizeDataRetrieval", appOptimizeDataRetrieval);
+        settingsSave.putInt("BluetoothRecycleAttempt", appBluetoothRecycleAttempt);
+        settingsSave.putInt("BleDisconnectWaitTime", appBleDisconnectWaitTime);
+        settingsSave.putBoolean("OptimizeDataRetrieval", appOptimizeDataRetrieval);
 
         settingsSave.putBoolean("ELDStarted", appELDStarted);
         settingsSave.putBoolean("SecureELD", appSecureELD);
@@ -369,12 +372,22 @@ public class Main extends Activity
         // Set the minimum interval
         blueFire.SetMinInterval(appMinInterval);
 
+        // Set the BLE Disconnect Wait Timeout.
+        // Note, in order for BLE to release the connection to the adapter and allow reconnects
+        // or subsequent connects, it must be completely closed. Unfortunately Android does not
+        // have a way to detect this other than waiting a set amount of time after disconnecting
+        // from the adapter. This wait time can vary with the Android version and the make and
+        // model of the mobile device. The default is 2 seconds. If your app experiences numerous
+        // unable to connect and BlueFire LE fails to show up under Bluetooth settings, try increasing
+        // this value.
+        blueFire.SetBleDisconnectWaitTime(appBleDisconnectWaitTime);
+
         // Set the Bluetooth discovery timeout.
         // Note, depending on the number of Bluetooth devices present on the mobile device,
         // discovery could take a long time.
         // Note, if this is set to a high value, the app needs to provide the user with the
         // capability of canceling the discovery.
-        blueFire.SetDiscoveryTimeout(appDiscoveryTimeOut);
+        blueFire.SetDiscoveryTimeout(appDiscoveryTimeout);
 
         // Set number of Bluetooth connection attempts.
         // Note, if the mobile device does not connect, try setting this to a value that
@@ -386,7 +399,7 @@ public class Main extends Activity
         // to compensate for this duration.
         blueFire.SetMaxConnectAttempts(appMaxConnectAttempts);
         blueFire.SetMaxReconnectAttempts(appMaxReconnectAttempts);
-        blueFire.SetBluetoothRecycleAttempt(appMaxBluetoothRecycleAttempt);
+        blueFire.SetBluetoothRecycleAttempt(appBluetoothRecycleAttempt);
 
         // Set the device and adapter ids
         blueFire.SetDeviceId(appDeviceId);
@@ -600,8 +613,12 @@ public class Main extends Activity
                 buttonNextFault.setVisibility(View.INVISIBLE);
                 buttonResetFault.setVisibility(View.INVISIBLE);
 
-                checkBluetoothPermissions();
-            } else
+                if (appUseBT21)
+                    startConnection();
+                else
+                    checkBluetoothPermissions();
+            }
+            else
             {
                 Thread.sleep(500); // allow eld to stop before disconnecting
 
@@ -630,7 +647,10 @@ public class Main extends Activity
         buttonELDData.setEnabled(false);
         buttonTest.setEnabled(false);
 
-        checkBluetoothPermissions();
+        if (appUseBT21)
+            startConnection();
+        else
+            checkBluetoothPermissions();
     }
 
     // Stop Service Button
@@ -658,24 +678,18 @@ public class Main extends Activity
     private void checkBluetoothPermissions()
     {
         // BLE adapters require Android 6.0 and the user must accept location access permission
-        if (appUseBLE)
+        // Check for Android 6 or higher
+        if (blueFire.AndroidVersion()[0] < 6)
         {
-            // Check for Android 6 or higher
-            if (blueFire.AndroidVersion()[0] < 6)
-            {
-                adapterDisconnected();
+            adapterDisconnected();
 
-                Toast.makeText(this, "BLE Adapters require Android 6+.", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            // Check and request access permission for BLE
-            // Note, ActivityCompat.shouldShowRequestPermissionRationale doesn't always work so we don't use it here.
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            Toast.makeText(this, "BLE Adapters require Android 6+.", Toast.LENGTH_LONG).show();
+            return;
         }
-        // Bluetooth Classic adapter is good to go
-        else
-            startConnection();
+
+        // Check and request access permission for BLE
+        // Note, ActivityCompat.shouldShowRequestPermissionRationale doesn't always work so we don't use it here.
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
     }
 
     @Override
