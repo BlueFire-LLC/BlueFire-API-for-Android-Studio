@@ -154,7 +154,7 @@ public class Main extends Activity
     private String faultConversion = "";
 
     private int groupNo;
-    private static final int maxGroupNo = 8;
+    private static final int maxGroupNo = 9;
 
     private boolean IsRetrievingVINID;
 
@@ -1354,6 +1354,10 @@ public class Main extends Activity
             else
                 textKeyState.setText("Key Off");
 
+            // Double check key change by retrieving IsCANAvailable and IsJ1708Available.
+            // Note, only do this on change of state, not constantly.
+            blueFire.GetKeyState();
+
             isKeyOn = keyIsOn;
         }
     }
@@ -1596,6 +1600,23 @@ public class Main extends Activity
                 break;
 
             case 6:
+                textView1.setText("RPM");
+                textView2.setText("Speed");
+                textView3.setText("Distance");
+                textView4.setText("Odometer");
+                textView5.setText("Total Hours");
+                textView6.setText("");
+                textView7.setText("");
+
+                if (!isTesting)
+                {
+                    clearAdapterData();
+                    blueFire.GetELDData(); // RPM, Speed, Distance/Odometer, Total Hours
+                }
+
+                break;
+
+            case 7:
                 textView1.setText("Engine VIN");
                 textView2.setText("Make");
                 textView3.setText("Model");
@@ -1616,7 +1637,7 @@ public class Main extends Activity
 
                 break;
 
-            case 7:
+            case 8:
                 textView1.setText("Truck VIN");
                 textView2.setText("Make");
                 textView3.setText("Model");
@@ -1627,7 +1648,7 @@ public class Main extends Activity
 
                 break;
 
-            case 8:
+            case 9:
                 textView1.setText("Source");
                 textView2.setText("SPN");
                 textView3.setText("FMI");
@@ -1729,6 +1750,17 @@ public class Main extends Activity
                 break;
 
             case 6:
+                dataView1.setText(formatInt(Truck.RPM));
+                dataView2.setText(formatFloat(Truck.Speed * Const.KphToMph,2));
+                dataView3.setText(formatFloat(Truck.Distance * Const.MetersToMiles,2)); // hi-res or converted lo-res
+                dataView4.setText(formatFloat(Truck.Odometer * Const.MetersToMiles,2)); // hi-res or converted lo-res
+                dataView5.setText(formatFloat(Truck.TotalHours,3));
+                dataView6.setText("");
+                dataView7.setText("");
+
+                break;
+
+            case 7:
                 dataView1.setText(Truck.EngineVIN);
                 dataView2.setText(Truck.EngineMake);
                 dataView3.setText(Truck.EngineModel);
@@ -1765,7 +1797,7 @@ public class Main extends Activity
 
                 break;
 
-            case 7:
+            case 8:
                 dataView1.setText(Truck.VIN);
                 dataView2.setText(Truck.Make);
                 dataView3.setText(Truck.Model);
@@ -1799,7 +1831,7 @@ public class Main extends Activity
 
                 break;
 
-            case 8:
+            case 9:
                 if (Truck.GetFaultCount() == 0)
                 {
                     faultCount = 0;

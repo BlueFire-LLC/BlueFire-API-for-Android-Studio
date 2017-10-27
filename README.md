@@ -396,3 +396,9 @@ Version 23.11:<ul>
     <li>Added properties ConnectToLastAdapter, MaxConnectAttempts, MaxReconnectAttempts, BluetoothRecycleAttempt.
     <li>Updated the Demo App to reflect the above changes.
 </ul>
+
+Version 23.12:<ul>
+    <li>Added method GetELDData that will only retrieve RPM, Speed, Distance/Odometer, and Total Hours with optimum settings. See the Demo app getTruckData, group 6.
+    <li>Added method GetKeyState that will double check if the ECM is powered up and sending data. See the Demo app function checkKeyState for how to use it properly.
+    <li>Updated the Demo App to reflect the above changes.
+</ul>
