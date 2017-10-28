@@ -400,5 +400,7 @@ Version 23.11:<ul>
 Version 23.12:<ul>
     <li>Added method GetELDData that will only retrieve RPM, Speed, Distance/Odometer, and Total Hours with optimum settings. See the Demo app getTruckData, group 6.
     <li>Added method GetKeyState that will double check if the ECM is powered up and sending data. See the Demo app function checkKeyState for how to use it properly.
+    <li>Added ConnectionState J1939Started that will be raised when the API is connected and the J1939 CAN bus is available (key is turned on). See the Demo app function setJ1939Starting.
+    <li>Added property CANBusSpeed that will be returned when the ConnectionState J1939Started is raised.
     <li>Updated the Demo App to reflect the above changes.
 </ul>

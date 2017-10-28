@@ -7,11 +7,11 @@ import android.os.Message;
 import android.util.Log;
 
 import com.bluefire.api.BlueFire;
+import com.bluefire.api.CANBusSpeeds;
 import com.bluefire.api.ConnectionStates;
 import com.bluefire.api.Const;
 import com.bluefire.api.RetrievalMethods;
 import com.bluefire.api.Truck;
-
 
 public class Service
 {
@@ -306,6 +306,10 @@ public class Service
             else
                 logNotifications("Key is Off");
 
+            // Double check key change by retrieving IsCANAvailable and IsJ1708Available.
+            // Note, only do this on change of state, not constantly.
+            blueFire.GetKeyState();
+
             isKeyOn = keyIsOn;
         }
     }
@@ -357,6 +361,33 @@ public class Service
         logNotifications("Adapter not re-connected.");
 
         adapterNotConnected();
+    }
+
+    private void j1939Starting()
+    {
+        // Get the CAN bus speed
+        CANBusSpeeds CANBusSpeed = blueFire.CANBusSpeed();
+
+        String Message = "J1939 is starting, CAN bus speed is ";
+        switch (CANBusSpeed)
+        {
+            case K250:
+                Message += "250K.";
+                break;
+            case K500:
+                Message += "500K.";
+                break;
+            default:
+                Message += "unknown.";
+                break;
+        }
+        logNotifications(Message);
+
+        // Key is on so double check the key state
+        checkKeyState();
+
+        // Re-retrieve truck data
+        getTruckData();
     }
 
     private void j1708Restarting()
@@ -427,6 +458,10 @@ public class Service
                     case NotReconnected:
                         if (isConnecting)// only show once
                             adapterNotReconnected();
+                        break;
+
+                    case J1939Starting:
+                        j1939Starting();
                         break;
 
                     case J1708Restarting:

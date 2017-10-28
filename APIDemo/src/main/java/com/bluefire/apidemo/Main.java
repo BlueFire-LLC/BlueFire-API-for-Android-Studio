@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bluefire.api.BlueFire;
+import com.bluefire.api.CANBusSpeeds;
 import com.bluefire.api.ConnectionStates;
 import com.bluefire.api.Const;
 import com.bluefire.api.HardwareTypes;
@@ -816,9 +817,41 @@ public class Main extends Activity
         }
     }
 
+    private void j1939Starting()
+    {
+        // Get the CAN bus speed
+        CANBusSpeeds CANBusSpeed = blueFire.CANBusSpeed();
+
+        String Message = "J1939 is starting, CAN bus speed is ";
+        switch (CANBusSpeed)
+        {
+            case K250:
+                Message += "250K.";
+                break;
+            case K500:
+                Message += "500K.";
+                break;
+            default:
+                Message += "unknown.";
+                break;
+        }
+        logNotifications(Message, true);
+
+        // Key is on so double check the key state
+        checkKeyState();
+
+        // Re-retrieve truck data
+        retrieveTruckData();
+    }
+
     private void j1708Restarting()
     {
         // Re-retrieve truck data
+        retrieveTruckData();
+    }
+
+    private void retrieveTruckData()
+    {
         if (isTesting)
             StartTest();
         else
@@ -2730,6 +2763,10 @@ public class Main extends Activity
                     case NotReconnected:
                         if (isConnecting) // only show once
                             adapterNotReconnected();
+                        break;
+
+                    case J1939Starting:
+                        j1939Starting();
                         break;
 
                     case J1708Restarting:
