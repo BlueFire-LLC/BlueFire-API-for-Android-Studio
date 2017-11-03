@@ -404,3 +404,11 @@ Version 23.12:<ul>
     <li>Added property CANBusSpeed that will be returned when the ConnectionState J1939Started is raised.
     <li>Updated the Demo App to reflect the above changes.
 </ul>
+
+Version 23.13:<ul>
+    <li>More reliable event handling.
+    <li>Faster BLE re-connection and elimination of the BluetoothGattCallback.onConnectionStateChange exception.
+    <li>The UseBLE, UseBT21 will not be changed if the HardwareType is HW_6_Pin. This is to allow for BT21 and BLE 6-pin adapters. The IgnoreJ1939, and IgnoreJ1708 settings will still be set appropriately.
+    <li>ConnectionState J1939Starting will be raised only after connecting to the adapter, either when the key is turned on or immediately after authentication if the key is already on.
+    <li>Added option for the Demo App to kill itself on exiting (see onBackPressed).
+</ul>

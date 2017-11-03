@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
@@ -182,6 +183,10 @@ public class Main extends Activity
 
     private boolean isStartingService;
 
+    // Android process pid for the activity or service that instantiates the API.
+    private int appPid;
+    private boolean killApp = false;
+
     // BlueFire App settings\
 
     private SharedPreferences settings;
@@ -242,6 +247,12 @@ public class Main extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        // Set to kill the app when the user exits.
+        // Note, this is recommended as it will ensure that all API resources such as
+        // Bluetooth (BLE GATT) are released.
+        killApp = true;
+        appPid = Process.myPid();
 
         logNotifications("API Demo started.");
 
@@ -817,152 +828,6 @@ public class Main extends Activity
         }
     }
 
-    private void j1939Starting()
-    {
-        // Get the CAN bus speed
-        CANBusSpeeds CANBusSpeed = blueFire.CANBusSpeed();
-
-        String Message = "J1939 is starting, CAN bus speed is ";
-        switch (CANBusSpeed)
-        {
-            case K250:
-                Message += "250K.";
-                break;
-            case K500:
-                Message += "500K.";
-                break;
-            default:
-                Message += "unknown.";
-                break;
-        }
-        logNotifications(Message, true);
-
-        // Key is on so double check the key state
-        checkKeyState();
-
-        // Re-retrieve truck data
-        retrieveTruckData();
-    }
-
-    private void j1708Restarting()
-    {
-        // Re-retrieve truck data
-        retrieveTruckData();
-    }
-
-    private void retrieveTruckData()
-    {
-        if (isTesting)
-            StartTest();
-        else
-            getTruckData();
-    }
-
-    // Start retrieving data after connecting to the adapter
-    private void getAdapterData()
-    {
-        // Check for an incompatible version.
-        if (!blueFire.IsCompatible())
-        {
-            logNotifications("Incompatible Adapter.");
-
-            Toast.makeText(this, "The Adapter is not compatible with this API.", Toast.LENGTH_LONG).show();
-            disconnectAdapter();
-            return;
-        }
-
-        // Set to receive notifications from the adapter.
-        // Note, this should only be used during testing.
-        blueFire.SetNotificationsOn(true);
-
-        // Set the adapter led brightness
-        blueFire.SetLedBrightness(appLedBrightness);
-
-        // Set the performance mode
-        blueFire.SetPerformanceModeOn(appPerformanceMode);
-
-        // Get the adapter hardware type
-        appHardwareType = blueFire.HardwareType();
-
-        // Get the device and adapter ids
-        appDeviceId = blueFire.DeviceId();
-        appAdapterId = blueFire.AdapterId();
-
-        // Check for API setting the adapter data
-        appUseBT21 = blueFire.UseBT21;
-        appUseBLE = blueFire.UseBLE;
-
-        appIgnoreJ1939 = blueFire.IgnoreJ1939();
-        appIgnoreJ1708 = blueFire.IgnoreJ1708();
-
-        // Save any changed data from the API
-        saveSettings();
-
-        // Update UseBT21 and UseBLE checkboxes
-        checkUseBT21.setChecked(appUseBT21);
-        checkUseBLE.setChecked(appUseBLE);
-
-        // Update J1939 and J1708 checkboxes
-        checkUseJ1939.setChecked(!appIgnoreJ1939);
-        checkUseJ1708.setChecked(!appIgnoreJ1708);
-
-        // Show hardware and firmware versions
-        textHardware.setText(blueFire.HardwareVersion());
-        textFirmware.setText(blueFire.FirmwareVersion());
-
-        // Check the key state (key on/off)
-        checkKeyState();
-    }
-
-    private void adapterNotAuthenticated()
-    {
-        logNotifications("Adapter is not authenticated.");
-
-        adapterNotConnected();
-
-        Toast.makeText(this, "You are not authorized to access this adapter. Check for the correct adapter, the 'connect to last adapter' setting, or your user name and password.", Toast.LENGTH_LONG).show();
-    }
-
-    private void adapterConnected()
-    {
-        isConnected = true;
-        isConnecting = false;
-
-        // Enable Use J1939/J1708
-        checkUseJ1939.setEnabled(true);
-        checkUseJ1708.setEnabled(true);
-
-        // Enable adapter parameters
-        enableAdapterParms(true);
-
-        // Enable buttons
-        showDisconnectButton();
-        buttonUpdate.setEnabled(true);
-        buttonSendMonitor.setEnabled(true);
-
-        buttonNextFault.setVisibility(View.INVISIBLE);
-        buttonResetFault.setVisibility(View.INVISIBLE);
-
-        buttonTruckData.setEnabled(true);
-        buttonELDData.setEnabled(true);
-        buttonTest.setEnabled(true);
-
-        buttonConnect.requestFocus();
-
-        // Connect to ELD
-        blueFire.ELD.Connect();
-
-        // Get adapter data
-        getAdapterData();
-
-        if (isTesting)
-            StartTest();
-
-        String Message = "Adapter is connected.";
-        logNotifications(Message);
-        Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
-    }
-
     private void adapterDisconnected()
     {
         adapterNotConnected(false);
@@ -1042,6 +907,152 @@ public class Main extends Activity
         String Message = "Adapter did not reconnect.";
         logNotifications(Message);
         Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
+    }
+
+    private void adapterNotAuthenticated()
+    {
+        logNotifications("Adapter is not authenticated.");
+
+        adapterNotConnected();
+
+        Toast.makeText(this, "You are not authorized to access this adapter. Check for the correct adapter, the 'connect to last adapter' setting, or your user name and password.", Toast.LENGTH_LONG).show();
+    }
+
+    private void adapterConnected()
+    {
+        isConnected = true;
+        isConnecting = false;
+
+        // Enable Use J1939/J1708
+        checkUseJ1939.setEnabled(true);
+        checkUseJ1708.setEnabled(true);
+
+        // Enable adapter parameters
+        enableAdapterParms(true);
+
+        // Enable buttons
+        showDisconnectButton();
+        buttonUpdate.setEnabled(true);
+        buttonSendMonitor.setEnabled(true);
+
+        buttonNextFault.setVisibility(View.INVISIBLE);
+        buttonResetFault.setVisibility(View.INVISIBLE);
+
+        buttonTruckData.setEnabled(true);
+        buttonELDData.setEnabled(true);
+        buttonTest.setEnabled(true);
+
+        buttonConnect.requestFocus();
+
+        // Connect to ELD
+        blueFire.ELD.Connect();
+
+        // Get adapter data
+        getAdapterData();
+
+        if (isTesting)
+            StartTest();
+
+        String Message = "Adapter is connected.";
+        logNotifications(Message);
+        Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
+    }
+
+    private void j1939Starting()
+    {
+        // Get the CAN bus speed
+        CANBusSpeeds CANBusSpeed = blueFire.CANBusSpeed();
+
+        String Message = "J1939 is starting, CAN bus speed is ";
+        switch (CANBusSpeed)
+        {
+            case K250:
+                Message += "250K.";
+                break;
+            case K500:
+                Message += "500K.";
+                break;
+            default:
+                Message += "unknown.";
+                break;
+        }
+        logNotifications(Message, true);
+
+        // Key is on so double check the key state
+        checkKeyState();
+
+        // Re-retrieve truck data
+        retrieveTruckData();
+    }
+
+    private void j1708Restarting()
+    {
+        // Re-retrieve truck data
+        retrieveTruckData();
+    }
+
+    // Start retrieving data after connecting to the adapter
+    private void getAdapterData()
+    {
+        // Check for an incompatible version.
+        if (!blueFire.IsCompatible())
+        {
+            logNotifications("Incompatible Adapter.");
+
+            Toast.makeText(this, "The Adapter is not compatible with this API.", Toast.LENGTH_LONG).show();
+            disconnectAdapter();
+            return;
+        }
+
+        // Set to receive notifications from the adapter.
+        // Note, this should only be used during testing.
+        blueFire.SetNotificationsOn(true);
+
+        // Set the adapter led brightness
+        blueFire.SetLedBrightness(appLedBrightness);
+
+        // Set the performance mode
+        blueFire.SetPerformanceModeOn(appPerformanceMode);
+
+        // Get the adapter hardware type
+        appHardwareType = blueFire.HardwareType();
+
+        // Get the device and adapter ids
+        appDeviceId = blueFire.DeviceId();
+        appAdapterId = blueFire.AdapterId();
+
+        // Check for API setting the adapter data
+        appUseBT21 = blueFire.UseBT21;
+        appUseBLE = blueFire.UseBLE;
+
+        appIgnoreJ1939 = blueFire.IgnoreJ1939();
+        appIgnoreJ1708 = blueFire.IgnoreJ1708();
+
+        // Save any changed data from the API
+        saveSettings();
+
+        // Update UseBT21 and UseBLE checkboxes
+        checkUseBT21.setChecked(appUseBT21);
+        checkUseBLE.setChecked(appUseBLE);
+
+        // Update J1939 and J1708 checkboxes
+        checkUseJ1939.setChecked(!appIgnoreJ1939);
+        checkUseJ1708.setChecked(!appIgnoreJ1708);
+
+        // Show hardware and firmware versions
+        textHardware.setText(blueFire.HardwareVersion());
+        textFirmware.setText(blueFire.FirmwareVersion());
+
+        // Check the key state (key on/off)
+        checkKeyState();
+    }
+
+    private void retrieveTruckData()
+    {
+        if (isTesting)
+            StartTest();
+        else
+            getTruckData();
     }
 
     // BT21 Checkbox
@@ -2875,6 +2886,7 @@ public class Main extends Activity
     {
         try
         {
+            // Check if leaving the Truck page
             if (layoutTruck.getVisibility() == View.VISIBLE)
             {
                 saveSettings();
@@ -2884,6 +2896,7 @@ public class Main extends Activity
 
                 return;
             }
+            // Check for leaving the ELD page
             if (layoutELD.getVisibility() == View.VISIBLE)
             {
                 if (!editELDParms())
@@ -2897,11 +2910,23 @@ public class Main extends Activity
                 return;
             }
 
+            // Exiting the app, save settings
             saveSettings();
 
+            // Notify Android
             super.onBackPressed();
 
+            // Disconnect the adapter
             blueFire.Disconnect();
+
+            // Kill the app to ensure all resources (like BLE) are released.
+            // Note, this will close the BLE GATT connection if for some reason
+            // Android is keeping it open.
+            // Note, the app will be killed but most likely Android will restart it
+            // so it will show up under Settings/Apps but all the App and API resources
+            // will be stopped and restarted.
+            if (killApp)
+                Process.killProcess(appPid);
         }
         catch (Exception e) {}
     }

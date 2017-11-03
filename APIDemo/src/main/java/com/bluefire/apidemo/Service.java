@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.util.Log;
 
 import com.bluefire.api.BlueFire;
@@ -20,6 +21,10 @@ public class Service
     private ServiceThread serviceThread;
 
     private boolean serviceIsRunning;
+
+    // Android process pid for the activity or service that instantiates the API.
+    private int servicePid;
+    private boolean killService= false;
 
     private ConnectionStates connectionState = ConnectionStates.NotConnected;
 
@@ -52,6 +57,11 @@ public class Service
     private String appAdapterId = "";
     private boolean appConnectToLastAdapter;
 
+    private String appUserName = "";
+    private String appPassword = "";
+    private boolean appSecureDevice = false;
+    private boolean appSecureAdapter = false;
+
     private boolean appOptimizeDataRetrieval = false;
 
     private Context serviceContext;
@@ -59,6 +69,12 @@ public class Service
     public Service(Context context)
     {
         serviceContext = context; // the API requires a context
+
+        // Set to kill the service when the user exits.
+        // Note, this is recommended as it will ensure that all API resources such as
+        // Bluetooth (BLE GATT) are released.
+        killService = true;
+        servicePid = Process.myPid();
 
         // Set app variables
         appUseBLE = true;
@@ -102,6 +118,15 @@ public class Service
         disconnectAdapter();
 
         blueFire.Dispose();
+
+        // Kill the service to ensure all resources (like BLE) are released.
+        // Note, this will close the BLE GATT connection if for some reason
+        // Android is keeping it open.
+        // Note, the app will be killed but most likely Android will restart it
+        // so it will show up under Settings/Apps but all the App and API resources
+        // will be stopped and restarted.
+        if (killService)
+            Process.killProcess(servicePid);
     }
 
     private class ServiceThread extends Thread
@@ -176,6 +201,9 @@ public class Service
         // Set the connect to last adapter setting
         blueFire.SetConnectToLastAdapter(appConnectToLastAdapter);
 
+        // Set the adapter security parameters
+        blueFire.SetSecurity(appSecureDevice, appSecureAdapter, appUserName, appPassword);
+
         // Set to optimize data retrieval
         blueFire.SetOptimizeDataRetrieval(appOptimizeDataRetrieval);
     }
@@ -190,6 +218,55 @@ public class Service
             blueFire.Disconnect(WaitForDisconnect);
         }
         catch(Exception e) {}
+    }
+
+    private void adapterDisconnected()
+    {
+        logNotifications("Adapter disconnected.");
+
+        adapterNotConnected();
+    }
+
+    private void adapterNotConnected()
+    {
+        logNotifications("Adapter not connected.");
+
+        isConnected = false;
+        isConnecting = false;
+
+        logStatus();
+    }
+
+    private void adapterReconnecting()
+    {
+        if (!isConnecting)
+            logNotifications("App lost connection to the Adapter. Reason is " + blueFire.ReconnectReason() + ".");
+
+        logNotifications("Adapter re-connecting.");
+
+        isConnected = false;
+        isConnecting = true;
+    }
+
+    private void adapterReconnected()
+    {
+        logNotifications("Adapter re-connected.");
+
+        adapterConnected();
+    }
+
+    private void adapterNotReconnected()
+    {
+        logNotifications("Adapter not re-connected.");
+
+        adapterNotConnected();
+    }
+
+    private void adapterNotAuthenticated()
+    {
+        logNotifications("Adapter not authenticated.");
+
+        adapterNotConnected();
     }
 
     private void adapterConnected()
@@ -312,55 +389,6 @@ public class Service
 
             isKeyOn = keyIsOn;
         }
-    }
-
-    private void adapterNotAuthenticated()
-    {
-        logNotifications("Adapter not authenticated.");
-
-        adapterNotConnected();
-    }
-
-    private void adapterDisconnected()
-    {
-        logNotifications("Adapter disconnected.");
-
-        adapterNotConnected();
-    }
-
-    private void adapterNotConnected()
-    {
-        logNotifications("Adapter not connected.");
-
-        isConnected = false;
-        isConnecting = false;
-
-        logStatus();
-    }
-
-    private void adapterReconnecting()
-    {
-        if (!isConnecting)
-            logNotifications("App lost connection to the Adapter. Reason is " + blueFire.ReconnectReason() + ".");
-
-        logNotifications("Adapter re-connecting.");
-
-        isConnected = false;
-        isConnecting = true;
-    }
-
-    private void adapterReconnected()
-    {
-        logNotifications("Adapter re-connected.");
-
-        adapterConnected();
-    }
-
-    private void adapterNotReconnected()
-    {
-        logNotifications("Adapter not re-connected.");
-
-        adapterNotConnected();
     }
 
     private void j1939Starting()
