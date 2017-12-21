@@ -61,8 +61,10 @@ public class Main extends Activity
     private CheckBox checkUseBLE;
     private CheckBox checkUseJ1939;
     private CheckBox checkUseJ1708;
+    private CheckBox checkUseOBD2;
     private CheckBox checkSecureDevice;
     private CheckBox checkSecureAdapter;
+    private CheckBox checkSendAllPackets;
     private CheckBox checkConnectLastAdapter;
 
     private Button buttonConnect;
@@ -201,9 +203,11 @@ public class Main extends Activity
     private SleepModes appSleepMode = SleepModes.NoSleep;
     private boolean appPerformanceMode = false;
     public int appMinInterval;
+    public boolean appSendAllPackets = false;
 
     private boolean appIgnoreJ1939 = false;
     private boolean appIgnoreJ1708 = false;
+    private boolean appIgnoreOBD2 = false;
 
     private String appDeviceId = "";
     private String appAdapterId = "";
@@ -277,8 +281,23 @@ public class Main extends Activity
         // Initialize adapter properties
         initializeAdapter();
 
+        // Initialize settings that are not in the form for the
+        // user to change.
+        initializeSettings();
+
         // Initialize the app startup form
         initializeForm();
+    }
+
+    private void initializeSettings()
+    {
+        // Initialize settings that are not in the form for the
+        // user to change.
+
+        appPerformanceMode = false;
+        appOptimizeDataRetrieval = true;
+
+        saveSettings();
     }
 
     private void getSettings()
@@ -289,7 +308,9 @@ public class Main extends Activity
         appUseBT21 = settings.getBoolean("UseBT21", false);
         appIgnoreJ1939 = settings.getBoolean("IgnoreJ1939", false);
         appIgnoreJ1708 = settings.getBoolean("IgnoreJ1708", true);
+        appIgnoreOBD2 = settings.getBoolean("IgnoreOBD2", true);
         appPerformanceMode = settings.getBoolean("IsPerformanceModeOn", false);
+        appSendAllPackets = settings.getBoolean("IsSendAllPackets", false);
         appSecureDevice = settings.getBoolean("SecureDevice", false);
         appSecureAdapter = settings.getBoolean("SecureAdapter", false);
         appConnectToLastAdapter = settings.getBoolean("ConnectToLastAdapter", false);
@@ -330,7 +351,9 @@ public class Main extends Activity
         settingsSave.putBoolean("UseBT21", appUseBT21);
         settingsSave.putBoolean("IgnoreJ1939", appIgnoreJ1939);
         settingsSave.putBoolean("IgnoreJ1708", appIgnoreJ1708);
+        settingsSave.putBoolean("IgnoreOBD2", appIgnoreOBD2);
         settingsSave.putBoolean("IsPerformanceModeOn", appPerformanceMode);
+        settingsSave.putBoolean("IsSendAllPackets", appSendAllPackets);
         settingsSave.putBoolean("SecureDevice", appSecureDevice);
         settingsSave.putBoolean("SecureAdapter", appSecureAdapter);
         settingsSave.putBoolean("ConnectToLastAdapter", appConnectToLastAdapter);
@@ -380,6 +403,7 @@ public class Main extends Activity
         // Set to ignore data bus settings
         blueFire.SetIgnoreJ1939(appIgnoreJ1939);
         blueFire.SetIgnoreJ1708(appIgnoreJ1708);
+        blueFire.SetIgnoreOBD2(appIgnoreOBD2);
 
         // Set the minimum interval
         blueFire.SetMinInterval(appMinInterval);
@@ -426,6 +450,9 @@ public class Main extends Activity
         // Set to optimize data retrieval
         blueFire.SetOptimizeDataRetrieval(appOptimizeDataRetrieval);
 
+        // Set the send all packets option
+        blueFire.SetSendAllPackets(appSendAllPackets);
+
         // Set streaming and recording mode
         blueFire.ELD.SetStreaming(appStreamingELD);
         blueFire.ELD.SetRecordingMode(RecordingModes.forValue(appRecordingMode));
@@ -454,8 +481,10 @@ public class Main extends Activity
         checkUseBLE = (CheckBox) findViewById(R.id.checkUseBLE);
         checkUseJ1939 = (CheckBox) findViewById(R.id.checkUseJ1939);
         checkUseJ1708 = (CheckBox) findViewById(R.id.checkUseJ1708);
+        checkUseOBD2 = (CheckBox) findViewById(R.id.checkUseOBD2);
         checkSecureDevice = (CheckBox) findViewById(R.id.checkSecureDevice);
         checkSecureAdapter = (CheckBox) findViewById(R.id.checkSecureAdapter);
+        checkSendAllPackets = (CheckBox) findViewById(R.id.checkSendAllPackets);
         checkConnectLastAdapter = (CheckBox) findViewById(R.id.checkConnectLastAdapter);
 
         buttonConnect = (Button) findViewById(R.id.buttonConnect);
@@ -534,14 +563,8 @@ public class Main extends Activity
 
         showConnectButton();
 
-        buttonSendMonitor.setEnabled(false);
-
         buttonNextFault.setVisibility(View.INVISIBLE);
         buttonResetFault.setVisibility(View.INVISIBLE);
-
-        buttonTruckData.setEnabled(false);
-        buttonELDData.setEnabled(false);
-        buttonTest.setEnabled(false);
 
         textStatus.setText("Not Connected");
 
@@ -553,7 +576,7 @@ public class Main extends Activity
     private void clearForm()
     {
         // Disable adapter parameters
-        enableAdapterParms(false);
+        enableAdapterParms();
 
         textHeartbeat.setText("0");
 
@@ -566,8 +589,10 @@ public class Main extends Activity
         checkUseBLE.setChecked(appUseBLE);
         checkUseJ1939.setChecked(!appIgnoreJ1939); // checkUseJ1939 is the opposite of ignoreJ1939
         checkUseJ1708.setChecked(!appIgnoreJ1708); // checkUseJ1708 is the opposite of ignoreJ1708
+        checkUseOBD2.setChecked(!appIgnoreOBD2); // checkUseJ1708 is the opposite of ignoreJ1708
         checkSecureDevice.setChecked(appSecureDevice);
         checkSecureAdapter.setChecked(appSecureAdapter);
+        checkSendAllPackets.setChecked(appSendAllPackets);
         checkConnectLastAdapter.setChecked(appConnectToLastAdapter);
 
         textUserName.setText(appUserName);
@@ -580,15 +605,39 @@ public class Main extends Activity
         setELDParms();
     }
 
-    private void enableAdapterParms(boolean isEnable)
+    private void enableAdapterParms()
     {
         // Enable/Disable Adapter page parameters
 
-        checkSecureDevice.setEnabled(isEnable);
-        checkSecureAdapter.setEnabled(isEnable);
+        // Enable only if not connecting or connected
+        boolean isNotConnecting = (!isConnecting && !isConnected);
 
-        textPGN.setEnabled(isEnable);
-        textPGNData.setEnabled(isEnable);
+        checkUseBLE.setEnabled(isNotConnecting);
+        checkUseBT21.setEnabled(isNotConnecting);
+
+        checkUseJ1939.setEnabled(isNotConnecting);
+        checkUseJ1708.setEnabled(isNotConnecting);
+        checkUseOBD2.setEnabled(isNotConnecting);
+
+        checkConnectLastAdapter.setEnabled(isNotConnecting);
+
+        checkSecureDevice.setEnabled(isNotConnecting);
+        checkSecureAdapter.setEnabled(isNotConnecting);
+
+        textUserName.setEnabled(isNotConnecting);
+        textPassword.setEnabled(isNotConnecting);
+
+        buttonUpdate.setEnabled(isNotConnecting);
+
+        // Enable only if connected
+
+        buttonTruckData.setEnabled(isConnected);
+        buttonELDData.setEnabled(isConnected);
+        buttonTest.setEnabled(isConnected);
+
+        textPGN.setEnabled(isConnected);
+        textPGNData.setEnabled(isConnected);
+        buttonSendMonitor.setEnabled(isConnected);
     }
 
     // Connect Button
@@ -614,13 +663,11 @@ public class Main extends Activity
 
                 checkUseJ1939.setEnabled(false);
                 checkUseJ1708.setEnabled(false);
+                checkUseOBD2.setEnabled(false);
 
                 showDisconnectButton();
 
-                enableAdapterParms(false);
-
-                buttonUpdate.setEnabled(false);
-                buttonSendMonitor.setEnabled(false);
+                enableAdapterParms();
 
                 buttonNextFault.setVisibility(View.INVISIBLE);
                 buttonResetFault.setVisibility(View.INVISIBLE);
@@ -646,18 +693,12 @@ public class Main extends Activity
     {
         isStartingService = true;
 
-        enableAdapterParms(false);
+        enableAdapterParms();
 
         buttonStartService.setEnabled(false);
         buttonStopService.setEnabled(true);
 
         buttonConnect.setEnabled(false);
-        buttonUpdate.setEnabled(false);
-        buttonSendMonitor.setEnabled(false);
-
-        buttonTruckData.setEnabled(false);
-        buttonELDData.setEnabled(false);
-        buttonTest.setEnabled(false);
 
         if (appUseBT21)
             startConnection();
@@ -673,18 +714,12 @@ public class Main extends Activity
 
         demoService.stopService();
 
-        enableAdapterParms(false);
+        enableAdapterParms();
 
         buttonStartService.setEnabled(true);
         buttonStopService.setEnabled(false);
 
         buttonConnect.setEnabled(true);
-        buttonUpdate.setEnabled(true);
-        buttonSendMonitor.setEnabled(true);
-
-        buttonTruckData.setEnabled(true);
-        buttonELDData.setEnabled(true);
-        buttonTest.setEnabled(true);
     }
 
     private void checkBluetoothPermissions()
@@ -802,18 +837,12 @@ public class Main extends Activity
     {
         try
         {
-            enableAdapterParms(false);
+            enableAdapterParms();
 
             buttonConnect.setEnabled(false);
-            buttonUpdate.setEnabled(false);
-            buttonSendMonitor.setEnabled(false);
 
             buttonNextFault.setVisibility(View.INVISIBLE);
             buttonResetFault.setVisibility(View.INVISIBLE);
-
-            buttonTruckData.setEnabled(false);
-            buttonELDData.setEnabled(false);
-            buttonTest.setEnabled(false);
 
             buttonStartService.setEnabled(false);
             buttonStopService.setEnabled(false);
@@ -848,16 +877,14 @@ public class Main extends Activity
 
         showConnectButton();
 
-        enableAdapterParms(false);
+        enableAdapterParms();
 
         checkUseBT21.setEnabled(true);
         checkUseBLE.setEnabled(true);
 
         checkUseJ1939.setEnabled(true);
         checkUseJ1708.setEnabled(true);
-
-        buttonUpdate.setEnabled(true);
-        buttonSendMonitor.setEnabled(false);
+        checkUseOBD2.setEnabled(true);
 
         buttonConnect.requestFocus();
 
@@ -876,11 +903,9 @@ public class Main extends Activity
         isConnected = false;
         isConnecting = true;
 
-        enableAdapterParms(false);
+        enableAdapterParms();
 
         buttonConnect.setEnabled(true);
-        buttonUpdate.setEnabled(false);
-        buttonSendMonitor.setEnabled(false);
 
         logAPINotifications();
 
@@ -928,12 +953,10 @@ public class Main extends Activity
         checkUseJ1708.setEnabled(true);
 
         // Enable adapter parameters
-        enableAdapterParms(true);
+        enableAdapterParms();
 
         // Enable buttons
         showDisconnectButton();
-        buttonUpdate.setEnabled(true);
-        buttonSendMonitor.setEnabled(true);
 
         buttonNextFault.setVisibility(View.INVISIBLE);
         buttonResetFault.setVisibility(View.INVISIBLE);
@@ -958,12 +981,18 @@ public class Main extends Activity
         Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
     }
 
-    private void j1939Starting()
+    private void CANStarting()
     {
         // Get the CAN bus speed
         CANBusSpeeds CANBusSpeed = blueFire.CANBusSpeed();
 
-        String Message = "J1939 is starting, CAN bus speed is ";
+        String Message;
+        if (blueFire.IsOBD2())
+            Message = "OBD2";
+        else
+            Message = "J1939";
+        Message += " is starting, CAN bus speed is ";
+
         switch (CANBusSpeed)
         {
             case K250:
@@ -1027,6 +1056,7 @@ public class Main extends Activity
 
         appIgnoreJ1939 = blueFire.IgnoreJ1939();
         appIgnoreJ1708 = blueFire.IgnoreJ1708();
+        appIgnoreOBD2 = blueFire.IgnoreOBD2();
 
         // Save any changed data from the API
         saveSettings();
@@ -1038,6 +1068,7 @@ public class Main extends Activity
         // Update J1939 and J1708 checkboxes
         checkUseJ1939.setChecked(!appIgnoreJ1939);
         checkUseJ1708.setChecked(!appIgnoreJ1708);
+        checkUseOBD2.setChecked(!appIgnoreOBD2);
 
         // Show hardware and firmware versions
         textHardware.setText(blueFire.HardwareVersion());
@@ -1104,6 +1135,16 @@ public class Main extends Activity
         return true;
     }
 
+    // Send All Packets Checkbox
+    public void onSendAllPacketsCheck(View view)
+    {
+        appSendAllPackets = checkSendAllPackets.isChecked();
+
+        blueFire.SetSendAllPackets(appSendAllPackets);
+
+        saveSettings();
+    }
+
     // Connect to Last Adapter Checkbox
     public void onConnectLastAdapterCheck(View view)
     {
@@ -1143,11 +1184,14 @@ public class Main extends Activity
         // Set to ignore J1939 (opposite of checkUseJ1939)
         appIgnoreJ1939 = !checkUseJ1939.isChecked();
 
-        // Update api or adapter
-        if (isConnected)
-            blueFire.SetIgnoreDatabuses(appIgnoreJ1939, appIgnoreJ1708);
-        else
-            blueFire.SetIgnoreJ1939(appIgnoreJ1939);
+        if (!appIgnoreJ1939)
+        {
+            appIgnoreOBD2 = true;
+            checkUseOBD2.setChecked(false);
+        }
+
+        // Update api
+        blueFire.SetIgnoreJ1939(appIgnoreJ1939);
 
         saveSettings();
     }
@@ -1158,11 +1202,32 @@ public class Main extends Activity
         // Set to ignore J708 (opposite of checkUseJ1708)
         appIgnoreJ1708 = !checkUseJ1708.isChecked();
 
-        // Update api or adapter
-        if (isConnected)
-            blueFire.SetIgnoreDatabuses(appIgnoreJ1939, appIgnoreJ1708);
-        else
-            blueFire.SetIgnoreJ1708(appIgnoreJ1708);
+        if (!appIgnoreJ1708)
+        {
+            appIgnoreOBD2 = true;
+            checkUseOBD2.setChecked(false);
+        }
+        // Update api
+        blueFire.SetIgnoreJ1708(appIgnoreJ1708);
+
+        saveSettings();
+    }
+
+    // OBD2 Checkbox
+    public void onUseOBD2Check(View view)
+    {
+        // Set to ignore J708 (opposite of checkUseJ1708)
+        appIgnoreOBD2 = !checkUseOBD2.isChecked();
+
+        if (!appIgnoreOBD2)
+        {
+            appIgnoreJ1939 = true;
+            appIgnoreJ1708 = true;
+            checkUseJ1939.setChecked(false);
+            checkUseJ1708.setChecked(false);
+        }
+        // Update api
+        blueFire.SetIgnoreOBD2(appIgnoreOBD2);
 
         saveSettings();
     }
@@ -1198,6 +1263,7 @@ public class Main extends Activity
     // Update Button
     public void onUpdateClick(View view)
     {
+        // Update username and password
         updateSecurity();
 
         buttonConnect.requestFocus();
@@ -1216,15 +1282,10 @@ public class Main extends Activity
             appSecureAdapter = secureAdapter;
             appUserName = userNameText;
             appPassword = passwordText;
+            saveSettings();
 
-            if (!blueFire.UpdateSecurity(appSecureDevice, appSecureAdapter, appUserName, appPassword))
-                Toast.makeText(this, "Security parameters have not been updated.", Toast.LENGTH_SHORT).show();
-            else
-            {
-                Toast.makeText(this, "Security parameters have been updated.", Toast.LENGTH_SHORT).show();
-                saveSettings();
-                return true;
-            }
+            blueFire.SetSecurity(appSecureDevice, appSecureAdapter, appUserName, appPassword);
+            return true;
         }
         return false;
     }
@@ -1529,7 +1590,7 @@ public class Main extends Activity
 
         // Set the retrieval method and interval.
         // Note, this is here for demo-ing the different methods.
-        retrievalMethod = RetrievalMethods.OnChange; // default
+        retrievalMethod = RetrievalMethods.OnChange;
         retrievalInterval = blueFire.MinInterval(); // default, only required if RetrievalMethod is OnInterval
 
         switch (groupNo)
@@ -1669,14 +1730,22 @@ public class Main extends Activity
                 textView6.setText("");
                 textView7.setText("");
 
-                if (!IsRetrievingVINID)
+//                if (!appIgnoreOBD2)
+//                {
+//                    clearAdapterData();
+//                    blueFire.GetEngineVIN();
+//                }
+//                else
                 {
-                    clearAdapterData();
+                    if (!IsRetrievingVINID)
+                    {
+                        clearAdapterData();
 
-                    IsRetrievingVINID = true;
+                        IsRetrievingVINID = true;
 
-                    getTruckInfoThread = new GetTruckInfoThread();
-                    getTruckInfoThread.start();
+                        getTruckInfoThread = new GetTruckInfoThread();
+                        getTruckInfoThread.start();
+                    }
                 }
 
                 break;
@@ -2776,8 +2845,8 @@ public class Main extends Activity
                             adapterNotReconnected();
                         break;
 
-                    case J1939Starting:
-                        j1939Starting();
+                    case CANStarting:
+                        CANStarting();
                         break;
 
                     case J1708Restarting:

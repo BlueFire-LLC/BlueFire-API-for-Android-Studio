@@ -488,7 +488,7 @@ public class Service
                             adapterNotReconnected();
                         break;
 
-                    case J1939Starting:
+                    case CANStarting:
                         j1939Starting();
                         break;
 

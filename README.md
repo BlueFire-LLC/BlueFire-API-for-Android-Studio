@@ -412,3 +412,22 @@ Version 23.13:<ul>
     <li>ConnectionState J1939Starting will be raised only after connecting to the adapter, either when the key is turned on or immediately after authentication if the key is already on.
     <li>Added option for the Demo App to kill itself on exiting (see onBackPressed).
 </ul>
+
+Version 23.14:<ul>
+    <li>GetELDData settings are changed to RPM and Speed - OnInterval, one second; Distance/Odometer - OnChange, 5 seconds; Total Hours - OnChange, 10 seconds.
+    <li>Invalid J1587 MIDs are ignored.
+    <li>Internal exception handling.
+</ul>
+
+Version 24.0 Beta 1:<ul>
+    <li>Added OBD2 support. Requires Adapter Beta Firmware 3.15.3.
+    <li>Added property IgnoreOBD2 which when set to false (connecting to OBD2) will set IgnoreJ1939 and IgnoreJ1708 true.
+    <li>Added property IsOBD2 which will be set when CAN is starting (CANStarting).
+    <li>Renamed ConnectionState J1939Starting to CANStarting to reflect CAN Starting for either J1939 or OBD2.
+    <li>Removed property SetIgnoreDataBuses because the properties IgnoreJ1939/J1708/OBD2 are required for the Adapter to connect to the correct ECUs.
+    <li>Remove method UpdateSecurity because security parameters must be set prior to connecting to the Adapter.
+    <li>Added property SendAllPackets that will instruct the Adapter to send all J1939 VIN, Make, Model, etc data packets all at one time instead of in a conversational manner. This also applies to the ELD VIN.
+    <li>The Adapter will wait to initiate a CAN connection until after all Adapter data has been retrieved by the API. The previous API version initiated the CAN connection when the Adapter is authenticated.
+    <li>The Demo App will show the API Beta version.
+    <li>Updated the Demo App to reflect the above changes.
+</ul>

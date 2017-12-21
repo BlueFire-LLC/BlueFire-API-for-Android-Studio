@@ -56,26 +56,38 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <CheckBox
-                    android:id="@+id/checkUseBT21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/labelAdapter"
-                    android:layout_alignBottom="@+id/labelLedBrightness"
-                    android:layout_marginLeft="80dp"
-                    android:onClick="onUseBT21Check"
-                    android:text="BT 2.1"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <CheckBox
                     android:id="@+id/checkUseBLE"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelAdapter"
                     android:layout_alignBottom="@+id/labelLedBrightness"
-                    android:layout_alignLeft="@+id/checkUseBT21"
                     android:layout_marginLeft="90dp"
                     android:onClick="onUseBLECheck"
                     android:text="BLE"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/checkUseBT21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelAdapter"
+                    android:layout_alignBottom="@+id/labelLedBrightness"
+                    android:layout_alignLeft="@+id/checkUseBLE"
+                    android:layout_marginLeft="80dp"
+                    android:onClick="onUseBT21Check"
+                    android:text="BT 2.1"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Reset Settings Button    -->
+                <Button
+                    android:id="@+id/buttonReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/checkUseBT21"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onResetSettingsClick"
+                    android:text="Reset"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <!--  Data Bus Checkboxez   -->
@@ -95,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelDataBus"
                     android:layout_alignBottom="@+id/labelDataBus"
-                    android:layout_alignLeft="@+id/checkUseBT21"
+                    android:layout_alignLeft="@+id/checkUseBLE"
                     android:onClick="onUseJ1939Check"
                     android:text="J1939"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -112,6 +124,18 @@
                     android:text="J1708"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
+                <CheckBox
+                    android:id="@+id/checkUseOBD2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelDataBus"
+                    android:layout_alignBottom="@+id/labelDataBus"
+                    android:layout_alignLeft="@+id/checkUseJ1708"
+                    android:layout_marginLeft="90dp"
+                    android:onClick="onUseOBD2Check"
+                    android:text="OBD2"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
                 <!--  Separator    -->
                 <View
                     android:id="@+id/lineSeparator0"
@@ -119,20 +143,8 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_below="@+id/checkUseJ1708"
+                    android:layout_below="@+id/checkUseOBD2"
                     android:background="@android:color/darker_gray"/>
-
-                <!--  Reset Settings Button    -->
-                <Button
-                    android:id="@+id/buttonReset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/checkUseJ1708"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:onClick="onResetSettingsClick"
-                    android:text="Reset"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <!--  Connect Button    -->
                 <Button
@@ -251,15 +263,36 @@
                     android:maxLength="3"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
+                <!--  Send All Packets Checkbox  -->
+                <TextView
+                    android:id="@+id/labelSendAllPackets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/textLedBrightness"
+                    android:text="Send All Packets:"
+                    android:layout_marginTop="5dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/checkSendAllPackets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelSendAllPackets"
+                    android:layout_alignBottom="@+id/labelSendAllPackets"
+                    android:layout_marginLeft="160dp"
+                    android:onClick="onSendAllPacketsCheck"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
                 <!--  Connect to Last Adapter Checkbox   -->
                 <TextView
                     android:id="@+id/labelConnectLastAdapter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin"
-                    android:layout_below="@+id/textLedBrightness"
+                    android:layout_below="@+id/labelSendAllPackets"
                     android:text="Connect to Last Adapter:"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <CheckBox
