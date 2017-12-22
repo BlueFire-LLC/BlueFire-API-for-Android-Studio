@@ -429,7 +429,7 @@ Version 24.0 Beta 2:<ul>
     <li>Removed method UpdateSecurity because security parameters must be set prior to connecting to the Adapter.
     <li>Added property DisconnectedReboot that will instruct the Adapter to reboot every hour when not connected to the App (Firmware 3.12+).
     <li>Added property SendAllPackets that will instruct the Adapter to send all J1939 VIN, Make, Model, etc data packets at one time instead of in a conversational manner. This also applies to the ELD VIN.
-    <li>The Adapter will wait to initiate a CAN connection until after all Adapter data has been retrieved by the API. The previous API version initiated the CAN connection when the Adapter is authenticated.
+    <li>The Adapter will wait to initiate a CAN connection until all Adapter data has been retrieved by the API. The previous API version initiated the CAN connection when the Adapter is authenticated.
     <li>The Demo App will show the API Beta version.
     <li>Updated the Demo App to reflect the above changes.
 </ul>
