@@ -202,6 +202,7 @@ public class Main extends Activity
     private int appLedBrightness = 100;
     private SleepModes appSleepMode = SleepModes.NoSleep;
     private boolean appPerformanceMode = false;
+    private boolean appDisconnectedReboot = false;
     public int appMinInterval;
     public boolean appSendAllPackets = false;
 
@@ -295,6 +296,7 @@ public class Main extends Activity
         // user to change.
 
         appPerformanceMode = false;
+        appDisconnectedReboot = true;
         appOptimizeDataRetrieval = true;
 
         saveSettings();
@@ -309,8 +311,9 @@ public class Main extends Activity
         appIgnoreJ1939 = settings.getBoolean("IgnoreJ1939", false);
         appIgnoreJ1708 = settings.getBoolean("IgnoreJ1708", true);
         appIgnoreOBD2 = settings.getBoolean("IgnoreOBD2", true);
-        appPerformanceMode = settings.getBoolean("IsPerformanceModeOn", false);
-        appSendAllPackets = settings.getBoolean("IsSendAllPackets", false);
+        appPerformanceMode = settings.getBoolean("PerformanceMode", false);
+        appDisconnectedReboot = settings.getBoolean("DisconnectedReboot", false);
+        appSendAllPackets = settings.getBoolean("SendAllPackets", false);
         appSecureDevice = settings.getBoolean("SecureDevice", false);
         appSecureAdapter = settings.getBoolean("SecureAdapter", false);
         appConnectToLastAdapter = settings.getBoolean("ConnectToLastAdapter", false);
@@ -352,8 +355,9 @@ public class Main extends Activity
         settingsSave.putBoolean("IgnoreJ1939", appIgnoreJ1939);
         settingsSave.putBoolean("IgnoreJ1708", appIgnoreJ1708);
         settingsSave.putBoolean("IgnoreOBD2", appIgnoreOBD2);
-        settingsSave.putBoolean("IsPerformanceModeOn", appPerformanceMode);
-        settingsSave.putBoolean("IsSendAllPackets", appSendAllPackets);
+        settingsSave.putBoolean("PerformanceMode", appPerformanceMode);
+        settingsSave.putBoolean("DisconnectedReboot", appDisconnectedReboot);
+        settingsSave.putBoolean("SendAllPackets", appSendAllPackets);
         settingsSave.putBoolean("SecureDevice", appSecureDevice);
         settingsSave.putBoolean("SecureAdapter", appSecureAdapter);
         settingsSave.putBoolean("ConnectToLastAdapter", appConnectToLastAdapter);
@@ -1042,6 +1046,9 @@ public class Main extends Activity
 
         // Set the performance mode
         blueFire.SetPerformanceModeOn(appPerformanceMode);
+
+        // Set the disconnect reboot option
+        blueFire.SetDisconnectedReboot(appDisconnectedReboot);
 
         // Get the adapter hardware type
         appHardwareType = blueFire.HardwareType();
