@@ -307,7 +307,7 @@ public class Main extends Activity
 
         // Set the disconnect reboot option
         appDisconnectedReboot = true;
-        appDisconnectedRebootInterval = 2; // for testing
+        appDisconnectedRebootInterval = 60; // minutes
         blueFire.SetDisconnectedReboot(appDisconnectedReboot, appDisconnectedRebootInterval);
 
         // Set Optimize Data Retrieval
