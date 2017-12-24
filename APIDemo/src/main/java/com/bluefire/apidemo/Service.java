@@ -1,3 +1,4 @@
+//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.annotation.SuppressLint;
@@ -291,13 +292,6 @@ public class Service
             disconnectAdapter();
             return;
         }
-
-        // Set to receive notifications from the adapter.
-        // Note, this should only be used during testing.
-        blueFire.SetNotificationsOn(true);
-
-        // Set the adapter led brightness
-        blueFire.SetLedBrightness(appLedBrightness);
 
         // Get the adapter id
         appDeviceId = blueFire.DeviceId();

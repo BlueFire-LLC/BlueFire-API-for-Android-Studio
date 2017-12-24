@@ -122,8 +122,8 @@
     <orderEntry type="library" scope="TEST" name="com.android.support.test.espresso:espresso-idling-resource-2.2.2" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-26.0.0-alpha1" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-utils-26.0.0-alpha1" level="project" />
-    <orderEntry type="library" name="artifacts:bluefire-api-v24.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="javax.annotation:javax.annotation-api:1.2@jar" level="project" />
+    <orderEntry type="library" name="artifacts:bluefire-api-v24.0.3" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-26.0.0-alpha1" level="project" />
     <orderEntry type="library" scope="TEST" name="com.google.code.findbugs:jsr305:2.0.1@jar" level="project" />
     <orderEntry type="library" name="android-android-25" level="project" />

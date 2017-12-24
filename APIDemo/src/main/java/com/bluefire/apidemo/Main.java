@@ -1,3 +1,4 @@
+//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.Manifest;
@@ -203,6 +204,7 @@ public class Main extends Activity
     private SleepModes appSleepMode = SleepModes.NoSleep;
     private boolean appPerformanceMode = false;
     private boolean appDisconnectedReboot = false;
+    private int appDisconnectedRebootInterval = 60; // minutes
     public int appMinInterval;
     public boolean appSendAllPackets = false;
 
@@ -295,10 +297,23 @@ public class Main extends Activity
         // Initialize settings that are not in the form for the
         // user to change.
 
+        // Set the sleep mode
+        appSleepMode = SleepModes.NoSleep;
+        blueFire.SetSleepMode(appSleepMode);
+
+        // Set the performance mode
         appPerformanceMode = false;
+        blueFire.SetPerformanceModeOn(appPerformanceMode);
+
+        // Set the disconnect reboot option
         appDisconnectedReboot = true;
+        appDisconnectedRebootInterval = 2; // for testing
+        blueFire.SetDisconnectedReboot(appDisconnectedReboot, appDisconnectedRebootInterval);
+
+        // Set Optimize Data Retrieval
         appOptimizeDataRetrieval = true;
 
+        // Save settings
         saveSettings();
     }
 
@@ -313,6 +328,7 @@ public class Main extends Activity
         appIgnoreOBD2 = settings.getBoolean("IgnoreOBD2", true);
         appPerformanceMode = settings.getBoolean("PerformanceMode", false);
         appDisconnectedReboot = settings.getBoolean("DisconnectedReboot", false);
+        appDisconnectedRebootInterval = settings.getInt("DisconnectedRebootInterval", blueFire.DisconnectedRebootIntervalDefault);
         appSendAllPackets = settings.getBoolean("SendAllPackets", false);
         appSecureDevice = settings.getBoolean("SecureDevice", false);
         appSecureAdapter = settings.getBoolean("SecureAdapter", false);
@@ -357,6 +373,7 @@ public class Main extends Activity
         settingsSave.putBoolean("IgnoreOBD2", appIgnoreOBD2);
         settingsSave.putBoolean("PerformanceMode", appPerformanceMode);
         settingsSave.putBoolean("DisconnectedReboot", appDisconnectedReboot);
+        settingsSave.putInt("DisconnectedRebootInterval", appDisconnectedRebootInterval);
         settingsSave.putBoolean("SendAllPackets", appSendAllPackets);
         settingsSave.putBoolean("SecureDevice", appSecureDevice);
         settingsSave.putBoolean("SecureAdapter", appSecureAdapter);
@@ -403,6 +420,10 @@ public class Main extends Activity
         // Set Bluetooth adapter type
         blueFire.UseBLE = appUseBLE;
         blueFire.UseBT21 = appUseBT21;
+
+        // Set to receive notifications from the adapter.
+        // Note, this should only be used during testing.
+        blueFire.SetNotificationsOn(true);
 
         // Set to ignore data bus settings
         blueFire.SetIgnoreJ1939(appIgnoreJ1939);
@@ -1037,19 +1058,6 @@ public class Main extends Activity
             return;
         }
 
-        // Set to receive notifications from the adapter.
-        // Note, this should only be used during testing.
-        blueFire.SetNotificationsOn(true);
-
-        // Set the adapter led brightness
-        blueFire.SetLedBrightness(appLedBrightness);
-
-        // Set the performance mode
-        blueFire.SetPerformanceModeOn(appPerformanceMode);
-
-        // Set the disconnect reboot option
-        blueFire.SetDisconnectedReboot(appDisconnectedReboot);
-
         // Get the adapter hardware type
         appHardwareType = blueFire.HardwareType();
 
@@ -1136,8 +1144,9 @@ public class Main extends Activity
         }
 
         appLedBrightness = ledBrightness;
-
         saveSettings();
+
+        blueFire.SetLedBrightness(appLedBrightness);
 
         return true;
     }
@@ -1146,10 +1155,9 @@ public class Main extends Activity
     public void onSendAllPacketsCheck(View view)
     {
         appSendAllPackets = checkSendAllPackets.isChecked();
+        saveSettings();
 
         blueFire.SetSendAllPackets(appSendAllPackets);
-
-        saveSettings();
     }
 
     // Connect to Last Adapter Checkbox
