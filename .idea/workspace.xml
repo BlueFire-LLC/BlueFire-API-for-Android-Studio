@@ -10,42 +10,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab225881-d1f1-4fab-9884-60ce23a3ad49" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/bluefire_api_v22_0_unspecified.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.aar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_22.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/lint.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw600dp/dimens.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/build.gradle" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.aar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/bluefire_api_v22_0_unspecified.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/lint.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_22.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
     </list>
     <ignored path="BlueFire-API-for-Android-Studio.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,21 +77,168 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Build_Instructions" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Build_Instructions" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Build_Instructions">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="40" column="102" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
+            <state relative-caret-position="119">
+              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="278" column="39" lean-forward="true" selection-start-line="278" selection-start-column="39" selection-end-line="278" selection-end-column="39" />
+            <state relative-caret-position="214">
+              <caret line="1466" column="34" lean-forward="false" selection-start-line="1466" selection-start-column="34" selection-end-line="1466" selection-end-column="34" />
+              <folding>
+                <element signature="method#onCreate#0;class#Main#0" expanded="false" />
+                <element signature="e#7814#7857#0" expanded="false" />
+                <element signature="e#8222#8259#0" expanded="false" />
+                <element signature="e#8833#8888#0" expanded="false" />
+                <element signature="method#initializeSettings#0;class#Main#0" expanded="false" />
+                <element signature="e#9075#9130#0" expanded="false" />
+                <element signature="method#getSettings#0;class#Main#0" expanded="false" />
+                <element signature="e#9824#9855#0" expanded="false" />
+                <element signature="method#saveSettings#0;class#Main#0" expanded="false" />
+                <element signature="method#resetSettings#0;class#Main#0" expanded="false" />
+                <element signature="method#initializeAdapter#0;class#Main#0" expanded="false" />
+                <element signature="e#15831#15880#0" expanded="false" />
+                <element signature="e#16266#16305#0" expanded="false" />
+                <element signature="e#16992#17031#0" expanded="false" />
+                <element signature="e#17379#17426#0" expanded="false" />
+                <element signature="method#initializeForm#0;class#Main#0" expanded="false" />
+                <element signature="method#clearForm#0;class#Main#0" expanded="false" />
+                <element signature="method#enableAdapterParms#0;class#Main#0" expanded="false" />
+                <element signature="e#26169#26210#0" expanded="false" />
+                <element signature="method#onConnectClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onStartServiceClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onStopServiceClick#0;class#Main#0" expanded="false" />
+                <element signature="method#checkBluetoothPermissions#0;class#Main#0" expanded="false" />
+                <element signature="e#29276#29363#0" expanded="false" />
+                <element signature="e#29632#29678#0" expanded="false" />
+                <element signature="method#onRequestPermissionsResult#0;class#Main#0" expanded="false" />
+                <element signature="e#30038#30076#0" expanded="false" />
+                <element signature="method#isLocationEnabled#0;class#Main#0" expanded="false" />
+                <element signature="method#startConnection#0;class#Main#0" expanded="false" />
+                <element signature="e#31274#31333#0" expanded="false" />
+                <element signature="method#StartService#0;class#Main#0" expanded="false" />
+                <element signature="class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
+                <element signature="method#run#0;class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
+                <element signature="e#31940#31966#0" expanded="false" />
+                <element signature="method#showConnectButton#0;class#Main#0" expanded="false" />
+                <element signature="method#showDisconnectButton#0;class#Main#0" expanded="false" />
+                <element signature="method#disconnectAdapter#0;class#Main#0" expanded="false" />
+                <element signature="e#32971#33035#0" expanded="false" />
+                <element signature="method#adapterDisconnected#0;class#Main#0" expanded="false" />
+                <element signature="method#adapterNotConnected#1;class#Main#0" expanded="false" />
+                <element signature="method#adapterReconnecting#0;class#Main#0" expanded="false" />
+                <element signature="method#adapterReconnected#0;class#Main#0" expanded="false" />
+                <element signature="method#adapterNotReconnected#0;class#Main#0" expanded="false" />
+                <element signature="method#adapterNotAuthenticated#0;class#Main#0" expanded="false" />
+                <element signature="method#adapterConnected#0;class#Main#0" expanded="false" />
+                <element signature="method#CANStarting#0;class#Main#0" expanded="false" />
+                <element signature="method#j1708Restarting#0;class#Main#0" expanded="false" />
+                <element signature="method#getAdapterData#0;class#Main#0" expanded="false" />
+                <element signature="method#retrieveTruckData#0;class#Main#0" expanded="false" />
+                <element signature="method#onUseBT21Check#0;class#Main#0" expanded="false" />
+                <element signature="method#onUseBLECheck#0;class#Main#0" expanded="false" />
+                <element signature="method#EditLEDBrightness#0;class#Main#0" expanded="false" />
+                <element signature="method#onSendAllPacketsCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onConnectLastAdapterCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onSecureDeviceCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onSecureAdapterCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onUseJ1939Check#0;class#Main#0" expanded="false" />
+                <element signature="method#onUseJ1708Check#0;class#Main#0" expanded="false" />
+                <element signature="method#onUseOBD2Check#0;class#Main#0" expanded="false" />
+                <element signature="method#onResetSettingsClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onUpdateClick#0;class#Main#0" expanded="false" />
+                <element signature="method#updateSecurity#0;class#Main#0" expanded="false" />
+                <element signature="method#onSendMonitorClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onNextGroupClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onPreviousGroupClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onTruckDataClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onTestClick#0;class#Main#0" expanded="false" />
+                <element signature="method#StartTest#0;class#Main#0" expanded="false" />
+                <element signature="e#47487#47520#0" expanded="false" />
+                <element signature="e#49832#49909#0" expanded="false" />
+                <element signature="method#showData#0;class#Main#0" expanded="false" />
+                <element signature="method#showHeartbeat#0;class#Main#0" expanded="false" />
+                <element signature="method#startTruckData#0;class#Main#0" expanded="false" />
+                <element signature="e#50973#51014#0" expanded="false" />
+                <element signature="method#stopTruckData#0;class#Main#0" expanded="false" />
+                <element signature="method#clearAdapterData#0;class#Main#0" expanded="false" />
+                <element signature="class#GetTruckInfoThread#0;class#Main#0" expanded="false" />
+                <element signature="method#run#0;class#GetTruckInfoThread#0;class#Main#0" expanded="false" />
+                <element signature="method#getTruckData#0;class#Main#0" expanded="false" />
+                <element signature="e#53328#53369#0" expanded="false" />
+                <element signature="e#54007#54055#0" expanded="false" />
+                <element signature="e#59703#59740#0" expanded="false" />
+                <element signature="e#61372#61419#0" expanded="false" />
+                <element signature="method#showTruckData#0;class#Main#0" expanded="false" />
+                <element signature="e#66917#66974#0" expanded="false" />
+                <element signature="e#68470#68527#0" expanded="false" />
+                <element signature="method#showNextFault#0;class#Main#0" expanded="false" />
+                <element signature="method#showStatus#0;class#Main#0" expanded="false" />
+                <element signature="method#connectedELD#0;class#Main#0" expanded="false" />
+                <element signature="method#onELDDataClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onAlignELDCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onAlignIFTACheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onAlignStatsCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onSecureELDCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onStreamingELDCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onRecordingConnectedCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onRecordingDisconnectedCheck#0;class#Main#0" expanded="false" />
+                <element signature="method#onStartELDClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onUploadELDClick#0;class#Main#0" expanded="false" />
+                <element signature="method#onDeleteELDClick#0;class#Main#0" expanded="false" />
+                <element signature="method#showELDPage#0;class#Main#0" expanded="false" />
+                <element signature="method#startELD#0;class#Main#0" expanded="false" />
+                <element signature="e#78121#78152#0" expanded="false" />
+                <element signature="method#stopELD#0;class#Main#0" expanded="false" />
+                <element signature="method#showELDData#0;class#Main#0" expanded="false" />
+                <element signature="method#showELDRecord#0;class#Main#0" expanded="false" />
+                <element signature="method#showELDRemaining#0;class#Main#0" expanded="false" />
+                <element signature="method#clearELDData#0;class#Main#0" expanded="false" />
+                <element signature="method#getELDParms#0;class#Main#0" expanded="false" />
+                <element signature="e#84063#84111#0" expanded="false" />
+                <element signature="method#setELDParms#0;class#Main#0" expanded="false" />
+                <element signature="method#SetStreamingText#0;class#Main#0" expanded="false" />
+                <element signature="method#editELDParms#0;class#Main#0" expanded="false" />
+                <element signature="method#enableELDParms#0;class#Main#0" expanded="false" />
+                <element signature="method#sendCustomELDRecord#0;class#Main#0" expanded="false" />
+                <element signature="method#editInterval#0;class#Main#0" expanded="false" />
+                <element signature="method#editELDInterval#0;class#Main#0" expanded="false" />
+                <element signature="method#editIFTAInterval#0;class#Main#0" expanded="false" />
+                <element signature="method#editStatsInterval#0;class#Main#0" expanded="false" />
+                <element signature="method#uploadELD#0;class#Main#0" expanded="false" />
+                <element signature="method#writeELDRecord#0;class#Main#0" expanded="false" />
+                <element signature="method#formatInt#0;class#Main#0" expanded="false" />
+                <element signature="method#formatFloat#0;class#Main#0" expanded="false" />
+                <element signature="method#formatDecimal#0;class#Main#0" expanded="false" />
+                <element signature="method#showSystemError#0;class#Main#0" expanded="false" />
+                <element signature="method#showMessage#0;class#Main#0" expanded="false" />
+                <element signature="method#logAPINotifications#0;class#Main#0" expanded="false" />
+                <element signature="method#logAdapterMessages#0;class#Main#0" expanded="false" />
+                <element signature="method#logNotifications#1;class#Main#0" expanded="false" />
+                <element signature="method#hexStringToBytes#0;class#Main#0" expanded="false" />
+                <element signature="method#bytesToHexString#0;class#Main#0" expanded="false" />
+                <element signature="method#celciusToFarenheit#0;class#Main#0" expanded="false" />
+                <element signature="method#farenheitToCelcius#0;class#Main#0" expanded="false" />
+                <element signature="method#onBackPressed#0;class#Main#0" expanded="false" />
+                <element signature="e#99984#100048#0" expanded="false" />
+                <element signature="method#onDestroy#0;class#Main#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Service.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Service.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -134,8 +281,8 @@
                 <option name="path" value="$PROJECT_DIR$/APIDemo" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value=":bluefire-api-v24.0.3" />
-                <option name="path" value="$PROJECT_DIR$/bluefire-api-v24.0.3" />
+                <option name="name" value=":bluefire-api-v24.0" />
+                <option name="path" value="$PROJECT_DIR$/bluefire-api-v24.0" />
               </ExternalProjectPojo>
             </list>
           </value>
@@ -1501,6 +1648,62 @@
                 <option name="description" value="Displays the properties of project ':APIDemo'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/APIDemo" />
                 <option name="name" value="properties" />
+              </ExternalTaskPojo>
+            </list>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/bluefire-api-v24.0">
+          <value>
+            <list>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the components produced by project ':bluefire-api-v24.0'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="components" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the sub-projects of project ':bluefire-api-v24.0'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="projects" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the dependent components of components in project ':bluefire-api-v24.0'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="dependentComponents" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays all buildscript dependencies declared in project ':bluefire-api-v24.0'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="buildEnvironment" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the insight into a specific dependency in project ':bluefire-api-v24.0'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="dependencyInsight" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays all dependencies declared in project ':bluefire-api-v24.0'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="dependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays a help message." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="help" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the configuration model of project ':bluefire-api-v24.0'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="model" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the properties of project ':bluefire-api-v24.0'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="properties" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the tasks runnable from project ':bluefire-api-v24.0'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                <option name="name" value="tasks" />
               </ExternalTaskPojo>
             </list>
           </value>
@@ -4335,6 +4538,84 @@
                       </ExternalModuleBuildClasspathPojo>
                     </value>
                   </entry>
+                  <entry key="$PROJECT_DIR$/bluefire-api-v24.0">
+                    <value>
+                      <ExternalModuleBuildClasspathPojo>
+                        <option name="entries">
+                          <list>
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/3.0.1/gradle-3.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-core/3.0.1/gradle-core-3.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/3.0.1/builder-3.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint/26.0.1/lint-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/org-jetbrains/uast/26.0.1/uast-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle-api/3.0.1/gradle-api-3.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/databinding/compilerCommon/3.0.1/compilerCommon-3.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jetbrains/kotlin/kotlin-stdlib/1.1.3-2/kotlin-stdlib-1.1.3-2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/transform-api/2.0.0-deprecated-use-gradle-api/transform-api-2.0.0-deprecated-use-gradle-api.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm/5.1/asm-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-analysis/5.1/asm-analysis-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-commons/5.1/asm-commons-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-util/5.1/asm-util-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jacoco/org.jacoco.core/0.7.4.201502262128/org.jacoco.core-0.7.4.201502262128.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jacoco/org.jacoco.report/0.7.4.201502262128/org.jacoco.report-0.7.4.201502262128.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/jopt-simple/jopt-simple/4.9/jopt-simple-4.9.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-gradle/5.3.3/proguard-gradle-5.3.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/protobuf/protobuf-java/3.0.0/protobuf-java-3.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/3.0.1/builder-model-3.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-test-api/3.0.1/builder-test-api-3.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdklib/26.0.1/sdklib-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/sdk-common/26.0.1/sdk-common-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/common/26.0.1/common-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/manifest-merger/26.0.1/manifest-merger-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/ddms/ddmlib/26.0.1/ddmlib-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/analytics-library/protos/26.0.1/protos-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/analytics-library/shared/26.0.1/shared-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/analytics-library/tracker/26.0.1/tracker-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/apksig/3.0.1/apksig-3.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/squareup/javawriter/2.5.0/javawriter-2.5.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcpkix-jdk15on/1.56/bcpkix-jdk15on-1.56.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/bouncycastle/bcprov-jdk15on/1.56/bcprov-jdk15on-1.56.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/ow2/asm/asm-tree/5.1/asm-tree-5.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/it/unimi/dsi/fastutil/7.2.0/fastutil-7.2.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/googlecode/json-simple/json-simple/1.1/json-simple-1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-checks/26.0.1/lint-checks-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/eclipse/jdt/core/compiler/ecj/4.6.1/ecj-4.6.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/guava/guava/22.0/guava-22.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/databinding/baseLibrary/3.0.1/baseLibrary-3.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/antlr/antlr4/4.5.3/antlr4-4.5.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-io/commons-io/2.4/commons-io-2.4.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/annotations/26.0.1/annotations-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/proguard/proguard-base/5.3.3/proguard-base-5.3.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/layoutlib/layoutlib-api/26.0.1/layoutlib-api-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/dvlib/26.0.1/dvlib-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/repository/26.0.1/repository-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/gson/gson/2.3/gson-2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/commons/commons-compress/1.12/commons-compress-1.12.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpclient/4.2.6/httpclient-4.2.6.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/lint/lint-api/26.0.1/lint-api-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/intellij/annotations/12.0/annotations-12.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/jimfs/jimfs/1.1/jimfs-1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/apache/httpcomponents/httpcore/4.2.5/httpcore-4.2.5.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.6/commons-codec-1.6.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/com-intellij/intellij-core/26.0.1/intellij-core-26.0.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jetbrains/kotlin/kotlin-reflect/1.1.3-2/kotlin-reflect-1.1.3-2.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jetbrains/annotations/13.0/annotations-13.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/jetbrains/trove4j/trove4j/20160824/trove4j-20160824.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/errorprone/error_prone_annotations/2.0.18/error_prone_annotations-2.0.18.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar" />
+                          </list>
+                        </option>
+                        <option name="path" value="$PROJECT_DIR$/bluefire-api-v24.0" />
+                      </ExternalModuleBuildClasspathPojo>
+                    </value>
+                  </entry>
                   <entry key="$PROJECT_DIR$/bluefire-api-v24.0.1">
                     <value>
                       <ExternalModuleBuildClasspathPojo>
@@ -4728,10 +5009,10 @@
         <option value="$PROJECT_DIR$/APIDemo/build.gradle" />
         <option value="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/Build_Instructions" />
-        <option value="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Service.java" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Service.java" />
         <option value="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
+        <option value="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -4759,9 +5040,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -4798,7 +5080,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bluefire-api-v24.0.3" />
+              <option name="myItemId" value="bluefire-api-v24.0" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -4870,7 +5152,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -4884,18 +5165,18 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../API" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bluefire.apidemo" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\Eclipse libs" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\java\com\bluefire\apidemo" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\res\layout" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.bluefire.apidemo" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -4981,7 +5262,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514100797184" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515425580818" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -5029,7 +5310,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514100797185" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515425580818" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -5061,6 +5342,27 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -5191,7 +5493,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514100797186" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515425580819" />
       </method>
     </configuration>
     <list size="1">
@@ -5234,9 +5536,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24675325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -5252,7 +5553,8 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19325961" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19325961" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32683983" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24960506" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -5268,7 +5570,6 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32683983" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -5629,39 +5930,177 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="1466" column="34" lean-forward="false" selection-start-line="1466" selection-start-column="34" selection-end-line="1466" selection-end-column="34" />
+          <folding>
+            <element signature="method#onCreate#0;class#Main#0" expanded="false" />
+            <element signature="e#7814#7857#0" expanded="false" />
+            <element signature="e#8222#8259#0" expanded="false" />
+            <element signature="e#8833#8888#0" expanded="false" />
+            <element signature="method#initializeSettings#0;class#Main#0" expanded="false" />
+            <element signature="e#9075#9130#0" expanded="false" />
+            <element signature="method#getSettings#0;class#Main#0" expanded="false" />
+            <element signature="e#9824#9855#0" expanded="false" />
+            <element signature="method#saveSettings#0;class#Main#0" expanded="false" />
+            <element signature="method#resetSettings#0;class#Main#0" expanded="false" />
+            <element signature="method#initializeAdapter#0;class#Main#0" expanded="false" />
+            <element signature="e#15831#15880#0" expanded="false" />
+            <element signature="e#16266#16305#0" expanded="false" />
+            <element signature="e#16992#17031#0" expanded="false" />
+            <element signature="e#17379#17426#0" expanded="false" />
+            <element signature="method#initializeForm#0;class#Main#0" expanded="false" />
+            <element signature="method#clearForm#0;class#Main#0" expanded="false" />
+            <element signature="method#enableAdapterParms#0;class#Main#0" expanded="false" />
+            <element signature="e#26169#26210#0" expanded="false" />
+            <element signature="method#onConnectClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onStartServiceClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onStopServiceClick#0;class#Main#0" expanded="false" />
+            <element signature="method#checkBluetoothPermissions#0;class#Main#0" expanded="false" />
+            <element signature="e#29276#29363#0" expanded="false" />
+            <element signature="e#29632#29678#0" expanded="false" />
+            <element signature="method#onRequestPermissionsResult#0;class#Main#0" expanded="false" />
+            <element signature="e#30038#30076#0" expanded="false" />
+            <element signature="method#isLocationEnabled#0;class#Main#0" expanded="false" />
+            <element signature="method#startConnection#0;class#Main#0" expanded="false" />
+            <element signature="e#31274#31333#0" expanded="false" />
+            <element signature="method#StartService#0;class#Main#0" expanded="false" />
+            <element signature="class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
+            <element signature="method#run#0;class#ConnectAdapterThread#0;class#Main#0" expanded="false" />
+            <element signature="e#31940#31966#0" expanded="false" />
+            <element signature="method#showConnectButton#0;class#Main#0" expanded="false" />
+            <element signature="method#showDisconnectButton#0;class#Main#0" expanded="false" />
+            <element signature="method#disconnectAdapter#0;class#Main#0" expanded="false" />
+            <element signature="e#32971#33035#0" expanded="false" />
+            <element signature="method#adapterDisconnected#0;class#Main#0" expanded="false" />
+            <element signature="method#adapterNotConnected#1;class#Main#0" expanded="false" />
+            <element signature="method#adapterReconnecting#0;class#Main#0" expanded="false" />
+            <element signature="method#adapterReconnected#0;class#Main#0" expanded="false" />
+            <element signature="method#adapterNotReconnected#0;class#Main#0" expanded="false" />
+            <element signature="method#adapterNotAuthenticated#0;class#Main#0" expanded="false" />
+            <element signature="method#adapterConnected#0;class#Main#0" expanded="false" />
+            <element signature="method#CANStarting#0;class#Main#0" expanded="false" />
+            <element signature="method#j1708Restarting#0;class#Main#0" expanded="false" />
+            <element signature="method#getAdapterData#0;class#Main#0" expanded="false" />
+            <element signature="method#retrieveTruckData#0;class#Main#0" expanded="false" />
+            <element signature="method#onUseBT21Check#0;class#Main#0" expanded="false" />
+            <element signature="method#onUseBLECheck#0;class#Main#0" expanded="false" />
+            <element signature="method#EditLEDBrightness#0;class#Main#0" expanded="false" />
+            <element signature="method#onSendAllPacketsCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onConnectLastAdapterCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onSecureDeviceCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onSecureAdapterCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onUseJ1939Check#0;class#Main#0" expanded="false" />
+            <element signature="method#onUseJ1708Check#0;class#Main#0" expanded="false" />
+            <element signature="method#onUseOBD2Check#0;class#Main#0" expanded="false" />
+            <element signature="method#onResetSettingsClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onUpdateClick#0;class#Main#0" expanded="false" />
+            <element signature="method#updateSecurity#0;class#Main#0" expanded="false" />
+            <element signature="method#onSendMonitorClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onNextGroupClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onPreviousGroupClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onTruckDataClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onTestClick#0;class#Main#0" expanded="false" />
+            <element signature="method#StartTest#0;class#Main#0" expanded="false" />
+            <element signature="e#47487#47520#0" expanded="false" />
+            <element signature="e#49832#49909#0" expanded="false" />
+            <element signature="method#showData#0;class#Main#0" expanded="false" />
+            <element signature="method#showHeartbeat#0;class#Main#0" expanded="false" />
+            <element signature="method#startTruckData#0;class#Main#0" expanded="false" />
+            <element signature="e#50973#51014#0" expanded="false" />
+            <element signature="method#stopTruckData#0;class#Main#0" expanded="false" />
+            <element signature="method#clearAdapterData#0;class#Main#0" expanded="false" />
+            <element signature="class#GetTruckInfoThread#0;class#Main#0" expanded="false" />
+            <element signature="method#run#0;class#GetTruckInfoThread#0;class#Main#0" expanded="false" />
+            <element signature="method#getTruckData#0;class#Main#0" expanded="false" />
+            <element signature="e#53328#53369#0" expanded="false" />
+            <element signature="e#54007#54055#0" expanded="false" />
+            <element signature="e#59703#59740#0" expanded="false" />
+            <element signature="e#61372#61419#0" expanded="false" />
+            <element signature="method#showTruckData#0;class#Main#0" expanded="false" />
+            <element signature="e#66917#66974#0" expanded="false" />
+            <element signature="e#68470#68527#0" expanded="false" />
+            <element signature="method#showNextFault#0;class#Main#0" expanded="false" />
+            <element signature="method#showStatus#0;class#Main#0" expanded="false" />
+            <element signature="method#connectedELD#0;class#Main#0" expanded="false" />
+            <element signature="method#onELDDataClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onAlignELDCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onAlignIFTACheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onAlignStatsCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onSecureELDCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onStreamingELDCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onRecordingConnectedCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onRecordingDisconnectedCheck#0;class#Main#0" expanded="false" />
+            <element signature="method#onStartELDClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onUploadELDClick#0;class#Main#0" expanded="false" />
+            <element signature="method#onDeleteELDClick#0;class#Main#0" expanded="false" />
+            <element signature="method#showELDPage#0;class#Main#0" expanded="false" />
+            <element signature="method#startELD#0;class#Main#0" expanded="false" />
+            <element signature="e#78121#78152#0" expanded="false" />
+            <element signature="method#stopELD#0;class#Main#0" expanded="false" />
+            <element signature="method#showELDData#0;class#Main#0" expanded="false" />
+            <element signature="method#showELDRecord#0;class#Main#0" expanded="false" />
+            <element signature="method#showELDRemaining#0;class#Main#0" expanded="false" />
+            <element signature="method#clearELDData#0;class#Main#0" expanded="false" />
+            <element signature="method#getELDParms#0;class#Main#0" expanded="false" />
+            <element signature="e#84063#84111#0" expanded="false" />
+            <element signature="method#setELDParms#0;class#Main#0" expanded="false" />
+            <element signature="method#SetStreamingText#0;class#Main#0" expanded="false" />
+            <element signature="method#editELDParms#0;class#Main#0" expanded="false" />
+            <element signature="method#enableELDParms#0;class#Main#0" expanded="false" />
+            <element signature="method#sendCustomELDRecord#0;class#Main#0" expanded="false" />
+            <element signature="method#editInterval#0;class#Main#0" expanded="false" />
+            <element signature="method#editELDInterval#0;class#Main#0" expanded="false" />
+            <element signature="method#editIFTAInterval#0;class#Main#0" expanded="false" />
+            <element signature="method#editStatsInterval#0;class#Main#0" expanded="false" />
+            <element signature="method#uploadELD#0;class#Main#0" expanded="false" />
+            <element signature="method#writeELDRecord#0;class#Main#0" expanded="false" />
+            <element signature="method#formatInt#0;class#Main#0" expanded="false" />
+            <element signature="method#formatFloat#0;class#Main#0" expanded="false" />
+            <element signature="method#formatDecimal#0;class#Main#0" expanded="false" />
+            <element signature="method#showSystemError#0;class#Main#0" expanded="false" />
+            <element signature="method#showMessage#0;class#Main#0" expanded="false" />
+            <element signature="method#logAPINotifications#0;class#Main#0" expanded="false" />
+            <element signature="method#logAdapterMessages#0;class#Main#0" expanded="false" />
+            <element signature="method#logNotifications#1;class#Main#0" expanded="false" />
+            <element signature="method#hexStringToBytes#0;class#Main#0" expanded="false" />
+            <element signature="method#bytesToHexString#0;class#Main#0" expanded="false" />
+            <element signature="method#celciusToFarenheit#0;class#Main#0" expanded="false" />
+            <element signature="method#farenheitToCelcius#0;class#Main#0" expanded="false" />
+            <element signature="method#onBackPressed#0;class#Main#0" expanded="false" />
+            <element signature="e#99984#100048#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#Main#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="31" lean-forward="false" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="646">
+          <first_editor relative-caret-position="518">
             <caret line="425" column="110" lean-forward="true" selection-start-line="425" selection-start-column="110" selection-end-line="425" selection-end-column="110" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="33" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="40" column="102" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="278" column="39" lean-forward="true" selection-start-line="278" selection-start-column="39" selection-end-line="278" selection-end-column="39" />
+        <state relative-caret-position="119">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>

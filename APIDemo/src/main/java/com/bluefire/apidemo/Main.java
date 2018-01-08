@@ -1,4 +1,3 @@
-//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.Manifest;
@@ -1465,7 +1464,7 @@ public class Main extends Activity
 
     private void checkKeyState()
     {
-        boolean keyIsOn = (isConnected && (blueFire.IsCANAvailable() || blueFire.IsJ1708Available()));
+        boolean keyIsOn = blueFire.IsKeyOn();
 
         if (isKeyOn != keyIsOn)
         {
@@ -2978,6 +2977,8 @@ public class Main extends Activity
                 layoutTruck.setVisibility(View.INVISIBLE);
                 layoutAdapter.setVisibility(View.VISIBLE);
 
+                stopTruckData();
+
                 return;
             }
             // Check for leaving the ELD page
@@ -2985,6 +2986,7 @@ public class Main extends Activity
             {
                 if (!editELDParms())
                     return;
+
                 getELDParms();
                 saveSettings();
 

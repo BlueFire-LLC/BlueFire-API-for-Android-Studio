@@ -419,18 +419,21 @@ Version 23.14:<ul>
     <li>Internal exception handling.
 </ul>
 
-Version 24.0 Beta 3:<ul>
-    <li>Requires Adapter Beta Firmware 3.15.4 unless otherwise noted.
+Version 24.0:<ul>
+    <li>Requires Adapter Firmware 3.15 unless otherwise noted.
     <li>Added OBD2 support. 
+    <li>Added property IsOBD2 which will be set when CAN is starting (CANStarting, see below).
     <li>Added property IgnoreOBD2 which when set to false (connecting to OBD2) will set IgnoreJ1939 and IgnoreJ1708 true.
-    <li>Added property IsOBD2 which will be set when CAN is starting (CANStarting).
+    <li>Property IgnoreOBD2 accepts the OBD2.CANSettings parameter. Warning! Changing this from the default may cause ECM faults.
     <li>Renamed ConnectionState J1939Starting to CANStarting to reflect CAN Starting for either J1939 or OBD2.
     <li>Removed property SetIgnoreDataBuses because the properties IgnoreJ1939/J1708/OBD2 are required for the Adapter to connect to the correct ECUs.
     <li>Removed method UpdateSecurity because security parameters must be set prior to connecting to the Adapter.
-    <li>Added property DisconnectedReboot that will instruct the Adapter to reboot every hour when not connected to the App (Firmware 3.12+).
-    <li>Added property DisconnectedRebootInterval that will instruct the Adapter to reboot every interval when not connected to the App (Firmware 3.15.4+).
+    <li>Added property SetDisconnectedReboot that will instruct the Adapter to reboot at a set interval when not connected to the App (Firmware 3.12+). Note with Firmware 3.12+ the interval is fixed at one hour. With Firmware 3.15+ the interval is set with the property.
+    <li>Added properties IsKeyOn and IsKeyOff that will check for key on/off and if off will set RPM, Speed, PctLoad, PctTorque, DrvPctTorque to 0.
     <li>Added property SendAllPackets that will instruct the Adapter to send all J1939 VIN, Make, Model, etc data packets at one time instead of in a conversational manner. This also applies to the ELD VIN.
     <li>The Adapter will wait to initiate a CAN connection until all Adapter data has been retrieved by the API. The previous API version initiated the CAN connection when the Adapter is authenticated.
+    <li>The ConnectionState AdapterMessage will always return a complete message.
+    <li>Compatible with Firmware 3.7.
     <li>The Demo App will show the API Beta version.
     <li>Updated the Demo App to reflect the above changes.
 </ul>

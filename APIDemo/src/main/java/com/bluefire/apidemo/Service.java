@@ -1,4 +1,3 @@
-//package com.bluefire.api;
 package com.bluefire.apidemo;
 
 import android.annotation.SuppressLint;
@@ -368,7 +367,7 @@ public class Service
 
     private void checkKeyState()
     {
-        boolean keyIsOn = (isConnected && (blueFire.IsCANAvailable() || blueFire.IsJ1708Available()));
+        boolean keyIsOn = blueFire.IsKeyOn();
 
         if (isKeyOn != keyIsOn)
         {
@@ -385,12 +384,18 @@ public class Service
         }
     }
 
-    private void j1939Starting()
+    private void CANStarting()
     {
         // Get the CAN bus speed
         CANBusSpeeds CANBusSpeed = blueFire.CANBusSpeed();
 
-        String Message = "J1939 is starting, CAN bus speed is ";
+        String Message;
+        if (blueFire.IsOBD2())
+            Message = "OBD2";
+        else
+            Message = "J1939";
+        Message += " is starting, CAN bus speed is ";
+
         switch (CANBusSpeed)
         {
             case K250:
@@ -483,7 +488,7 @@ public class Service
                         break;
 
                     case CANStarting:
-                        j1939Starting();
+                        CANStarting();
                         break;
 
                     case J1708Restarting:
