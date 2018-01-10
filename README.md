@@ -435,3 +435,10 @@ Version 24.0:<ul>
     <li>The Demo App will show the API Beta version.
     <li>Updated the Demo App to reflect the above changes.
 </ul>
+
+Version 24.1:<ul>
+    <li>Added Property Force500kBus that will instruct the Adapter to connect only to a 500K CAN bus.
+    <li>Fixed SleepMode not being initialized by App or Service.
+    <li>Internal fixes to potential issues.
+    <li>Fixed Starting Service in Demo App.
+</ul>

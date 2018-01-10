@@ -73,7 +73,8 @@ public class Service
         // Set to kill the service when the user exits.
         // Note, this is recommended as it will ensure that all API resources such as
         // Bluetooth (BLE GATT) are released.
-        killService = true;
+        //killService = true;
+        killService = false; // for testing
         servicePid = Process.myPid();
 
         // Set app variables
@@ -82,12 +83,6 @@ public class Service
 
         appIgnoreJ1939 = false;
         appIgnoreJ1708 = true;
-
-        appDiscoveryTimeOut = blueFire.DiscoveryTimeoutDefault;
-        appMaxConnectAttempts = blueFire.MaxConnectAttemptsDefault;
-        appMaxReconnectAttempts = blueFire.MaxReconnectAttemptsDefault;
-        appBluetoothRecycleAttempt = blueFire.BluetoothRecycleAttemptDefault;
-        appBleDisconnectWaitTime = blueFire.BleDisconnectWaitTimeDefault;
 
         appLedBrightness = 100;
 
@@ -100,6 +95,12 @@ public class Service
     {
         // Initiate the API
         blueFire = new BlueFire(serviceContext, eventHandler);
+
+        appDiscoveryTimeOut = blueFire.DiscoveryTimeoutDefault;
+        appMaxConnectAttempts = blueFire.MaxConnectAttemptsDefault;
+        appMaxReconnectAttempts = blueFire.MaxReconnectAttemptsDefault;
+        appBluetoothRecycleAttempt = blueFire.BluetoothRecycleAttemptDefault;
+        appBleDisconnectWaitTime = blueFire.BleDisconnectWaitTimeDefault;
 
         // Simulate a service
         serviceIsRunning = true;

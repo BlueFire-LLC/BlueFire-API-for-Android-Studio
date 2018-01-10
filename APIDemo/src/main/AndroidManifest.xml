@@ -3,7 +3,7 @@
       package="com.bluefire.apidemo"
 
       android:versionCode="1"
-      android:versionName="24.0" >
+      android:versionName="24.1" >
     <!--  Note - versionName must match BlueFire.Version and the README.md -->
 
     <uses-sdk android:minSdkVersion="23"></uses-sdk>
