@@ -444,9 +444,9 @@ Version 24.1:<ul>
 </ul>
 
 Version 24.2:<ul>
-    <li>Properties IgnoreJ1708 and IgnoreOBD2 default to true and IgnoreJ1939 to false; If you want to retrieve J1708 or OBD2 data you must explicitly set them to false.
+    <li>Properties IgnoreJ1708 and IgnoreOBD2 default to true (ignore both J1708 and OBD2) and IgnoreJ1939 defaults to false (retrieve J1939 data); If you want to retrieve J1708 or OBD2 data you must explicitly set them to false.
     <li>The API will not allow retrieving J1939/J1708 data along with OBD2 data (see below).
-    <li>Setting IgnoreJ1939 or IgnoreOBD2 to false will set IgnoreOBD2 true.
-    <li>Setting IgnoreOBD2 to false will set IgnoreJ1939 and IgnoreJ1708 true.
+    <li>Setting IgnoreJ1939 or IgnoreOBD2 to false (retrieve J1939/J1708 data) will set IgnoreOBD2 true (ignore OBD2).
+    <li>Setting IgnoreOBD2 to false (retrieve OBD2 data) will set IgnoreJ1939 and IgnoreJ1708 true (ignore them both).
     <li>Updated the Demo App to reflect the above changes.
 </ul>
