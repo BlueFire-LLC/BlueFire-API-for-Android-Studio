@@ -1100,31 +1100,27 @@ public class Main extends Activity
             getTruckData();
     }
 
-    // BT21 Checkbox
-    public void onUseBT21Check(View view)
-    {
-        appUseBT21 = checkUseBT21.isChecked();
-
-        if (appUseBT21)
-        {
-            appUseBLE = false;
-            checkUseBLE.setChecked(false);
-        }
-        saveSettings();
-    }
-
     // BLE Checkbox
     public void onUseBLECheck(View view)
     {
         appUseBLE = checkUseBLE.isChecked();
 
-        if (appUseBLE)
-        {
-            appUseBT21 = false;
-            checkUseBT21.setChecked(false);
-        }
+        // Update api
+        blueFire.UseBLE = appUseBLE;
+
         saveSettings();
-   }
+    }
+
+    // BT21 Checkbox
+    public void onUseBT21Check(View view)
+    {
+        appUseBT21 = checkUseBT21.isChecked();
+
+        // Update api
+        blueFire.UseBT21 = appUseBT21;
+
+        saveSettings();
+    }
 
     private boolean EditLEDBrightness()
     {
@@ -1201,11 +1197,18 @@ public class Main extends Activity
         if (!appIgnoreJ1939)
         {
             appIgnoreOBD2 = true;
-            checkUseOBD2.setChecked(false);
+            checkUseOBD2.setChecked(!appIgnoreOBD2); // opposite
+        }
+        else
+        {
+            appIgnoreJ1708 = false;
+            checkUseJ1708.setChecked(!appIgnoreJ1708); // opposite
         }
 
         // Update api
         blueFire.SetIgnoreJ1939(appIgnoreJ1939);
+        blueFire.SetIgnoreJ1708(appIgnoreJ1708);
+        blueFire.SetIgnoreOBD2(appIgnoreOBD2);
 
         saveSettings();
     }
@@ -1219,10 +1222,18 @@ public class Main extends Activity
         if (!appIgnoreJ1708)
         {
             appIgnoreOBD2 = true;
-            checkUseOBD2.setChecked(false);
+            checkUseOBD2.setChecked(!appIgnoreOBD2); // opposite
         }
+        else
+        {
+            appIgnoreJ1939 = false;
+            checkUseJ1939.setChecked(!appIgnoreJ1939); // opposite
+        }
+
         // Update api
+        blueFire.SetIgnoreJ1939(appIgnoreJ1939);
         blueFire.SetIgnoreJ1708(appIgnoreJ1708);
+        blueFire.SetIgnoreOBD2(appIgnoreOBD2);
 
         saveSettings();
     }
@@ -1237,10 +1248,18 @@ public class Main extends Activity
         {
             appIgnoreJ1939 = true;
             appIgnoreJ1708 = true;
-            checkUseJ1939.setChecked(false);
-            checkUseJ1708.setChecked(false);
         }
+        else
+        {
+            appIgnoreJ1939 = false;
+            appIgnoreJ1708 = true;
+        }
+        checkUseJ1939.setChecked(!appIgnoreJ1939); // opposite
+        checkUseJ1708.setChecked(!appIgnoreJ1708); // opposite
+
         // Update api
+        blueFire.SetIgnoreJ1939(appIgnoreJ1939);
+        blueFire.SetIgnoreJ1708(appIgnoreJ1708);
         blueFire.SetIgnoreOBD2(appIgnoreOBD2);
 
         saveSettings();
