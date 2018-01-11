@@ -448,5 +448,7 @@ Version 24.2:<ul>
     <li>The API will not allow retrieving J1939/J1708 data along with OBD2 data (see below).
     <li>Setting IgnoreJ1939 or IgnoreOBD2 to false (retrieve J1939/J1708 data) will set IgnoreOBD2 true (ignore OBD2).
     <li>Setting IgnoreOBD2 to false (retrieve OBD2 data) will set IgnoreJ1939 and IgnoreJ1708 true (ignore them both).
+    <li>Setting both UseBLE and UseBT21 on will cause the API to auto discover the Adapter (same as if they are both set off). 
+    <li>If UseBLE/UseBT21 are changed, or both set, or both not set, the API will reset the Previous Adapter Id, Discovery Timeout, and Advertisement Timeout.
     <li>Updated the Demo App to reflect the above changes.
 </ul>

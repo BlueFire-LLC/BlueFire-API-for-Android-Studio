@@ -10,42 +10,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab225881-d1f1-4fab-9884-60ce23a3ad49" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw600dp/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_22.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/lint.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.aar" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/bluefire_api_v22_0_unspecified.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bluefire-api-v22.0/build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw600dp/dimens.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/attrs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/lint.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/build.gradle" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BlueFire-API-for-Android-Studio.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,8 +80,8 @@
       <file leaf-file-name="Build_Instructions" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Build_Instructions">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="150">
+              <caret line="40" column="102" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -1491,62 +1491,6 @@
                 <option name="description" value="Displays the properties of project ':APIDemo'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/APIDemo" />
                 <option name="name" value="properties" />
-              </ExternalTaskPojo>
-            </list>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/bluefire-api-v24.1">
-          <value>
-            <list>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by project ':bluefire-api-v24.1'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="components" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of project ':bluefire-api-v24.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="projects" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in project ':bluefire-api-v24.1'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="dependentComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in project ':bluefire-api-v24.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="buildEnvironment" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in project ':bluefire-api-v24.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="dependencyInsight" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in project ':bluefire-api-v24.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="dependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays a help message." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="help" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of project ':bluefire-api-v24.1'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="model" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of project ':bluefire-api-v24.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="properties" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from project ':bluefire-api-v24.1'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v24.1" />
-                <option name="name" value="tasks" />
               </ExternalTaskPojo>
             </list>
           </value>
@@ -5039,6 +4983,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -5147,10 +5092,9 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -5164,18 +5108,18 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../API" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
-      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\Eclipse libs" />
-      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\java\com\bluefire\apidemo" />
-      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\res\layout" />
-      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.bluefire.apidemo" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\Eclipse libs" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
+      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\java\com\bluefire\apidemo" />
+      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\res\layout" />
+      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -5261,7 +5205,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515691310714" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515700230033" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -5309,7 +5253,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515691310714" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515700230033" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -5492,7 +5436,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515691310715" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515700230034" />
       </method>
     </configuration>
     <list size="1">
@@ -5535,7 +5479,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -5553,7 +5496,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19325961" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19325961" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32683983" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24960506" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -5891,13 +5834,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="1394" column="0" lean-forward="false" selection-start-line="1394" selection-start-column="0" selection-end-line="1394" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.android/build-cache/1aab3cfbe3f8fcc89497f94c4efe8bdc01ddc6d8/output/jars/classes.jar!/com/bluefire/api/ELD.class">
@@ -6128,7 +6071,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="654">
             <caret line="446" column="150" lean-forward="false" selection-start-line="446" selection-start-column="140" selection-end-line="446" selection-end-column="150" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -6136,8 +6078,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="150">
+          <caret line="40" column="102" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
           <folding />
         </state>
       </provider>
