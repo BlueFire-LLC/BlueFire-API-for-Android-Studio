@@ -411,9 +411,9 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_below="@+id/textPassword"
-                    android:background="@android:color/darker_gray"/>
+                    android:background="@android:color/darker_gray" />
 
-                <!--  Send PGN    -->
+                <!--  Send/Monitor PGN    -->
                 <TextView
                     android:id="@+id/labelPGN"
                     android:layout_width="wrap_content"
@@ -421,7 +421,7 @@
                     android:layout_alignLeft="@+id/labelMargin"
                     android:layout_below="@+id/lineSeparator2"
                     android:layout_marginTop="0dp"
-                    android:text="Send PGN:"
+                    android:text="Monitor PGN:"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -430,9 +430,43 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelPGN"
                     android:layout_alignBottom="@+id/labelPGN"
-                    android:layout_marginLeft="90dp"
-                    android:inputType="textNoSuggestions"
+                    android:layout_marginLeft="120dp"
+                    android:inputType="number"
                     android:maxLength="6"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Send/Monitor Button    -->
+                <Button
+                    android:id="@+id/buttonSendMonitor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textPGN"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onSendMonitorClick"
+                    android:text="Start"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelSource"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelPGN"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Source:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/textSource"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelSource"
+                    android:layout_alignBottom="@+id/labelSource"
+                    android:layout_marginLeft="120dp"
+                    android:inputType="number"
+                    android:maxLength="3"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -440,10 +474,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin"
-                    android:layout_below="@+id/labelPGN"
-                    android:layout_marginLeft="40dp"
+                    android:layout_below="@+id/labelSource"
+                    android:layout_marginLeft="25dp"
                     android:layout_marginTop="5dp"
-                    android:text="Data:"
+                    android:text="Send Data:"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -453,21 +487,91 @@
                     android:layout_alignBaseline="@+id/labelPGNData"
                     android:layout_below="@+id/textPGN"
                     android:layout_alignBottom="@+id/labelPGNData"
-                    android:layout_marginLeft="90dp"
+                    android:layout_marginLeft="120dp"
                     android:inputType="textNoSuggestions"
                     android:maxLength="16"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Send/Monitor Button    -->
-                <Button
-                    android:id="@+id/buttonSendMonitor"
+                <TextView
+                    android:id="@+id/labelRequest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/textPGNData"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:onClick="onSendMonitorClick"
-                    android:text="Send"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelPGNData"
+                    android:text="Request:"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/checkRequest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelRequest"
+                    android:layout_alignBottom="@+id/labelRequest"
+                    android:layout_marginLeft="120dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelBAMRTS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/checkRequest"
+                    android:layout_below="@+id/labelPGNData"
+                    android:text="BAM/RTS:"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/checkBAMRTS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelBAMRTS"
+                    android:layout_alignBottom="@+id/labelBAMRTS"
+                    android:layout_marginLeft="250dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelResponseSource"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelBAMRTS"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="PGN Source:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textResponseSource"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelResponseSource"
+                    android:layout_alignBottom="@+id/labelResponseSource"
+                    android:layout_marginLeft="125dp"
+                    android:text="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelResponseData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelResponseSource"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Data:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textResponseData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelResponseData"
+                    android:layout_alignBottom="@+id/labelResponseData"
+                    android:layout_marginLeft="125dp"
+                    android:text="0"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <!--  Separator    -->
@@ -477,8 +581,8 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_below="@+id/buttonSendMonitor"
-                    android:background="@android:color/darker_gray"/>
+                    android:layout_below="@+id/textResponseData"
+                    android:background="@android:color/darker_gray" />
 
                 <!--  Truck Button    -->
                 <Button
@@ -831,15 +935,15 @@
 
                 <CheckBox
                     android:id="@+id/checkRecordELD"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelELD"
                     android:layout_alignBottom="@+id/labelELD"
                     android:layout_alignLeft="@+id/labelELD"
                     android:layout_marginLeft="45dp"
-                    android:enabled="false"
                     android:checked="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:enabled="false"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
                     android:id="@+id/labelELDInterval"
@@ -1457,4 +1561,4 @@
 
         </RelativeLayout>
 
-    </ScrollView>
+</ScrollView>

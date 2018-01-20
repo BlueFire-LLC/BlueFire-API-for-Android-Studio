@@ -452,3 +452,11 @@ Version 24.2:<ul>
     <li>If UseBLE/UseBT21 are changed, or both set, or both not set, the API will reset the Previous Adapter Id, Discovery Timeout, and Advertisement Timeout.
     <li>Updated the Demo App to reflect the above changes.
 </ul>
+
+Version 24.3:<ul>
+    <li>Renamed the MonitorPGN method to StartMonitoringPGN.
+    <li>Added multi-packet (BAM/RTS) PGN retrieval to the StartMonitoringPGN, StopMonitoringPGN, and RequestPGN methods.
+    <li>SendPGN method parameters have changed to (Source, PGN, Priority, PGNData).
+    <li>Updated the Demo App to reflect the above changes.
+    <li>Updated the Demo App to show how to monitor multiple PGNs.
+</ul>

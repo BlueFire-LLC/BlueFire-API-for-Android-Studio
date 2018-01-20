@@ -27,6 +27,7 @@ import com.bluefire.api.CANBusSpeeds;
 import com.bluefire.api.ConnectionStates;
 import com.bluefire.api.Const;
 import com.bluefire.api.HardwareTypes;
+import com.bluefire.api.J1939;
 import com.bluefire.api.RecordIds;
 import com.bluefire.api.RecordingModes;
 import com.bluefire.api.RetrievalMethods;
@@ -53,12 +54,17 @@ public class Main extends Activity
     private EditText textUserName;
     private EditText textPassword;
     private EditText textPGN;
+    private EditText textSource;
     private EditText textPGNData;
 
     private TextView textNotifications;
+    private TextView textResponseSource;
+    private TextView textResponseData;
 
     private CheckBox checkUseBT21;
     private CheckBox checkUseBLE;
+    private CheckBox checkRequest;
+    private CheckBox checkBAMRTS;
     private CheckBox checkUseJ1939;
     private CheckBox checkUseJ1708;
     private CheckBox checkUseOBD2;
@@ -143,7 +149,11 @@ public class Main extends Activity
     private boolean isConnected;
     private boolean isConnectButton;
 
-    private int pgn;
+    private int monitorPGN;
+    private int monitorPGN2;
+    private int monitorSource;
+    private boolean monitorRequest;
+    private boolean monitorBAMRTS;
     private boolean isSendingPGN;
     private boolean isMonitoringPGN;
 
@@ -497,15 +507,20 @@ public class Main extends Activity
         textUserName = (EditText) findViewById(R.id.textUserName);
         textPassword = (EditText) findViewById(R.id.textPassword);
         textPGN = (EditText) findViewById(R.id.textPGN);
+        textSource = (EditText) findViewById(R.id.textSource);
         textPGNData = (EditText) findViewById(R.id.textPGNData);
 
         textNotifications = (TextView) findViewById(R.id.textNotifications);
+        textResponseSource = (TextView) findViewById(R.id.textResponseSource);
+        textResponseData = (TextView) findViewById(R.id.textResponseData);
 
         checkUseBT21 = (CheckBox) findViewById(R.id.checkUseBT21);
         checkUseBLE = (CheckBox) findViewById(R.id.checkUseBLE);
         checkUseJ1939 = (CheckBox) findViewById(R.id.checkUseJ1939);
         checkUseJ1708 = (CheckBox) findViewById(R.id.checkUseJ1708);
         checkUseOBD2 = (CheckBox) findViewById(R.id.checkUseOBD2);
+        checkRequest = (CheckBox) findViewById(R.id.checkRequest);
+        checkBAMRTS = (CheckBox) findViewById(R.id.checkBAMRTS);
         checkSecureDevice = (CheckBox) findViewById(R.id.checkSecureDevice);
         checkSecureAdapter = (CheckBox) findViewById(R.id.checkSecureAdapter);
         checkSendAllPackets = (CheckBox) findViewById(R.id.checkSendAllPackets);
@@ -1035,13 +1050,13 @@ public class Main extends Activity
         checkKeyState();
 
         // Re-retrieve truck data
-        retrieveTruckData();
+        reRetrieveTruckData();
     }
 
     private void j1708Restarting()
     {
         // Re-retrieve truck data
-        retrieveTruckData();
+        reRetrieveTruckData();
     }
 
     // Start retrieving data after connecting to the adapter
@@ -1092,11 +1107,12 @@ public class Main extends Activity
         checkKeyState();
     }
 
-    private void retrieveTruckData()
+    private void reRetrieveTruckData()
     {
         if (isTesting)
             StartTest();
-        else
+
+        else if (layoutTruck.getVisibility() == View.INVISIBLE)
             getTruckData();
     }
 
@@ -1326,62 +1342,162 @@ public class Main extends Activity
     // Send/Monitor Button
     public void onSendMonitorClick(View view)
     {
-        isSendingPGN = false;
-        isMonitoringPGN = false;
+        if (isSendingPGN || isMonitoringPGN)
+        {
+            buttonSendMonitor.setText("Start");
+            StopMonitoring();
+        }
+        else
+        {
+            buttonSendMonitor.setText("Stop");
+            StartMonitoring();
+        }
+    }
 
+    private void StartMonitoring()
+    {
         // Get PGN
-        pgn = -1;
+        monitorPGN = -1; // required
         try
         {
-            pgn = Integer.parseInt("0"+textPGN.getText().toString().trim());
+            monitorPGN = Integer.parseInt("0"+textPGN.getText().toString().trim());
         }
         catch(Exception e){}
 
-        if (pgn < 0)
+        if (monitorPGN < 0)
         {
             Toast.makeText(this, "PGN must be numeric.", Toast.LENGTH_LONG).show();
             return;
         }
 
-        // Ignore if no PGN
-        if (pgn == 0)
-            return;
-
         // Get PGN Data
-        byte[] pgnBytes = new byte[8];
-
         String pgnData = textPGNData.getText().toString().trim();
 
+        // If no PGN data, then we're monitoring a PGN.
+        // Note, you can send a PGN with no data so this is just an easy way to
+        // avoid adding a Send PGN button.
         if (pgnData.length() == 0) // Monitor a PGN
+            MonitorPGN();
+
+        // PGN data entered so Send the PGN rather than monitoring it.
+        // Note, see the above note.
+        else
+            SendPGN(pgnData);
+    }
+
+    private void MonitorPGN()
+    {
+        // Check for monitoring multiple PGNs
+        if (monitorPGN == 0)
         {
-            int source = 0; // engine
-            isMonitoringPGN = true;
-            blueFire.MonitorPGN(source, pgn);
+            MonitorMultiplePGNs();
+            return;
         }
-        else // Send a PGN
+        // Get the 'To' Source.
+        // Note, when monitoring a PGN this is the source you are requesting the data from.
+        // If the source is Global then any ECM that is programmed to respond will.
+        monitorSource = J1939.Sources.Engine.getValue(); // default to engine
+        try
         {
-            // Edit the PGN Data to be 16 hex characters (8 bytes)
-            if (pgnData.length() != 16)
-            {
-                Toast.makeText(this, "PGN Data must be 16 hex characters (8 bytes).", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            // Convert the PGN Data hex string to bytes
-            try
-            {
-                pgnBytes = hexStringToBytes(pgnData);
-
-            } catch (Exception e)
-            {
-                Toast.makeText(this, "PGN Data must be 16 hex characters (8 bytes).", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            // Send the PGN
-            isSendingPGN = true;
-            blueFire.SendPGN(pgn,  pgnBytes);
+            monitorSource = Integer.parseInt("0"+textSource.getText().toString().trim());
         }
+        catch(Exception e){}
+
+        if (monitorSource < 0 || monitorSource > 255)
+        {
+            Toast.makeText(this, "Source must be numeric and less than 256.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Get On Request and BAM/RTS.
+        // Note, this must match the the SAE specification of the PGN.
+        monitorRequest = checkRequest.isChecked();
+        monitorBAMRTS = checkBAMRTS.isChecked();
+
+        // Default to a 5 second interval since there is not an Interval entry field.
+        // Note, not specifying an interval or setting it to 0 will set the RequestType
+        // to On Change.
+        int interval = 5 * Const.OneSecond;
+
+        // Start monitoring the PGN
+        isMonitoringPGN = true;
+        blueFire.StartMonitoringPGN(monitorSource, monitorPGN, interval, monitorRequest, monitorBAMRTS);
+
+        textResponseSource.setText("Waiting for data ...");
+    }
+
+    // Test Monitor Button
+    public void onTestMonitorClick(View view)
+    {
+        MonitorMultiplePGNs();
+    }
+
+    private void MonitorMultiplePGNs()
+    {
+        isMonitoringPGN = true;
+
+        monitorSource = J1939.Sources.Engine.getValue();
+        monitorPGN = J1939.PGNs.EEC1.getValue();
+        blueFire.StartMonitoringPGN(monitorSource, monitorPGN);
+
+        monitorPGN2 = J1939.PGNs.EngineHoursRevolutions.getValue();
+        monitorRequest = true;
+        blueFire.StartMonitoringPGN(monitorSource, monitorPGN2, monitorRequest);
+    }
+
+    private void SendPGN(String pgnData)
+    {
+        // Get the 'From' Source.
+        // Note, when sending a PGN the BlueFire API should be the source otherwise
+        // you are spoofing another ECM.
+        monitorSource = J1939.Sources.BlueFire.getValue(); // default to BlueFire
+        try
+        {
+            monitorSource = Integer.parseInt("0"+textSource.getText().toString().trim());
+        }
+        catch(Exception e){}
+
+        if (monitorSource < 0 || monitorSource > 255)
+        {
+            Toast.makeText(this, "Source must be numeric and less than 256.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Edit the PGN Data to be 16 hex characters (8 bytes)
+        if (pgnData.length() != 16)
+        {
+            Toast.makeText(this, "PGN Data must be 16 hex characters (8 bytes).", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Convert the PGN Data hex string to bytes
+        byte[] pgnBytes = new byte[8];
+
+        try
+        {
+            pgnBytes = hexStringToBytes(pgnData);
+
+        } catch (Exception e)
+        {
+            Toast.makeText(this, "PGN Data must be 16 hex characters (8 bytes).", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Send the PGN
+        isSendingPGN = true;
+        blueFire.SendPGN(monitorSource, monitorPGN,  pgnBytes);
+    }
+
+    private void StopMonitoring()
+    {
+        isSendingPGN = false;
+        isMonitoringPGN = false;
+
+        textResponseSource.setText("");
+        textResponseData.setText("");
+
+        // Stop PGN monitoring
+        blueFire.StopMonitoringPGN(monitorSource, monitorPGN, monitorRequest);
     }
 
     // Next Group Button
@@ -1513,12 +1629,33 @@ public class Main extends Activity
         if ( blueFire.ELD.IsDataRetrieved())
             showELDData();
 
-        // Check for SendPGN response
-        if ((isSendingPGN || isMonitoringPGN) && blueFire.PGNData.PGN == pgn)
-        {
-            isSendingPGN = false; // only show sending data once
-            textPGNData.setText(bytesToHexString(blueFire.PGNData.Data).toUpperCase()); //TODO Fix Hex
-        }
+        // Check for Monitoring a PGN
+        if (isMonitoringPGN && (blueFire.PGNData.PGN == monitorPGN || blueFire.PGNData.PGN == monitorPGN2))
+            ShowMonitorData();
+
+        // Check for Sending a PGN
+        if (isSendingPGN && blueFire.PGNData.PGN == monitorPGN)
+            ShowSendPGNData();
+    }
+
+    private void ShowSendPGNData()
+    {
+        StopMonitoring(); // only show sending data once
+
+        textPGNData.setText(bytesToHexString(blueFire.PGNData.Data).toUpperCase());
+    }
+
+    private void ShowMonitorData()
+    {
+        textPGN.setText(Integer.toString(blueFire.PGNData.PGN));
+
+        textResponseSource.setText(Integer.toString(blueFire.PGNData.Source));
+
+        String PGNDataText = bytesToHexString(blueFire.PGNData.Data).toUpperCase();
+
+        textResponseData.setText(PGNDataText);
+
+        logNotifications("ShowMonitorData - PGN=" + blueFire.PGNData.PGN + ", Source=" + blueFire.PGNData.Source + ", Data=" + PGNDataText);
     }
 
     private void showHeartbeat()
@@ -1528,6 +1665,7 @@ public class Main extends Activity
 
         textHeartbeat.setText(String.valueOf(blueFire.HeartbeatCount()));
     }
+
     private void startTruckData()
     {
         if (!blueFire.IsConnected())
@@ -2962,9 +3100,16 @@ public class Main extends Activity
 
     private String bytesToHexString(byte[] hexBytes)
     {
+        // Convert hex bytes to a hex string.
+        // Note, this will pad < 8 bytes with hex 0.
+
         String hexString = ("0000000000000000" + new BigInteger(1, hexBytes).toString(16));
 
-        return hexString.substring(hexString.length()-16);
+        int startIndex = hexString.length()-16;
+        if (startIndex > 16)
+            startIndex = 16;
+
+        return hexString.substring(startIndex);
     }
 
     private float celciusToFarenheit(float temp)
