@@ -460,3 +460,7 @@ Version 24.3:<ul>
     <li>Updated the Demo App to reflect the above changes.
     <li>Updated the Demo App to show how to monitor multiple PGNs.
 </ul>
+
+Version 24.4:<ul>
+    <li>Fixed retrieving data from a 6-pin adapter.
+</ul>
