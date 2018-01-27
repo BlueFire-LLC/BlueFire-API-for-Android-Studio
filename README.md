@@ -464,3 +464,7 @@ Version 24.3:<ul>
 Version 24.4:<ul>
     <li>Fixed retrieving data from a 6-pin adapter.
 </ul>
+
+Version 24.5:<ul>
+    <li>Fixed backward compatibility with 3.7 Firmware on a 2.1 (Bluetooth Classic) adapter.
+</ul>
