@@ -14,6 +14,9 @@ import com.bluefire.api.Const;
 import com.bluefire.api.RetrievalMethods;
 import com.bluefire.api.Truck;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Service
 {
     private BlueFire blueFire;
@@ -27,6 +30,10 @@ public class Service
     private boolean killService= false;
 
     private ConnectionStates connectionState = ConnectionStates.NotConnected;
+    private String connectionMessage = "";
+
+    private Queue<Message> EventsQueue = new LinkedList<Message>();
+    private ReceiveEventsThreading ReceiveEventsThread;
 
     private boolean isKeyOn;
 
@@ -89,6 +96,10 @@ public class Service
         appConnectToLastAdapter = false;
 
         appOptimizeDataRetrieval = true;
+
+        // Setup to receive API events
+        ReceiveEventsThread = new ReceiveEventsThreading();
+        ReceiveEventsThread.start();
     }
 
     public void startService()
@@ -240,9 +251,6 @@ public class Service
 
     private void adapterReconnecting()
     {
-        if (!isConnecting)
-            logNotifications("App lost connection to the Adapter. Reason is " + blueFire.ReconnectReason() + ".");
-
         logNotifications("Adapter re-connecting.");
 
         isConnected = false;
@@ -424,184 +432,157 @@ public class Service
         getTruckData();
     }
 
+    private void processEvent(Message msg)
+    {
+        try
+        {
+            connectionState = ConnectionStates.values()[msg.arg1];
+            connectionMessage = (String)msg.obj;
+
+            logStatus();
+
+            switch (connectionState)
+            {
+                case Connecting:
+                case Discovering:
+                case Disconnecting:
+                    break;
+
+                case Connected:
+                    adapterConnected();
+                    break;
+
+                case NotAuthenticated:
+                    adapterNotAuthenticated();
+                    break;
+
+                case Disconnected:
+                    adapterDisconnected();
+                    break;
+
+                case Reconnecting:
+                    adapterReconnecting();
+                    break;
+
+                case Reconnected:
+                    adapterReconnected();
+                    break;
+
+                case NotReconnected:
+                    adapterNotReconnected();
+                    break;
+
+                case CANStarting:
+                    CANStarting();
+                    break;
+
+                case J1708Restarting:
+                    j1708Restarting();
+                    break;
+
+                case NotConnected:
+                    adapterNotConnected();
+                    break;
+
+                case CANFilterFull:
+                    logNotifications("The CAN Filter is Full. Some data will not be retrieved.");
+                    break;
+
+                case DataError:
+                    logNotifications("Adapter Data Error. " + connectionMessage);
+                    break;
+
+                case Notification:
+                    logNotifications("API notification. " + connectionMessage);
+                    break;
+
+                case AdapterMessage:
+                    logNotifications("Adapter message. " + connectionMessage);
+                    break;
+
+                case AdapterReboot:
+                    logNotifications("Adapter Rebooting - " + connectionMessage);
+                    break;
+
+                case DataTimeout:
+                    logNotifications("Adapter Data Timeout - Lost connection with the Adapter");
+                    break;
+
+                case BluetoothTimeout:
+                    adapterNotConnected();
+                    logNotifications("Adapter Bluetooth Timeout - Unable to connect to Bluetooth.");
+                    break;
+
+                case AdapterTimeout:
+                    adapterNotConnected();
+                    logNotifications("Adapter Connection Timeout - Bluetooth unable to connect to the Adapter.");
+                    break;
+
+                case SystemError:
+                    adapterNotConnected();
+                    logNotifications("API System error. " + connectionMessage);
+                    break;
+
+                case DataChanged:
+                    checkTruckData();
+                    break;
+            }
+
+        }
+        catch (Exception e) {}
+    }
+
+    // BlueFire Event Handler Thread
+    private class ReceiveEventsThreading extends Thread
+    {
+        public void run()
+        {
+            while (true)
+            {
+                if (!EventsQueue.isEmpty())
+                {
+                    Message handleMessage = EventsQueue.poll();
+                    if (handleMessage != null)
+                        processEvent(handleMessage);
+                }
+                threadSleep(1); // allow other threads to execute
+            }
+        }
+    }
+
     // BlueFire Event Handler
-    private final Handler eventHandler = new Handler()
+    private Handler eventHandler = new Handler()
     {
         @Override
         @SuppressLint("HandlerLeak")
         public void handleMessage(Message msg)
         {
-            try
-            {
-                logStatus();
+            Message handleMessage = new Message();
+            handleMessage.what = msg.what;
+            handleMessage.obj = msg.obj;
 
-                switch (blueFire.ConnectionState)
-                {
-                    case NotConnected:
-                        if (isConnecting || isConnected) // only show once
-                            adapterNotConnected();
-                        break;
-
-                    case Connecting:
-                        if (blueFire.IsReconnecting())
-                            if (!isConnecting) // only show once
-                                adapterReconnecting();
-                        break;
-
-                    case Discovering:
-                        // Status only
-                        break;
-
-                    case AdapterConnected:
-                        // Status only
-                        break;
-
-                    case Authenticated:
-                        if (!isConnected) // only show once
-                            adapterConnected();
-                        break;
-
-                    case NotAuthenticated:
-                        adapterNotAuthenticated();
-                        break;
-
-                    case Disconnecting:
-                        // Status only
-                        break;
-
-                    case Disconnected:
-                        if (isConnecting || isConnected) // only show once
-                            adapterDisconnected();
-                        break;
-
-                    case Reconnecting:
-                        adapterReconnecting();
-                        break;
-
-                    case Reconnected:
-                        if (isConnecting)// only show once
-                            adapterReconnected();
-                        break;
-
-                    case NotReconnected:
-                        if (isConnecting)// only show once
-                            adapterNotReconnected();
-                        break;
-
-                    case CANStarting:
-                        CANStarting();
-                        break;
-
-                    case J1708Restarting:
-                        j1708Restarting();
-                        break;
-
-                    case Notification:
-                        logAPINotifications();
-                        break;
-
-                    case AdapterMessage:
-                        logAdapterMessages();
-                        break;
-
-                    case CANFilterFull:
-                        logNotifications("The CAN Filter is Full. Some data will not be retrieved.");
-                        break;
-
-                    case DataError:
-                        // Ignore, handled by Reconnecting
-                        break;
-
-                    case CommTimeout:
-                    case ConnectTimeout:
-                    case AdapterTimeout:
-                        if (isConnecting || isConnected) // only show once
-                        {
-                            blueFire.Disconnect();
-                            adapterNotConnected();
-                            logNotifications("The Adapter has Timed Out.");
-                        }
-                        break;
-
-                    case SystemError:
-                        if (isConnecting || isConnected) // only show once
-                        {
-                            blueFire.Disconnect();
-                            adapterNotConnected();
-                            logSystemError();
-                        }
-                        break;
-
-                    case DataChanged:
-                        checkTruckData();
-                }
-
-            }
-            catch (Exception e) {}
+            EventsQueue.add(handleMessage);
         }
     };
 
     private void logStatus()
     {
-        // Check for a change of the connection state
-        if (connectionState != blueFire.ConnectionState)
-        {
-            connectionState = blueFire.ConnectionState;
-            logNotifications(connectionState.toString());
-        }
-
-        // Show any error message from the adapter
-        if (!blueFire.NotificationMessage().equals(""))
-        {
-            logNotifications(blueFire.NotificationMessage());
-            blueFire.ClearNotificationMessage();
-        }
+        logNotifications(connectionState.toString());
     }
 
-    private void logSystemError()
+    private void logNotifications(String message)
     {
-        logNotifications("System Error");
-
-        logAPINotifications();
+        if (!message.equals(""))
+            Log.d("BlueFire", message);
     }
 
-    private String logAPINotifications()
+    private void threadSleep(int Interval)
     {
-        String Message = blueFire.NotificationMessage();
-
-        if (!Message.equals(""))
+        try
         {
-            if (!blueFire.NotificationLocation().equals(""))
-                Message = blueFire.NotificationLocation() + " - " + Message;
-
-            blueFire.ClearNotificationMessage();
-
-            logNotifications(Message);
+            Thread.sleep(Interval);
         }
-
-        String AdapterMessage = logAdapterMessages();
-        if (!AdapterMessage.equals(""))
-            Message += Const.CrLf + AdapterMessage;
-
-        return Message;
-    }
-
-    private String logAdapterMessages()
-    {
-        String Message = blueFire.Message();
-
-        if (!Message.equals(""))
-        {
-            blueFire.ClearMessages();
-
-            logNotifications(Message);
-        }
-        return Message;
-    }
-
-    private void logNotifications(String notification)
-    {
-        Log.d("BlueFire", notification);
+        catch(Exception ex) {}
     }
 
 }

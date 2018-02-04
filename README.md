@@ -468,3 +468,33 @@ Version 24.4:<ul>
 Version 24.5:<ul>
     <li>Fixed backward compatibility with 3.7 Firmware on a 2.1 (Bluetooth Classic) adapter.
 </ul>
+
+Version 25.0.1 Beta:<ul>
+    <li>Changed event handling to be faster, more accurate and more reliable.
+    <ul>
+        <li>Uses queues to ensure messages are received.
+        <li>Events are received as soon as they are raised by the API.
+        <li>Connection State and any Messages (if appropriate) are returned with the event.
+        <li>Duplicate events no longer occur.
+        <li>Imperative that events are allowed to be handled without interruption.
+        <li>API will attempt to deliver an event for 2 seconds before ignoring it.
+        <li>See the Demo App for correct implementation.
+    </ul>
+    <li>Added ConnectionState AdapterReboot.
+    <li>Removed ConnectionState AdapterConnected.
+    <li>Renamed ConnectionState Authenticated to Connected.
+    <li>Renamed ConnectionState CommTimeout to DataTimeout.
+    <li>Renamed ConnectionState ConnectTimeout to BluetoothTimeout.
+    <li>Added property ConnectAttempt.
+    <li>Added property ReconnectAttempt.
+    <li>Renamed property Message to ConnectionMessage.
+    <li>Removed property ReconnectReason.
+    <li>Removed property NotificationMessage.
+    <li>Removed property NotificationLocation.
+    <li>Removed method ClearMessages.
+    <li>Removed method ClearNotificationMessage.
+    <li>Fixed setting Notifications On/Off.
+    <li>Fixed setting UserName without a Password.
+    <li>Fixed updating security to the Adapter.
+    <li>Updated the Demo App to reflect the above changes.
+</ul>

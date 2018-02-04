@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,9 +39,13 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Main extends Activity
 {
+    private ScrollView scrollViewDemo;
+
     // Adapter Layout
     private RelativeLayout layoutAdapter;
 
@@ -146,6 +151,7 @@ public class Main extends Activity
 
     // App variables
     private boolean isConnecting;
+    private boolean isReconnecting;
     private boolean isConnected;
     private boolean isConnectButton;
 
@@ -187,7 +193,11 @@ public class Main extends Activity
     private boolean secureDevice = false;
     private boolean secureAdapter = false;
 
-    private ConnectionStates connectionState = ConnectionStates.NotConnected;
+    private ConnectionStates connectionState = ConnectionStates.NA;
+    private String connectionMessage = "";
+
+    private Queue<Message> EventsQueue = new LinkedList<Message>();
+    private ReceiveEventsThreading ReceiveEventsThread;
 
     // BlueFire adapter and service
     private BlueFire blueFire;
@@ -299,6 +309,10 @@ public class Main extends Activity
 
         // Initialize the app startup form
         initializeForm();
+
+        // Setup to receive API events
+        ReceiveEventsThread = new ReceiveEventsThreading();
+        ReceiveEventsThread.start();
     }
 
     private void initializeSettings()
@@ -309,6 +323,10 @@ public class Main extends Activity
         // Set the sleep mode
         appSleepMode = SleepModes.NoSleep;
         blueFire.SetSleepMode(appSleepMode);
+
+        // Test setting connect attempts
+        //appMaxConnectAttempts = 1; // default is blueFire.MaxConnectAttemptsDefault (5)
+        //appMaxReconnectAttempts = 0; // default is blueFire.MaxReconnectAttemptsDefault (5)
 
         // Set the performance mode
         appPerformanceMode = false;
@@ -432,7 +450,7 @@ public class Main extends Activity
 
         // Set to receive notifications from the adapter.
         // Note, this should only be used during testing.
-        blueFire.SetNotificationsOn(true);
+        blueFire.SetNotificationsOn(false);
 
         // Set to ignore data bus settings
         blueFire.SetIgnoreJ1939(appIgnoreJ1939);
@@ -494,6 +512,8 @@ public class Main extends Activity
 
     private void initializeForm()
     {
+        scrollViewDemo = (ScrollView) findViewById(R.id.scrollViewDemo);
+
         // Adapter layout
         layoutAdapter = (RelativeLayout) findViewById(R.id.layoutAdapter);
 
@@ -605,7 +625,8 @@ public class Main extends Activity
         buttonNextFault.setVisibility(View.INVISIBLE);
         buttonResetFault.setVisibility(View.INVISIBLE);
 
-        textStatus.setText("Not Connected");
+        connectionState = ConnectionStates.NA;
+        showStatus();
 
         buttonConnect.setFocusable(true);
         buttonConnect.setFocusableInTouchMode(true);
@@ -660,14 +681,6 @@ public class Main extends Activity
 
         checkConnectLastAdapter.setEnabled(isNotConnecting);
 
-        checkSecureDevice.setEnabled(isNotConnecting);
-        checkSecureAdapter.setEnabled(isNotConnecting);
-
-        textUserName.setEnabled(isNotConnecting);
-        textPassword.setEnabled(isNotConnecting);
-
-        buttonUpdate.setEnabled(isNotConnecting);
-
         // Enable only if connected
 
         buttonTruckData.setEnabled(isConnected);
@@ -676,6 +689,9 @@ public class Main extends Activity
 
         textPGN.setEnabled(isConnected);
         textPGNData.setEnabled(isConnected);
+        textSource.setEnabled(isConnected);
+        checkRequest.setEnabled(isConnected);
+        checkBAMRTS.setEnabled(isConnected);
         buttonSendMonitor.setEnabled(isConnected);
     }
 
@@ -693,9 +709,7 @@ public class Main extends Activity
 
                 isConnecting = true;
                 isConnected = false;
-
-                connectionState = ConnectionStates.NA;
-                textStatus.setText("Connecting...");
+                isReconnecting = false;
 
                 checkUseBT21.setEnabled(false);
                 checkUseBLE.setEnabled(false);
@@ -880,11 +894,17 @@ public class Main extends Activity
 
             buttonConnect.setEnabled(false);
 
+            buttonSendMonitor.setEnabled(false);
+
             buttonNextFault.setVisibility(View.INVISIBLE);
             buttonResetFault.setVisibility(View.INVISIBLE);
 
             buttonStartService.setEnabled(false);
             buttonStopService.setEnabled(false);
+
+            // Stop any monitoring
+            if (isSendingPGN || isMonitoringPGN)
+                StopMonitoring();
 
             // Wait for the adapter to disconnect so that the Connect button
             // is not displayed too prematurely.
@@ -902,7 +922,7 @@ public class Main extends Activity
 
         String Message = "Adapter disconnected.";
         logNotifications(Message);
-        Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
     }
 
     private void adapterNotConnected()
@@ -913,6 +933,7 @@ public class Main extends Activity
     {
         isConnected = false;
         isConnecting = false;
+        isReconnecting = false;
 
         showConnectButton();
 
@@ -933,7 +954,7 @@ public class Main extends Activity
         {
             String Message = "Adapter not connected.";
             logNotifications(Message);
-            Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -941,12 +962,11 @@ public class Main extends Activity
     {
         isConnected = false;
         isConnecting = true;
+        isReconnecting = true;
 
         enableAdapterParms();
 
-        buttonConnect.setEnabled(true);
-
-        logAPINotifications();
+        showDisconnectButton();
 
         String Message = "Reconnecting to the Adapter.";
         logNotifications(Message);
@@ -955,9 +975,9 @@ public class Main extends Activity
 
     private void adapterReconnected()
     {
-        logNotifications("Adapter is reconnected.");
+        isReconnecting = false;
 
-        adapterConnected();
+        logNotifications("Adapter is reconnected and re-retrieving data.");
 
         // Start re-retrieving truck data after reconnection
         if (layoutTruck.getVisibility() == View.VISIBLE)
@@ -970,7 +990,7 @@ public class Main extends Activity
 
         String Message = "Adapter did not reconnect.";
         logNotifications(Message);
-        Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
     }
 
     private void adapterNotAuthenticated()
@@ -979,7 +999,7 @@ public class Main extends Activity
 
         adapterNotConnected();
 
-        Toast.makeText(this, "You are not authorized to access this adapter. Check for the correct adapter, the 'connect to last adapter' setting, or your user name and password.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "You are not authorized to access this adapter. Check for the correct adapter, the 'Connect to Last Adapter' setting, or your 'User Name and Password'.", Toast.LENGTH_LONG).show();
     }
 
     private void adapterConnected()
@@ -1017,7 +1037,7 @@ public class Main extends Activity
 
         String Message = "Adapter is connected.";
         logNotifications(Message);
-        Toast.makeText(this, Message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
     }
 
     private void CANStarting()
@@ -1112,7 +1132,7 @@ public class Main extends Activity
         if (isTesting)
             StartTest();
 
-        else if (layoutTruck.getVisibility() == View.INVISIBLE)
+        else if (layoutTruck.getVisibility() == View.VISIBLE)
             getTruckData();
     }
 
@@ -1343,19 +1363,19 @@ public class Main extends Activity
     public void onSendMonitorClick(View view)
     {
         if (isSendingPGN || isMonitoringPGN)
-        {
-            buttonSendMonitor.setText("Start");
             StopMonitoring();
-        }
         else
-        {
-            buttonSendMonitor.setText("Stop");
             StartMonitoring();
-        }
     }
 
     private void StartMonitoring()
     {
+        // Clear response data
+        textResponseSource.setText("");
+        textResponseData.setText("");
+
+        buttonSendMonitor.setText("Stop");
+
         // Get PGN
         monitorPGN = -1; // required
         try
@@ -1372,6 +1392,13 @@ public class Main extends Activity
 
         // Get PGN Data
         String pgnData = textPGNData.getText().toString().trim();
+
+        // Disable PGN monitoring data
+        textPGN.setEnabled(false);
+        textPGNData.setEnabled(false);
+        textSource.setEnabled(false);
+        checkRequest.setEnabled(false);
+        checkBAMRTS.setEnabled(false);
 
         // If no PGN data, then we're monitoring a PGN.
         // Note, you can send a PGN with no data so this is just an easy way to
@@ -1490,14 +1517,21 @@ public class Main extends Activity
 
     private void StopMonitoring()
     {
+        // Stop PGN monitoring
+        blueFire.StopMonitoringPGN(monitorSource, monitorPGN, monitorRequest);
+
         isSendingPGN = false;
         isMonitoringPGN = false;
 
-        textResponseSource.setText("");
-        textResponseData.setText("");
+        // Set button text
+        buttonSendMonitor.setText("Start");
 
-        // Stop PGN monitoring
-        blueFire.StopMonitoringPGN(monitorSource, monitorPGN, monitorRequest);
+        // Enable PGN monitoring data
+        textPGN.setEnabled(true);
+        textPGNData.setEnabled(true);
+        textSource.setEnabled(true);
+        checkRequest.setEnabled(true);
+        checkBAMRTS.setEnabled(true);
     }
 
     // Next Group Button
@@ -1528,6 +1562,8 @@ public class Main extends Activity
             layoutAdapter.setVisibility(View.INVISIBLE);
             layoutELD.setVisibility(View.INVISIBLE);
             layoutTruck.setVisibility(View.VISIBLE);
+
+            scrollViewDemo.scrollTo(0,0);
 
             startTruckData();
         }
@@ -1655,7 +1691,7 @@ public class Main extends Activity
 
         textResponseData.setText(PGNDataText);
 
-        logNotifications("ShowMonitorData - PGN=" + blueFire.PGNData.PGN + ", Source=" + blueFire.PGNData.Source + ", Data=" + PGNDataText);
+        //logNotifications("ShowMonitorData - PGN=" + blueFire.PGNData.PGN + ", Source=" + blueFire.PGNData.Source + ", Data=" + PGNDataText);
     }
 
     private void showHeartbeat()
@@ -1715,6 +1751,7 @@ public class Main extends Activity
                 if (Truck.EngineVIN != Const.NA)
                     break;
                 retries--;
+                threadSleep(1); // allow other threads to execute
             }
 
             retries = nofRetries;
@@ -1724,6 +1761,7 @@ public class Main extends Activity
                 if (Truck.EngineMake != Const.NA)
                     break;
                 retries--;
+                threadSleep(1); // allow other threads to execute
             }
 
             retries = nofRetries;
@@ -1733,6 +1771,7 @@ public class Main extends Activity
                 if (Truck.VIN != Const.NA)
                     break;
                 retries--;
+                threadSleep(1); // allow other threads to execute
             }
 
             retries = nofRetries;
@@ -1742,6 +1781,7 @@ public class Main extends Activity
                 if (Truck.Make != Const.NA)
                     break;
                 retries--;
+                threadSleep(1); // allow other threads to execute
             }
         }
     }
@@ -2173,15 +2213,7 @@ public class Main extends Activity
 
     private void showStatus()
     {
-        // Check for a change of the connection state
-        if (connectionState != blueFire.ConnectionState)
-        {
-            connectionState = blueFire.ConnectionState;
-            textStatus.setText(connectionState.toString());
-        }
-
-        // Show any error messages from the adapter
-        logAPINotifications();
+        textStatus.setText(connectionState.toString());
     }
 
     // *********************************** ELD *******************************************
@@ -2881,13 +2913,6 @@ public class Main extends Activity
         return String.valueOf(bd.floatValue());
     }
 
-    private void showSystemError()
-    {
-        logAPINotifications();
-
-        showMessage("System Error", "See System Log for details.");
-    }
-
     private void showMessage(String title, String message)
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -2896,187 +2921,197 @@ public class Main extends Activity
         alert.show();
     }
 
-    private String logAPINotifications()
-    {
-        String Message = blueFire.NotificationMessage();
-
-        if (!Message.equals(""))
-        {
-            if (!blueFire.NotificationLocation().equals(""))
-                Message = blueFire.NotificationLocation() + " - " + Message;
-
-            blueFire.ClearNotificationMessage();
-
-            logNotifications(Message, true);
-        }
-
-        String AdapterMessage = logAdapterMessages();
-        if (!AdapterMessage.equals(""))
-            Message += Const.CrLf + AdapterMessage;
-
-        return Message;
-    }
-
-    private String logAdapterMessages()
-    {
-        String Message = blueFire.Message();
-
-        if (!Message.equals(""))
-        {
-            blueFire.ClearMessages();
-
-            logNotifications(Message, true);
-        }
-        return Message;
-    }
     private void logNotifications(String notification)
     {
         logNotifications(notification, false);
     }
 
-    private void logNotifications(String notification, boolean showMessage)
+    private void logNotifications(String message, boolean showMessage)
     {
-        Log.d("BlueFire", notification);
+        if (message.equals(""))
+            return;
+
+        Log.d("BlueFire", message);
 
         if (textNotifications == null)
             return;
 
-        String Message;
+        String textNotification;
         if (showMessage)
         {
-            Message = textNotifications.getText().toString().trim();
-            if (!Message.equals(""))
-                Message += Const.CrLf;
+            textNotification = textNotifications.getText().toString().trim();
+            if (!textNotification.equals(""))
+                textNotification += Const.CrLf;
 
-            Message += notification;
+            textNotification += message;
 
-            textNotifications.setText(Message);
+            textNotifications.setText(textNotification);
+        }
+    }
+
+    private void processEvent(Message msg)
+    {
+        try
+        {
+            connectionState = ConnectionStates.values()[msg.what];
+            connectionMessage = (String)msg.obj;
+
+            //android.util.Log.d("BlueFire", "Main ProcessEvent, State=" + connectionState);
+
+            switch (connectionState)
+            {
+                case Initializing:
+                case Initialized:
+                case Discovering:
+                case Disconnecting:
+                    // Status only
+                    break;
+
+                case Connecting:
+                    if (!blueFire.IsReconnecting())
+                        logNotifications("Connection Attempt " + blueFire.ConnectAttempts(), true);
+                    break;
+
+                case Connected:
+                    adapterConnected();
+                    break;
+
+                case NotAuthenticated:
+                    adapterNotAuthenticated();
+                    break;
+
+                case Disconnected:
+                    adapterDisconnected();
+                    break;
+
+                case Reconnecting:
+                    logNotifications("Reconnect Attempt " + blueFire.ReconnectAttempts(), true);
+                    adapterReconnecting();
+                    break;
+
+                case Reconnected:
+                    adapterReconnected();
+                    break;
+
+                case NotReconnected:
+                    adapterNotReconnected();
+                    break;
+
+                case CANStarting:
+                    CANStarting();
+                    break;
+
+                case J1708Restarting:
+                    j1708Restarting();
+                    break;
+
+                case ELDConnected:
+                    connectedELD();
+                    break;
+
+                case NotConnected:
+                    adapterNotConnected();
+                    break;
+
+                case DataChanged:
+                    showData();
+                    break;
+
+                case Heartbeat:
+                    showHeartbeat();
+                    return; // do not show status
+
+                case CANFilterFull:
+                    logNotifications("The CAN Filter is Full", true);
+                    showMessage("Adapter Data Retrieval", "The CAN Filter is Full. Some data will not be retrieved.");
+                    break;
+
+                case Notification:
+                    logNotifications("API Notification - " + connectionMessage, true);
+                    return; // do not show status
+
+                case AdapterMessage:
+                    logNotifications("Adapter Message - " + connectionMessage, true);
+                    return; // do not show status
+
+                case AdapterReboot:
+                    if (appMaxReconnectAttempts == 0) // no reconnect attempt
+                        adapterNotConnected();
+                    logNotifications("Adapter Rebooting - " + connectionMessage, true);
+                    return; // do not show status
+
+                case DataError:
+                    if (appMaxReconnectAttempts == 0) // no reconnect attempt
+                        adapterNotConnected();
+                    logNotifications("Adapter Data Error - " + connectionMessage, true);
+                    return; // do not show status
+
+                case DataTimeout:
+                    if (appMaxReconnectAttempts == 0) // no reconnect attempt
+                        adapterNotConnected();
+                    logNotifications("Adapter Data Timeout - Lost connection with the Adapter", true);
+                    return; // do not show status
+
+                case BluetoothTimeout:
+                    adapterNotConnected();
+                    logNotifications("API Bluetooth Timeout - Unable to connect to Bluetooth." , true);
+                    break;
+
+                case AdapterTimeout:
+                    adapterNotConnected();
+                    logNotifications("Adapter Connection Timeout - Bluetooth unable to connect to the Adapter." , true);
+                    break;
+
+                case SystemError:
+                    adapterNotConnected();
+                    logNotifications("API System Error - " + connectionMessage , true);
+                    showMessage("API System Error", "See the log for details.");
+                    break;
+            }
+
+            showStatus();
+        }
+        catch (Exception e) {}
+    }
+
+    // BlueFire Event Handler Thread
+    private class ReceiveEventsThreading extends Thread
+    {
+        public void run()
+        {
+            while (true)
+            {
+                if (!EventsQueue.isEmpty())
+                {
+                    final Message handleMessage = EventsQueue.poll();
+                    if (handleMessage != null)
+                    {
+                        runOnUiThread(new Runnable()
+                        {
+                            public void run()
+                            {
+                                processEvent(handleMessage);
+                            }
+                        });
+                    }
+                }
+                threadSleep(1); // allow other threads to execute
+            }
         }
     }
 
     // BlueFire Event Handler
-    private final Handler eventHandler = new Handler()
+    private Handler eventHandler = new Handler()
     {
         @Override
         @SuppressLint("HandlerLeak")
         public void handleMessage(Message msg)
         {
-            try
-            {
-                switch (blueFire.ConnectionState)
-                {
-                    case NotConnected:
-                        if (isConnecting || isConnected) // only show once
-                            adapterNotConnected();
-                        break;
+            Message handleMessage = new Message();
+            handleMessage.what = msg.what;
+            handleMessage.obj = msg.obj;
 
-                    case Connecting:
-                        if (blueFire.IsReconnecting())
-                            if (!isConnecting) // only show once
-                                adapterReconnecting();
-                        break;
-
-                    case Discovering:
-                        // Status only
-                        break;
-
-                    case AdapterConnected:
-                        // Status only
-                        break;
-
-                    case Authenticated:
-                        if (!isConnected) // only show once
-                            adapterConnected();
-                        break;
-
-                    case NotAuthenticated:
-                        adapterNotAuthenticated();
-                        break;
-
-                    case Disconnecting:
-                        // Status only
-                        break;
-
-                    case Disconnected:
-                        if (isConnecting || isConnected) // only show once
-                            adapterDisconnected();
-                        break;
-
-                    case Reconnecting:
-                        adapterReconnecting();
-                        break;
-
-                    case Reconnected:
-                        if (isConnecting) // only show once
-                            adapterReconnected();
-                        break;
-
-                    case NotReconnected:
-                        if (isConnecting) // only show once
-                            adapterNotReconnected();
-                        break;
-
-                    case CANStarting:
-                        CANStarting();
-                        break;
-
-                    case J1708Restarting:
-                        j1708Restarting();
-                        break;
-
-                    case ELDConnected:
-                        connectedELD();
-                        break;
-
-                    case Notification:
-                        logAPINotifications();
-                        break;
-
-                    case AdapterMessage:
-                        logAdapterMessages();
-                        break;
-
-                    case CANFilterFull:
-                        showMessage("Adapter Data Retrieval", "The CAN Filter is Full. Some data will not be retrieved.");
-                        break;
-
-                    case DataError:
-                        // Ignore, handled by Reconnecting
-                        break;
-
-                    case CommTimeout:
-                    case ConnectTimeout:
-                    case AdapterTimeout:
-                        if (isConnecting || isConnected) // only show once
-                        {
-                            blueFire.Disconnect();
-                            adapterNotConnected();
-                            showMessage("Adapter Connection", "The Adapter Timed Out.");
-                        }
-                        break;
-
-                    case SystemError:
-                        if (isConnecting || isConnected) // only show once
-                        {
-                            blueFire.Disconnect();
-                            adapterNotConnected();
-                        }
-                        showSystemError();
-                        break;
-
-                    case DataChanged:
-                        showData();
-                        break;
-
-                    case Heartbeat:
-                        showHeartbeat();
-                        return; // do not show heartbeat status
-                }
-
-                showStatus();
-
-            }
-            catch (Exception e) {}
+            EventsQueue.add(handleMessage);
         }
     };
 
@@ -3126,6 +3161,15 @@ public class Main extends Activity
             return -1;
         else
             return ((temp -32) / 1.8F);
+    }
+
+    private void threadSleep(int Interval)
+    {
+        try
+        {
+            Thread.sleep(Interval);
+        }
+        catch(Exception ex) {}
     }
 
     @Override
