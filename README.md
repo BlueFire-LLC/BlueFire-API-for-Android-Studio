@@ -502,5 +502,5 @@ Version 25.0.1 Beta:<ul>
 </ul>
 
 Version 25.0.2 Beta:<ul>
-    <li>Fixed System Error when connecting.
+    <li>Fixed null object System Errors.
 </ul>
