@@ -496,5 +496,11 @@ Version 25.0.1 Beta:<ul>
     <li>Fixed setting Notifications On/Off.
     <li>Fixed setting UserName without a Password.
     <li>Fixed updating security to the Adapter.
-    <li>Updated the Demo App to reflect the above changes.
+    <li>Fixed AdapterTimeout when connecting to a factory reset Adapter.
+    <li>Added ignoring the Retarder and Exhaust ECMs due to failing to adhere to the J1939 standard and causing undue network traffic.
+   <li>Updated the Demo App to reflect the above changes.
+</ul>
+
+Version 25.0.2 Beta:<ul>
+    <li>Fixed System Error when connecting.
 </ul>
