@@ -1414,7 +1414,12 @@ public class Main extends Activity
 
     private void MonitorPGN()
     {
-        // Check for monitoring multiple PGNs
+        // Clear notification area
+        textNotifications.setText("");
+
+        // Check for monitoring multiple PGNs.
+        // Note, in lieu of a MultipleMonitor button we just use the PGN and if none, then
+        // we simulate monitoring multiple PGNs.
         if (monitorPGN == 0)
         {
             MonitorMultiplePGNs();
@@ -1448,7 +1453,11 @@ public class Main extends Activity
 
         // Start monitoring the PGN
         isMonitoringPGN = true;
-        blueFire.StartMonitoringPGN(monitorSource, monitorPGN, interval, monitorRequest, monitorBAMRTS);
+
+        if (monitorBAMRTS)
+            blueFire.RequestPGN(monitorSource, monitorPGN, monitorRequest, monitorBAMRTS);
+        else
+            blueFire.StartMonitoringPGN(monitorSource, monitorPGN, interval, monitorRequest, monitorBAMRTS);
 
         textResponseSource.setText("Waiting for data ...");
     }
@@ -1461,12 +1470,15 @@ public class Main extends Activity
 
     private void MonitorMultiplePGNs()
     {
+        // Simulate monitoring multiple PGNs
         isMonitoringPGN = true;
 
+        // First PGN, a non-request PGN
         monitorSource = J1939.Sources.Engine.getValue();
         monitorPGN = J1939.PGNs.EEC1.getValue();
         blueFire.StartMonitoringPGN(monitorSource, monitorPGN);
 
+        // Second PGN, an on-request PGN
         monitorPGN2 = J1939.PGNs.EngineHoursRevolutions.getValue();
         monitorRequest = true;
         blueFire.StartMonitoringPGN(monitorSource, monitorPGN2, monitorRequest);
@@ -1665,9 +1677,13 @@ public class Main extends Activity
         if ( blueFire.ELD.IsDataRetrieved())
             showELDData();
 
-        // Check for Monitoring a PGN
+        // Check for Monitoring a PGN(s)
         if (isMonitoringPGN && (blueFire.PGNData.PGN == monitorPGN || blueFire.PGNData.PGN == monitorPGN2))
+        {
             ShowMonitorData();
+            if (monitorBAMRTS)
+                StopMonitoring();
+        }
 
         // Check for Sending a PGN
         if (isSendingPGN && blueFire.PGNData.PGN == monitorPGN)
@@ -1724,6 +1740,9 @@ public class Main extends Activity
         if (!blueFire.IsConnected())
             return;
 
+        if (getTruckInfoThread != null)
+            getTruckInfoThread.interrupt();
+
         blueFire.StopDataRetrieval();
     }
 
@@ -1733,6 +1752,9 @@ public class Main extends Activity
 
         IsRetrievingVINID = false;
         isRetrievingFaults = false;
+
+        if (getTruckInfoThread != null)
+            getTruckInfoThread.interrupt();
 
         blueFire.StopDataRetrieval();
     }

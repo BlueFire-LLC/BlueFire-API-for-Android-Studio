@@ -505,6 +505,6 @@ Version 25.0.2 Beta:<ul>
     <li>Fixed null object System Errors.
 </ul>
 
-Version 25.0.4 Beta:<ul>
+Version 25.0.5 Beta:<ul>
     <li>Fixed monitoring non-API PGNs.
 </ul>
