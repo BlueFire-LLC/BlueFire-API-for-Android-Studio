@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/APIDemo/APIDemo.iml" filepath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/BlueFire-API-for-Android-Studio.iml" filepath="$PROJECT_DIR$/BlueFire-API-for-Android-Studio.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bluefire-api-v25.0.5/bluefire-api-v25.0.5.iml" filepath="$PROJECT_DIR$/bluefire-api-v25.0.5/bluefire-api-v25.0.5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bluefire-api-v25.0/bluefire-api-v25.0.iml" filepath="$PROJECT_DIR$/bluefire-api-v25.0/bluefire-api-v25.0.iml" />
     </modules>
   </component>
 </project>

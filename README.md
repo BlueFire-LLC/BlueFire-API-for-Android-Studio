@@ -469,7 +469,7 @@ Version 24.5:<ul>
     <li>Fixed backward compatibility with 3.7 Firmware on a 2.1 (Bluetooth Classic) adapter.
 </ul>
 
-Version 25.0.1 Beta:<ul>
+Version 25.0:<ul>
     <li>Changed event handling to be faster, more accurate and more reliable.
     <ul>
         <li>Uses queues to ensure messages are received.
@@ -499,12 +499,4 @@ Version 25.0.1 Beta:<ul>
     <li>Fixed AdapterTimeout when connecting to a factory reset Adapter.
     <li>Added ignoring the Retarder and Exhaust ECMs due to failing to adhere to the J1939 standard and causing undue network traffic.
    <li>Updated the Demo App to reflect the above changes.
-</ul>
-
-Version 25.0.2 Beta:<ul>
-    <li>Fixed null object System Errors.
-</ul>
-
-Version 25.0.5 Beta:<ul>
-    <li>Fixed monitoring non-API PGNs.
 </ul>
