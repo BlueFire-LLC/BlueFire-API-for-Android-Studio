@@ -500,3 +500,7 @@ Version 25.0:<ul>
     <li>Added ignoring the Retarder and Exhaust ECMs due to failing to adhere to the J1939 standard and causing undue network traffic.
    <li>Updated the Demo App to reflect the above changes.
 </ul>
+
+Version 25.1:<ul>
+    <li>Added method SetKeepJ1708PortOpen that will cause the Adapter to keep the J1708 Com port open. This can be used for trucks that do not adhere to the J1708 spec and raise a fault when the Adapter is connected.
+</ul>

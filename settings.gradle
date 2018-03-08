@@ -1,1 +1,1 @@
-include ':APIDemo', ':bluefire-api-v25.0'
+include ':APIDemo', ':bluefire-api-v25.1'
