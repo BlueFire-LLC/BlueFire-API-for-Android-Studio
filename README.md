@@ -504,3 +504,8 @@ Version 25.0:<ul>
 Version 25.1:<ul>
     <li>Added method SetKeepJ1708PortOpen that will cause the Adapter to keep the J1708 Com port open. This can be used for trucks that do not adhere to the J1708 spec and raise a fault when the Adapter is connected.
 </ul>
+
+Version 25.2:<ul>
+    <li>Added Interval to Send/Monitoring.
+    <li>Added Send button to Send/Monitoring. Note, sending PGN data will continue based on the interval until either stopped, navigated to Truck/ELD data, or disconnected.
+</ul>

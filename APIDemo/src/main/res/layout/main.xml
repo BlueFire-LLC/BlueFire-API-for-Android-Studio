@@ -422,7 +422,8 @@
                     android:layout_alignLeft="@+id/labelMargin"
                     android:layout_below="@+id/lineSeparator2"
                     android:layout_marginTop="0dp"
-                    android:text="Monitor PGN:"
+                    android:layout_marginLeft="30dp"
+                    android:text="PGN:"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -431,21 +432,33 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelPGN"
                     android:layout_alignBottom="@+id/labelPGN"
-                    android:layout_marginLeft="120dp"
+                    android:layout_marginLeft="80dp"
                     android:inputType="number"
                     android:maxLength="6"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <!--  Send/Monitor Button    -->
+                <!--  Monitor Button    -->
                 <Button
-                    android:id="@+id/buttonSendMonitor"
+                    android:id="@+id/buttonMonitor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textPGN"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="80dp"
+                    android:onClick="onMonitorClick"
+                    android:text="Monitor"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Send Button    -->
+                <Button
+                    android:id="@+id/buttonSend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/textPGN"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:onClick="onSendMonitorClick"
-                    android:text="Start"
+                    android:onClick="onSendClick"
+                    android:text="Send"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -454,7 +467,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin"
                     android:layout_below="@+id/labelPGN"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:text="Source:"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -465,9 +478,31 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelSource"
                     android:layout_alignBottom="@+id/labelSource"
-                    android:layout_marginLeft="120dp"
+                    android:layout_marginLeft="80dp"
                     android:inputType="number"
                     android:maxLength="3"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/labelInterval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/labelMargin"
+                    android:layout_below="@+id/labelSource"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Interval:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/textInterval"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/labelInterval"
+                    android:layout_alignBottom="@+id/labelInterval"
+                    android:layout_marginLeft="80dp"
+                    android:inputType="number"
+                    android:maxLength="6"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -475,10 +510,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin"
-                    android:layout_below="@+id/labelSource"
+                    android:layout_below="@+id/labelInterval"
                     android:layout_marginLeft="25dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Send Data:"
+                    android:layout_marginTop="10dp"
+                    android:text="Data:"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -488,7 +523,7 @@
                     android:layout_alignBaseline="@+id/labelPGNData"
                     android:layout_below="@+id/textPGN"
                     android:layout_alignBottom="@+id/labelPGNData"
-                    android:layout_marginLeft="120dp"
+                    android:layout_marginLeft="80dp"
                     android:inputType="textNoSuggestions"
                     android:maxLength="16"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -500,7 +535,7 @@
                     android:layout_alignLeft="@+id/labelMargin"
                     android:layout_below="@+id/labelPGNData"
                     android:text="Request:"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="0dp"
                     android:layout_marginTop="10dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -510,7 +545,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelRequest"
                     android:layout_alignBottom="@+id/labelRequest"
-                    android:layout_marginLeft="120dp"
+                    android:layout_marginLeft="80dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -530,18 +565,27 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelBAMRTS"
                     android:layout_alignBottom="@+id/labelBAMRTS"
-                    android:layout_marginLeft="250dp"
+                    android:layout_marginLeft="210dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <!--  Separator    -->
+                <View
+                    android:id="@+id/lineSeparator2a"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/labelBAMRTS"
+                    android:background="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/labelResponseSource"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin"
-                    android:layout_below="@+id/labelBAMRTS"
+                    android:layout_below="@+id/lineSeparator2a"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="PGN Source:"
+                    android:text="Source:"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -550,7 +594,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelResponseSource"
                     android:layout_alignBottom="@+id/labelResponseSource"
-                    android:layout_marginLeft="125dp"
+                    android:layout_marginLeft="85dp"
                     android:text="0"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -560,7 +604,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/labelMargin"
                     android:layout_below="@+id/labelResponseSource"
-                    android:layout_marginLeft="70dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginTop="10dp"
                     android:text="Data:"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -571,7 +615,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/labelResponseData"
                     android:layout_alignBottom="@+id/labelResponseData"
-                    android:layout_marginLeft="125dp"
+                    android:layout_marginLeft="85dp"
                     android:text="0"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 

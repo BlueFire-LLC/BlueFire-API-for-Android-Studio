@@ -60,6 +60,7 @@ public class Main extends Activity
     private EditText textPassword;
     private EditText textPGN;
     private EditText textSource;
+    private EditText textInterval;
     private EditText textPGNData;
 
     private TextView textNotifications;
@@ -82,7 +83,8 @@ public class Main extends Activity
     private Button buttonNextFault;
     private Button buttonResetFault;
     private Button buttonUpdate;
-    private Button buttonSendMonitor;
+    private Button buttonSend;
+    private Button buttonMonitor;
     private Button buttonTruckData;
     private Button buttonELDData;
     private Button buttonTest;
@@ -158,6 +160,8 @@ public class Main extends Activity
     private int monitorPGN;
     private int monitorPGN2;
     private int monitorSource;
+    private int monitorInterval;
+    private byte[] monitorPGNData;
     private boolean monitorRequest;
     private boolean monitorBAMRTS;
     private boolean isSendingPGN;
@@ -210,6 +214,8 @@ public class Main extends Activity
     private boolean killApp = false;
 
     // BlueFire App settings\
+
+    private boolean ignoreSettings = false;
 
     private SharedPreferences settings;
     private SharedPreferences.Editor settingsSave;
@@ -294,11 +300,18 @@ public class Main extends Activity
             blueFire.SetUseInsecureConnection(false);
 
         // Establish settings persistent storage
-        settings = this.getPreferences(Context.MODE_PRIVATE);
-        settingsSave = settings.edit();
+        try
+        {
+            settings = this.getPreferences(Context.MODE_PRIVATE);
+            settingsSave = settings.edit();
 
-        // Get application settings
-        getSettings();
+            // Get application settings
+            getSettings();
+        }
+        catch (Exception ex)
+        {
+            ignoreSettings = true;
+        }
 
         // Initialize adapter properties
         initializeAdapter();
@@ -317,6 +330,9 @@ public class Main extends Activity
 
     private void initializeSettings()
     {
+        if (ignoreSettings)
+            return;
+
         // Initialize settings that are not in the form for the
         // user to change.
 
@@ -346,6 +362,9 @@ public class Main extends Activity
 
     private void getSettings()
     {
+        if (ignoreSettings)
+            return;
+
         // Get the application settings
         // Note, these should be retrieved from persistent storage.
         appUseBLE = settings.getBoolean("UseBLE", true);
@@ -438,6 +457,9 @@ public class Main extends Activity
 
     private void resetSettings()
     {
+        if (ignoreSettings)
+            return;
+
         settingsSave.clear();
         settingsSave.commit();
     }
@@ -528,6 +550,7 @@ public class Main extends Activity
         textPassword = (EditText) findViewById(R.id.textPassword);
         textPGN = (EditText) findViewById(R.id.textPGN);
         textSource = (EditText) findViewById(R.id.textSource);
+        textInterval = (EditText) findViewById(R.id.textInterval);
         textPGNData = (EditText) findViewById(R.id.textPGNData);
 
         textNotifications = (TextView) findViewById(R.id.textNotifications);
@@ -550,7 +573,8 @@ public class Main extends Activity
         buttonNextFault = (Button) findViewById(R.id.buttonNextFault);
         buttonResetFault = (Button) findViewById(R.id.buttonResetFault);
         buttonUpdate = (Button) findViewById(R.id.buttonUpdate);
-        buttonSendMonitor = (Button) findViewById(R.id.buttonSendMonitor);
+        buttonSend = (Button) findViewById(R.id.buttonSend);
+        buttonMonitor = (Button) findViewById(R.id.buttonMonitor);
         buttonTruckData = (Button) findViewById(R.id.buttonTruckData);
         buttonELDData = (Button) findViewById(R.id.buttonELDData);
         buttonTest = (Button) findViewById(R.id.buttonTest);
@@ -692,7 +716,8 @@ public class Main extends Activity
         textSource.setEnabled(isConnected);
         checkRequest.setEnabled(isConnected);
         checkBAMRTS.setEnabled(isConnected);
-        buttonSendMonitor.setEnabled(isConnected);
+        buttonSend.setEnabled(isConnected);
+        buttonMonitor.setEnabled(isConnected);
     }
 
     // Connect Button
@@ -702,7 +727,7 @@ public class Main extends Activity
         {
             if (isConnectButton)
             {
-                if (!EditLEDBrightness())
+                if (!editLEDBrightness())
                     return;
 
                 clearForm();
@@ -894,7 +919,8 @@ public class Main extends Activity
 
             buttonConnect.setEnabled(false);
 
-            buttonSendMonitor.setEnabled(false);
+            buttonSend.setEnabled(false);
+            buttonMonitor.setEnabled(false);
 
             buttonNextFault.setVisibility(View.INVISIBLE);
             buttonResetFault.setVisibility(View.INVISIBLE);
@@ -904,7 +930,7 @@ public class Main extends Activity
 
             // Stop any monitoring
             if (isSendingPGN || isMonitoringPGN)
-                StopMonitoring();
+                stopSendMonitoring();
 
             // Wait for the adapter to disconnect so that the Connect button
             // is not displayed too prematurely.
@@ -1033,14 +1059,14 @@ public class Main extends Activity
         getAdapterData();
 
         if (isTesting)
-            StartTest();
+            startTest();
 
         String Message = "Adapter is connected.";
         logNotifications(Message);
         Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
     }
 
-    private void CANStarting()
+    private void startingCAN()
     {
         // Get the CAN bus speed
         CANBusSpeeds CANBusSpeed = blueFire.CANBusSpeed();
@@ -1130,7 +1156,7 @@ public class Main extends Activity
     private void reRetrieveTruckData()
     {
         if (isTesting)
-            StartTest();
+            startTest();
 
         else if (layoutTruck.getVisibility() == View.VISIBLE)
             getTruckData();
@@ -1158,7 +1184,7 @@ public class Main extends Activity
         saveSettings();
     }
 
-    private boolean EditLEDBrightness()
+    private boolean editLEDBrightness()
     {
         // Edit LED Brightness
         int ledBrightness = -1;
@@ -1359,72 +1385,19 @@ public class Main extends Activity
         return false;
     }
 
-    // Send/Monitor Button
-    public void onSendMonitorClick(View view)
+    // Monitor Button
+    public void onMonitorClick(View view)
     {
-        if (isSendingPGN || isMonitoringPGN)
-            StopMonitoring();
-        else
-            StartMonitoring();
-    }
-
-    private void StartMonitoring()
-    {
-        // Clear response data
-        textResponseSource.setText("");
-        textResponseData.setText("");
-
-        buttonSendMonitor.setText("Stop");
-
-        // Get PGN
-        monitorPGN = -1; // required
-        try
+        if (isMonitoringPGN)
         {
-            monitorPGN = Integer.parseInt("0"+textPGN.getText().toString().trim());
-        }
-        catch(Exception e){}
-
-        if (monitorPGN < 0)
-        {
-            Toast.makeText(this, "PGN must be numeric.", Toast.LENGTH_LONG).show();
+            stopSendMonitoring();
             return;
         }
 
-        // Get PGN Data
-        String pgnData = textPGNData.getText().toString().trim();
-
-        // Disable PGN monitoring data
-        textPGN.setEnabled(false);
-        textPGNData.setEnabled(false);
-        textSource.setEnabled(false);
-        checkRequest.setEnabled(false);
-        checkBAMRTS.setEnabled(false);
-
-        // If no PGN data, then we're monitoring a PGN.
-        // Note, you can send a PGN with no data so this is just an easy way to
-        // avoid adding a Send PGN button.
-        if (pgnData.length() == 0) // Monitor a PGN
-            MonitorPGN();
-
-        // PGN data entered so Send the PGN rather than monitoring it.
-        // Note, see the above note.
-        else
-            SendPGN(pgnData);
-    }
-
-    private void MonitorPGN()
-    {
-        // Clear notification area
-        textNotifications.setText("");
-
-        // Check for monitoring multiple PGNs.
-        // Note, in lieu of a MultipleMonitor button we just use the PGN and if none, then
-        // we simulate monitoring multiple PGNs.
-        if (monitorPGN == 0)
-        {
-            MonitorMultiplePGNs();
+        // Edit Send/Monitoring data
+        if (!editSendMonitoring())
             return;
-        }
+
         // Get the 'To' Source.
         // Note, when monitoring a PGN this is the source you are requesting the data from.
         // If the source is Global then any ECM that is programmed to respond will.
@@ -1446,10 +1419,22 @@ public class Main extends Activity
         monitorRequest = checkRequest.isChecked();
         monitorBAMRTS = checkBAMRTS.isChecked();
 
-        // Default to a 5 second interval since there is not an Interval entry field.
-        // Note, not specifying an interval or setting it to 0 will set the RequestType
-        // to On Change.
-        int interval = 5 * Const.OneSecond;
+        disableSendMonitoring();
+
+        buttonSend.setEnabled(false);
+        buttonMonitor.setText("Stop");
+
+        // Clear notification area
+        textNotifications.setText("");
+
+        // Check for monitoring multiple PGNs.
+        // Note, in lieu of a MultipleMonitor button we just use the PGN and if none, then
+        // we simulate monitoring multiple PGNs.
+        if (monitorPGN == 0)
+        {
+            monitorMultiplePGNs();
+            return;
+        }
 
         // Start monitoring the PGN
         isMonitoringPGN = true;
@@ -1457,35 +1442,34 @@ public class Main extends Activity
         if (monitorBAMRTS)
             blueFire.RequestPGN(monitorSource, monitorPGN, monitorRequest, monitorBAMRTS);
         else
-            blueFire.StartMonitoringPGN(monitorSource, monitorPGN, interval, monitorRequest, monitorBAMRTS);
+            blueFire.StartMonitoringPGN(monitorSource, monitorPGN, monitorInterval, monitorRequest, monitorBAMRTS);
 
         textResponseSource.setText("Waiting for data ...");
     }
 
-    // Test Monitor Button
-    public void onTestMonitorClick(View view)
+    // Send Button
+    public void onSendClick(View view)
     {
-        MonitorMultiplePGNs();
-    }
+        if (isSendingPGN)
+        {
+            stopSendMonitoring();
+            return;
+        }
 
-    private void MonitorMultiplePGNs()
-    {
-        // Simulate monitoring multiple PGNs
-        isMonitoringPGN = true;
+        // Edit Send/Monitoring data
+        if (!editSendMonitoring())
+            return;
 
-        // First PGN, a non-request PGN
-        monitorSource = J1939.Sources.Engine.getValue();
-        monitorPGN = J1939.PGNs.EEC1.getValue();
-        blueFire.StartMonitoringPGN(monitorSource, monitorPGN);
+        // Get PGN Data
+        String pgnData = textPGNData.getText().toString().trim();
 
-        // Second PGN, an on-request PGN
-        monitorPGN2 = J1939.PGNs.EngineHoursRevolutions.getValue();
-        monitorRequest = true;
-        blueFire.StartMonitoringPGN(monitorSource, monitorPGN2, monitorRequest);
-    }
+        // Edit the PGN Data to be 16 hex characters (8 bytes)
+        if (pgnData.length() != 16)
+        {
+            Toast.makeText(this, "PGN Data must be 16 hex characters (8 bytes).", Toast.LENGTH_LONG).show();
+            return;
+        }
 
-    private void SendPGN(String pgnData)
-    {
         // Get the 'From' Source.
         // Note, when sending a PGN the BlueFire API should be the source otherwise
         // you are spoofing another ECM.
@@ -1502,12 +1486,10 @@ public class Main extends Activity
             return;
         }
 
-        // Edit the PGN Data to be 16 hex characters (8 bytes)
-        if (pgnData.length() != 16)
-        {
-            Toast.makeText(this, "PGN Data must be 16 hex characters (8 bytes).", Toast.LENGTH_LONG).show();
-            return;
-        }
+        disableSendMonitoring();
+
+        buttonSend.setText("Stop");
+        buttonMonitor.setEnabled(false);
 
         // Convert the PGN Data hex string to bytes
         byte[] pgnBytes = new byte[8];
@@ -1524,24 +1506,100 @@ public class Main extends Activity
 
         // Send the PGN
         isSendingPGN = true;
-        blueFire.SendPGN(monitorSource, monitorPGN,  pgnBytes);
+        blueFire.SendPGN(monitorSource, monitorPGN, monitorInterval, pgnBytes);
     }
 
-    private void StopMonitoring()
+    private boolean editSendMonitoring()
     {
-        // Stop PGN monitoring
+        // Clear response data
+        textResponseSource.setText("");
+        textResponseData.setText("");
+
+        // Get the interval
+        monitorInterval = -1;
+        try
+        {
+            monitorInterval = Integer.parseInt("0"+textInterval.getText().toString().trim());
+        }
+        catch(Exception e){}
+
+        if (monitorInterval < 0)
+        {
+            Toast.makeText(this, "Interval must be numeric.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (monitorInterval == 0)
+            monitorInterval = 5 * Const.OneSecond;
+
+        // Get PGN
+        monitorPGN = -1; // required
+        try
+        {
+            monitorPGN = Integer.parseInt("0"+textPGN.getText().toString().trim());
+        }
+        catch(Exception e){}
+
+        if (monitorPGN < 0)
+        {
+            Toast.makeText(this, "PGN must be numeric.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private void disableSendMonitoring()
+    {
+        // Disable send/monitoring data
+        textPGN.setEnabled(false);
+        textPGNData.setEnabled(false);
+        textSource.setEnabled(false);
+        textInterval.setEnabled(false);
+        checkRequest.setEnabled(false);
+        checkBAMRTS.setEnabled(false);
+    }
+
+    // Test Monitor Button
+    public void onTestMonitorClick(View view)
+    {
+        monitorMultiplePGNs();
+    }
+
+    private void monitorMultiplePGNs()
+    {
+        // Simulate monitoring multiple PGNs
+        isMonitoringPGN = true;
+
+        // First PGN, a non-request PGN
+        monitorSource = J1939.Sources.Engine.getValue();
+        monitorPGN = J1939.PGNs.EEC1.getValue();
+        blueFire.StartMonitoringPGN(monitorSource, monitorPGN);
+
+        // Second PGN, an on-request PGN
+        monitorPGN2 = J1939.PGNs.EngineHoursRevolutions.getValue();
+        monitorRequest = true;
+        blueFire.StartMonitoringPGN(monitorSource, monitorPGN2, monitorRequest);
+    }
+
+    private void stopSendMonitoring()
+    {
+        // Stop PGN monitoring.
+        // Note, this will also stop any Sending PGNs.
         blueFire.StopMonitoringPGN(monitorSource, monitorPGN, monitorRequest);
 
         isSendingPGN = false;
         isMonitoringPGN = false;
 
-        // Set button text
-        buttonSendMonitor.setText("Start");
+        buttonSend.setText("Send");
+        buttonMonitor.setText("Monitor");
+        buttonSend.setEnabled(true);
+        buttonMonitor.setEnabled(true);
 
         // Enable PGN monitoring data
         textPGN.setEnabled(true);
         textPGNData.setEnabled(true);
         textSource.setEnabled(true);
+        textInterval.setEnabled(true);
         checkRequest.setEnabled(true);
         checkBAMRTS.setEnabled(true);
     }
@@ -1608,10 +1666,10 @@ public class Main extends Activity
         isTesting = true;
         logNotifications("Test started");
 
-        StartTest();
+        startTest();
     }
 
-    private void StartTest()
+    private void startTest()
     {
         clearAdapterData();
 
@@ -1680,24 +1738,22 @@ public class Main extends Activity
         // Check for Monitoring a PGN(s)
         if (isMonitoringPGN && (blueFire.PGNData.PGN == monitorPGN || blueFire.PGNData.PGN == monitorPGN2))
         {
-            ShowMonitorData();
+            showMonitorData();
             if (monitorBAMRTS)
-                StopMonitoring();
+                stopSendMonitoring();
         }
 
         // Check for Sending a PGN
         if (isSendingPGN && blueFire.PGNData.PGN == monitorPGN)
-            ShowSendPGNData();
+            showSendPGNData();
     }
 
-    private void ShowSendPGNData()
+    private void showSendPGNData()
     {
-        StopMonitoring(); // only show sending data once
-
         textPGNData.setText(bytesToHexString(blueFire.PGNData.Data).toUpperCase());
     }
 
-    private void ShowMonitorData()
+    private void showMonitorData()
     {
         textPGN.setText(Integer.toString(blueFire.PGNData.PGN));
 
@@ -1707,7 +1763,7 @@ public class Main extends Activity
 
         textResponseData.setText(PGNDataText);
 
-        //logNotifications("ShowMonitorData - PGN=" + blueFire.PGNData.PGN + ", Source=" + blueFire.PGNData.Source + ", Data=" + PGNDataText);
+        //logNotifications("showMonitorData - PGN=" + blueFire.PGNData.PGN + ", Source=" + blueFire.PGNData.Source + ", Data=" + PGNDataText);
     }
 
     private void showHeartbeat()
@@ -1755,6 +1811,8 @@ public class Main extends Activity
 
         if (getTruckInfoThread != null)
             getTruckInfoThread.interrupt();
+
+        stopSendMonitoring();
 
         blueFire.StopDataRetrieval();
     }
@@ -1928,7 +1986,7 @@ public class Main extends Activity
                 textView7.setText("Max Speed");
 
                 if (isTesting && !testStarted)
-                    StartTest(); // restart testing
+                    startTest(); // restart testing
 
                 if (!isTesting)
                 {
@@ -2004,7 +2062,7 @@ public class Main extends Activity
                 textView7.setText("");
 
                 if (isTesting && !testStarted)
-                    StartTest(); // restart testing
+                    startTest(); // restart testing
 
                 if (!isTesting && !isRetrievingFaults)
                 {
@@ -3020,7 +3078,7 @@ public class Main extends Activity
                     break;
 
                 case CANStarting:
-                    CANStarting();
+                    startingCAN();
                     break;
 
                 case J1708Restarting:
