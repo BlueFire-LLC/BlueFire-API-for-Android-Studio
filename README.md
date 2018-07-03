@@ -509,3 +509,7 @@ Version 25.2:<ul>
     <li>Added Interval to Send/Monitoring.
     <li>Added Send button to Send/Monitoring. Note, sending PGN data will continue based on the interval until either stopped, navigated to Truck/ELD data, or disconnected.
 </ul>
+
+Version 25.3:<ul>
+    <li>Fixed retrieving J1708 (6-pin) Distance and Odometer when they are different. Note, this can occur when the engine or cab/body/instrument ECMs are changed and the distance values are not synced between the two.
+</ul>

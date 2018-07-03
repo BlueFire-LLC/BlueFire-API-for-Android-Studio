@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '26.0.2'
     defaultConfig {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled false
@@ -21,5 +20,5 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:support-v4:26.0.0-alpha1'
-    implementation project(':bluefire-api-v25.2')
+    implementation project(':bluefire-api-v25.3')
 }
