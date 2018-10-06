@@ -6,8 +6,6 @@
       android:versionName="25.3" >
     <!--  Note - versionName must match BlueFire.Version and the README.md -->
 
-    <uses-sdk android:minSdkVersion="23"></uses-sdk>
-
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>

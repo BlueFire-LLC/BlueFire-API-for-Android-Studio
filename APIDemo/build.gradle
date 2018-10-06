@@ -5,6 +5,7 @@ android {
     defaultConfig {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled false
+        minSdkVersion = 23
     }
     buildTypes {
         release {
