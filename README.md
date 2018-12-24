@@ -513,3 +513,8 @@ Version 25.2:<ul>
 Version 25.3:<ul>
     <li>Fixed retrieving J1708 (6-pin) Distance and Odometer when they are different. Note, this can occur when the engine or cab/body/instrument ECMs are changed and the distance values are not synced between the two.
 </ul>
+
+Version 25.4:<ul>
+    <li>API is compiled with Target SDK 26 and Min SDK 22. Previous version was Target SDK 25 and Min SDK 23.
+    <li>The Demo App checks for Min SDK 23 and Location Permission granted by the user.
+</ul>
