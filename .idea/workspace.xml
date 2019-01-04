@@ -98,8 +98,8 @@
       <file leaf-file-name="Build_Instructions" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Build_Instructions">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-57">
-              <caret line="40" column="102" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
+            <state relative-caret-position="307">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
             </state>
           </provider>
         </entry>
@@ -107,8 +107,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="827" selection-start-line="827" selection-end-line="827" />
+            <state relative-caret-position="4777">
+              <caret line="821" column="4" selection-start-line="821" selection-start-column="4" selection-end-line="821" selection-end-column="4" />
               <folding>
                 <element signature="e#8498#10137#0" />
                 <element signature="e#8661#8704#0" />
@@ -136,129 +136,6 @@
                 <element signature="e#31120#31805#0" />
                 <element signature="e#31175#31262#0" />
                 <element signature="e#31531#31577#0" />
-                <element signature="e#32766#32977#0" />
-                <element signature="e#32983#33442#0" />
-                <element signature="e#33173#33232#0" />
-                <element signature="e#33448#33622#0" />
-                <element signature="e#33628#33991#0" />
-                <element signature="e#33692#33985#0" />
-                <element signature="e#33839#33865#0" />
-                <element signature="e#33997#34272#0" />
-                <element signature="e#34278#34490#0" />
-                <element signature="e#34496#35381#0" />
-                <element signature="e#35081#35145#0" />
-                <element signature="e#35387#35621#0" />
-                <element signature="e#35713#36398#0" />
-                <element signature="e#36404#36762#0" />
-                <element signature="e#36768#37069#0" />
-                <element signature="e#37075#37316#0" />
-                <element signature="e#37322#37674#0" />
-                <element signature="e#37680#38609#0" />
-                <element signature="e#38615#39410#0" />
-                <element signature="e#39416#39523#0" />
-                <element signature="e#39529#41088#0" />
-                <element signature="e#41094#41279#0" />
-                <element signature="e#41285#41483#0" />
-                <element signature="e#41489#41693#0" />
-                <element signature="e#41699#42311#0" />
-                <element signature="e#42317#42547#0" />
-                <element signature="e#42553#42904#0" />
-                <element signature="e#42910#43075#0" />
-                <element signature="e#43081#43351#0" />
-                <element signature="e#43357#44019#0" />
-                <element signature="e#44025#44686#0" />
-                <element signature="e#44692#45413#0" />
-                <element signature="e#45631#45946#0" />
-                <element signature="e#45952#46126#0" />
-                <element signature="e#46132#46917#0" />
-                <element signature="e#46923#48896#0" />
-                <element signature="e#47194#47217#0" />
-                <element signature="e#47832#47862#0" />
-                <element signature="e#48230#48268#0" />
-                <element signature="e#48902#50684#0" />
-                <element signature="e#49504#49529#0" />
-                <element signature="e#50690#51698#0" />
-                <element signature="e#51704#52023#0" />
-                <element signature="e#52146#52702#0" />
-                <element signature="e#52708#53403#0" />
-                <element signature="e#52756#52779#0" />
-                <element signature="e#53409#53588#0" />
-                <element signature="e#53594#53781#0" />
-                <element signature="e#53787#54347#0" />
-                <element signature="e#54418#54855#0" />
-                <element signature="e#54861#57299#0" />
-                <element signature="e#55236#55269#0" />
-                <element signature="e#57305#57812#0" />
-                <element signature="e#57581#57658#0" />
-                <element signature="e#57818#58521#0" />
-                <element signature="e#58527#58653#0" />
-                <element signature="e#58659#59123#0" />
-                <element signature="e#59129#59313#0" />
-                <element signature="e#59319#59805#0" />
-                <element signature="e#59421#59462#0" />
-                <element signature="e#59811#60032#0" />
-                <element signature="e#60038#60337#0" />
-                <element signature="e#60343#61863#0" />
-                <element signature="e#60405#61857#0" />
-                <element signature="e#61869#70461#0" />
-                <element signature="e#62241#62282#0" />
-                <element signature="e#62920#62968#0" />
-                <element signature="e#68616#68653#0" />
-                <element signature="e#70285#70332#0" />
-                <element signature="e#70467#79710#0" />
-                <element signature="e#75830#75887#0" />
-                <element signature="e#77383#77440#0" />
-                <element signature="e#79716#79906#0" />
-                <element signature="e#80103#80390#0" />
-                <element signature="e#80396#81258#0" />
-                <element signature="e#81264#81408#0" />
-                <element signature="e#81553#81700#0" />
-                <element signature="e#81849#81999#0" />
-                <element signature="e#82005#82240#0" />
-                <element signature="e#82246#82527#0" />
-                <element signature="e#82533#82829#0" />
-                <element signature="e#82835#83134#0" />
-                <element signature="e#83140#83312#0" />
-                <element signature="e#83318#83679#0" />
-                <element signature="e#83685#84261#0" />
-                <element signature="e#84267#85788#0" />
-                <element signature="e#85794#87308#0" />
-                <element signature="e#86759#86790#0" />
-                <element signature="e#87314#88168#0" />
-                <element signature="e#88174#89292#0" />
-                <element signature="e#89298#91941#0" />
-                <element signature="e#91947#92166#0" />
-                <element signature="e#92172#92654#0" />
-                <element signature="e#92660#93391#0" />
-                <element signature="e#92701#92749#0" />
-                <element signature="e#93397#94333#0" />
-                <element signature="e#94339#94669#0" />
-                <element signature="e#94675#95843#0" />
-                <element signature="e#95849#96573#0" />
-                <element signature="e#96579#97027#0" />
-                <element signature="e#97033#97702#0" />
-                <element signature="e#97708#98107#0" />
-                <element signature="e#98113#98517#0" />
-                <element signature="e#98523#98933#0" />
-                <element signature="e#98939#99811#0" />
-                <element signature="e#99817#100017#0" />
-                <element signature="e#100119#100266#0" />
-                <element signature="e#100272#100432#0" />
-                <element signature="e#100438#100659#0" />
-                <element signature="e#100665#100886#0" />
-                <element signature="e#101007#101585#0" />
-                <element signature="e#101591#106006#0" />
-                <element signature="e#106012#106792#0" />
-                <element signature="e#106115#106786#0" />
-                <element signature="e#107193#107611#0" />
-                <element signature="e#107617#108025#0" />
-                <element signature="e#107680#107717#0" />
-                <element signature="e#108031#108185#0" />
-                <element signature="e#108191#108345#0" />
-                <element signature="e#108351#108500#0" />
-                <element signature="e#108506#110076#0" />
-                <element signature="e#109554#109618#0" />
-                <element signature="e#110082#110215#0" />
               </folding>
             </state>
           </provider>
@@ -266,21 +143,21 @@
       </file>
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
             </state>
-          </provider>
-          <provider editor-type-id="android-manifest">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/APIDemo/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+            <state relative-caret-position="153">
+              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -2045,62 +1922,6 @@
                 <option name="description" value="Displays the properties of project ':APIDemo'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/APIDemo" />
                 <option name="name" value="properties" />
-              </ExternalTaskPojo>
-            </list>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/bluefire-api-v25.3">
-          <value>
-            <list>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by project ':bluefire-api-v25.3'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="components" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of project ':bluefire-api-v25.3'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="projects" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in project ':bluefire-api-v25.3'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="dependentComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in project ':bluefire-api-v25.3'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="buildEnvironment" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in project ':bluefire-api-v25.3'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="dependencyInsight" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in project ':bluefire-api-v25.3'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="dependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays a help message." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="help" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of project ':bluefire-api-v25.3'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="model" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of project ':bluefire-api-v25.3'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="properties" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from project ':bluefire-api-v25.3'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/bluefire-api-v25.3" />
-                <option name="name" value="tasks" />
               </ExternalTaskPojo>
             </list>
           </value>
@@ -7040,8 +6861,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -7098,16 +6917,13 @@
               <item name="BlueFire-API-for-Android-Studio" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
-            <path>
-              <item name="BlueFire-API-for-Android-Studio" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Gradle: artifacts:bluefire-api-v25.4" type="70bed36:NamedLibraryElementNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -7122,18 +6938,18 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.bluefire.apidemo" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\Eclipse libs" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\res\layout" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\java\com\bluefire\apidemo" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bluefire.apidemo" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -7504,7 +7320,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Gradle" order="5" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info anchor="right" id="Captures" order="9" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Project" order="3" visible="true" weight="0.1937862" />
@@ -7512,23 +7328,23 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="right" id="Build Variants" order="10" />
       <window_info id="Image Layers" order="0" />
       <window_info id="Capture Tool" order="1" />
       <window_info anchor="bottom" id="Android Monitor" order="8" weight="0.32900432" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32683983" />
-      <window_info anchor="right" id="Preview" order="11" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39935064" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.24675325" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32900432" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Favorites" order="12" />
       <window_info anchor="bottom" id="Gradle Console" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.24675325" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="right" id="Android Model" order="6" side_tool="true" />
-      <window_info anchor="right" id="Favorites" order="12" />
+      <window_info anchor="right" id="Preview" order="11" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -7614,13 +7430,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bluefire-api-v23.0/build.gradle" />
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="1394" selection-start-line="1394" selection-end-line="1394" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.android/build-cache/1aab3cfbe3f8fcc89497f94c4efe8bdc01ddc6d8/output/jars/classes.jar!/com/bluefire/api/ELD.class" />
@@ -7644,20 +7460,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="827" selection-start-line="827" selection-end-line="827" />
+        <state relative-caret-position="4777">
+          <caret line="821" column="4" selection-start-line="821" selection-start-column="4" selection-end-line="821" selection-end-column="4" />
           <folding>
             <element signature="e#8498#10137#0" />
             <element signature="e#8661#8704#0" />
@@ -7685,144 +7491,31 @@
             <element signature="e#31120#31805#0" />
             <element signature="e#31175#31262#0" />
             <element signature="e#31531#31577#0" />
-            <element signature="e#32766#32977#0" />
-            <element signature="e#32983#33442#0" />
-            <element signature="e#33173#33232#0" />
-            <element signature="e#33448#33622#0" />
-            <element signature="e#33628#33991#0" />
-            <element signature="e#33692#33985#0" />
-            <element signature="e#33839#33865#0" />
-            <element signature="e#33997#34272#0" />
-            <element signature="e#34278#34490#0" />
-            <element signature="e#34496#35381#0" />
-            <element signature="e#35081#35145#0" />
-            <element signature="e#35387#35621#0" />
-            <element signature="e#35713#36398#0" />
-            <element signature="e#36404#36762#0" />
-            <element signature="e#36768#37069#0" />
-            <element signature="e#37075#37316#0" />
-            <element signature="e#37322#37674#0" />
-            <element signature="e#37680#38609#0" />
-            <element signature="e#38615#39410#0" />
-            <element signature="e#39416#39523#0" />
-            <element signature="e#39529#41088#0" />
-            <element signature="e#41094#41279#0" />
-            <element signature="e#41285#41483#0" />
-            <element signature="e#41489#41693#0" />
-            <element signature="e#41699#42311#0" />
-            <element signature="e#42317#42547#0" />
-            <element signature="e#42553#42904#0" />
-            <element signature="e#42910#43075#0" />
-            <element signature="e#43081#43351#0" />
-            <element signature="e#43357#44019#0" />
-            <element signature="e#44025#44686#0" />
-            <element signature="e#44692#45413#0" />
-            <element signature="e#45631#45946#0" />
-            <element signature="e#45952#46126#0" />
-            <element signature="e#46132#46917#0" />
-            <element signature="e#46923#48896#0" />
-            <element signature="e#47194#47217#0" />
-            <element signature="e#47832#47862#0" />
-            <element signature="e#48230#48268#0" />
-            <element signature="e#48902#50684#0" />
-            <element signature="e#49504#49529#0" />
-            <element signature="e#50690#51698#0" />
-            <element signature="e#51704#52023#0" />
-            <element signature="e#52146#52702#0" />
-            <element signature="e#52708#53403#0" />
-            <element signature="e#52756#52779#0" />
-            <element signature="e#53409#53588#0" />
-            <element signature="e#53594#53781#0" />
-            <element signature="e#53787#54347#0" />
-            <element signature="e#54418#54855#0" />
-            <element signature="e#54861#57299#0" />
-            <element signature="e#55236#55269#0" />
-            <element signature="e#57305#57812#0" />
-            <element signature="e#57581#57658#0" />
-            <element signature="e#57818#58521#0" />
-            <element signature="e#58527#58653#0" />
-            <element signature="e#58659#59123#0" />
-            <element signature="e#59129#59313#0" />
-            <element signature="e#59319#59805#0" />
-            <element signature="e#59421#59462#0" />
-            <element signature="e#59811#60032#0" />
-            <element signature="e#60038#60337#0" />
-            <element signature="e#60343#61863#0" />
-            <element signature="e#60405#61857#0" />
-            <element signature="e#61869#70461#0" />
-            <element signature="e#62241#62282#0" />
-            <element signature="e#62920#62968#0" />
-            <element signature="e#68616#68653#0" />
-            <element signature="e#70285#70332#0" />
-            <element signature="e#70467#79710#0" />
-            <element signature="e#75830#75887#0" />
-            <element signature="e#77383#77440#0" />
-            <element signature="e#79716#79906#0" />
-            <element signature="e#80103#80390#0" />
-            <element signature="e#80396#81258#0" />
-            <element signature="e#81264#81408#0" />
-            <element signature="e#81553#81700#0" />
-            <element signature="e#81849#81999#0" />
-            <element signature="e#82005#82240#0" />
-            <element signature="e#82246#82527#0" />
-            <element signature="e#82533#82829#0" />
-            <element signature="e#82835#83134#0" />
-            <element signature="e#83140#83312#0" />
-            <element signature="e#83318#83679#0" />
-            <element signature="e#83685#84261#0" />
-            <element signature="e#84267#85788#0" />
-            <element signature="e#85794#87308#0" />
-            <element signature="e#86759#86790#0" />
-            <element signature="e#87314#88168#0" />
-            <element signature="e#88174#89292#0" />
-            <element signature="e#89298#91941#0" />
-            <element signature="e#91947#92166#0" />
-            <element signature="e#92172#92654#0" />
-            <element signature="e#92660#93391#0" />
-            <element signature="e#92701#92749#0" />
-            <element signature="e#93397#94333#0" />
-            <element signature="e#94339#94669#0" />
-            <element signature="e#94675#95843#0" />
-            <element signature="e#95849#96573#0" />
-            <element signature="e#96579#97027#0" />
-            <element signature="e#97033#97702#0" />
-            <element signature="e#97708#98107#0" />
-            <element signature="e#98113#98517#0" />
-            <element signature="e#98523#98933#0" />
-            <element signature="e#98939#99811#0" />
-            <element signature="e#99817#100017#0" />
-            <element signature="e#100119#100266#0" />
-            <element signature="e#100272#100432#0" />
-            <element signature="e#100438#100659#0" />
-            <element signature="e#100665#100886#0" />
-            <element signature="e#101007#101585#0" />
-            <element signature="e#101591#106006#0" />
-            <element signature="e#106012#106792#0" />
-            <element signature="e#106115#106786#0" />
-            <element signature="e#107193#107611#0" />
-            <element signature="e#107617#108025#0" />
-            <element signature="e#107680#107717#0" />
-            <element signature="e#108031#108185#0" />
-            <element signature="e#108191#108345#0" />
-            <element signature="e#108351#108500#0" />
-            <element signature="e#108506#110076#0" />
-            <element signature="e#109554#109618#0" />
-            <element signature="e#110082#110215#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APIDemo/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+        <state relative-caret-position="153">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="40" column="102" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
+        <state relative-caret-position="307">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
