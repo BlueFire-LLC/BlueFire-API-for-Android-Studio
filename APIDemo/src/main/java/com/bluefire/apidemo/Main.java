@@ -820,11 +820,18 @@ public class Main extends Activity
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
     {
+        int MinSDKVersion = 0;
+        try
+        {
+            MinSDKVersion = this.getApplicationInfo().minSdkVersion;
+        }
+        catch (Error e){}
+
         // Check for user granting permission.
         // Note, iff request is cancelled, the result arrays are empty.
         // Note, only minSDKVersion 23 and above requires the user to grant location permission.
 
-        if (blueFire.MinSDKVersion < 23 || (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED))
+        if (MinSDKVersion < 23 || (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED))
         {
             // Ensure location services is turned on
             if (isLocationEnabled())
