@@ -518,3 +518,7 @@ Version 25.4:<ul>
     <li>API is compiled with Target SDK 26 and Min SDK 22. Previous version was Target SDK 25 and Min SDK 23.
     <li>The Demo App checks for Min SDK 23 and Location Permission granted by the user.
 </ul>
+
+Version 25.5:<ul>
+    <li>API is compiled with Target SDK 28 and Min SDK 22. 
+</ul>
