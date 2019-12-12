@@ -12,7 +12,7 @@ import com.bluefire.api.CANBusSpeeds;
 import com.bluefire.api.ConnectionStates;
 import com.bluefire.api.Const;
 import com.bluefire.api.RetrievalMethods;
-import com.bluefire.api.Truck;
+import com.bluefire.api.Vehicle;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -317,7 +317,7 @@ public class Service
         // Clear previous data from the CAN Filter
         blueFire.StopDataRetrieval();
 
-        if (Truck.EngineVIN == Const.NA)
+        if (Vehicle.EngineVIN == Const.NA)
         {
             IsRetrievingEngineVIN = true;
             blueFire.GetEngineVIN();
@@ -353,25 +353,25 @@ public class Service
         // event. If you're not concerned with data throughput for processing the data, you can just
         // process all the data whether it changed or not.
 
-        if (IsRetrievingEngineVIN && Truck.EngineVIN != Const.NA)
+        if (IsRetrievingEngineVIN && Vehicle.EngineVIN != Const.NA)
         {
             IsRetrievingEngineVIN = false;
             blueFire.StopRetrievingEngineVIN();
-            logNotifications("Engine VIN=" + Truck.EngineVIN);
+            logNotifications("Engine VIN=" + Vehicle.EngineVIN);
         }
 
         if (TimeToWrite > 50)
         {
             TimeToWrite = 0;
-            logNotifications("RPM=" + Truck.RPM);
+            logNotifications("RPM=" + Vehicle.RPM);
         }
         else
             TimeToWrite ++;
 
-//        if (Truck.RPM > 0)
-//            logNotifications("RPM=" + Truck.RPM);
-//        logNotifications("PctLoad=" + Truck.PctLoad);
-//        logNotifications("Speed=" + Truck.Speed);
+//        if (Vehicle.RPM > 0)
+//            logNotifications("RPM=" + Vehicle.RPM);
+//        logNotifications("PctLoad=" + Vehicle.PctLoad);
+//        logNotifications("Speed=" + Vehicle.Speed);
     }
 
     private void checkKeyState()
@@ -446,9 +446,10 @@ public class Service
                 case Connecting:
                 case Discovering:
                 case Disconnecting:
+                case Connected:
                     break;
 
-                case Connected:
+                case IsReady:
                     adapterConnected();
                     break;
 

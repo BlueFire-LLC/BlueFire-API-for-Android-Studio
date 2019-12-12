@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.core.app.ActivityCompat;
 
 import com.bluefire.api.BlueFire;
 import com.bluefire.api.CANBusSpeeds;
@@ -33,7 +33,7 @@ import com.bluefire.api.RecordIds;
 import com.bluefire.api.RecordingModes;
 import com.bluefire.api.RetrievalMethods;
 import com.bluefire.api.SleepModes;
-import com.bluefire.api.Truck;
+import com.bluefire.api.Vehicle;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -44,6 +44,8 @@ import java.util.Queue;
 
 public class Main extends Activity
 {
+    //region Declaratives
+
     private ScrollView scrollViewDemo;
 
     // Adapter Layout
@@ -85,14 +87,14 @@ public class Main extends Activity
     private Button buttonUpdate;
     private Button buttonSend;
     private Button buttonMonitor;
-    private Button buttonTruckData;
+    private Button buttonVehicleData;
     private Button buttonELDData;
     private Button buttonTest;
     private Button buttonStartService;
     private Button buttonStopService;
 
-    // Truck Layout
-    private RelativeLayout layoutTruck;
+    // Vehicle Layout
+    private RelativeLayout layoutVehicle;
 
     private TextView textView1;
     private TextView textView2;
@@ -190,7 +192,7 @@ public class Main extends Activity
 
     private ConnectAdapterThread connectThread;
 
-    private GetTruckInfoThread getTruckInfoThread;
+    private GetVehicleInfoThread getVehicleInfoThread;
 
     private boolean isKeyOn;
 
@@ -255,6 +257,7 @@ public class Main extends Activity
     private boolean appOptimizeDataRetrieval = false;
 
     // ELD settings
+    public boolean appIgnoreELD = true;
     public boolean appELDStarted = false;
     public boolean appSecureELD = false;
     public boolean appRecordIFTA = false;
@@ -274,6 +277,12 @@ public class Main extends Activity
     private boolean isUploading;
     private int currentRecordNo = -1;
 
+    private Context context;
+
+    //endregion
+
+    //region Constructor
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -286,11 +295,13 @@ public class Main extends Activity
         killApp = true;
         appPid = Process.myPid();
 
-        logNotifications("API Demo started.");
+        logNotifications("BlueFire API Demo started.");
 
-        blueFire = new BlueFire(this, eventHandler);
+        context = this;
 
-        this.setTitle("API Demo v-" + blueFire.APIVersion());
+        blueFire = new BlueFire(context, eventHandler);
+
+        this.setTitle("BlueFire API Demo v-" + blueFire.APIVersion());
 
         // Set to use an insecure connection.
         // Note, there are other Android devices that require this other than just ICS (4.0.x).
@@ -328,6 +339,10 @@ public class Main extends Activity
         ReceiveEventsThread.start();
     }
 
+    //endregion
+
+    //region Initialize Settings
+
     private void initializeSettings()
     {
         if (ignoreSettings)
@@ -360,6 +375,10 @@ public class Main extends Activity
         saveSettings();
     }
 
+    //endregion
+
+    //region Get Settings
+
     private void getSettings()
     {
         if (ignoreSettings)
@@ -372,6 +391,7 @@ public class Main extends Activity
         appIgnoreJ1939 = settings.getBoolean("IgnoreJ1939", false);
         appIgnoreJ1708 = settings.getBoolean("IgnoreJ1708", true);
         appIgnoreOBD2 = settings.getBoolean("IgnoreOBD2", true);
+        appLedBrightness = settings.getInt("LedBrightness", 100);
         appPerformanceMode = settings.getBoolean("PerformanceMode", false);
         appDisconnectedReboot = settings.getBoolean("DisconnectedReboot", false);
         appDisconnectedRebootInterval = settings.getInt("DisconnectedRebootInterval", blueFire.DisconnectedRebootIntervalDefault);
@@ -383,7 +403,6 @@ public class Main extends Activity
         appAdapterId = settings.getString("AdapterId", "");
         appUserName = settings.getString("UserName", "");
         appPassword = settings.getString("Password", "");
-        appLedBrightness = settings.getInt("LedBrightness", 100);
         appMinInterval = settings.getInt("MinInterval", blueFire.MinIntervalDefault);
         appDiscoveryTimeout = settings.getInt("DiscoveryTimeout", blueFire.DiscoveryTimeoutDefault);
         appMaxConnectAttempts = settings.getInt("MaxConnectAttempts", blueFire.MaxConnectAttemptsDefault);
@@ -393,6 +412,7 @@ public class Main extends Activity
         appOptimizeDataRetrieval = settings.getBoolean("OptimizeDataRetrieval", true);
 
         // Get ELD settings
+        appIgnoreELD = settings.getBoolean("IgnoreELD", true);
         appELDStarted = settings.getBoolean("ELDStarted", false);
         appSecureELD = settings.getBoolean("SecureELD", false);
         appRecordIFTA = settings.getBoolean("RecordIFTA", false);
@@ -409,6 +429,10 @@ public class Main extends Activity
         appStatsInterval = settings.getFloat("StatsInterval", 60); // minutes;
     }
 
+    //endregion
+
+    //region Save Settings
+
     private void saveSettings()
     {
         // Save the application settings.
@@ -416,7 +440,7 @@ public class Main extends Activity
         settingsSave.putBoolean("UseBT21", appUseBT21);
         settingsSave.putBoolean("IgnoreJ1939", appIgnoreJ1939);
         settingsSave.putBoolean("IgnoreJ1708", appIgnoreJ1708);
-        settingsSave.putBoolean("IgnoreOBD2", appIgnoreOBD2);
+        settingsSave.putBoolean("IgnoreELD", appIgnoreELD);
         settingsSave.putBoolean("PerformanceMode", appPerformanceMode);
         settingsSave.putBoolean("DisconnectedReboot", appDisconnectedReboot);
         settingsSave.putInt("DisconnectedRebootInterval", appDisconnectedRebootInterval);
@@ -437,6 +461,7 @@ public class Main extends Activity
         settingsSave.putInt("BleDisconnectWaitTime", appBleDisconnectWaitTime);
         settingsSave.putBoolean("OptimizeDataRetrieval", appOptimizeDataRetrieval);
 
+        settingsSave.putBoolean("IgnoreOBD2", appIgnoreOBD2);
         settingsSave.putBoolean("ELDStarted", appELDStarted);
         settingsSave.putBoolean("SecureELD", appSecureELD);
         settingsSave.putBoolean("RecordIFTA", appRecordIFTA);
@@ -463,6 +488,10 @@ public class Main extends Activity
         settingsSave.clear();
         settingsSave.commit();
     }
+
+    //endregion
+
+    //region Initialize Adapter
 
     private void initializeAdapter()
     {
@@ -528,9 +557,16 @@ public class Main extends Activity
         blueFire.SetSendAllPackets(appSendAllPackets);
 
         // Set streaming and recording mode
-        blueFire.ELD.SetStreaming(appStreamingELD);
-        blueFire.ELD.SetRecordingMode(RecordingModes.forValue(appRecordingMode));
+        if (!blueFire.IgnoreELD())
+        {
+            blueFire.ELD.SetStreaming(appStreamingELD);
+            blueFire.ELD.SetRecordingMode(RecordingModes.forValue(appRecordingMode));
+        }
     }
+
+    //endregion
+
+    //region Initialize Form
 
     private void initializeForm()
     {
@@ -575,14 +611,14 @@ public class Main extends Activity
         buttonUpdate = (Button) findViewById(R.id.buttonUpdate);
         buttonSend = (Button) findViewById(R.id.buttonSend);
         buttonMonitor = (Button) findViewById(R.id.buttonMonitor);
-        buttonTruckData = (Button) findViewById(R.id.buttonTruckData);
+        buttonVehicleData = (Button) findViewById(R.id.buttonVehicleData);
         buttonELDData = (Button) findViewById(R.id.buttonELDData);
         buttonTest = (Button) findViewById(R.id.buttonTest);
         buttonStartService = (Button) findViewById(R.id.buttonStartService);
         buttonStopService = (Button) findViewById(R.id.buttonStopService);
 
-        // Truck layout
-        layoutTruck = (RelativeLayout) findViewById(R.id.layoutTruck);
+        // Vehicle layout
+        layoutVehicle = (RelativeLayout) findViewById(R.id.layoutVehicle);
 
         textView1 = (TextView) findViewById(R.id.textView1);
         textView2 = (TextView) findViewById(R.id.textView2);
@@ -657,6 +693,10 @@ public class Main extends Activity
         buttonConnect.requestFocus();
     }
 
+    //endregion
+
+    //region Clear Form
+
     private void clearForm()
     {
         // Disable adapter parameters
@@ -669,11 +709,22 @@ public class Main extends Activity
         isRetrievingFaults = false;
 
         // Show user settings
-        checkUseBT21.setChecked(appUseBT21);
-        checkUseBLE.setChecked(appUseBLE);
+
+        if (!blueFire.IsBLESupported())
+        {
+            checkUseBLE.setChecked(false);
+            checkUseBT21.setChecked(true);
+        }
+        else
+        {
+            checkUseBLE.setChecked(appUseBLE);
+            checkUseBT21.setChecked(appUseBT21);
+        }
+
         checkUseJ1939.setChecked(!appIgnoreJ1939); // checkUseJ1939 is the opposite of ignoreJ1939
         checkUseJ1708.setChecked(!appIgnoreJ1708); // checkUseJ1708 is the opposite of ignoreJ1708
         checkUseOBD2.setChecked(!appIgnoreOBD2); // checkUseJ1708 is the opposite of ignoreJ1708
+
         checkSecureDevice.setChecked(appSecureDevice);
         checkSecureAdapter.setChecked(appSecureAdapter);
         checkSendAllPackets.setChecked(appSendAllPackets);
@@ -686,8 +737,13 @@ public class Main extends Activity
         textNotifications.setText("");
 
         // ELD
-        setELDParms();
+        if (!blueFire.IgnoreELD())
+            setELDParms();
     }
+
+    //endregion
+
+    //region Enable Adapter Parameters
 
     private void enableAdapterParms()
     {
@@ -707,9 +763,10 @@ public class Main extends Activity
 
         // Enable only if connected
 
-        buttonTruckData.setEnabled(isConnected);
-        buttonELDData.setEnabled(isConnected);
+        buttonVehicleData.setEnabled(isConnected);
         buttonTest.setEnabled(isConnected);
+
+        buttonELDData.setEnabled(isConnected && !blueFire.IgnoreELD());
 
         textPGN.setEnabled(isConnected);
         textPGNData.setEnabled(isConnected);
@@ -720,7 +777,10 @@ public class Main extends Activity
         buttonMonitor.setEnabled(isConnected);
     }
 
-    // Connect Button
+    //endregion
+
+    //region Connect Button
+
     public void onConnectClick(View view)
     {
         try
@@ -755,7 +815,7 @@ public class Main extends Activity
                 else
                     checkBluetoothPermissions();
             }
-            else
+            else // disconnect button
             {
                 Thread.sleep(500); // allow eld to stop before disconnecting
 
@@ -766,7 +826,10 @@ public class Main extends Activity
         }
     }
 
-    // Start Service Button
+    //endregion
+
+    //region Start Service Button
+
     public void onStartServiceClick(View view)
     {
         isStartingService = true;
@@ -784,7 +847,10 @@ public class Main extends Activity
             checkBluetoothPermissions();
     }
 
-    // Stop Service Button
+    //endregion
+
+    //region Stop Service Button
+
     public void onStopServiceClick(View view)
     {
         if (demoService == null)
@@ -799,6 +865,10 @@ public class Main extends Activity
 
         buttonConnect.setEnabled(true);
     }
+
+    //endregion
+
+    //region Check Bluetooth Permissions
 
     private void checkBluetoothPermissions()
     {
@@ -828,7 +898,7 @@ public class Main extends Activity
         catch (Error e){}
 
         // Check for user granting permission.
-        // Note, iff request is cancelled, the result arrays are empty.
+        // Note, if request is cancelled, the result arrays are empty.
         // Note, only minSDKVersion 23 and above requires the user to grant location permission.
 
         if (MinSDKVersion < 23 || (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED))
@@ -859,6 +929,10 @@ public class Main extends Activity
         return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
+    //endregion
+
+    //region Start Connection
+
     private void startConnection()
     {
         if (isStartingService)
@@ -876,7 +950,10 @@ public class Main extends Activity
         }
     }
 
-    // Start Service
+    //endregion
+
+    //region Start Service
+
     public void StartService()
     {
         if (demoService == null)
@@ -885,6 +962,10 @@ public class Main extends Activity
         demoService.startService();
     }
 
+    //endregion
+
+    //region Connect Adapter
+
     private class ConnectAdapterThread extends Thread
     {
         public void run()
@@ -892,11 +973,59 @@ public class Main extends Activity
             // Initialize adapter properties (in case they were changed)
             initializeAdapter();
 
+            // Instantiate BLE or BT21 Comm
+            instantiateComm();
+
             // Connect to the adapter.
             // Note, this is a blocking call and must run in it's own thread.
             blueFire.Connect();
         }
     }
+
+    private void instantiateComm()
+    {
+        // Check for user changing adapter types
+        if (blueFire.Comm != null)
+        {
+            if ((appUseBLE && (blueFire.Comm instanceof CommBT2)) || (appUseBT21 && (blueFire.Comm instanceof CommBLE)))
+            {
+                disposeComm(); // dispose previous instance
+
+                blueFire.SetDiscoveryTimeout(0);
+                blueFire.SetAdvertisementTimeout(0);
+            }
+        }
+
+        // Must set Comm to null for BT21
+        if (appUseBT21 && blueFire.Comm != null)
+            disposeComm();
+
+        // Check for a BLE or BT21 adapter
+        if (blueFire.Comm == null)
+        {
+             if (appUseBLE)
+                blueFire.Comm = new CommBLE(context, eventHandler, blueFire);
+            else
+                blueFire.Comm = new CommBT2(context, eventHandler, blueFire);
+        }
+    }
+
+    private void disposeComm()
+    {
+        try
+        {
+            if (blueFire.Comm == null)
+                return;
+
+            blueFire.Comm.Dispose();
+            blueFire.Comm = null;
+
+        } catch (Exception ex){}
+    }
+
+    //endregion
+
+    //region Show Connect Button
 
     private void showConnectButton()
     {
@@ -919,6 +1048,10 @@ public class Main extends Activity
         buttonStartService.setEnabled(false);
     }
 
+    //endregion
+
+    //region Adapter Connections
+
     private void disconnectAdapter()
     {
         try
@@ -939,6 +1072,9 @@ public class Main extends Activity
             // Stop any monitoring
             if (isSendingPGN || isMonitoringPGN)
                 stopSendMonitoring();
+
+            // Stop any reconnection
+            blueFire.Comm.StopReconnection(false);
 
             // Wait for the adapter to disconnect so that the Connect button
             // is not displayed too prematurely.
@@ -1013,9 +1149,9 @@ public class Main extends Activity
 
         logNotifications("Adapter is reconnected and re-retrieving data.");
 
-        // Start re-retrieving truck data after reconnection
-        if (layoutTruck.getVisibility() == View.VISIBLE)
-            getTruckData();
+        // Start re-retrieving Vehicle data after reconnection
+        if (layoutVehicle.getVisibility() == View.VISIBLE)
+            getVehicleData();
     }
 
     private void adapterNotReconnected()
@@ -1054,14 +1190,16 @@ public class Main extends Activity
         buttonNextFault.setVisibility(View.INVISIBLE);
         buttonResetFault.setVisibility(View.INVISIBLE);
 
-        buttonTruckData.setEnabled(true);
-        buttonELDData.setEnabled(true);
+        buttonVehicleData.setEnabled(true);
         buttonTest.setEnabled(true);
+
+        buttonELDData.setEnabled(!blueFire.IgnoreELD());
 
         buttonConnect.requestFocus();
 
         // Connect to ELD
-        blueFire.ELD.Connect();
+        if (!blueFire.IgnoreELD())
+            blueFire.ELD.Connect();
 
         // Get adapter data
         getAdapterData();
@@ -1073,6 +1211,10 @@ public class Main extends Activity
         logNotifications(Message);
         Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
     }
+
+    //endregion
+
+    //region Starting CAN
 
     private void startingCAN()
     {
@@ -1103,15 +1245,19 @@ public class Main extends Activity
         // Key is on so double check the key state
         checkKeyState();
 
-        // Re-retrieve truck data
-        reRetrieveTruckData();
+        // Re-retrieve Vehicle data
+        reRetrieveVehicleData();
     }
 
     private void j1708Restarting()
     {
-        // Re-retrieve truck data
-        reRetrieveTruckData();
+        // Re-retrieve Vehicle data
+        reRetrieveVehicleData();
     }
+
+    //endregion
+
+    //region Get Adapter Data
 
     // Start retrieving data after connecting to the adapter
     private void getAdapterData()
@@ -1134,8 +1280,8 @@ public class Main extends Activity
         appAdapterId = blueFire.AdapterId();
 
         // Check for API setting the adapter data
-        appUseBT21 = blueFire.UseBT21;
         appUseBLE = blueFire.UseBLE;
+        appUseBT21 = blueFire.UseBT21;
 
         appIgnoreJ1939 = blueFire.IgnoreJ1939();
         appIgnoreJ1708 = blueFire.IgnoreJ1708();
@@ -1144,9 +1290,9 @@ public class Main extends Activity
         // Save any changed data from the API
         saveSettings();
 
-        // Update UseBT21 and UseBLE checkboxes
-        checkUseBT21.setChecked(appUseBT21);
+        // Update UseBLE and UseBT21 checkboxes
         checkUseBLE.setChecked(appUseBLE);
+        checkUseBT21.setChecked(appUseBT21);
 
         // Update J1939 and J1708 checkboxes
         checkUseJ1939.setChecked(!appIgnoreJ1939);
@@ -1161,19 +1307,25 @@ public class Main extends Activity
         checkKeyState();
     }
 
-    private void reRetrieveTruckData()
+    private void reRetrieveVehicleData()
     {
         if (isTesting)
             startTest();
 
-        else if (layoutTruck.getVisibility() == View.VISIBLE)
-            getTruckData();
+        else if (layoutVehicle.getVisibility() == View.VISIBLE)
+            getVehicleData();
     }
 
-    // BLE Checkbox
+    //endregion
+
+    //region BLE Checkbox
+
     public void onUseBLECheck(View view)
     {
         appUseBLE = checkUseBLE.isChecked();
+
+        appUseBT21 = !appUseBLE;
+        checkUseBT21.setChecked(appUseBT21);
 
         // Update api
         blueFire.UseBLE = appUseBLE;
@@ -1181,16 +1333,26 @@ public class Main extends Activity
         saveSettings();
     }
 
-    // BT21 Checkbox
+    //endregion
+
+    //region BT21 Checkbox
+
     public void onUseBT21Check(View view)
     {
         appUseBT21 = checkUseBT21.isChecked();
+
+        appUseBLE = !appUseBT21;
+        checkUseBLE.setChecked(appUseBLE);
 
         // Update api
         blueFire.UseBT21 = appUseBT21;
 
         saveSettings();
     }
+
+    //endregion
+
+    //region LED Brightness
 
     private boolean editLEDBrightness()
     {
@@ -1216,7 +1378,10 @@ public class Main extends Activity
         return true;
     }
 
-    // Send All Packets Checkbox
+    //endregion
+
+    //region Send All Packets Checkbox
+
     public void onSendAllPacketsCheck(View view)
     {
         appSendAllPackets = checkSendAllPackets.isChecked();
@@ -1225,7 +1390,10 @@ public class Main extends Activity
         blueFire.SetSendAllPackets(appSendAllPackets);
     }
 
-    // Connect to Last Adapter Checkbox
+    //endregion
+
+    //region Connect to Last Adapter Checkbox
+
     public void onConnectLastAdapterCheck(View view)
     {
         appConnectToLastAdapter = checkConnectLastAdapter.isChecked();
@@ -1238,7 +1406,10 @@ public class Main extends Activity
         saveSettings();
     }
 
-    // Secure Device Checkbox
+    //endregion
+
+    //region Secure Device Checkbox
+
     public void onSecureDeviceCheck(View view)
     {
         secureDevice = checkSecureDevice.isChecked();
@@ -1258,7 +1429,10 @@ public class Main extends Activity
         }
     }
 
-    // J1939 Checkbox
+    //endregion
+
+    //region J1939 Checkbox
+
     public void onUseJ1939Check(View view)
     {
         // Set to ignore J1939 (opposite of checkUseJ1939)
@@ -1283,7 +1457,10 @@ public class Main extends Activity
         saveSettings();
     }
 
-    // J1708 Checkbox
+    //endregion
+
+    //region J1708 Checkbox
+
     public void onUseJ1708Check(View view)
     {
         // Set to ignore J708 (opposite of checkUseJ1708)
@@ -1308,7 +1485,9 @@ public class Main extends Activity
         saveSettings();
     }
 
-    // OBD2 Checkbox
+    //endregion
+
+    //region OBD2 Checkbox
     public void onUseOBD2Check(View view)
     {
         // Set to ignore J708 (opposite of checkUseJ1708)
@@ -1335,19 +1514,28 @@ public class Main extends Activity
         saveSettings();
     }
 
-    // Fault Button
+    //endregion
+
+    //region Fault Button
+
     public void onNextFaultClick(View view)
     {
         showNextFault();
     }
 
-    // Reset Button
+    //endregion
+
+    //region Reset Button
+
     public void onResetFaultClick(View view)
     {
         blueFire.ResetFaults();
     }
 
-    // Reset Settings Button
+    //endregion
+
+    //region Reset Settings Button
+
     public void onResetSettingsClick(View view)
     {
         resetSettings();
@@ -1363,7 +1551,10 @@ public class Main extends Activity
         Toast.makeText(this, "App settings have been reset.", Toast.LENGTH_SHORT).show();
     }
 
-    // Update Button
+    //endregion
+
+    //region Update Button
+
     public void onUpdateClick(View view)
     {
         // Update username and password
@@ -1393,7 +1584,10 @@ public class Main extends Activity
         return false;
     }
 
-    // Monitor Button
+    //endregion
+
+    //region Monitor Button
+
     public void onMonitorClick(View view)
     {
         if (isMonitoringPGN)
@@ -1455,7 +1649,10 @@ public class Main extends Activity
         textResponseSource.setText("Waiting for data ...");
     }
 
-    // Send Button
+    //endregion
+
+    //region Send Button
+
     public void onSendClick(View view)
     {
         if (isSendingPGN)
@@ -1567,7 +1764,10 @@ public class Main extends Activity
         checkBAMRTS.setEnabled(false);
     }
 
-    // Test Monitor Button
+    //endregion
+
+    //region Test Monitor Button
+
     public void onTestMonitorClick(View view)
     {
         monitorMultiplePGNs();
@@ -1612,47 +1812,56 @@ public class Main extends Activity
         checkBAMRTS.setEnabled(true);
     }
 
-    // Next Group Button
+    //endregion
+
+    //region Next/Previous Buttons
+
     public void onNextGroupClick(View view)
     {
         groupNo++;
         if (groupNo > maxGroupNo)
             groupNo = 0;
 
-        getTruckData();
+        getVehicleData();
     }
 
-    // Previous Group Button
-    public void onPreviousGroupClick(View view)
+     public void onPreviousGroupClick(View view)
     {
         groupNo--;
         if (groupNo < 0)
             groupNo = maxGroupNo;
 
-        getTruckData();
+        getVehicleData();
     }
 
-    // Truck Button
-    public void onTruckDataClick(View view)
+    //endregion
+
+    //region Vehicle Button
+
+    public void onVehicleDataClick(View view)
     {
-        if (layoutTruck.getVisibility() == View.INVISIBLE)
+        if (layoutVehicle.getVisibility() == View.INVISIBLE)
         {
             layoutAdapter.setVisibility(View.INVISIBLE);
             layoutELD.setVisibility(View.INVISIBLE);
-            layoutTruck.setVisibility(View.VISIBLE);
+            layoutVehicle.setVisibility(View.VISIBLE);
 
             scrollViewDemo.scrollTo(0,0);
 
-            startTruckData();
+            startVehicleData();
         }
         else
         {
-            layoutTruck.setVisibility(View.INVISIBLE);
+            layoutVehicle.setVisibility(View.INVISIBLE);
             layoutAdapter.setVisibility(View.VISIBLE);
 
-            stopTruckData();
+            stopVehicleData();
         }
     }
+
+    //endregion
+
+    //region Testing
 
     private boolean isTesting;
     private boolean testStarted;
@@ -1694,7 +1903,7 @@ public class Main extends Activity
         // Note, this clears the CAN Filter so it must be before any other requests for data.
         blueFire.GetFaults();
 
-        // Start monitoring all other truck data
+        // Start monitoring all other Vehicle data
         blueFire.GetEngineData1(retrievalMethod, retrievalInterval); // RPM, Percent Torque, Driver Torque, Torque Mode
         blueFire.GetEngineData2(retrievalMethod, retrievalInterval); // Percent Load, Accelerator Pedal Position
         blueFire.GetEngineData3(retrievalMethod, retrievalInterval); // Vehicle Speed, Max Set Speed, Brake Switch, Clutch Switch, Park Brake Switch, Cruise Control Settings and Switches
@@ -1710,6 +1919,10 @@ public class Main extends Activity
 
         testStarted = true;
     }
+
+    //endregion
+
+    //region Check Key State
 
     private void checkKeyState()
     {
@@ -1730,18 +1943,25 @@ public class Main extends Activity
         }
     }
 
+    //endregion
+
+    //region Show Data
+
     private void showData()
     {
         // Check the key state (key on/off)
         checkKeyState();
 
-        // Show truck data
-        if (blueFire.IsTruckDataChanged())
-            showTruckData();
+        // Show Vehicle data
+        if (blueFire.IsVehicleDataChanged())
+            showVehicleData();
 
         // Show ELD data
-        if ( blueFire.ELD.IsDataRetrieved())
-            showELDData();
+        if (!blueFire.IgnoreELD())
+        {
+            if (blueFire.ELD.IsDataRetrieved())
+                showELDData();
+        }
 
         // Check for Monitoring a PGN(s)
         if (isMonitoringPGN && (blueFire.PGNData.PGN == monitorPGN || blueFire.PGNData.PGN == monitorPGN2))
@@ -1782,7 +2002,82 @@ public class Main extends Activity
         textHeartbeat.setText(String.valueOf(blueFire.HeartbeatCount()));
     }
 
-    private void startTruckData()
+    //endregion
+
+    //region Clear Adapter Data
+    private void clearAdapterData()
+    {
+        testStarted = false;
+
+        IsRetrievingVINID = false;
+        isRetrievingFaults = false;
+
+        if (getVehicleInfoThread != null)
+            getVehicleInfoThread.interrupt();
+
+        stopSendMonitoring();
+
+        blueFire.StopDataRetrieval();
+    }
+
+    //endregion
+
+    //region Get Vehicle Info
+
+    private class GetVehicleInfoThread extends Thread
+    {
+        public void run()
+        {
+            // Get the Engine VIN and Component Id
+            final int nofRetries = 3;
+
+            int retries = nofRetries;
+            while (retries > 0)
+            {
+                blueFire.GetEngineVIN(RetrievalMethods.Synchronized);
+                if (Vehicle.EngineVIN != Const.NA)
+                    break;
+                retries--;
+                threadSleep(1); // allow other threads to execute
+            }
+
+            retries = nofRetries;
+            while (retries > 0)
+            {
+                blueFire.GetEngineId(RetrievalMethods.Synchronized);
+                if (Vehicle.EngineMake != Const.NA)
+                    break;
+                retries--;
+                threadSleep(1); // allow other threads to execute
+            }
+
+            retries = nofRetries;
+            while (retries > 0)
+            {
+                blueFire.GetVehicleVIN(RetrievalMethods.Synchronized);
+                if (Vehicle.VIN != Const.NA)
+                    break;
+                retries--;
+                threadSleep(1); // allow other threads to execute
+            }
+
+            retries = nofRetries;
+            while (retries > 0)
+            {
+                blueFire.GetVehicleId(RetrievalMethods.Synchronized);
+                if (Vehicle.Make != Const.NA)
+                    break;
+                retries--;
+                threadSleep(1); // allow other threads to execute
+            }
+        }
+    }
+
+    //endregion
+
+    //region Get Vehicle Data
+
+    private void startVehicleData()
     {
         if (!blueFire.IsConnected())
             return;
@@ -1796,85 +2091,21 @@ public class Main extends Activity
         retrievalInterval = blueFire.MinInterval(); // or any interval you need
 
         groupNo = 0;
-        getTruckData();
+        getVehicleData();
     }
 
-    private void stopTruckData()
+    private void stopVehicleData()
     {
         if (!blueFire.IsConnected())
             return;
 
-        if (getTruckInfoThread != null)
-            getTruckInfoThread.interrupt();
+        if (getVehicleInfoThread != null)
+            getVehicleInfoThread.interrupt();
 
         blueFire.StopDataRetrieval();
     }
 
-    private void clearAdapterData()
-    {
-        testStarted = false;
-
-        IsRetrievingVINID = false;
-        isRetrievingFaults = false;
-
-        if (getTruckInfoThread != null)
-            getTruckInfoThread.interrupt();
-
-        stopSendMonitoring();
-
-        blueFire.StopDataRetrieval();
-    }
-
-    private class GetTruckInfoThread extends Thread
-    {
-        public void run()
-        {
-            // Get the Engine VIN and Component Id
-            final int nofRetries = 3;
-
-            int retries = nofRetries;
-            while (retries > 0)
-            {
-                blueFire.GetEngineVIN(RetrievalMethods.Synchronized);
-                if (Truck.EngineVIN != Const.NA)
-                    break;
-                retries--;
-                threadSleep(1); // allow other threads to execute
-            }
-
-            retries = nofRetries;
-            while (retries > 0)
-            {
-                blueFire.GetEngineId(RetrievalMethods.Synchronized);
-                if (Truck.EngineMake != Const.NA)
-                    break;
-                retries--;
-                threadSleep(1); // allow other threads to execute
-            }
-
-            retries = nofRetries;
-            while (retries > 0)
-            {
-                blueFire.GetTruckVIN(RetrievalMethods.Synchronized);
-                if (Truck.VIN != Const.NA)
-                    break;
-                retries--;
-                threadSleep(1); // allow other threads to execute
-            }
-
-            retries = nofRetries;
-            while (retries > 0)
-            {
-                blueFire.GetTruckId(RetrievalMethods.Synchronized);
-                if (Truck.Make != Const.NA)
-                    break;
-                retries--;
-                threadSleep(1); // allow other threads to execute
-            }
-        }
-    }
-
-    private void getTruckData()
+    private void getVehicleData()
     {
         dataView1.setText("");
         dataView2.setText("");
@@ -2042,15 +2273,15 @@ public class Main extends Activity
 
                         IsRetrievingVINID = true;
 
-                        getTruckInfoThread = new GetTruckInfoThread();
-                        getTruckInfoThread.start();
+                        getVehicleInfoThread = new GetVehicleInfoThread();
+                        getVehicleInfoThread.start();
                     }
                 }
 
                 break;
 
             case 8:
-                textView1.setText("Truck VIN");
+                textView1.setText("Vehicle VIN");
                 textView2.setText("Make");
                 textView3.setText("Model");
                 textView4.setText("Serial No");
@@ -2088,108 +2319,112 @@ public class Main extends Activity
         }
     }
 
-    private void showTruckData()
+    //endregion
+
+    //region Show Vehicle Data
+
+    private void showVehicleData()
     {
         switch (groupNo)
         {
             case 0:
-                dataView1.setText(formatInt(Truck.RPM));
-                dataView2.setText(formatFloat(Truck.Speed * Const.KphToMph,2));
-                dataView3.setText(formatFloat(Truck.AccelPedal,2));
-                dataView4.setText(formatInt(Truck.PctLoad));
-                dataView5.setText(formatInt(Truck.PctTorque));
-                dataView6.setText(formatInt(Truck.DrvPctTorque));
-                dataView7.setText(String.valueOf(Truck.TorqueMode));
+                dataView1.setText(formatInt(Vehicle.RPM));
+                dataView2.setText(formatFloat(Vehicle.Speed * Const.KphToMph,2));
+                dataView3.setText(formatFloat(Vehicle.AccelPedal,2));
+                dataView4.setText(formatInt(Vehicle.PctLoad));
+                dataView5.setText(formatInt(Vehicle.PctTorque));
+                dataView6.setText(formatInt(Vehicle.DrvPctTorque));
+                dataView7.setText(String.valueOf(Vehicle.TorqueMode));
 
                 break;
 
             case 1:
-                dataView1.setText(formatFloat(Truck.Distance * Const.MetersToMiles,2)); // hi-res or converted lo-res
-                dataView2.setText(formatFloat(Truck.HiResDistance * Const.MetersToMiles,2));
-                dataView3.setText(formatFloat(Truck.LoResDistance * Const.KmToMiles,2));
+                dataView1.setText(formatFloat(Vehicle.Distance * Const.MetersToMiles,2)); // hi-res or converted lo-res
+                dataView2.setText(formatFloat(Vehicle.HiResDistance * Const.MetersToMiles,2));
+                dataView3.setText(formatFloat(Vehicle.LoResDistance * Const.KmToMiles,2));
                 dataView4.setText("");
-                dataView5.setText(formatFloat(Truck.Odometer * Const.MetersToMiles,2)); // hi-res or converted lo-res
-                dataView6.setText(formatFloat(Truck.HiResOdometer * Const.MetersToMiles,2));
-                dataView7.setText(formatFloat(Truck.LoResOdometer * Const.KmToMiles,2));
+                dataView5.setText(formatFloat(Vehicle.Odometer * Const.MetersToMiles,2)); // hi-res or converted lo-res
+                dataView6.setText(formatFloat(Vehicle.HiResOdometer * Const.MetersToMiles,2));
+                dataView7.setText(formatFloat(Vehicle.LoResOdometer * Const.KmToMiles,2));
 
                 break;
 
             case 2:
-                dataView1.setText(formatFloat(Truck.TotalHours,3));
-                dataView2.setText(formatFloat(Truck.IdleHours,3));
-                dataView3.setText(formatFloat(Truck.BrakeAppPressure * Const.kPaToPSI,2));
-                dataView4.setText(formatFloat(Truck.Brake1AirPressure * Const.kPaToPSI,2));
-                dataView5.setText(formatInt(Truck.CurrentGear));
-                dataView6.setText(formatInt(Truck.SelectedGear));
-                dataView7.setText(formatFloat(Truck.BatteryPotential,2));
+                dataView1.setText(formatFloat(Vehicle.TotalHours,3));
+                dataView2.setText(formatFloat(Vehicle.IdleHours,3));
+                dataView3.setText(formatFloat(Vehicle.BrakeAppPressure * Const.kPaToPSI,2));
+                dataView4.setText(formatFloat(Vehicle.Brake1AirPressure * Const.kPaToPSI,2));
+                dataView5.setText(formatInt(Vehicle.CurrentGear));
+                dataView6.setText(formatInt(Vehicle.SelectedGear));
+                dataView7.setText(formatFloat(Vehicle.BatteryPotential,2));
 
                 break;
 
             case 3:
-                dataView1.setText(formatFloat(Truck.FuelRate * Const.LphToGalPHr,2));
-                dataView2.setText(formatFloat(Truck.FuelUsed * Const.LitersToGal,3));
-                dataView3.setText(formatFloat(Truck.HiResFuelUsed * Const.LitersToGal,3));
-                dataView4.setText(formatFloat(Truck.IdleFuelUsed * Const.LitersToGal,3));
-                dataView5.setText(formatFloat(Truck.AvgFuelEcon * Const.KplToMpg,2));
-                dataView6.setText(formatFloat(Truck.InstFuelEcon * Const.KplToMpg,2));
-                dataView7.setText(formatFloat(Truck.ThrottlePos,2));
+                dataView1.setText(formatFloat(Vehicle.FuelRate * Const.LphToGalPHr,2));
+                dataView2.setText(formatFloat(Vehicle.FuelUsed * Const.LitersToGal,3));
+                dataView3.setText(formatFloat(Vehicle.HiResFuelUsed * Const.LitersToGal,3));
+                dataView4.setText(formatFloat(Vehicle.IdleFuelUsed * Const.LitersToGal,3));
+                dataView5.setText(formatFloat(Vehicle.AvgFuelEcon * Const.KplToMpg,2));
+                dataView6.setText(formatFloat(Vehicle.InstFuelEcon * Const.KplToMpg,2));
+                dataView7.setText(formatFloat(Vehicle.ThrottlePos,2));
 
                 break;
 
             case 4:
-                dataView1.setText(formatFloat(celciusToFarenheit(Truck.OilTemp),2));
-                dataView2.setText(formatFloat(Truck.OilPressure * Const.kPaToPSI,2));
-                dataView3.setText(formatFloat(celciusToFarenheit(Truck.IntakeTemp),2));
-                dataView4.setText(formatFloat(Truck.IntakePressure * Const.kPaToPSI,2));
-                dataView5.setText(formatFloat(celciusToFarenheit(Truck.CoolantTemp),2));
-                dataView6.setText(formatFloat(Truck.CoolantPressure * Const.kPaToPSI,2));
-                dataView7.setText(formatFloat(Truck.CoolantLevel,2));
+                dataView1.setText(formatFloat(celciusToFarenheit(Vehicle.OilTemp),2));
+                dataView2.setText(formatFloat(Vehicle.OilPressure * Const.kPaToPSI,2));
+                dataView3.setText(formatFloat(celciusToFarenheit(Vehicle.IntakeTemp),2));
+                dataView4.setText(formatFloat(Vehicle.IntakePressure * Const.kPaToPSI,2));
+                dataView5.setText(formatFloat(celciusToFarenheit(Vehicle.CoolantTemp),2));
+                dataView6.setText(formatFloat(Vehicle.CoolantPressure * Const.kPaToPSI,2));
+                dataView7.setText(formatFloat(Vehicle.CoolantLevel,2));
 
                 break;
 
             case 5:
-                dataView1.setText(String.valueOf(Truck.BrakeSwitch));
-                dataView2.setText(String.valueOf(Truck.ClutchSwitch));
-                dataView3.setText(String.valueOf(Truck.ParkBrakeSwitch));
-                dataView4.setText(String.valueOf(Truck.CruiseOnOff));
-                dataView5.setText(String.valueOf(Truck.CruiseState));
-                dataView6.setText(formatFloat(Truck.CruiseSetSpeed * Const.KphToMph,0));
-                float MaxSpeed = Truck.MaxSpeed;
-                if (Truck.HiResMaxSpeed > 0)
-                    MaxSpeed = Truck.HiResMaxSpeed;
+                dataView1.setText(String.valueOf(Vehicle.BrakeSwitch));
+                dataView2.setText(String.valueOf(Vehicle.ClutchSwitch));
+                dataView3.setText(String.valueOf(Vehicle.ParkBrakeSwitch));
+                dataView4.setText(String.valueOf(Vehicle.CruiseOnOff));
+                dataView5.setText(String.valueOf(Vehicle.CruiseState));
+                dataView6.setText(formatFloat(Vehicle.CruiseSetSpeed * Const.KphToMph,0));
+                float MaxSpeed = Vehicle.MaxSpeed;
+                if (Vehicle.HiResMaxSpeed > 0)
+                    MaxSpeed = Vehicle.HiResMaxSpeed;
                 dataView7.setText(formatFloat(MaxSpeed * Const.KphToMph,0));
 
                 break;
 
             case 6:
-                dataView1.setText(formatInt(Truck.RPM));
-                dataView2.setText(formatFloat(Truck.Speed * Const.KphToMph,2));
-                dataView3.setText(formatFloat(Truck.Distance * Const.MetersToMiles,2)); // hi-res or converted lo-res
-                dataView4.setText(formatFloat(Truck.Odometer * Const.MetersToMiles,2)); // hi-res or converted lo-res
-                dataView5.setText(formatFloat(Truck.TotalHours,3));
+                dataView1.setText(formatInt(Vehicle.RPM));
+                dataView2.setText(formatFloat(Vehicle.Speed * Const.KphToMph,2));
+                dataView3.setText(formatFloat(Vehicle.Distance * Const.MetersToMiles,2)); // hi-res or converted lo-res
+                dataView4.setText(formatFloat(Vehicle.Odometer * Const.MetersToMiles,2)); // hi-res or converted lo-res
+                dataView5.setText(formatFloat(Vehicle.TotalHours,3));
                 dataView6.setText("");
                 dataView7.setText("");
 
                 break;
 
             case 7:
-                dataView1.setText(Truck.EngineVIN);
-                dataView2.setText(Truck.EngineMake);
-                dataView3.setText(Truck.EngineModel);
-                dataView4.setText(Truck.EngineSerialNo);
-                dataView5.setText(Truck.EngineUnitNo);
+                dataView1.setText(Vehicle.EngineVIN);
+                dataView2.setText(Vehicle.EngineMake);
+                dataView3.setText(Vehicle.EngineModel);
+                dataView4.setText(Vehicle.EngineSerialNo);
+                dataView5.setText(Vehicle.EngineUnitNo);
                 dataView6.setText("");
 
                 // Waiting on either VIN or ID
-                if (Truck.EngineVIN == Const.NA && Truck.EngineMake == Const.NA)
+                if (Vehicle.EngineVIN == Const.NA && Vehicle.EngineMake == Const.NA)
                     textView7.setText("Retrieving Engine VIN ...");
 
                 // Waiting just for VIN
-                else if (Truck.EngineVIN == Const.NA)
+                else if (Vehicle.EngineVIN == Const.NA)
                     textView7.setText("Retrieving Engine VIN ...");
 
                 // Waiting just for ID
-                else if (Truck.EngineMake == Const.NA)
+                else if (Vehicle.EngineMake == Const.NA)
                     textView7.setText("Retrieving Engine Id ...");
 
                 // Retrieved VIN and ID
@@ -2199,35 +2434,35 @@ public class Main extends Activity
                 // Stop retrieving the data when all have been retrieved.
                 // Note, because the VIN and ID are requested on interval, they should be stopped
                 // when all have been retrieved.
-                if (Truck.EngineVIN != Const.NA)
+                if (Vehicle.EngineVIN != Const.NA)
                     blueFire.StopRetrievingEngineVIN();
-                if (Truck.EngineMake != Const.NA )
+                if (Vehicle.EngineMake != Const.NA )
                     blueFire.StopRetrievingEngineId();
 
-                if (Truck.EngineVIN != Const.NA && Truck.EngineMake != Const.NA && Truck.VIN != Const.NA && Truck.Make != Const.NA)
+                if (Vehicle.EngineVIN != Const.NA && Vehicle.EngineMake != Const.NA && Vehicle.VIN != Const.NA && Vehicle.Make != Const.NA)
                     blueFire.StopDataRetrieval();
 
                 break;
 
             case 8:
-                dataView1.setText(Truck.VIN);
-                dataView2.setText(Truck.Make);
-                dataView3.setText(Truck.Model);
-                dataView4.setText(Truck.SerialNo);
-                dataView5.setText(Truck.UnitNo);
+                dataView1.setText(Vehicle.VIN);
+                dataView2.setText(Vehicle.Make);
+                dataView3.setText(Vehicle.Model);
+                dataView4.setText(Vehicle.SerialNo);
+                dataView5.setText(Vehicle.UnitNo);
                 dataView6.setText("");
 
                 // Waiting on either VIN or ID
-                if (Truck.VIN == Const.NA && Truck.Make == Const.NA)
-                    textView7.setText("Retrieving Truck VIN ...");
+                if (Vehicle.VIN == Const.NA && Vehicle.Make == Const.NA)
+                    textView7.setText("Retrieving Vehicle VIN ...");
 
                     // Waiting just for VIN
-                else if (Truck.VIN == Const.NA)
-                    textView7.setText("Retrieving Truck VIN ...");
+                else if (Vehicle.VIN == Const.NA)
+                    textView7.setText("Retrieving Vehicle VIN ...");
 
                     // Waiting just for ID
-                else if (Truck.Make == Const.NA)
-                    textView7.setText("Retrieving Truck Id ...");
+                else if (Vehicle.Make == Const.NA)
+                    textView7.setText("Retrieving Vehicle Id ...");
 
                     // Retrieved VIN and ID
                 else
@@ -2236,15 +2471,15 @@ public class Main extends Activity
                 // Stop retrieving the data when all have been retrieved.
                 // Note, because the VIN and ID are requested on interval, they should be stopped
                 // when all have been retrieved.
-                if (Truck.VIN != Const.NA)
-                    blueFire.StopRetrievingTruckVIN();
-                if (Truck.Make != Const.NA )
-                    blueFire.StopRetrievingTruckId();
+                if (Vehicle.VIN != Const.NA)
+                    blueFire.StopRetrievingVehicleVIN();
+                if (Vehicle.Make != Const.NA )
+                    blueFire.StopRetrievingVehicleId();
 
                 break;
 
             case 9:
-                if (Truck.GetFaultCount() == 0)
+                if (Vehicle.GetFaultCount() == 0)
                 {
                     faultCount = 0;
                     faultIndex = -1; // reset to show fault
@@ -2253,9 +2488,9 @@ public class Main extends Activity
                 }
                 else // faults found
                 {
-                    if (Truck.GetFaultCount() != faultCount) // additional faults
+                    if (Vehicle.GetFaultCount() != faultCount) // additional faults
                     {
-                        faultCount = Truck.GetFaultCount();
+                        faultCount = Vehicle.GetFaultCount();
                         faultIndex = 0; // show first fault
                         if (faultCount > 1)
                             buttonNextFault.setEnabled(true);
@@ -2272,11 +2507,11 @@ public class Main extends Activity
                 }
                 else
                 {
-                    faultSource = String.valueOf(Truck.GetFaultSource(faultIndex));
-                    faultSPN = String.valueOf(Truck.GetFaultSPN(faultIndex));
-                    faultFMI = String.valueOf(Truck.GetFaultFMI(faultIndex));
-                    faultOccurrence = String.valueOf(Truck.GetFaultOccurrence(faultIndex));
-                    faultConversion = String.valueOf(Truck.GetFaultConversion(faultIndex));
+                    faultSource = String.valueOf(Vehicle.GetFaultSource(faultIndex));
+                    faultSPN = String.valueOf(Vehicle.GetFaultSPN(faultIndex));
+                    faultFMI = String.valueOf(Vehicle.GetFaultFMI(faultIndex));
+                    faultOccurrence = String.valueOf(Vehicle.GetFaultOccurrence(faultIndex));
+                    faultConversion = String.valueOf(Vehicle.GetFaultConversion(faultIndex));
                 }
 
                 dataView1.setText(faultSource);
@@ -2303,6 +2538,10 @@ public class Main extends Activity
     {
         textStatus.setText(connectionState.toString());
     }
+
+    //endregion
+
+    //region ELD
 
     // *********************************** ELD *******************************************
 
@@ -2336,7 +2575,7 @@ public class Main extends Activity
         if (layoutELD.getVisibility() == View.INVISIBLE)
         {
             layoutAdapter.setVisibility(View.INVISIBLE);
-            layoutTruck.setVisibility(View.INVISIBLE);
+            layoutVehicle.setVisibility(View.INVISIBLE);
             layoutELD.setVisibility(View.VISIBLE);
 
             showELDPage();
@@ -2402,7 +2641,7 @@ public class Main extends Activity
 
         blueFire.ELD.SetStreaming(appStreamingELD);
 
-        SetStreamingText();
+        setELDStreamingText();
     }
 
     // Record Connected Checkbox
@@ -2413,7 +2652,7 @@ public class Main extends Activity
 
         blueFire.ELD.SetRecordingMode(checkRecordingConnected.isChecked(), checkRecordingDisconnected.isChecked());
 
-        SetStreamingText();
+        setELDStreamingText();
     }
 
     // Record Connected Checkbox
@@ -2424,7 +2663,7 @@ public class Main extends Activity
 
         blueFire.ELD.SetRecordingMode(checkRecordingConnected.isChecked(), checkRecordingDisconnected.isChecked());
 
-        SetStreamingText();
+        setELDStreamingText();
     }
 
     // ELD Start Button
@@ -2778,10 +3017,10 @@ public class Main extends Activity
         checkRecordingConnected.setChecked(blueFire.ELD.IsRecordingConnected()); // comes from appRecordingMode
         checkRecordingDisconnected.setChecked(blueFire.ELD.IsRecordingDisconnected()); // comes from appRecordingMode
 
-        SetStreamingText();
+        setELDStreamingText();
     }
 
-    private void SetStreamingText()
+    private void setELDStreamingText()
     {
         // Streaming text
         if (blueFire.ELD.IsStreaming())
@@ -2978,6 +3217,10 @@ public class Main extends Activity
 
     // *********************************** End ELD *******************************************
 
+    //endregion
+
+    //region Formatting
+
     private String formatInt(int data)
     {
         if (data < 0)
@@ -3001,6 +3244,10 @@ public class Main extends Activity
         return String.valueOf(bd.floatValue());
     }
 
+    //endregion
+
+    //region Show Message
+
     private void showMessage(String title, String message)
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -3008,6 +3255,10 @@ public class Main extends Activity
         alert.setMessage(message);
         alert.show();
     }
+
+    //endregion
+
+    //region Log Notifications
 
     private void logNotifications(String notification)
     {
@@ -3037,6 +3288,51 @@ public class Main extends Activity
         }
     }
 
+    //endregion
+
+    //region Event Handler
+
+    // BlueFire Event Handler
+    private Handler eventHandler = new Handler()
+    {
+        @Override
+        @SuppressLint("HandlerLeak")
+        public void handleMessage(Message msg)
+        {
+            Message handleMessage = new Message();
+            handleMessage.what = msg.what;
+            handleMessage.obj = msg.obj;
+
+            EventsQueue.add(handleMessage);
+        }
+    };
+
+    // BlueFire Event Handler Thread
+    private class ReceiveEventsThreading extends Thread
+    {
+        public void run()
+        {
+            while (true)
+            {
+                if (!EventsQueue.isEmpty())
+                {
+                    final Message handleMessage = EventsQueue.poll();
+                    if (handleMessage != null)
+                    {
+                        runOnUiThread(new Runnable()
+                        {
+                            public void run()
+                            {
+                                processEvent(handleMessage);
+                            }
+                        });
+                    }
+                }
+                threadSleep(1); // allow other threads to execute
+            }
+        }
+    }
+
     private void processEvent(Message msg)
     {
         try
@@ -3052,15 +3348,16 @@ public class Main extends Activity
                 case Initialized:
                 case Discovering:
                 case Disconnecting:
+                case Connected:
                     // Status only
                     break;
 
                 case Connecting:
-                    if (!blueFire.IsReconnecting())
+                    if (!blueFire.Comm.IsReconnecting)
                         logNotifications("Connection Attempt " + blueFire.ConnectAttempts(), true);
                     break;
 
-                case Connected:
+                case IsReady:
                     adapterConnected();
                     break;
 
@@ -3073,7 +3370,7 @@ public class Main extends Activity
                     break;
 
                 case Reconnecting:
-                    logNotifications("Reconnect Attempt " + blueFire.ReconnectAttempts(), true);
+                    logNotifications("Reconnect Attempt " + blueFire.Comm.ReconnectAttempt, true);
                     adapterReconnecting();
                     break;
 
@@ -3125,6 +3422,9 @@ public class Main extends Activity
                 case AdapterReboot:
                     if (appMaxReconnectAttempts == 0) // no reconnect attempt
                         adapterNotConnected();
+                    else
+                        blueFire.Comm.Reconnect();
+
                     logNotifications("Adapter Rebooting - " + connectionMessage, true);
                     return; // do not show status
 
@@ -3162,46 +3462,9 @@ public class Main extends Activity
         catch (Exception e) {}
     }
 
-    // BlueFire Event Handler Thread
-    private class ReceiveEventsThreading extends Thread
-    {
-        public void run()
-        {
-            while (true)
-            {
-                if (!EventsQueue.isEmpty())
-                {
-                    final Message handleMessage = EventsQueue.poll();
-                    if (handleMessage != null)
-                    {
-                        runOnUiThread(new Runnable()
-                        {
-                            public void run()
-                            {
-                                processEvent(handleMessage);
-                            }
-                        });
-                    }
-                }
-                threadSleep(1); // allow other threads to execute
-            }
-        }
-    }
+    //endregion
 
-    // BlueFire Event Handler
-    private Handler eventHandler = new Handler()
-    {
-        @Override
-        @SuppressLint("HandlerLeak")
-        public void handleMessage(Message msg)
-        {
-            Message handleMessage = new Message();
-            handleMessage.what = msg.what;
-            handleMessage.obj = msg.obj;
-
-            EventsQueue.add(handleMessage);
-        }
-    };
+    //region Conversions
 
     private byte[] hexStringToBytes(String hexString)
     {
@@ -3251,6 +3514,10 @@ public class Main extends Activity
             return ((temp -32) / 1.8F);
     }
 
+    //endregion
+
+    //region Thread Sleep
+
     private void threadSleep(int Interval)
     {
         try
@@ -3260,20 +3527,24 @@ public class Main extends Activity
         catch(Exception ex) {}
     }
 
+    //endregion
+
+    //region Back Button
+
     @Override
     public void onBackPressed()
     {
         try
         {
-            // Check if leaving the Truck page
-            if (layoutTruck.getVisibility() == View.VISIBLE)
+            // Check if leaving the Vehicle page
+            if (layoutVehicle.getVisibility() == View.VISIBLE)
             {
                 saveSettings();
 
-                layoutTruck.setVisibility(View.INVISIBLE);
+                layoutVehicle.setVisibility(View.INVISIBLE);
                 layoutAdapter.setVisibility(View.VISIBLE);
 
-                stopTruckData();
+                stopVehicleData();
 
                 return;
             }
@@ -3313,6 +3584,10 @@ public class Main extends Activity
         catch (Exception e) {}
     }
 
+    //endregion
+
+    //region Destroy
+
     @Override
     protected void onDestroy()
     {
@@ -3322,5 +3597,7 @@ public class Main extends Activity
 
         blueFire.Dispose();
     }
+
+    //endregion
 
 }

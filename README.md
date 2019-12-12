@@ -522,3 +522,13 @@ Version 25.4:<ul>
 Version 25.5:<ul>
     <li>API is compiled with Target SDK 28 and Min SDK 22. 
 </ul>
+
+Version 26.0:<ul>
+    <li>Removed Eclipse support.
+    <li>Renamed "Truck" to "Vehicle".
+    <li>The ResetAdapter method now resets the adapter correctly. See the documentation for the changes.
+    <li>Open sourced Bluetooth communication code Comm, CommBLE, CommBT2. Open source Comm modules use Pascal notation.
+    <li>Added regions to Main, Comm, CommBLE, and CommBT2.
+    <li>Updated documentation to v26.0 (pdf).
+    <li>API is compiled with Target SDK 29 and Min SDK 23 (Android 5-10).
+</ul>

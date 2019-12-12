@@ -629,15 +629,15 @@
                     android:layout_below="@+id/textResponseData"
                     android:background="@android:color/darker_gray" />
 
-                <!--  Truck Button    -->
+                <!--  Vehicle Button    -->
                 <Button
-                    android:id="@+id/buttonTruckData"
+                    android:id="@+id/buttonVehicleData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/lineSeparator3"
                     android:layout_alignParentLeft="true"
-                    android:onClick="onTruckDataClick"
-                    android:text="Truck Data"
+                    android:onClick="onVehicleDataClick"
+                    android:text="Vehicle Data"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <!--  ELD Button    -->
@@ -645,9 +645,9 @@
                     android:id="@+id/buttonELDData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/buttonTruckData"
+                    android:layout_alignBottom="@+id/buttonVehicleData"
                     android:layout_marginTop="5dp"
-                    android:layout_alignLeft="@+id/buttonTruckData"
+                    android:layout_alignLeft="@+id/buttonVehicleData"
                     android:layout_marginLeft="120dp"
                     android:onClick="onELDDataClick"
                     android:text="ELD Data"
@@ -658,7 +658,7 @@
                     android:id="@+id/buttonTest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/buttonTruckData"
+                    android:layout_alignBottom="@+id/buttonVehicleData"
                     android:layout_marginTop="5dp"
                     android:layout_alignLeft="@+id/buttonELDData"
                     android:layout_marginLeft="105dp"
@@ -671,7 +671,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_below="@+id/buttonTruckData"
+                    android:layout_below="@+id/buttonVehicleData"
                     android:text="Notifications"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -719,9 +719,9 @@
 
             </RelativeLayout>
 
-            <!--  Truck Layout    -->
+            <!--  Vehicle Layout    -->
             <RelativeLayout
-                android:id="@+id/layoutTruck"
+                android:id="@+id/layoutVehicle"
                 android:orientation="vertical"
                 android:visibility="invisible"
                 android:layout_width="wrap_content"
