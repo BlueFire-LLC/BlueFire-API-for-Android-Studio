@@ -532,3 +532,8 @@ Version 26.0:<ul>
     <li>Updated documentation to v26.0 (pdf).
     <li>API is compiled with Target SDK 29 and Min SDK 23 (Android 5-10).
 </ul>
+
+Version 27.0:<ul>
+    <li>Android version 6 is not longer suppported.
+    <li>API is compiled with Min SDK 24 and Target SDK 31 (Android 7-12).
+</ul>

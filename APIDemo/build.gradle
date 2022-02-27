@@ -1,11 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
     defaultConfig {
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled false
-        minSdkVersion 23
+        minSdkVersion 24
     }
     buildTypes {
         release {
@@ -15,20 +14,16 @@ android {
 }
 repositories {
     google()
-    jcenter()
 }
 allprojects {
     repositories {
         google()
-        jcenter()
-        mavenCentral()
     }
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.3.0-alpha03'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha03'
-    implementation project(path: ':bluefire-api-v26.0')
+    implementation 'androidx.activity:activity:1.4.0'
+    implementation 'androidx.fragment:fragment:1.4.1'
+    implementation files('libs/bluefire-api-v27.0.aar')
+
 }

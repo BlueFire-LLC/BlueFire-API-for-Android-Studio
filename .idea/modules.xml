@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/APIDemo/APIDemo.iml" filepath="$PROJECT_DIR$/APIDemo/APIDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/BlueFire-API-for-Android-Studio.iml" filepath="$PROJECT_DIR$/BlueFire-API-for-Android-Studio.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bluefire-api-v26.0/bluefire-api-v26.0.iml" filepath="$PROJECT_DIR$/bluefire-api-v26.0/bluefire-api-v26.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/APIDemo/BlueFire-API-for-Android-Studio.APIDemo.iml" filepath="$PROJECT_DIR$/.idea/modules/APIDemo/BlueFire-API-for-Android-Studio.APIDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bluefire-api-v27.0/BlueFire-API-for-Android-Studio.bluefire-api-v27.0.iml" filepath="$PROJECT_DIR$/.idea/modules/bluefire-api-v27.0/BlueFire-API-for-Android-Studio.bluefire-api-v27.0.iml" />
     </modules>
   </component>
 </project>

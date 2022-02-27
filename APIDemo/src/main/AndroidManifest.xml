@@ -3,7 +3,7 @@
       package="com.bluefire.apidemo"
 
       android:versionCode="1"
-      android:versionName="26.0" >
+      android:versionName="27.0" >
     <!--  Note - versionName must match BlueFire.Version and the README.md -->
 
     <uses-permission android:name="android.permission.BLUETOOTH"/>

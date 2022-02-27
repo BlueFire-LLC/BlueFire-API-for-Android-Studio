@@ -8,53 +8,59 @@
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab225881-d1f1-4fab-9884-60ce23a3ad49" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/android_android_22.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bluefire_api_v22_0_unspecified.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterDir="false" />
+    <list default="true" id="ab225881-d1f1-4fab-9884-60ce23a3ad49" name="Default" comment="Update to Version 27.0">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/APIDemo/APIDemo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIDemo-v26.0.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIDemo/APIDemo.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/APIDemo/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/APIDemo/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/APIDemo/build/outputs/apk/APIDemo-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/libs/bluefire-api.v22.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/lint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIDemo/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/APIDemo/proguard-rules.pro" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/layout/main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw600dp/dimens.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-sw720dp-land/dimens.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v11/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values-v14/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/arrays.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/attrs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/dimens.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/APIDemo/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlueFire-API-for-Android-Studio.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BlueFire-API-for-Android-Studio.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.aar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bluefire-api-v22.0/bluefire-api-v22.0.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bluefire-api-v22.0/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/bluefire-api-v26.0.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/0555d773c5b8ec973b34ac0f03f63407.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/0802fa37cd1ec4061cfea3c1bc3af526.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/0f173fc414e5e47e2973b947eb8b1390.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/3b7913982bd8f242df08648abc052e31.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/44727d11ddc4430df3dddebcd5c1711e.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/4c68a1c53cd870fee2c2970a246c1603.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/61b81ef5720ed480ddfc0cabd0d11f60.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/61b81ef5720ed480ddfc0cabd0d11f60/bluefire-api-v26.0-runtime.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/70d4559d4d711f45746744fd91b5a5cf.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/70d4559d4d711f45746744fd91b5a5cf/package-aware-r.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/904b6b502fc8fbab3a72d6ec1f2ac21e.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/904b6b502fc8fbab3a72d6ec1f2ac21e/bluefire-api-v26.0-runtime/classes.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/b6efaa6d84b7d60963a72ddbdf24982e.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/c1d797e4ba3ebf6c2f2faaae8af1bf9f.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/cef5dca15d7c0c24113048a09c703946.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/d8cf6460488e55a7931a2c34888e0fa4.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/d8cf6460488e55a7931a2c34888e0fa4/bluefire-api-v26.0-api.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/ea50e802baff4ebd5994dae3b5e5a6fd.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/ea50e802baff4ebd5994dae3b5e5a6fd/bluefire-api-v26.0/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/ea50e802baff4ebd5994dae3b5e5a6fd/bluefire-api-v26.0/R.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/ea50e802baff4ebd5994dae3b5e5a6fd/bluefire-api-v26.0/jars/classes.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/ea50e802baff4ebd5994dae3b5e5a6fd/bluefire-api-v26.0/res/values/values.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluefire-api-v26.0/build/.transforms/faf401bb7131f209ac0015b1759ea6d2.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
-    <ignored path="BlueFire-API-for-Android-Studio.iws" />
-    <ignored path=".idea/workspace.xml" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,10 +69,7 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="isMigrated" value="true" />
-  </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="HGADNNPQ" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R9JR608E07F]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -84,9 +87,17 @@
         <task path="$PROJECT_DIR$/bluefire-api-v25.3">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/bluefire-api-v26.0">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BlueFire-API-for-Android-Studio" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -96,67 +107,23 @@
   <component name="FavoritesManager">
     <favorites_list name="BlueFire-API-for-Android-Studio" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Build_Instructions">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="40" column="102" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/CommBT2.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Comm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/CommBLE.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Service.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APIDemo/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="GenerateSignedApkSettings">
     <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/CommBT2.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/CommBLE.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Comm.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/APIDemo/src/main/AndroidManifest.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gradle.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/APIDemo/build.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/APIDemo/src/main/java/com/bluefire/apidemo/Service.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -183,6 +150,7 @@
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
+  <component name="ProjectId" id="25fRB2HONHUKH3WBq5jMn0Y8RHq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -285,11 +253,17 @@
       <pane id="AndroidView" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/Build_Instructions&#10;true" />
     <property name="android.project.structure.last.selected" value="APIDemo" />
     <property name="android.project.structure.proportion" value="0.22375" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="cidr.known.project.marker" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538839859898" />
     <property name="device.picker.selection" value="HGADNNPQ" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -302,61 +276,19 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
+      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\libs" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\Eclipse libs" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\java\com\bluefire\apidemo" />
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\res\layout" />
-      <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio\APIDemo\src\main\res\drawable" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.bluefire.apidemo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Development\BlueFire\Android\BlueFire-API-for-Android-Studio" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bluefire.apidemo" />
+    </key>
   </component>
   <component name="RunManager" selected="Android App.APIDemo">
-    <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-    </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -365,13 +297,31 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
     <configuration name="APIDemo" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="APIDemo" />
+      <module name="BlueFire-API-for-Android-Studio.APIDemo" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -379,9 +329,8 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
@@ -409,11 +358,16 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
@@ -424,6 +378,8 @@
       <option name="DEPLOY_AS_INSTANT" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -431,9 +387,8 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
@@ -461,29 +416,37 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
       <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
       <option name="EXTRA_OPTIONS" value="" />
+      <option name="INCLUDE_GRADLE_EXTRA_OPTIONS" value="true" />
+      <option name="RETENTION_ENABLED" value="No" />
+      <option name="RETENTION_MAX_SNAPSHOTS" value="2" />
+      <option name="RETENTION_COMPRESS_SNAPSHOTS" value="false" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
@@ -511,17 +474,14 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -546,52 +506,27 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <module name="bluefire-api-v25.3" />
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
       <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="bluefire-api-v25.3" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -615,6 +550,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -630,6 +566,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Image Layers" order="0" />
       <window_info id="Capture Tool" order="1" />
@@ -650,7 +587,7 @@
       <window_info anchor="bottom" id="Version Control" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="13" />
       <window_info anchor="bottom" id="Messages" order="14" weight="0.24675325" />
-      <window_info anchor="bottom" id="Build" order="15" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Build" order="15" weight="0.32827735" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -717,6 +654,8 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
+    <MESSAGE value="Update to Version 27.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update to Version 27.0" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://$USER_HOME$/.android/build-cache/0726b88951f056bfc516d89b82fa43f0e9f1f0c6/output/jars/classes.jar!/com/bluefire/api/Comm.class" />
@@ -830,8 +769,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Build_Instructions">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="40" column="102" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="102" />
+        <state relative-caret-position="198">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>

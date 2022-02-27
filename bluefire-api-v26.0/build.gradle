@@ -1,2 +1,0 @@
-configurations.maybeCreate("default")
-artifacts.add("default", file('bluefire-api-v26.0.aar'))
